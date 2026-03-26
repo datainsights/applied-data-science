@@ -1,0 +1,727 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science Foundations Premium",
+    "section": "",
+    "text": "Premium Guide v1.0.0: Updated Mar 2026",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>index.html</span>"
+    ]
+  },
+  {
+    "objectID": "00-preface.html",
+    "href": "00-preface.html",
+    "title": "Preface",
+    "section": "",
+    "text": "Why This Track Exists\nYou have already learned how to:\nThese are essential foundations.\nBut in practice, analysis alone is not enough.\nWhat matters next is how we move from:\nThis track focuses on that transition.\nIt extends data science from a process of reasoning into a process of building systems that produce reliable results.",
+    "crumbs": [
+      "Premium Foundations",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "00-preface.html#why-this-track-exists",
+    "href": "00-preface.html#why-this-track-exists",
+    "title": "Preface",
+    "section": "",
+    "text": "explore datasets\n\nclean and prepare data\n\nvisualize patterns\n\nsummarize findings\n\n\n\n\n\nstructured insight\nto\n\nreliable analytical systems",
+    "crumbs": [
+      "Premium Foundations",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "00-preface.html#what-you-will-learn",
+    "href": "00-preface.html#what-you-will-learn",
+    "title": "Preface",
+    "section": "What You Will Learn",
+    "text": "What You Will Learn\nThis track focuses on extending your analytical workflow into real-world practice:\n\ntransforming data into model-ready representations\n\nbuilding and evaluating machine learning models\n\nstructuring pipelines to ensure reproducibility\n\ninterpreting model behavior carefully\n\npackaging models for reuse\n\nexposing models through simple APIs\n\nunderstanding deployment concepts\n\nrecognizing model failure, drift, and limitations\n\nThe goal is not to introduce more tools.\nThe goal is to understand how analytical components work together as a system.",
+    "crumbs": [
+      "Premium Foundations",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "00-preface.html#how-this-guide-is-structured",
+    "href": "00-preface.html#how-this-guide-is-structured",
+    "title": "Preface",
+    "section": "How This Guide Is Structured",
+    "text": "How This Guide Is Structured\nEach chapter follows a consistent pattern:\n\nExplanation\nWhat concept we are learning and why it matters\nCode\nPractical implementation\nInterpretation\nWhat the results mean\nSummary\nThe key ideas to retain\nExercise\nA task to reinforce understanding\n\nThis structure remains intentional.\nAs the workflow becomes more complex, clarity becomes more important.",
+    "crumbs": [
+      "Premium Foundations",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "00-preface.html#how-to-approach-this-guide",
+    "href": "00-preface.html#how-to-approach-this-guide",
+    "title": "Preface",
+    "section": "How to Approach This Guide",
+    "text": "How to Approach This Guide\nThis track assumes you are already comfortable with:\n\nbasic data exploration\n\ndata cleaning and transformation\n\nvisualization and interpretation\n\nHere, the focus shifts to:\n\nconnecting steps across a workflow\n\nunderstanding how decisions affect outcomes\n\nrecognizing where errors can occur\n\nbuilding systems that can be reused and extended\n\nDo not rush through implementation.\nTake time to understand how each step fits into the larger system.",
+    "crumbs": [
+      "Premium Foundations",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "00-preface.html#the-cdi-extended-workflow",
+    "href": "00-preface.html#the-cdi-extended-workflow",
+    "title": "Preface",
+    "section": "The CDI Extended Workflow",
+    "text": "The CDI Extended Workflow\nIn the foundations track, the focus was:\n\ndata → exploration → insight\n\nIn practice, analytical work extends beyond this.\n\n\nCode\nflowchart TB\n  A[Question or Problem] --&gt; B[Load & Explore Data]\n\n  B --&gt; C[Clean & Prepare]\n  B --&gt; D[Visualize Patterns]\n\n  C --&gt; D\n  D --&gt; E[Summarize & Interpret]\n\n  E --&gt; F[Modeling & Evaluation]\n  F --&gt; G[System & Deployment]\n\n  G --&gt; H[Monitoring & Feedback]\n  H --&gt; B\n\n\n\n\n\nflowchart TB\n  A[Question or Problem] --&gt; B[Load & Explore Data]\n\n  B --&gt; C[Clean & Prepare]\n  B --&gt; D[Visualize Patterns]\n\n  C --&gt; D\n  D --&gt; E[Summarize & Interpret]\n\n  E --&gt; F[Modeling & Evaluation]\n  F --&gt; G[System & Deployment]\n\n  G --&gt; H[Monitoring & Feedback]\n  H --&gt; B\n\n\n\n\n\n\nThis extended workflow reflects how real analytical systems operate.\nEach stage introduces new considerations, including validation, reproducibility, and reliability.",
+    "crumbs": [
+      "Premium Foundations",
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html",
+    "href": "01-setting-up-environment.html",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "",
+    "text": "What This Setup Supports\nIn the foundations track, you learned how to run analysis.\nIn this track, you will build workflows that must remain:\nThis requires a more deliberate setup.\nAn environment is not just where code runs.\nIt is the foundation of the system you are building.\nBy the end of this lesson, you will have a working environment that supports:",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#what-this-setup-supports",
+    "href": "01-setting-up-environment.html#what-this-setup-supports",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "",
+    "text": "consistent execution across sessions\n\ncontrolled dependencies\n\nstructured project organization\n\nreproducible builds\n\npreparation for modeling, pipelines, and deployment",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#project-structure-important",
+    "href": "01-setting-up-environment.html#project-structure-important",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "Project Structure (Important)",
+    "text": "Project Structure (Important)",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#project-structure-important-1",
+    "href": "01-setting-up-environment.html#project-structure-important-1",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "Project Structure (Important)",
+    "text": "Project Structure (Important)\nproject-root/\n│\n├── data/\n├── scripts/\n│   ├── bash/\n│   └── python/\n├── models/\n├── docs/\n├── requirements.txt\n├── _quarto.yml\n│\n├── 00-preface.qmd\n├── 01-setting-up-environment.qmd\n├── 08-feature-engineering.qmd\n...\n\n---\n\n## Python Environment\n\nActivate:\n\n```{bash}\nsource .venv/bin/activate\nVerify:\nwhich python\npython --version",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#dependency-control",
+    "href": "01-setting-up-environment.html#dependency-control",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "Dependency Control",
+    "text": "Dependency Control\npip install -r requirements.txt",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#build-the-project",
+    "href": "01-setting-up-environment.html#build-the-project",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "Build the Project",
+    "text": "Build the Project\nbash scripts/bash/build.sh",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#sanity-check",
+    "href": "01-setting-up-environment.html#sanity-check",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "Sanity Check",
+    "text": "Sanity Check\nOpen:\nopen docs/index.html",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#cdi-insight",
+    "href": "01-setting-up-environment.html#cdi-insight",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "CDI Insight",
+    "text": "CDI Insight\nReliable systems depend on stable foundations.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#summary",
+    "href": "01-setting-up-environment.html#summary",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "Summary",
+    "text": "Summary\n\n.venv is active\n\ndependencies are controlled\n\nbuild pipeline works",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "01-setting-up-environment.html#next-step",
+    "href": "01-setting-up-environment.html#next-step",
+    "title": "Setting Up a Reproducible Analytical System",
+    "section": "Next Step",
+    "text": "Next Step\n→ Feature engineering and data representation",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Setting Up a Reproducible Analytical System</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html",
+    "href": "08-feature-engineering.html",
+    "title": "Feature Engineering and Data Representation",
+    "section": "",
+    "text": "Representation Comes Before Modeling\nIn the foundations track, you worked with data as it was given.\nYou explored it, cleaned it, and interpreted it.\nIn this track, that is no longer sufficient.\nBefore building a model, you must decide:\nThis is the role of feature engineering.\nModels do not understand raw data.\nThey operate on numerical representations.\nThis means:\nFeature engineering determines:\nTwo datasets with the same information can lead to very different models depending on how features are constructed.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#representation-comes-before-modeling",
+    "href": "08-feature-engineering.html#representation-comes-before-modeling",
+    "title": "Feature Engineering and Data Representation",
+    "section": "",
+    "text": "the model does not “discover” structure on its own\n\nit can only learn from what is made visible\n\n\n\nwhich patterns are detectable\n\nwhich relationships are emphasized\n\nwhich signals are ignored",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#a-simple-example",
+    "href": "08-feature-engineering.html#a-simple-example",
+    "title": "Feature Engineering and Data Representation",
+    "section": "A Simple Example",
+    "text": "A Simple Example\n\n\nCode\nimport pandas as pd\n\ndf = pd.DataFrame({\n    \"age\": [22, 35, 47, 51],\n    \"income\": [25000, 48000, 52000, 61000],\n    \"city\": [\"A\", \"B\", \"A\", \"C\"]\n})\n\ndf\n\n\n\n\n\n\n\n\n\nage\nincome\ncity\n\n\n\n\n0\n22\n25000\nA\n\n\n1\n35\n48000\nB\n\n\n2\n47\n52000\nA\n\n\n3\n51\n61000\nC\n\n\n\n\n\n\n\nAt this stage:\n\nscales are inconsistent\n\ncategorical data is not usable\n\nrelationships are implicit\n\nThis is not yet a modeling dataset.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#step-1-making-variables-comparable",
+    "href": "08-feature-engineering.html#step-1-making-variables-comparable",
+    "title": "Feature Engineering and Data Representation",
+    "section": "Step 1 — Making Variables Comparable",
+    "text": "Step 1 — Making Variables Comparable\n\n\nCode\nfrom sklearn.preprocessing import StandardScaler\n\nscaler = StandardScaler()\n\ndf_scaled = df.copy()\ndf_scaled[[\"age\", \"income\"]] = scaler.fit_transform(df[[\"age\", \"income\"]])\n\ndf_scaled\n\n\n\n\n\n\n\n\n\nage\nincome\ncity\n\n\n\n\n0\n-1.479422\n-1.619474\nA\n\n\n1\n-0.331214\n0.112987\nB\n\n\n2\n0.728670\n0.414284\nA\n\n\n3\n1.081965\n1.092203\nC",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#step-2-making-categories-visible",
+    "href": "08-feature-engineering.html#step-2-making-categories-visible",
+    "title": "Feature Engineering and Data Representation",
+    "section": "Step 2 — Making Categories Visible",
+    "text": "Step 2 — Making Categories Visible\n\n\nCode\ndf_encoded = pd.get_dummies(df_scaled, columns=[\"city\"])\n\ndf_encoded\n\n\n\n\n\n\n\n\n\nage\nincome\ncity_A\ncity_B\ncity_C\n\n\n\n\n0\n-1.479422\n-1.619474\nTrue\nFalse\nFalse\n\n\n1\n-0.331214\n0.112987\nFalse\nTrue\nFalse\n\n\n2\n0.728670\n0.414284\nTrue\nFalse\nFalse\n\n\n3\n1.081965\n1.092203\nFalse\nFalse\nTrue",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#step-3-making-relationships-explicit",
+    "href": "08-feature-engineering.html#step-3-making-relationships-explicit",
+    "title": "Feature Engineering and Data Representation",
+    "section": "Step 3 — Making Relationships Explicit",
+    "text": "Step 3 — Making Relationships Explicit\n\n\nCode\ndf_features = df_encoded.copy()\n\ndf_features[\"income_per_age\"] = df_features[\"income\"] / (df_features[\"age\"] + 1)\n\ndf_features\n\n\n\n\n\n\n\n\n\nage\nincome\ncity_A\ncity_B\ncity_C\nincome_per_age\n\n\n\n\n0\n-1.479422\n-1.619474\nTrue\nFalse\nFalse\n3.377974\n\n\n1\n-0.331214\n0.112987\nFalse\nTrue\nFalse\n0.168943\n\n\n2\n0.728670\n0.414284\nTrue\nFalse\nFalse\n0.239655\n\n\n3\n1.081965\n1.092203\nFalse\nFalse\nTrue\n0.524602",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#transition-to-real-world-data",
+    "href": "08-feature-engineering.html#transition-to-real-world-data",
+    "title": "Feature Engineering and Data Representation",
+    "section": "Transition to Real-World Data",
+    "text": "Transition to Real-World Data\nSo far, we have worked with small, controlled examples.\nThis is intentional.\nIt allows us to isolate key ideas without distraction.\nIn practice, however, data rarely arrives in this form.\nReal datasets are:\n\nlarger\n\nless consistent\n\nless explicit in their structure\n\nAs we move forward, we will begin working with real-world data.\nThis introduces a new responsibility:\n\nensuring that your data is structured in a way that supports analysis and modeling",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#preparing-your-own-data",
+    "href": "08-feature-engineering.html#preparing-your-own-data",
+    "title": "Feature Engineering and Data Representation",
+    "section": "Preparing Your Own Data",
+    "text": "Preparing Your Own Data\nBefore applying models, your dataset should follow a clear tabular structure:\n\neach row represents one observation\n\neach column represents one variable\n\neach column has a consistent data type\n\nmissing values are handled or explicitly represented\n\nIn CDI terms, this is a tidy and structured dataset.\nIf your data does not follow this structure:\n\nfeature engineering becomes inconsistent\n\nmodels become unreliable\n\nresults become difficult to interpret",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#cdi-insight",
+    "href": "08-feature-engineering.html#cdi-insight",
+    "title": "Feature Engineering and Data Representation",
+    "section": "CDI Insight",
+    "text": "CDI Insight\nControlled examples teach concepts.\nReal datasets test your ability to apply them.\nThe transition between the two is where analytical skill develops.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#summary",
+    "href": "08-feature-engineering.html#summary",
+    "title": "Feature Engineering and Data Representation",
+    "section": "Summary",
+    "text": "Summary\n\nModels learn from representations, not raw data\n\nScaling controls how variables influence learning\n\nEncoding makes categorical information usable\n\nDerived features expose relationships\n\nFeature engineering is a design process with direct impact on model behavior",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-engineering.html#next-step",
+    "href": "08-feature-engineering.html#next-step",
+    "title": "Feature Engineering and Data Representation",
+    "section": "Next Step",
+    "text": "Next Step\n→ Building models with intention and control",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Feature Engineering and Data Representation</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html",
+    "href": "09-model-building.html",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "",
+    "text": "Why We Are Using a Health Dataset\nIn the previous lesson, we worked with controlled examples to understand feature engineering.\nThat was intentional.\nIt allowed us to focus on how data representation affects what a model can learn.\nNow we move into a real-world dataset.\nThis is where premium work begins to feel different.\nReal datasets are not just collections of variables.\nThey represent a prediction problem, a measurement process, and a set of assumptions about what can be learned.\nIn this lesson, we will use a health-related tabular dataset to build a first model in a way that is structured, cautious, and interpretable.\nHealth-related data is useful for modeling lessons because it is both practical and consequential.\nVariables such as:\ncan carry meaningful signals, but they also require careful interpretation.\nThis makes health data a good setting for learning how modeling decisions affect results.\nOur goal is not to make a clinical claim.\nOur goal is to understand how a model behaves when applied to structured health data.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#why-we-are-using-a-health-dataset",
+    "href": "09-model-building.html#why-we-are-using-a-health-dataset",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "",
+    "text": "age\n\nbody mass index\n\nblood pressure\n\nblood chemistry",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#the-prediction-task",
+    "href": "09-model-building.html#the-prediction-task",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "The Prediction Task",
+    "text": "The Prediction Task\nWe will use the diabetes dataset available in scikit-learn.\nThis dataset contains ten baseline variables measured for each patient, along with a quantitative target related to disease progression.\nThat gives us a regression task:\n\nuse baseline patient measurements to predict a continuous outcome\n\nThis is a good starting point because it allows us to focus on:\n\nfeature matrix design\n\ntraining and testing logic\n\nbaseline model behavior\n\ninterpretation of prediction error",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#load-the-dataset",
+    "href": "09-model-building.html#load-the-dataset",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Load the Dataset",
+    "text": "Load the Dataset\n\n\nCode\nimport pandas as pd\n\nfrom sklearn.datasets import load_diabetes\n\ndiabetes = load_diabetes()\n\nX = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)\ny = pd.Series(diabetes.target, name=\"disease_progression\")\n\nX.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n\n\n\n\n\n\n\nLet us also inspect the target.\n\n\nCode\ny.head()\n\n\n0    151.0\n1     75.0\n2    141.0\n3    206.0\n4    135.0\nName: disease_progression, dtype: float64",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#understand-the-data-structure",
+    "href": "09-model-building.html#understand-the-data-structure",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Understand the Data Structure",
+    "text": "Understand the Data Structure\nBefore modeling, confirm what the data represents.\n\n\nCode\nX.shape, y.shape\n\n\n((442, 10), (442,))\n\n\n\n\nCode\nX.columns.tolist()\n\n\n['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']\n\n\nEach row represents one patient observation.\nEach column represents one measured feature.\nThe target is a continuous variable, so this is not a classification problem.\nThis distinction matters because it determines:\n\nwhat model types are appropriate\n\nwhat evaluation metrics make sense\n\nhow results should be interpreted",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#a-brief-look-at-the-features",
+    "href": "09-model-building.html#a-brief-look-at-the-features",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "A Brief Look at the Features",
+    "text": "A Brief Look at the Features\n\n\nCode\nX.describe().round(3)\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\n\n\n\n\ncount\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n\n\nmean\n-0.000\n0.000\n-0.000\n-0.000\n-0.000\n0.000\n-0.000\n-0.000\n0.000\n0.000\n\n\nstd\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n\n\nmin\n-0.107\n-0.045\n-0.090\n-0.112\n-0.127\n-0.116\n-0.102\n-0.076\n-0.126\n-0.138\n\n\n25%\n-0.037\n-0.045\n-0.034\n-0.037\n-0.034\n-0.030\n-0.035\n-0.039\n-0.033\n-0.033\n\n\n50%\n0.005\n-0.045\n-0.007\n-0.006\n-0.004\n-0.004\n-0.007\n-0.003\n-0.002\n-0.001\n\n\n75%\n0.038\n0.051\n0.031\n0.036\n0.028\n0.030\n0.029\n0.034\n0.032\n0.028\n\n\nmax\n0.111\n0.051\n0.171\n0.132\n0.154\n0.199\n0.181\n0.185\n0.134\n0.136\n\n\n\n\n\n\n\nThe features in this dataset are already numeric.\nThat makes it suitable for a first regression workflow.\nBut numeric does not mean automatically meaningful.\nWe still need to think about:\n\nscale\n\nsignal strength\n\ncorrelation structure\n\nwhether the relationship to the outcome is likely to be simple or complex",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#split-the-data-properly",
+    "href": "09-model-building.html#split-the-data-properly",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Split the Data Properly",
+    "text": "Split the Data Properly\nA model should not be evaluated on the same data used to fit it.\nThat would produce an overly optimistic result.\nWe create separate training and testing sets so that performance is assessed on unseen data.\n\n\nCode\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42\n)\n\nX_train.shape, X_test.shape\n\n\n((353, 10), (89, 10))\n\n\nThis is one of the first major shifts from exploratory analysis to modeling:\n\nwe are no longer only asking what patterns exist\nwe are asking whether those patterns generalize beyond the data used to fit the model",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#start-with-a-baseline-model",
+    "href": "09-model-building.html#start-with-a-baseline-model",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Start with a Baseline Model",
+    "text": "Start with a Baseline Model\nPremium modeling should begin with a baseline, not with complexity.\nA simple model gives us a reference point.\nWe will start with linear regression.\n\n\nCode\nfrom sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.LinearRegression?Documentation for LinearRegressioniFitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nfit_intercept fit_intercept: bool, default=True\n\nWhether to calculate the intercept for this model. If set\nto False, no intercept will be used in calculations\n(i.e. data is expected to be centered).\nTrue\n\n\n\ncopy_X copy_X: bool, default=True\n\nIf True, X will be copied; else, it may be overwritten.\nTrue\n\n\n\ntol tol: float, default=1e-6\n\nThe precision of the solution (`coef_`) is determined by `tol` which\nspecifies a different convergence criterion for the `lsqr` solver.\n`tol` is set as `atol` and `btol` of :func:`scipy.sparse.linalg.lsqr` when\nfitting on sparse training data. This parameter has no effect when fitting\non dense data.\n\n.. versionadded:: 1.7\n1e-06\n\n\n\nn_jobs n_jobs: int, default=None\n\nThe number of jobs to use for the computation. This will only provide\nspeedup in case of sufficiently large problems, that is if firstly\n`n_targets &gt; 1` and secondly `X` is sparse or if `positive` is set\nto `True`. ``None`` means 1 unless in a\n:obj:`joblib.parallel_backend` context. ``-1`` means using all\nprocessors. See :term:`Glossary ` for more details.\nNone\n\n\n\npositive positive: bool, default=False\n\nWhen set to ``True``, forces the coefficients to be positive. This\noption is only supported for dense arrays.\n\nFor a comparison between a linear regression model with positive constraints\non the regression coefficients and a linear regression without such constraints,\nsee :ref:`sphx_glr_auto_examples_linear_model_plot_nnls.py`.\n\n.. versionadded:: 0.24\nFalse\n\n\n\n\n            \n        \n    \n\n\nNow generate predictions on the test set.\n\n\nCode\ny_pred = model.predict(X_test)\n\ny_pred[:10]\n\n\narray([139.5475584 , 179.51720835, 134.03875572, 291.41702925,\n       123.78965872,  92.1723465 , 258.23238899, 181.33732057,\n        90.22411311, 108.63375858])",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#evaluate-the-model",
+    "href": "09-model-building.html#evaluate-the-model",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Evaluate the Model",
+    "text": "Evaluate the Model\nFor regression, two common metrics are:\n\nMean Absolute Error (MAE): average absolute difference between observed and predicted values\n\nR-squared (R²): proportion of variability explained by the model\n\n\n\nCode\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\nmae = mean_absolute_error(y_test, y_pred)\nr2 = r2_score(y_test, y_pred)\n\npd.DataFrame({\n    \"metric\": [\"MAE\", \"R-squared\"],\n    \"value\": [mae, r2]\n}).round(3)\n\n\n\n\n\n\n\n\n\nmetric\nvalue\n\n\n\n\n0\nMAE\n42.794\n\n\n1\nR-squared\n0.453\n\n\n\n\n\n\n\nThese values are not simply “good” or “bad” in isolation.\nThey must be interpreted relative to:\n\nthe complexity of the problem\n\nthe amount of noise in the data\n\nthe expectations of the use case\n\nalternative models or baselines",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#compare-observed-and-predicted-values",
+    "href": "09-model-building.html#compare-observed-and-predicted-values",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Compare Observed and Predicted Values",
+    "text": "Compare Observed and Predicted Values\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\n\nresults_df = pd.DataFrame({\n    \"observed\": y_test,\n    \"predicted\": y_pred\n})\n\n# Absolute error\nresults_df[\"error\"] = np.abs(results_df[\"observed\"] - results_df[\"predicted\"])\n\nplt.figure(figsize=(7, 5))\n\nscatter = plt.scatter(\n    results_df[\"observed\"],\n    results_df[\"predicted\"],\n    c=results_df[\"error\"],\n    cmap=\"viridis\",          # strong contrast\n    edgecolors=\"black\",      # separation between points\n    linewidth=0.4,\n    alpha=0.9\n)\n\n# Perfect prediction line\nmin_val = results_df.min().min()\nmax_val = results_df.max().max()\nplt.plot([min_val, max_val], [min_val, max_val], linestyle=\"--\")\n\nplt.xlabel(\"Observed progression\")\nplt.ylabel(\"Predicted progression\")\nplt.title(\"Observed vs Predicted (Error Highlighted)\")\n\nplt.colorbar(scatter, label=\"Absolute Error\")\n\nplt.show()\n\n\n\n\n\n\n\n\n\nThis plot helps us move beyond a single metric.\nIf the model performs well, predictions should generally align with observed values.\nIf they are widely scattered, then the model is capturing only part of the signal.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#inspect-coefficients-carefully",
+    "href": "09-model-building.html#inspect-coefficients-carefully",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Inspect Coefficients Carefully",
+    "text": "Inspect Coefficients Carefully\nLinear regression also gives us coefficients for each feature.\n\n\nCode\ncoef_df = pd.DataFrame({\n    \"feature\": X_train.columns,\n    \"coefficient\": model.coef_\n}).sort_values(\"coefficient\", ascending=False)\n\ncoef_df\n\n\n\n\n\n\n\n\n\nfeature\ncoefficient\n\n\n\n\n8\ns5\n736.198859\n\n\n2\nbmi\n542.428759\n\n\n5\ns2\n518.062277\n\n\n3\nbp\n347.703844\n\n\n7\ns4\n275.317902\n\n\n6\ns3\n163.419983\n\n\n9\ns6\n48.670657\n\n\n0\nage\n37.904021\n\n\n1\nsex\n-241.964362\n\n\n4\ns1\n-931.488846\n\n\n\n\n\n\n\nThese coefficients are useful, but they must be interpreted carefully.\nA coefficient reflects how much the model’s prediction changes when a feature changes, holding other features constant.\nIn this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.\nHowever, a coefficient does not automatically imply:\n\ncausation\n\nclinical importance\n\nindependent biological truth\n\nInstead, it describes how the fitted model uses that feature within this dataset, under this specific modeling setup, and given the presence of other variables.\nThis distinction is critical.\nCoefficients represent model behavior, not real-world mechanisms.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#what-this-first-model-actually-tells-us",
+    "href": "09-model-building.html#what-this-first-model-actually-tells-us",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "What This First Model Actually Tells Us",
+    "text": "What This First Model Actually Tells Us\nAt this stage, we have not proven that we can predict diabetes progression well in a real clinical sense.\nWhat we have shown is something more fundamental:\n\nthe dataset supports a structured prediction task\n\na baseline regression model can be fit successfully\n\npredictions can be evaluated on held-out data\n\ncoefficients and errors can be inspected systematically\n\nThis is the beginning of modeling discipline.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#what-can-go-wrong-at-this-stage",
+    "href": "09-model-building.html#what-can-go-wrong-at-this-stage",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "What Can Go Wrong at This Stage",
+    "text": "What Can Go Wrong at This Stage\nEven a simple first model can fail for important reasons.\n\nLeakage\nIf preprocessing or feature selection uses the full dataset before splitting, test performance becomes misleading.\n\n\nOver-interpretation\nA moderate or weak metric does not mean the dataset is useless. It may mean the problem is difficult, the model is simple, or the features are limited.\n\n\nFalse confidence\nA fitted model is not the same as a validated workflow.\nWe still need to examine evaluation, robustness, and reproducibility more carefully.\n\n\nConfusing association with explanation\nA predictive relationship is not the same as a biological mechanism.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#cdi-insight",
+    "href": "09-model-building.html#cdi-insight",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "CDI Insight",
+    "text": "CDI Insight\nIn analysis, we often ask:\n\nwhat patterns are present in the data?\n\nIn modeling, we must also ask:\n\ndo these patterns remain useful when tested on unseen data?\n\nThat is the beginning of reliable prediction.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#summary",
+    "href": "09-model-building.html#summary",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Summary",
+    "text": "Summary\n\nWe introduced a real-world health-related tabular dataset\n\nThe diabetes dataset defines a regression task with clinical-style variables\n\nWe created separate training and testing sets\n\nWe fit a baseline linear regression model\n\nWe evaluated performance using MAE and R-squared\n\nWe examined observed versus predicted values and model coefficients\n\nWe interpreted results cautiously rather than treating model output as truth",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#next-step",
+    "href": "09-model-building.html#next-step",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Next Step",
+    "text": "Next Step\n→ Evaluating models beyond a single split",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html",
+    "href": "10-model-evaluation.html",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "",
+    "text": "Load the Dataset\nIn the previous lesson, we built a model and evaluated it using a single train/test split.\nWe obtained metrics.\nWe visualized predictions.\nWe inspected coefficients.\nThat was necessary.\nBut it is not sufficient.\nA single evaluation result does not tell us whether a model is reliable.\nWe continue using the diabetes dataset introduced in the previous lesson.\nEach chapter should remain runnable on its own, so we load the data again here.\nCode\nimport pandas as pd\nfrom sklearn.datasets import load_diabetes\n\ndiabetes = load_diabetes()\n\nX = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)\ny = pd.Series(diabetes.target, name=\"disease_progression\")\n\nX.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#why-evaluation-is-not-a-single-number",
+    "href": "10-model-evaluation.html#why-evaluation-is-not-a-single-number",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Why Evaluation Is Not a Single Number",
+    "text": "Why Evaluation Is Not a Single Number\nWhen we compute metrics such as:\n\nMean Absolute Error (MAE)\n\nR-squared (R²)\n\nwe are summarizing model performance under one specific condition:\n\none train/test split\n\none random state\n\none sample of the data\n\nThis raises an important question:\n\nWhat happens if the data is split differently?",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#repeating-the-split",
+    "href": "10-model-evaluation.html#repeating-the-split",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Repeating the Split",
+    "text": "Repeating the Split\nLet us repeat the modeling process using different random splits.\n\n\nCode\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\ndef evaluate_once(X, y, random_state):\n    X_train, X_test, y_train, y_test = train_test_split(\n        X, y, test_size=0.2, random_state=random_state\n    )\n\n    model = LinearRegression()\n    model.fit(X_train, y_train)\n\n    y_pred = model.predict(X_test)\n\n    mae = mean_absolute_error(y_test, y_pred)\n    r2 = r2_score(y_test, y_pred)\n\n    return mae, r2\n\nresults = [evaluate_once(X, y, rs) for rs in range(5)]\n\nresults\n\n\n[(46.1735850037048, 0.33223321731061817),\n (41.97492114949366, 0.43843162133692803),\n (45.213034190469024, 0.4399338661568968),\n (44.84820711311212, 0.4161792211496943),\n (42.78068694547005, 0.46109889928420855)]\n\n\nEven though:\n\nthe data is the same\n\nthe model is the same\n\nthe performance changes.\nThis tells us something important:\n\nmodel performance is not fixed\nit depends on how the data is partitioned",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#aggregating-results",
+    "href": "10-model-evaluation.html#aggregating-results",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Aggregating Results",
+    "text": "Aggregating Results\n\n\nCode\nresults_df = pd.DataFrame(results, columns=[\"MAE\", \"R2\"])\nresults_df\n\n\n\n\n\n\n\n\n\nMAE\nR2\n\n\n\n\n0\n46.173585\n0.332233\n\n\n1\n41.974921\n0.438432\n\n\n2\n45.213034\n0.439934\n\n\n3\n44.848207\n0.416179\n\n\n4\n42.780687\n0.461099\n\n\n\n\n\n\n\n\n\nCode\nresults_df.describe().round(3)\n\n\n\n\n\n\n\n\n\nMAE\nR2\n\n\n\n\ncount\n5.000\n5.000\n\n\nmean\n44.198\n0.418\n\n\nstd\n1.754\n0.050\n\n\nmin\n41.975\n0.332\n\n\n25%\n42.781\n0.416\n\n\n50%\n44.848\n0.438\n\n\n75%\n45.213\n0.440\n\n\nmax\n46.174\n0.461\n\n\n\n\n\n\n\nInstead of a single value, we now see a range of performance.\nThis is a more realistic view.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#introducing-cross-validation",
+    "href": "10-model-evaluation.html#introducing-cross-validation",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Introducing Cross-Validation",
+    "text": "Introducing Cross-Validation\nTo make evaluation more stable, we can systematically repeat this process.\nThis is the idea behind cross-validation.\n\n\nCode\nfrom sklearn.model_selection import cross_val_score\n\nmodel = LinearRegression()\n\ncv_scores = cross_val_score(\n    model,\n    X,\n    y,\n    cv=5,\n    scoring=\"r2\"\n)\n\ncv_scores\n\n\narray([0.42955615, 0.52259939, 0.48268054, 0.42649776, 0.55024834])\n\n\n\n\nCode\npd.DataFrame({\n    \"cv_fold\": range(1, len(cv_scores) + 1),\n    \"r2\": cv_scores\n}).round(3)\n\n\n\n\n\n\n\n\n\ncv_fold\nr2\n\n\n\n\n0\n1\n0.430\n\n\n1\n2\n0.523\n\n\n2\n3\n0.483\n\n\n3\n4\n0.426\n\n\n4\n5\n0.550\n\n\n\n\n\n\n\n\n\nCode\ncv_scores.mean(), cv_scores.std()\n\n\n(np.float64(0.48231643590864215), np.float64(0.04926857751190387))\n\n\nCross-validation gives us:\n\nan average performance\n\na measure of variability\n\nThis is more informative than a single split.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#interpreting-metrics-carefully",
+    "href": "10-model-evaluation.html#interpreting-metrics-carefully",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Interpreting Metrics Carefully",
+    "text": "Interpreting Metrics Carefully\nMetrics are useful, but incomplete.\n\nMean Absolute Error (MAE)\n\neasy to interpret\n\nsensitive to scale\n\nBut it does not tell us:\n\nwhere errors occur\n\nwhether errors are systematic\n\n\n\nR-squared (R²)\n\nmeasures explained variance\n\nBut it can be misleading:\n\na moderate R² may still be useful\n\na high R² does not guarantee generalization",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#residual-analysis",
+    "href": "10-model-evaluation.html#residual-analysis",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Residual Analysis",
+    "text": "Residual Analysis\nTo examine residuals clearly, we recompute predictions using a defined train/test split.\n\n\nCode\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nresidual_model = LinearRegression()\nresidual_model.fit(X_train, y_train)\n\ny_pred = residual_model.predict(X_test)\n\n\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nresiduals = y_test - y_pred\n\nplt.figure(figsize=(7, 5))\n\n# Scatter with contrast\nscatter = plt.scatter(\n    y_pred,\n    residuals,\n    c=np.abs(residuals),      # color by error magnitude\n    cmap=\"viridis\",\n    edgecolors=\"black\",\n    linewidth=0.4,\n    alpha=0.9\n)\n\n# Reference line at zero error\nplt.axhline(0, linestyle=\"--\", linewidth=1)\n\nplt.xlabel(\"Predicted values\")\nplt.ylabel(\"Residuals\")\nplt.title(\"Residual Plot (Error Magnitude Highlighted)\")\n\n# Colorbar for interpretation\nplt.colorbar(scatter, label=\"Absolute Error\")\n\nplt.grid(alpha=0.2)\n\nplt.show()\n\n\n\n\n\n\n\n\n\nThis plot helps us examine how prediction errors behave across the range of model outputs.\nIt allows us to detect:\n\nsystematic bias\nIf residuals are mostly above or below zero, the model consistently over- or under-predicts\nuneven error distribution (heteroscedasticity)\nIf the spread of residuals changes across predicted values, the model performs inconsistently across ranges\nregions of poor performance\nClusters of large residuals (highlighted by stronger color) indicate where the model struggles to capture the underlying pattern\n\nRather than summarizing error with a single number, this plot reveals how and where the model fails, which is essential for reliable interpretation.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#what-reliable-evaluation-requires",
+    "href": "10-model-evaluation.html#what-reliable-evaluation-requires",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "What Reliable Evaluation Requires",
+    "text": "What Reliable Evaluation Requires\nA model is not reliable because:\n\nit produces a number\n\nit performs well on one split\n\nA model becomes more reliable when:\n\nperformance is stable across splits\n\nerrors are understood, not just measured\n\nevaluation reflects how the model will be used",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#what-can-go-wrong",
+    "href": "10-model-evaluation.html#what-can-go-wrong",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "What Can Go Wrong",
+    "text": "What Can Go Wrong\n\nOver-trusting a Single Metric\nOne number cannot capture full model behavior.\n\n\nIgnoring Variability\nPerformance that changes across splits indicates instability.\n\n\nMisinterpreting Metrics\nMetrics must be interpreted in context.\n\n\nSkipping Error Analysis\nWithout examining residuals, important patterns may be missed.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#cdi-insight",
+    "href": "10-model-evaluation.html#cdi-insight",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "CDI Insight",
+    "text": "CDI Insight\nA model is not evaluated once.\nIt is evaluated across conditions.\nReliability comes from consistency, not a single result.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#summary",
+    "href": "10-model-evaluation.html#summary",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Summary",
+    "text": "Summary\n\nA single train/test split provides limited insight\n\nModel performance varies depending on data partitioning\n\nCross-validation provides a more stable estimate\n\nMetrics must be interpreted carefully\n\nResidual analysis reveals patterns hidden by summary statistics\n\nReliable evaluation requires multiple perspectives",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-evaluation.html#next-step",
+    "href": "10-model-evaluation.html#next-step",
+    "title": "Evaluating Models Beyond a Single Result",
+    "section": "Next Step",
+    "text": "Next Step\n→ Improving models through controlled changes",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html",
+    "href": "999-appendix.html",
+    "title": "Appendix",
+    "section": "",
+    "text": "Project Structure Overview\nThis appendix collects technical reference material that supports the Foundations Track.\nIt documents the project structure, environment setup, rendering workflow, and reusable patterns used throughout the guide.\nA standard CDI Quarto-first project looks like this:",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#project-structure-overview",
+    "href": "999-appendix.html#project-structure-overview",
+    "title": "Appendix",
+    "section": "",
+    "text": "data-science/\n├── index.qmd\n├── 00-preface.qmd\n├── 01-setting-up-environment.qmd\n├── ...\n├── data/\n├── figures/\n├── scripts/\n│   └── bash/\n├── docs/\n├── _quarto.yml\n└── requirements.txt\n\nKey Directories\n\ndata/\nstores raw and cleaned datasets\nfigures/\nstores plots that are explicitly saved during rendering\nscripts/bash/\ncontains helper scripts such as setup-env.sh and build.sh\ndocs/\ncontains the rendered Quarto site (GitHub Pages output)",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#environment-setup-reference",
+    "href": "999-appendix.html#environment-setup-reference",
+    "title": "Appendix",
+    "section": "Environment Setup Reference",
+    "text": "Environment Setup Reference\nThis project uses a local virtual environment (.venv) for reproducibility.\n\nCreate environment manually\npython3 -m venv .venv\nsource .venv/bin/activate\npip install -r requirements.txt\n\n\nRender the book\nquarto render\nOr use the helper script:\nbash scripts/bash/build.sh",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#quarto-workflow-summary",
+    "href": "999-appendix.html#quarto-workflow-summary",
+    "title": "Appendix",
+    "section": "Quarto Workflow Summary",
+    "text": "Quarto Workflow Summary\nThe workflow for this guide is:\nPython code\n    ↓\nQuarto chapter (.qmd)\n    ↓\nquarto render\n    ↓\ndocs/ (static site)\nAll figures and outputs are generated during rendering.",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#reusable-pandas-patterns",
+    "href": "999-appendix.html#reusable-pandas-patterns",
+    "title": "Appendix",
+    "section": "Reusable Pandas Patterns",
+    "text": "Reusable Pandas Patterns\n\nSelect columns\ndf[[\"col1\", \"col2\"]]\n\n\nFilter rows\ndf[df[\"col\"] &gt; value]\n\n\nGroup and aggregate\ndf.groupby(\"group_col\").agg(\n    metric=(\"value_col\", \"mean\")\n)\n\n\nHandle missing values\ndf[\"col\"] = df[\"col\"].fillna(df[\"col\"].median())\n\n\nConvert dtype\ndf[\"category_col\"] = df[\"category_col\"].astype(\"category\")",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#reproducibility-checklist",
+    "href": "999-appendix.html#reproducibility-checklist",
+    "title": "Appendix",
+    "section": "Reproducibility Checklist",
+    "text": "Reproducibility Checklist\nBefore finalizing any chapter:\n\nconfirm no missing values remain (unless justified)\n\nconfirm no unintended duplicates\n\nconfirm correct data types\n\nconfirm figures render correctly\n\nrebuild the book (quarto render)\n\nopen docs/index.html to verify output",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#data-sources",
+    "href": "999-appendix.html#data-sources",
+    "title": "Appendix",
+    "section": "Data Sources",
+    "text": "Data Sources\n\nIris dataset (Fisher 1936)",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#software-and-tools",
+    "href": "999-appendix.html#software-and-tools",
+    "title": "Appendix",
+    "section": "Software and Tools",
+    "text": "Software and Tools\nThis guide uses a small set of widely adopted tools for data analysis and visualization:\n\nPython (Python Software Foundation 2024) — general-purpose programming language for data analysis\n\npandas (McKinney et al. 2010) — data manipulation and tabular data handling\n\nNumPy (Harris et al. 2020) — numerical computing and array operations\n\nmatplotlib (Hunter 2007) — foundational plotting library\n\nseaborn (Waskom 2021) — statistical data visualization built on matplotlib\n\nThese tools form a standard ecosystem for reproducible data science workflows.",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-appendix.html#closing-note",
+    "href": "999-appendix.html#closing-note",
+    "title": "Appendix",
+    "section": "Closing Note",
+    "text": "Closing Note\nThe goal of this Foundations Track is not just to teach syntax.\nIt is to teach structure, discipline, and reproducibility.\nThe same workflow you used here can be applied to:\n\nnew datasets\n\nnew domains\n\nlarger analytical projects\n\nfuture CDI guides\n\n\n\n\n\nFisher, Ronald A. 1936. “The Use of Multiple Measurements in Taxonomic Problems.” Annals of Eugenics.\n\n\nHarris, Charles R. et al. 2020. “Array Programming with NumPy.” Nature. https://doi.org/10.1038/s41586-020-2649-2.\n\n\nHunter, J. D. 2007. “Matplotlib: A 2D Graphics Environment.” Computing in Science & Engineering. https://doi.org/10.1109/MCSE.2007.55.\n\n\nMcKinney, Wes et al. 2010. “Pandas-Dev/Pandas: Pandas.” Zenodo. https://doi.org/10.5281/zenodo.3509134.\n\n\nPython Software Foundation. 2024. “Python Language Reference.” https://www.python.org/.\n\n\nWaskom, Michael L. 2021. “Seaborn: Statistical Data Visualization.” Journal of Open Source Software. https://doi.org/10.21105/joss.03021.",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "999-references.html",
+    "href": "999-references.html",
+    "title": "References",
+    "section": "",
+    "text": "Fisher, Ronald A. 1936. “The Use of Multiple Measurements in\nTaxonomic Problems.” Annals of Eugenics.\n\n\nHarris, Charles R. et al. 2020. “Array Programming with\nNumPy.” Nature. https://doi.org/10.1038/s41586-020-2649-2.\n\n\nHunter, J. D. 2007. “Matplotlib: A 2D Graphics\nEnvironment.” Computing in Science & Engineering. https://doi.org/10.1109/MCSE.2007.55.\n\n\nMcKinney, Wes et al. 2010. “Pandas-Dev/Pandas: Pandas.”\nZenodo. https://doi.org/10.5281/zenodo.3509134.\n\n\nPython Software Foundation. 2024. “Python Language\nReference.” https://www.python.org/.\n\n\nWaskom, Michael L. 2021. “Seaborn: Statistical Data\nVisualization.” Journal of Open Source Software. https://doi.org/10.21105/joss.03021.",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>References</span>"
+    ]
+  }
+]

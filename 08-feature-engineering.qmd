@@ -1,0 +1,171 @@
+# Feature Engineering and Data Representation {#lesson08}
+
+:::cdi-message
+- **ID:** DS-L08
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** Data representation determines what a model can learn
+:::
+
+In the foundations track, you worked with data as it was given.
+
+You explored it, cleaned it, and interpreted it.
+
+In this track, that is no longer sufficient.
+
+Before building a model, you must decide:
+
+> **What information should the model receive, and in what form?**
+
+This is the role of feature engineering.
+
+---
+
+## Representation Comes Before Modeling
+
+Models do not understand raw data.
+
+They operate on numerical representations.
+
+This means:
+
+- the model does not “discover” structure on its own  
+- it can only learn from what is made visible  
+
+Feature engineering determines:
+
+- which patterns are detectable  
+- which relationships are emphasized  
+- which signals are ignored  
+
+Two datasets with the same information can lead to very different models depending on how features are constructed.
+
+---
+
+## A Simple Example
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "age": [22, 35, 47, 51],
+    "income": [25000, 48000, 52000, 61000],
+    "city": ["A", "B", "A", "C"]
+})
+
+df
+```
+
+At this stage:
+
+- scales are inconsistent  
+- categorical data is not usable  
+- relationships are implicit  
+
+This is not yet a modeling dataset.
+
+---
+
+## Step 1 — Making Variables Comparable
+
+```{python}
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+
+df_scaled = df.copy()
+df_scaled[["age", "income"]] = scaler.fit_transform(df[["age", "income"]])
+
+df_scaled
+```
+
+---
+
+## Step 2 — Making Categories Visible
+
+```{python}
+df_encoded = pd.get_dummies(df_scaled, columns=["city"])
+
+df_encoded
+```
+
+---
+
+## Step 3 — Making Relationships Explicit
+
+```{python}
+df_features = df_encoded.copy()
+
+df_features["income_per_age"] = df_features["income"] / (df_features["age"] + 1)
+
+df_features
+```
+
+---
+
+## Transition to Real-World Data
+
+So far, we have worked with small, controlled examples.
+
+This is intentional.
+
+It allows us to isolate key ideas without distraction.
+
+In practice, however, data rarely arrives in this form.
+
+Real datasets are:
+
+- larger  
+- less consistent  
+- less explicit in their structure  
+
+As we move forward, we will begin working with real-world data.
+
+This introduces a new responsibility:
+
+> ensuring that your data is structured in a way that supports analysis and modeling
+
+---
+
+## Preparing Your Own Data
+
+Before applying models, your dataset should follow a clear tabular structure:
+
+- each row represents one observation  
+- each column represents one variable  
+- each column has a consistent data type  
+- missing values are handled or explicitly represented  
+
+In CDI terms, this is a **tidy and structured dataset**.
+
+If your data does not follow this structure:
+
+- feature engineering becomes inconsistent  
+- models become unreliable  
+- results become difficult to interpret  
+
+---
+
+## CDI Insight
+
+Controlled examples teach concepts.
+
+Real datasets test your ability to apply them.
+
+The transition between the two is where analytical skill develops.
+
+---
+
+## Summary
+
+- Models learn from representations, not raw data  
+- Scaling controls how variables influence learning  
+- Encoding makes categorical information usable  
+- Derived features expose relationships  
+- Feature engineering is a design process with direct impact on model behavior  
+
+---
+
+## Next Step
+
+→ Building models with intention and control

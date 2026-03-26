@@ -1,0 +1,175 @@
+# Appendix {#appendix}
+
+:::cdi-message
+- **ID:** DS-APP
+- **Type:** Reference
+- **Audience:** Public
+- **Theme:** Environment, structure, and reproducibility reference
+:::
+
+This appendix collects technical reference material that supports the Foundations Track.
+
+It documents the project structure, environment setup, rendering workflow, and reusable patterns used throughout the guide.
+
+---
+
+## Project Structure Overview
+
+A standard CDI Quarto-first project looks like this:
+
+```
+data-science/
+├── index.qmd
+├── 00-preface.qmd
+├── 01-setting-up-environment.qmd
+├── ...
+├── data/
+├── figures/
+├── scripts/
+│   └── bash/
+├── docs/
+├── _quarto.yml
+└── requirements.txt
+```
+
+### Key Directories
+
+- `data/`  
+  stores raw and cleaned datasets  
+
+- `figures/`  
+  stores plots that are explicitly saved during rendering 
+
+- `scripts/bash/`  
+  contains helper scripts such as `setup-env.sh` and `build.sh`  
+
+- `docs/`  
+  contains the rendered Quarto site (GitHub Pages output)  
+
+---
+
+## Environment Setup Reference
+
+This project uses a local virtual environment (`.venv`) for reproducibility.
+
+### Create environment manually
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Render the book
+
+```bash
+quarto render
+```
+
+Or use the helper script:
+
+```bash
+bash scripts/bash/build.sh
+```
+
+---
+
+## Quarto Workflow Summary
+
+The workflow for this guide is:
+
+```
+Python code
+    ↓
+Quarto chapter (.qmd)
+    ↓
+quarto render
+    ↓
+docs/ (static site)
+```
+
+All figures and outputs are generated during rendering.
+
+---
+
+## Reusable Pandas Patterns
+
+### Select columns
+
+```python
+df[["col1", "col2"]]
+```
+
+### Filter rows
+
+```python
+df[df["col"] > value]
+```
+
+### Group and aggregate
+
+```python
+df.groupby("group_col").agg(
+    metric=("value_col", "mean")
+)
+```
+
+### Handle missing values
+
+```python
+df["col"] = df["col"].fillna(df["col"].median())
+```
+
+### Convert dtype
+
+```python
+df["category_col"] = df["category_col"].astype("category")
+```
+
+---
+
+## Reproducibility Checklist
+
+Before finalizing any chapter:
+
+- confirm no missing values remain (unless justified)  
+- confirm no unintended duplicates  
+- confirm correct data types  
+- confirm figures render correctly  
+- rebuild the book (`quarto render`)  
+- open `docs/index.html` to verify output  
+
+---
+
+## Data Sources
+
+- **Iris dataset** [@iris]
+
+---
+
+## Software and Tools
+
+This guide uses a small set of widely adopted tools for data analysis and visualization:
+
+- **Python** [@python] — general-purpose programming language for data analysis  
+- **pandas** [@pandas] — data manipulation and tabular data handling  
+- **NumPy** [@numpy] — numerical computing and array operations  
+- **matplotlib** [@matplotlib] — foundational plotting library  
+- **seaborn** [@seaborn] — statistical data visualization built on matplotlib  
+
+These tools form a standard ecosystem for reproducible data science workflows.
+
+---
+
+## Closing Note
+
+The goal of this Foundations Track is not just to teach syntax.
+
+It is to teach structure, discipline, and reproducibility.
+
+The same workflow you used here can be applied to:
+
+- new datasets  
+- new domains  
+- larger analytical projects  
+- future CDI guides  

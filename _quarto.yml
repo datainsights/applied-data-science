@@ -1,0 +1,57 @@
+project:
+  type: book
+  output-dir: docs
+
+bibliography: library/references.bib
+date: last-modified
+date-format: "MMM YYYY"
+
+book:
+  title: "Data Science Foundations Premium"
+  subtitle: "From Analysis to Real-World Analytical Systems"
+
+  chapters:
+    - index.qmd
+
+    - part: "Premium Foundations"
+      chapters:
+        - 00-preface.qmd
+        - 01-setting-up-environment.qmd
+        - 08-feature-engineering.qmd
+        - 09-model-building.qmd
+        - 10-model-evaluation.qmd
+        # - 11-model-improvement.qmd
+        # - 12-pipelines-and-reproducibility.qmd
+        # - 13-model-interpretation.qmd
+        # - 14-packaging-models.qmd
+        # - 15-building-api.qmd
+        # - 16-deployment-concepts.qmd
+        # - 17-monitoring-and-drift.qmd
+        # - 18-continuous-improvement.qmd
+        # - 19-capstone-project.qmd
+
+    - part: "Reference"
+      chapters:
+        - 999-appendix.qmd
+        - 999-references.qmd
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    number-depth: 2
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-icon: true
+    css: assets/css/cdi.css
+    code-fold: true
+    mermaid:
+      theme: forest
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+  working-dir: .

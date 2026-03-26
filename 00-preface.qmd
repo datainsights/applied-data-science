@@ -1,0 +1,127 @@
+# Preface {-}
+
+:::cdi-message
+- **ID:** DS-000
+- **Type:** Preface
+- **Audience:** Intermediate to Advanced
+- **Theme:** From analytical reasoning to system-level thinking
+:::
+
+## Why This Track Exists
+
+You have already learned how to:
+
+- explore datasets  
+- clean and prepare data  
+- visualize patterns  
+- summarize findings  
+
+These are essential foundations.
+
+But in practice, analysis alone is not enough.
+
+What matters next is how we move from:
+
+- structured insight  
+to  
+- reliable analytical systems  
+
+This track focuses on that transition.
+
+It extends data science from a **process of reasoning** into a **process of building systems that produce reliable results**.
+
+---
+
+## What You Will Learn
+
+This track focuses on extending your analytical workflow into real-world practice:
+
+- transforming data into model-ready representations  
+- building and evaluating machine learning models  
+- structuring pipelines to ensure reproducibility  
+- interpreting model behavior carefully  
+- packaging models for reuse  
+- exposing models through simple APIs  
+- understanding deployment concepts  
+- recognizing model failure, drift, and limitations  
+
+The goal is not to introduce more tools.
+
+The goal is to understand how analytical components work together as a system.
+
+---
+
+## How This Guide Is Structured
+
+Each chapter follows a consistent pattern:
+
+1. **Explanation**  
+   What concept we are learning and why it matters  
+
+2. **Code**  
+   Practical implementation  
+
+3. **Interpretation**  
+   What the results mean  
+
+4. **Summary**  
+   The key ideas to retain  
+
+5. **Exercise**  
+   A task to reinforce understanding  
+
+This structure remains intentional.
+
+As the workflow becomes more complex, clarity becomes more important.
+
+---
+
+## How to Approach This Guide
+
+This track assumes you are already comfortable with:
+
+- basic data exploration  
+- data cleaning and transformation  
+- visualization and interpretation  
+
+Here, the focus shifts to:
+
+- connecting steps across a workflow  
+- understanding how decisions affect outcomes  
+- recognizing where errors can occur  
+- building systems that can be reused and extended  
+
+Do not rush through implementation.
+
+Take time to understand how each step fits into the larger system.
+
+---
+
+## The CDI Extended Workflow
+
+In the foundations track, the focus was:
+
+> data → exploration → insight  
+
+In practice, analytical work extends beyond this.
+
+```{mermaid}
+flowchart TB
+  A[Question or Problem] --> B[Load & Explore Data]
+
+  B --> C[Clean & Prepare]
+  B --> D[Visualize Patterns]
+
+  C --> D
+  D --> E[Summarize & Interpret]
+
+  E --> F[Modeling & Evaluation]
+  F --> G[System & Deployment]
+
+  G --> H[Monitoring & Feedback]
+  H --> B
+```
+
+This extended workflow reflects how real analytical systems operate.
+
+Each stage introduces new considerations, including validation, reproducibility, and reliability.

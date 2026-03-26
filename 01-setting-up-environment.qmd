@@ -1,0 +1,120 @@
+# Setting Up a Reproducible Analytical System {#lesson01}
+
+:::cdi-message
+- **ID:** DS-L01
+- **Type:** Premium Foundation
+- **Audience:** Intermediate to Advanced
+- **Theme:** Reproducibility and structure enable reliable systems
+:::
+
+In the foundations track, you learned how to run analysis.
+
+In this track, you will build workflows that must remain:
+
+- reproducible  
+- structured  
+- reliable over time  
+
+This requires a more deliberate setup.
+
+An environment is not just where code runs.
+
+It is the **foundation of the system you are building**.
+
+---
+
+## What This Setup Supports
+
+By the end of this lesson, you will have a working environment that supports:
+
+- consistent execution across sessions  
+- controlled dependencies  
+- structured project organization  
+- reproducible builds  
+- preparation for modeling, pipelines, and deployment  
+
+---
+
+## Project Structure (Important)
+
+## Project Structure (Important)
+
+```text
+project-root/
+│
+├── data/
+├── scripts/
+│   ├── bash/
+│   └── python/
+├── models/
+├── docs/
+├── requirements.txt
+├── _quarto.yml
+│
+├── 00-preface.qmd
+├── 01-setting-up-environment.qmd
+├── 08-feature-engineering.qmd
+...
+
+---
+
+## Python Environment
+
+Activate:
+
+```{bash}
+source .venv/bin/activate
+```
+
+Verify:
+
+```{bash}
+which python
+python --version
+```
+
+---
+
+## Dependency Control
+
+```{bash}
+pip install -r requirements.txt
+```
+
+---
+
+## Build the Project
+
+```{bash}
+bash scripts/bash/build.sh
+```
+
+---
+
+## Sanity Check
+
+Open:
+
+```{bash}
+open docs/index.html
+```
+
+---
+
+## CDI Insight
+
+Reliable systems depend on stable foundations.
+
+---
+
+## Summary
+
+- `.venv` is active  
+- dependencies are controlled  
+- build pipeline works  
+
+---
+
+## Next Step
+
+→ Feature engineering and data representation

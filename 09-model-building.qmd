@@ -1,0 +1,381 @@
+# Building Your First Model with Real-World Health Data {#lesson09}
+
+:::cdi-message
+- **ID:** DS-L09
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** Modeling begins when representation meets a real prediction task
+:::
+
+In the previous lesson, we worked with controlled examples to understand feature engineering.
+
+That was intentional.
+
+It allowed us to focus on how data representation affects what a model can learn.
+
+Now we move into a real-world dataset.
+
+This is where premium work begins to feel different.
+
+Real datasets are not just collections of variables.
+
+They represent a prediction problem, a measurement process, and a set of assumptions about what can be learned.
+
+In this lesson, we will use a health-related tabular dataset to build a first model in a way that is structured, cautious, and interpretable.
+
+---
+
+## Why We Are Using a Health Dataset
+
+Health-related data is useful for modeling lessons because it is both practical and consequential.
+
+Variables such as:
+
+- age  
+- body mass index  
+- blood pressure  
+- blood chemistry  
+
+can carry meaningful signals, but they also require careful interpretation.
+
+This makes health data a good setting for learning how modeling decisions affect results.
+
+Our goal is not to make a clinical claim.
+
+Our goal is to understand how a model behaves when applied to structured health data.
+
+---
+
+## The Prediction Task
+
+We will use the diabetes dataset available in `scikit-learn`.
+
+This dataset contains ten baseline variables measured for each patient, along with a quantitative target related to disease progression.
+
+That gives us a **regression task**:
+
+> use baseline patient measurements to predict a continuous outcome
+
+This is a good starting point because it allows us to focus on:
+
+- feature matrix design  
+- training and testing logic  
+- baseline model behavior  
+- interpretation of prediction error  
+
+---
+
+## Load the Dataset
+
+```{python}
+#| label: 09-load-diabetes
+import pandas as pd
+
+from sklearn.datasets import load_diabetes
+
+diabetes = load_diabetes()
+
+X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+y = pd.Series(diabetes.target, name="disease_progression")
+
+X.head()
+```
+
+Let us also inspect the target.
+
+```{python}
+#| label: 09-target-preview
+y.head()
+```
+
+---
+
+## Understand the Data Structure
+
+Before modeling, confirm what the data represents.
+
+```{python}
+#| label: 09-data-shape
+X.shape, y.shape
+```
+
+```{python}
+#| label: 09-columns
+X.columns.tolist()
+```
+
+Each row represents one patient observation.
+
+Each column represents one measured feature.
+
+The target is a continuous variable, so this is not a classification problem.
+
+This distinction matters because it determines:
+
+- what model types are appropriate  
+- what evaluation metrics make sense  
+- how results should be interpreted  
+
+---
+
+## A Brief Look at the Features
+
+```{python}
+#| label: 09-summary-stats
+X.describe().round(3)
+```
+
+The features in this dataset are already numeric.
+
+That makes it suitable for a first regression workflow.
+
+But numeric does not mean automatically meaningful.
+
+We still need to think about:
+
+- scale  
+- signal strength  
+- correlation structure  
+- whether the relationship to the outcome is likely to be simple or complex  
+
+---
+
+## Split the Data Properly
+
+A model should not be evaluated on the same data used to fit it.
+
+That would produce an overly optimistic result.
+
+We create separate training and testing sets so that performance is assessed on unseen data.
+
+```{python}
+#| label: 09-train-test-split
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+X_train.shape, X_test.shape
+```
+
+This is one of the first major shifts from exploratory analysis to modeling:
+
+> we are no longer only asking what patterns exist  
+> we are asking whether those patterns generalize beyond the data used to fit the model
+
+---
+
+## Start with a Baseline Model
+
+Premium modeling should begin with a baseline, not with complexity.
+
+A simple model gives us a reference point.
+
+We will start with linear regression.
+
+```{python}
+#| label: 09-fit-linear-model
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+```
+
+Now generate predictions on the test set.
+
+```{python}
+#| label: 09-predict-linear-model
+y_pred = model.predict(X_test)
+
+y_pred[:10]
+```
+
+---
+
+## Evaluate the Model
+
+For regression, two common metrics are:
+
+- **Mean Absolute Error (MAE)**: average absolute difference between observed and predicted values  
+- **R-squared (R²)**: proportion of variability explained by the model  
+
+```{python}
+#| label: 09-evaluate-linear-model
+from sklearn.metrics import mean_absolute_error, r2_score
+
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+pd.DataFrame({
+    "metric": ["MAE", "R-squared"],
+    "value": [mae, r2]
+}).round(3)
+```
+
+These values are not simply “good” or “bad” in isolation.
+
+They must be interpreted relative to:
+
+- the complexity of the problem  
+- the amount of noise in the data  
+- the expectations of the use case  
+- alternative models or baselines  
+
+---
+
+## Compare Observed and Predicted Values
+
+```{python}
+#| label: 09-observed-vs-predicted
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+results_df = pd.DataFrame({
+    "observed": y_test,
+    "predicted": y_pred
+})
+
+# Absolute error
+results_df["error"] = np.abs(results_df["observed"] - results_df["predicted"])
+
+plt.figure(figsize=(7, 5))
+
+scatter = plt.scatter(
+    results_df["observed"],
+    results_df["predicted"],
+    c=results_df["error"],
+    cmap="viridis",          # strong contrast
+    edgecolors="black",      # separation between points
+    linewidth=0.4,
+    alpha=0.9
+)
+
+# Perfect prediction line
+min_val = results_df.min().min()
+max_val = results_df.max().max()
+plt.plot([min_val, max_val], [min_val, max_val], linestyle="--")
+
+plt.xlabel("Observed progression")
+plt.ylabel("Predicted progression")
+plt.title("Observed vs Predicted (Error Highlighted)")
+
+plt.colorbar(scatter, label="Absolute Error")
+
+plt.show()
+```
+
+This plot helps us move beyond a single metric.
+
+If the model performs well, predictions should generally align with observed values.
+
+If they are widely scattered, then the model is capturing only part of the signal.
+
+---
+
+## Inspect Coefficients Carefully
+
+Linear regression also gives us coefficients for each feature.
+
+```{python}
+#| label: 09-model-coefficients
+coef_df = pd.DataFrame({
+    "feature": X_train.columns,
+    "coefficient": model.coef_
+}).sort_values("coefficient", ascending=False)
+
+coef_df
+```
+
+These coefficients are useful, but they must be interpreted carefully.
+
+A coefficient reflects how much the model’s prediction changes when a feature changes, **holding other features constant**.  
+In this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.
+
+However, a coefficient does **not** automatically imply:
+
+- causation  
+- clinical importance  
+- independent biological truth  
+
+Instead, it describes how the fitted model uses that feature **within this dataset, under this specific modeling setup, and given the presence of other variables**.
+
+This distinction is critical.
+
+Coefficients represent **model behavior**, not real-world mechanisms.
+
+---
+
+## What This First Model Actually Tells Us
+
+At this stage, we have not proven that we can predict diabetes progression well in a real clinical sense.
+
+What we have shown is something more fundamental:
+
+- the dataset supports a structured prediction task  
+- a baseline regression model can be fit successfully  
+- predictions can be evaluated on held-out data  
+- coefficients and errors can be inspected systematically  
+
+This is the beginning of modeling discipline.
+
+---
+
+## What Can Go Wrong at This Stage
+
+Even a simple first model can fail for important reasons.
+
+### Leakage
+
+If preprocessing or feature selection uses the full dataset before splitting, test performance becomes misleading.
+
+### Over-interpretation
+
+A moderate or weak metric does not mean the dataset is useless.
+It may mean the problem is difficult, the model is simple, or the features are limited.
+
+### False confidence
+
+A fitted model is not the same as a validated workflow.
+
+We still need to examine evaluation, robustness, and reproducibility more carefully.
+
+### Confusing association with explanation
+
+A predictive relationship is not the same as a biological mechanism.
+
+---
+
+## CDI Insight
+
+In analysis, we often ask:
+
+> what patterns are present in the data?
+
+In modeling, we must also ask:
+
+> do these patterns remain useful when tested on unseen data?
+
+That is the beginning of reliable prediction.
+
+---
+
+## Summary
+
+- We introduced a real-world health-related tabular dataset  
+- The diabetes dataset defines a regression task with clinical-style variables  
+- We created separate training and testing sets  
+- We fit a baseline linear regression model  
+- We evaluated performance using MAE and R-squared  
+- We examined observed versus predicted values and model coefficients  
+- We interpreted results cautiously rather than treating model output as truth  
+
+---
+
+## Next Step
+
+→ **Evaluating models beyond a single split**

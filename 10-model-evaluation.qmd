@@ -1,0 +1,325 @@
+# Evaluating Models Beyond a Single Result {#lesson10}
+
+:::cdi-message
+- **ID:** DS-L10
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** Reliable models require stable and context-aware evaluation
+:::
+
+In the previous lesson, we built a model and evaluated it using a single train/test split.
+
+We obtained metrics.
+
+We visualized predictions.
+
+We inspected coefficients.
+
+That was necessary.
+
+But it is not sufficient.
+
+A single evaluation result does not tell us whether a model is reliable.
+
+---
+
+## Load the Dataset
+
+We continue using the diabetes dataset introduced in the previous lesson.
+
+Each chapter should remain runnable on its own, so we load the data again here.
+
+```{python}
+#| label: 10-load-diabetes
+import pandas as pd
+from sklearn.datasets import load_diabetes
+
+diabetes = load_diabetes()
+
+X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+y = pd.Series(diabetes.target, name="disease_progression")
+
+X.head()
+```
+
+---
+
+## Why Evaluation Is Not a Single Number
+
+When we compute metrics such as:
+
+- Mean Absolute Error (MAE)  
+- R-squared (R²)  
+
+we are summarizing model performance under one specific condition:
+
+- one train/test split  
+- one random state  
+- one sample of the data  
+
+This raises an important question:
+
+> What happens if the data is split differently?
+
+---
+
+## Repeating the Split
+
+Let us repeat the modeling process using different random splits.
+
+```{python}
+#| label: 10-repeat-split
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, r2_score
+
+def evaluate_once(X, y, random_state):
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=random_state
+    )
+
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+
+    y_pred = model.predict(X_test)
+
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+
+    return mae, r2
+
+results = [evaluate_once(X, y, rs) for rs in range(5)]
+
+results
+```
+
+Even though:
+
+- the data is the same  
+- the model is the same  
+
+the performance changes.
+
+This tells us something important:
+
+> model performance is not fixed  
+> it depends on how the data is partitioned  
+
+---
+
+## Aggregating Results
+
+```{python}
+#| label: 10-aggregate-results
+results_df = pd.DataFrame(results, columns=["MAE", "R2"])
+results_df
+```
+
+```{python}
+#| label: 10-summary-results
+results_df.describe().round(3)
+```
+
+Instead of a single value, we now see a **range of performance**.
+
+This is a more realistic view.
+
+---
+
+## Introducing Cross-Validation
+
+To make evaluation more stable, we can systematically repeat this process.
+
+This is the idea behind cross-validation.
+
+```{python}
+#| label: 10-cross-validation
+from sklearn.model_selection import cross_val_score
+
+model = LinearRegression()
+
+cv_scores = cross_val_score(
+    model,
+    X,
+    y,
+    cv=5,
+    scoring="r2"
+)
+
+cv_scores
+```
+
+```{python}
+#| label: 10-cv-summary
+pd.DataFrame({
+    "cv_fold": range(1, len(cv_scores) + 1),
+    "r2": cv_scores
+}).round(3)
+```
+
+```{python}
+#| label: 10-cv-mean-std
+cv_scores.mean(), cv_scores.std()
+```
+
+Cross-validation gives us:
+
+- an average performance  
+- a measure of variability  
+
+This is more informative than a single split.
+
+---
+
+## Interpreting Metrics Carefully
+
+Metrics are useful, but incomplete.
+
+### Mean Absolute Error (MAE)
+
+- easy to interpret  
+- sensitive to scale  
+
+But it does not tell us:
+
+- where errors occur  
+- whether errors are systematic  
+
+### R-squared (R²)
+
+- measures explained variance  
+
+But it can be misleading:
+
+- a moderate R² may still be useful  
+- a high R² does not guarantee generalization  
+
+---
+
+## Residual Analysis
+
+To examine residuals clearly, we recompute predictions using a defined train/test split.
+
+```{python}
+#| label: 10-residual-setup
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+residual_model = LinearRegression()
+residual_model.fit(X_train, y_train)
+
+y_pred = residual_model.predict(X_test)
+```
+
+```{python}
+#| label: 10-residual-plot
+import matplotlib.pyplot as plt
+import numpy as np
+
+residuals = y_test - y_pred
+
+plt.figure(figsize=(7, 5))
+
+# Scatter with contrast
+scatter = plt.scatter(
+    y_pred,
+    residuals,
+    c=np.abs(residuals),      # color by error magnitude
+    cmap="viridis",
+    edgecolors="black",
+    linewidth=0.4,
+    alpha=0.9
+)
+
+# Reference line at zero error
+plt.axhline(0, linestyle="--", linewidth=1)
+
+plt.xlabel("Predicted values")
+plt.ylabel("Residuals")
+plt.title("Residual Plot (Error Magnitude Highlighted)")
+
+# Colorbar for interpretation
+plt.colorbar(scatter, label="Absolute Error")
+
+plt.grid(alpha=0.2)
+
+plt.show()
+```
+
+This plot helps us examine how prediction errors behave across the range of model outputs.
+
+It allows us to detect:
+
+- **systematic bias**  
+  If residuals are mostly above or below zero, the model consistently over- or under-predicts  
+
+- **uneven error distribution (heteroscedasticity)**  
+  If the spread of residuals changes across predicted values, the model performs inconsistently across ranges  
+
+- **regions of poor performance**  
+  Clusters of large residuals (highlighted by stronger color) indicate where the model struggles to capture the underlying pattern  
+
+Rather than summarizing error with a single number, this plot reveals **how and where the model fails**, which is essential for reliable interpretation.
+
+---
+
+## What Reliable Evaluation Requires
+
+A model is not reliable because:
+
+- it produces a number  
+- it performs well on one split  
+
+A model becomes more reliable when:
+
+- performance is stable across splits  
+- errors are understood, not just measured  
+- evaluation reflects how the model will be used  
+
+---
+
+## What Can Go Wrong
+
+### Over-trusting a Single Metric
+
+One number cannot capture full model behavior.
+
+### Ignoring Variability
+
+Performance that changes across splits indicates instability.
+
+### Misinterpreting Metrics
+
+Metrics must be interpreted in context.
+
+### Skipping Error Analysis
+
+Without examining residuals, important patterns may be missed.
+
+---
+
+## CDI Insight
+
+A model is not evaluated once.
+
+It is evaluated across conditions.
+
+Reliability comes from consistency, not a single result.
+
+---
+
+## Summary
+
+- A single train/test split provides limited insight  
+- Model performance varies depending on data partitioning  
+- Cross-validation provides a more stable estimate  
+- Metrics must be interpreted carefully  
+- Residual analysis reveals patterns hidden by summary statistics  
+- Reliable evaluation requires multiple perspectives  
+
+---
+
+## Next Step
+
+→ **Improving models through controlled changes**
