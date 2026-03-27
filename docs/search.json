@@ -340,11 +340,22 @@
     ]
   },
   {
-    "objectID": "09-model-building.html#load-the-dataset",
-    "href": "09-model-building.html#load-the-dataset",
+    "objectID": "09-model-building.html#load-the-dataset-and-save-it-for-reuse",
+    "href": "09-model-building.html#load-the-dataset-and-save-it-for-reuse",
     "title": "Building Your First Model with Real-World Health Data",
-    "section": "Load the Dataset",
-    "text": "Load the Dataset\n\n\nCode\nimport pandas as pd\n\nfrom sklearn.datasets import load_diabetes\n\ndiabetes = load_diabetes()\n\nX = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)\ny = pd.Series(diabetes.target, name=\"disease_progression\")\n\nX.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n\n\n\n\n\n\n\nLet us also inspect the target.\n\n\nCode\ny.head()\n\n\n0    151.0\n1     75.0\n2    141.0\n3    206.0\n4    135.0\nName: disease_progression, dtype: float64",
+    "section": "Load the Dataset and Save It for Reuse",
+    "text": "Load the Dataset and Save It for Reuse\nWe first load the dataset from scikit-learn, then save it into the project data/ directory.\nThis makes the dataset part of the project itself.\nIn later lessons, we will load the same file directly from disk so that the workflow remains consistent and reproducible.\n\n\nCode\nimport pandas as pd\nfrom sklearn.datasets import load_diabetes\n\ndiabetes = load_diabetes()\n\ndf = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)\ndf[\"disease_progression\"] = diabetes.target\n\ndf.to_csv(\"data/diabetes.csv\", index=False)\n\ndf.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\ndisease_progression\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n151.0\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n75.0\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n141.0\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n206.0\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n135.0",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-building.html#create-features-and-target",
+    "href": "09-model-building.html#create-features-and-target",
+    "title": "Building Your First Model with Real-World Health Data",
+    "section": "Create Features and Target",
+    "text": "Create Features and Target\n\n\nCode\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]\n\nX.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n\n\n\n\n\n\n\nLet us also inspect the target.\n\n\nCode\ny.head()\n\n\n0    151.0\n1     75.0\n2    141.0\n3    206.0\n4    135.0\nName: disease_progression, dtype: float64",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
@@ -410,7 +421,7 @@
     "href": "09-model-building.html#compare-observed-and-predicted-values",
     "title": "Building Your First Model with Real-World Health Data",
     "section": "Compare Observed and Predicted Values",
-    "text": "Compare Observed and Predicted Values\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\n\nresults_df = pd.DataFrame({\n    \"observed\": y_test,\n    \"predicted\": y_pred\n})\n\n# Absolute error\nresults_df[\"error\"] = np.abs(results_df[\"observed\"] - results_df[\"predicted\"])\n\nplt.figure(figsize=(7, 5))\n\nscatter = plt.scatter(\n    results_df[\"observed\"],\n    results_df[\"predicted\"],\n    c=results_df[\"error\"],\n    cmap=\"viridis\",          # strong contrast\n    edgecolors=\"black\",      # separation between points\n    linewidth=0.4,\n    alpha=0.9\n)\n\n# Perfect prediction line\nmin_val = results_df.min().min()\nmax_val = results_df.max().max()\nplt.plot([min_val, max_val], [min_val, max_val], linestyle=\"--\")\n\nplt.xlabel(\"Observed progression\")\nplt.ylabel(\"Predicted progression\")\nplt.title(\"Observed vs Predicted (Error Highlighted)\")\n\nplt.colorbar(scatter, label=\"Absolute Error\")\n\nplt.show()\n\n\n\n\n\n\n\n\n\nThis plot helps us move beyond a single metric.\nIf the model performs well, predictions should generally align with observed values.\nIf they are widely scattered, then the model is capturing only part of the signal.",
+    "text": "Compare Observed and Predicted Values\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nresults_df = pd.DataFrame({\n    \"observed\": y_test,\n    \"predicted\": y_pred\n})\n\nresults_df[\"error\"] = np.abs(results_df[\"observed\"] - results_df[\"predicted\"])\n\nplt.figure(figsize=(7, 5))\n\nscatter = plt.scatter(\n    results_df[\"observed\"],\n    results_df[\"predicted\"],\n    c=results_df[\"error\"],\n    cmap=\"viridis\",\n    edgecolors=\"black\",\n    linewidth=0.4,\n    alpha=0.9\n)\n\nmin_val = min(results_df[\"observed\"].min(), results_df[\"predicted\"].min())\nmax_val = max(results_df[\"observed\"].max(), results_df[\"predicted\"].max())\nplt.plot([min_val, max_val], [min_val, max_val], linestyle=\"--\", linewidth=1)\n\nplt.xlabel(\"Observed progression\")\nplt.ylabel(\"Predicted progression\")\nplt.title(\"Observed vs Predicted (Error Highlighted)\")\nplt.colorbar(scatter, label=\"Absolute Error\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\nA good diagnostic plot does more than show predictions.\nIt reveals where the model is accurate and where it fails.\nPoints close to the diagonal line represent accurate predictions.\nPoints farther away indicate larger errors, which are highlighted here by color intensity.",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
@@ -421,7 +432,7 @@
     "href": "09-model-building.html#inspect-coefficients-carefully",
     "title": "Building Your First Model with Real-World Health Data",
     "section": "Inspect Coefficients Carefully",
-    "text": "Inspect Coefficients Carefully\nLinear regression also gives us coefficients for each feature.\n\n\nCode\ncoef_df = pd.DataFrame({\n    \"feature\": X_train.columns,\n    \"coefficient\": model.coef_\n}).sort_values(\"coefficient\", ascending=False)\n\ncoef_df\n\n\n\n\n\n\n\n\n\nfeature\ncoefficient\n\n\n\n\n8\ns5\n736.198859\n\n\n2\nbmi\n542.428759\n\n\n5\ns2\n518.062277\n\n\n3\nbp\n347.703844\n\n\n7\ns4\n275.317902\n\n\n6\ns3\n163.419983\n\n\n9\ns6\n48.670657\n\n\n0\nage\n37.904021\n\n\n1\nsex\n-241.964362\n\n\n4\ns1\n-931.488846\n\n\n\n\n\n\n\nThese coefficients are useful, but they must be interpreted carefully.\nA coefficient reflects how much the model’s prediction changes when a feature changes, holding other features constant.\nIn this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.\nHowever, a coefficient does not automatically imply:\n\ncausation\n\nclinical importance\n\nindependent biological truth\n\nInstead, it describes how the fitted model uses that feature within this dataset, under this specific modeling setup, and given the presence of other variables.\nThis distinction is critical.\nCoefficients represent model behavior, not real-world mechanisms.",
+    "text": "Inspect Coefficients Carefully\n\n\nCode\ncoef_df = pd.DataFrame({\n    \"feature\": X_train.columns,\n    \"coefficient\": model.coef_\n}).sort_values(\"coefficient\", ascending=False)\n\ncoef_df\n\n\n\n\n\n\n\n\n\nfeature\ncoefficient\n\n\n\n\n8\ns5\n736.198859\n\n\n2\nbmi\n542.428759\n\n\n5\ns2\n518.062277\n\n\n3\nbp\n347.703844\n\n\n7\ns4\n275.317902\n\n\n6\ns3\n163.419983\n\n\n9\ns6\n48.670657\n\n\n0\nage\n37.904021\n\n\n1\nsex\n-241.964362\n\n\n4\ns1\n-931.488846\n\n\n\n\n\n\n\nThese coefficients are useful, but they must be interpreted carefully.\nA coefficient reflects how much the model’s prediction changes when a feature changes, holding other features constant.\nIn this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.\nHowever, a coefficient does not automatically imply:\n\ncausation\n\nclinical importance\n\nindependent biological truth\n\nInstead, it describes how the fitted model uses that feature within this dataset, under this specific modeling setup, and given the presence of other variables.\nThis distinction is critical.\nCoefficients represent model behavior, not real-world mechanisms.",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
@@ -443,7 +454,7 @@
     "href": "09-model-building.html#what-can-go-wrong-at-this-stage",
     "title": "Building Your First Model with Real-World Health Data",
     "section": "What Can Go Wrong at This Stage",
-    "text": "What Can Go Wrong at This Stage\nEven a simple first model can fail for important reasons.\n\nLeakage\nIf preprocessing or feature selection uses the full dataset before splitting, test performance becomes misleading.\n\n\nOver-interpretation\nA moderate or weak metric does not mean the dataset is useless. It may mean the problem is difficult, the model is simple, or the features are limited.\n\n\nFalse confidence\nA fitted model is not the same as a validated workflow.\nWe still need to examine evaluation, robustness, and reproducibility more carefully.\n\n\nConfusing association with explanation\nA predictive relationship is not the same as a biological mechanism.",
+    "text": "What Can Go Wrong at This Stage\nEven a simple first model can fail for important reasons.\n\nLeakage\nIf preprocessing or feature selection uses the full dataset before splitting, test performance becomes misleading.\n\n\nOver-interpretation\nA moderate or weak metric does not mean the dataset is useless.\nIt may mean the problem is difficult, the model is simple, or the features are limited.\n\n\nFalse confidence\nA fitted model is not the same as a validated workflow.\nWe still need to examine evaluation, robustness, and reproducibility more carefully.\n\n\nConfusing association with explanation\nA predictive relationship is not the same as a biological mechanism.",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
@@ -465,7 +476,7 @@
     "href": "09-model-building.html#summary",
     "title": "Building Your First Model with Real-World Health Data",
     "section": "Summary",
-    "text": "Summary\n\nWe introduced a real-world health-related tabular dataset\n\nThe diabetes dataset defines a regression task with clinical-style variables\n\nWe created separate training and testing sets\n\nWe fit a baseline linear regression model\n\nWe evaluated performance using MAE and R-squared\n\nWe examined observed versus predicted values and model coefficients\n\nWe interpreted results cautiously rather than treating model output as truth",
+    "text": "Summary\n\nWe introduced a real-world health-related tabular dataset\n\nThe diabetes dataset defines a regression task with clinical-style variables\n\nWe saved the dataset into data/ so later lessons can reuse the same file\n\nWe created separate training and testing sets\n\nWe fit a baseline linear regression model\n\nWe evaluated performance using MAE and R-squared\n\nWe examined observed versus predicted values and model coefficients\n\nWe interpreted results cautiously rather than treating model output as truth",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Building Your First Model with Real-World Health Data</span>"
@@ -487,7 +498,7 @@
     "href": "10-model-evaluation.html",
     "title": "Evaluating Models Beyond a Single Result",
     "section": "",
-    "text": "Load the Dataset\nIn the previous lesson, we built a model and evaluated it using a single train/test split.\nWe obtained metrics.\nWe visualized predictions.\nWe inspected coefficients.\nThat was necessary.\nBut it is not sufficient.\nA single evaluation result does not tell us whether a model is reliable.\nWe continue using the diabetes dataset introduced in the previous lesson.\nEach chapter should remain runnable on its own, so we load the data again here.\nCode\nimport pandas as pd\nfrom sklearn.datasets import load_diabetes\n\ndiabetes = load_diabetes()\n\nX = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)\ny = pd.Series(diabetes.target, name=\"disease_progression\")\n\nX.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641",
+    "text": "Load the Dataset\nIn the previous lesson, we built a model and evaluated it using a single train/test split.\nWe obtained metrics.\nWe visualized predictions.\nWe inspected coefficients.\nThat was necessary.\nBut it is not sufficient.\nA single evaluation result does not tell us whether a model is reliable.\nWe continue using the diabetes dataset introduced in the previous lesson.\nBecause the dataset was saved into the project data/ directory, we now load it directly from disk.\nThis keeps the workflow consistent across lessons and reflects how real projects are usually organized.\nCode\nimport pandas as pd\n\ndf = pd.read_csv(\"data/diabetes.csv\")\n\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]\n\ndf.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\ndisease_progression\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n151.0\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n75.0\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n141.0\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n206.0\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n135.0",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
@@ -509,7 +520,7 @@
     "href": "10-model-evaluation.html#repeating-the-split",
     "title": "Evaluating Models Beyond a Single Result",
     "section": "Repeating the Split",
-    "text": "Repeating the Split\nLet us repeat the modeling process using different random splits.\n\n\nCode\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\ndef evaluate_once(X, y, random_state):\n    X_train, X_test, y_train, y_test = train_test_split(\n        X, y, test_size=0.2, random_state=random_state\n    )\n\n    model = LinearRegression()\n    model.fit(X_train, y_train)\n\n    y_pred = model.predict(X_test)\n\n    mae = mean_absolute_error(y_test, y_pred)\n    r2 = r2_score(y_test, y_pred)\n\n    return mae, r2\n\nresults = [evaluate_once(X, y, rs) for rs in range(5)]\n\nresults\n\n\n[(46.1735850037048, 0.33223321731061817),\n (41.97492114949366, 0.43843162133692803),\n (45.213034190469024, 0.4399338661568968),\n (44.84820711311212, 0.4161792211496943),\n (42.78068694547005, 0.46109889928420855)]\n\n\nEven though:\n\nthe data is the same\n\nthe model is the same\n\nthe performance changes.\nThis tells us something important:\n\nmodel performance is not fixed\nit depends on how the data is partitioned",
+    "text": "Repeating the Split\nLet us repeat the modeling process using different random splits.\n\n\nCode\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\ndef evaluate_once(X, y, random_state):\n    X_train, X_test, y_train, y_test = train_test_split(\n        X, y, test_size=0.2, random_state=random_state\n    )\n\n    model = LinearRegression()\n    model.fit(X_train, y_train)\n\n    y_pred = model.predict(X_test)\n\n    mae = mean_absolute_error(y_test, y_pred)\n    r2 = r2_score(y_test, y_pred)\n\n    return mae, r2\n\nresults = [evaluate_once(X, y, rs) for rs in range(5)]\n\nresults\n\n\n[(46.17358500370479, 0.3322332173106184),\n (41.97492114949365, 0.43843162133692803),\n (45.213034190469045, 0.4399338661568968),\n (44.8482071131121, 0.4161792211496944),\n (42.78068694547003, 0.461098899284209)]\n\n\nEven though:\n\nthe data is the same\n\nthe model is the same\n\nthe performance changes.\nThis tells us something important:\n\nmodel performance is not fixed\nit depends on how the data is partitioned",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
@@ -531,7 +542,7 @@
     "href": "10-model-evaluation.html#introducing-cross-validation",
     "title": "Evaluating Models Beyond a Single Result",
     "section": "Introducing Cross-Validation",
-    "text": "Introducing Cross-Validation\nTo make evaluation more stable, we can systematically repeat this process.\nThis is the idea behind cross-validation.\n\n\nCode\nfrom sklearn.model_selection import cross_val_score\n\nmodel = LinearRegression()\n\ncv_scores = cross_val_score(\n    model,\n    X,\n    y,\n    cv=5,\n    scoring=\"r2\"\n)\n\ncv_scores\n\n\narray([0.42955615, 0.52259939, 0.48268054, 0.42649776, 0.55024834])\n\n\n\n\nCode\npd.DataFrame({\n    \"cv_fold\": range(1, len(cv_scores) + 1),\n    \"r2\": cv_scores\n}).round(3)\n\n\n\n\n\n\n\n\n\ncv_fold\nr2\n\n\n\n\n0\n1\n0.430\n\n\n1\n2\n0.523\n\n\n2\n3\n0.483\n\n\n3\n4\n0.426\n\n\n4\n5\n0.550\n\n\n\n\n\n\n\n\n\nCode\ncv_scores.mean(), cv_scores.std()\n\n\n(np.float64(0.48231643590864215), np.float64(0.04926857751190387))\n\n\nCross-validation gives us:\n\nan average performance\n\na measure of variability\n\nThis is more informative than a single split.",
+    "text": "Introducing Cross-Validation\nTo make evaluation more stable, we can systematically repeat this process.\nThis is the idea behind cross-validation.\n\n\nCode\nfrom sklearn.model_selection import cross_val_score\n\nmodel = LinearRegression()\n\ncv_scores = cross_val_score(\n    model,\n    X,\n    y,\n    cv=5,\n    scoring=\"r2\"\n)\n\ncv_scores\n\n\narray([0.42955615, 0.52259939, 0.48268054, 0.42649776, 0.55024834])\n\n\n\n\nCode\npd.DataFrame({\n    \"cv_fold\": range(1, len(cv_scores) + 1),\n    \"r2\": cv_scores\n}).round(3)\n\n\n\n\n\n\n\n\n\ncv_fold\nr2\n\n\n\n\n0\n1\n0.430\n\n\n1\n2\n0.523\n\n\n2\n3\n0.483\n\n\n3\n4\n0.426\n\n\n4\n5\n0.550\n\n\n\n\n\n\n\n\n\nCode\ncv_scores.mean(), cv_scores.std()\n\n\n(np.float64(0.48231643590864215), np.float64(0.049268577511903784))\n\n\nCross-validation gives us:\n\nan average performance\n\na measure of variability\n\nThis is more informative than a single split.",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
@@ -553,7 +564,7 @@
     "href": "10-model-evaluation.html#residual-analysis",
     "title": "Evaluating Models Beyond a Single Result",
     "section": "Residual Analysis",
-    "text": "Residual Analysis\nTo examine residuals clearly, we recompute predictions using a defined train/test split.\n\n\nCode\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nresidual_model = LinearRegression()\nresidual_model.fit(X_train, y_train)\n\ny_pred = residual_model.predict(X_test)\n\n\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nresiduals = y_test - y_pred\n\nplt.figure(figsize=(7, 5))\n\n# Scatter with contrast\nscatter = plt.scatter(\n    y_pred,\n    residuals,\n    c=np.abs(residuals),      # color by error magnitude\n    cmap=\"viridis\",\n    edgecolors=\"black\",\n    linewidth=0.4,\n    alpha=0.9\n)\n\n# Reference line at zero error\nplt.axhline(0, linestyle=\"--\", linewidth=1)\n\nplt.xlabel(\"Predicted values\")\nplt.ylabel(\"Residuals\")\nplt.title(\"Residual Plot (Error Magnitude Highlighted)\")\n\n# Colorbar for interpretation\nplt.colorbar(scatter, label=\"Absolute Error\")\n\nplt.grid(alpha=0.2)\n\nplt.show()\n\n\n\n\n\n\n\n\n\nThis plot helps us examine how prediction errors behave across the range of model outputs.\nIt allows us to detect:\n\nsystematic bias\nIf residuals are mostly above or below zero, the model consistently over- or under-predicts\nuneven error distribution (heteroscedasticity)\nIf the spread of residuals changes across predicted values, the model performs inconsistently across ranges\nregions of poor performance\nClusters of large residuals (highlighted by stronger color) indicate where the model struggles to capture the underlying pattern\n\nRather than summarizing error with a single number, this plot reveals how and where the model fails, which is essential for reliable interpretation.",
+    "text": "Residual Analysis\nTo examine residuals clearly, we recompute predictions using a defined train/test split.\n\n\nCode\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nresidual_model = LinearRegression()\nresidual_model.fit(X_train, y_train)\n\ny_pred = residual_model.predict(X_test)\n\n\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nresiduals = y_test - y_pred\n\nplt.figure(figsize=(7, 5))\n\nscatter = plt.scatter(\n    y_pred,\n    residuals,\n    c=np.abs(residuals),\n    cmap=\"viridis\",\n    edgecolors=\"black\",\n    linewidth=0.4,\n    alpha=0.9\n)\n\nplt.axhline(0, linestyle=\"--\", linewidth=1)\nplt.xlabel(\"Predicted values\")\nplt.ylabel(\"Residuals\")\nplt.title(\"Residual Plot (Error Magnitude Highlighted)\")\nplt.colorbar(scatter, label=\"Absolute Error\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\nThis plot helps us examine how prediction errors behave across the range of model outputs.\nIt allows us to detect:\n\nsystematic bias\nIf residuals are mostly above or below zero, the model consistently over- or under-predicts\nuneven error distribution (heteroscedasticity)\nIf the spread of residuals changes across predicted values, the model performs inconsistently across ranges\nregions of poor performance\nClusters of large residuals, highlighted by stronger color, indicate where the model struggles to capture the underlying pattern\n\nRather than summarizing error with a single number, this plot reveals how and where the model fails, which is essential for reliable interpretation.",
     "crumbs": [
       "Premium Foundations",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Evaluating Models Beyond a Single Result</span>"
@@ -615,6 +626,1337 @@
     ]
   },
   {
+    "objectID": "11-model-improvement.html",
+    "href": "11-model-improvement.html",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "",
+    "text": "Load the Dataset\nIn the previous lesson, we learned that model performance is not fixed.\nIt varies depending on:\nThis leads to a natural next question:\nWe continue using the same diabetes dataset saved earlier in the project data/ directory.\nLoading the same file keeps the workflow stable across lessons and avoids hidden dependencies between chapters.\nCode\nimport pandas as pd\n\ndf = pd.read_csv(\"data/diabetes.csv\")\n\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]\n\ndf.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\ndisease_progression\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n151.0\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n75.0\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n141.0\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n206.0\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n135.0",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#why-improvement-must-be-controlled",
+    "href": "11-model-improvement.html#why-improvement-must-be-controlled",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Why Improvement Must Be Controlled",
+    "text": "Why Improvement Must Be Controlled\nImproving a model is not about trying many methods randomly.\nIt is about making intentional changes and observing their effect.\nIf multiple things change at once:\n\nwe cannot tell what caused improvement\n\nresults become difficult to interpret\n\nreproducibility is reduced\n\nA good workflow:\n\nstart with a baseline\n\nchange one element\n\nevaluate again\n\ncompare results",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#baseline-model-recap",
+    "href": "11-model-improvement.html#baseline-model-recap",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Baseline Model (Recap)",
+    "text": "Baseline Model (Recap)\nWe start from the same linear regression model.\n\n\nCode\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nbaseline_model = LinearRegression()\nbaseline_model.fit(X_train, y_train)\n\ny_pred_baseline = baseline_model.predict(X_test)\n\nbaseline_mae = mean_absolute_error(y_test, y_pred_baseline)\nbaseline_r2 = r2_score(y_test, y_pred_baseline)\n\nbaseline_mae, baseline_r2\n\n\n(42.79409467959996, 0.4526027629719189)\n\n\nThis is our reference point.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#strategy-1-feature-scaling",
+    "href": "11-model-improvement.html#strategy-1-feature-scaling",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Strategy 1 — Feature Scaling",
+    "text": "Strategy 1 — Feature Scaling\nSome models benefit from consistent feature scale.\n\n\nCode\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import Pipeline\n\nscaling_model = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"model\", LinearRegression())\n])\n\nscaling_model.fit(X_train, y_train)\ny_pred_scaled = scaling_model.predict(X_test)\n\nscaled_mae = mean_absolute_error(y_test, y_pred_scaled)\nscaled_r2 = r2_score(y_test, y_pred_scaled)\n\nscaled_mae, scaled_r2\n\n\n(42.79409467959995, 0.45260276297191915)\n\n\nCompare with baseline:\n\n\nCode\npd.DataFrame({\n    \"model\": [\"baseline\", \"scaled\"],\n    \"MAE\": [baseline_mae, scaled_mae],\n    \"R2\": [baseline_r2, scaled_r2]\n}).round(3)\n\n\n\n\n\n\n\n\n\nmodel\nMAE\nR2\n\n\n\n\n0\nbaseline\n42.794\n0.453\n\n\n1\nscaled\n42.794\n0.453\n\n\n\n\n\n\n\nScaling may or may not improve performance, but it ensures consistency.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#strategy-2-regularization",
+    "href": "11-model-improvement.html#strategy-2-regularization",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Strategy 2 — Regularization",
+    "text": "Strategy 2 — Regularization\nLinear regression can be extended with regularization to control model complexity.\n\nRidge Regression\n\n\nCode\nfrom sklearn.linear_model import Ridge\n\nridge_model = Ridge(alpha=1.0)\nridge_model.fit(X_train, y_train)\n\ny_pred_ridge = ridge_model.predict(X_test)\n\nridge_mae = mean_absolute_error(y_test, y_pred_ridge)\nridge_r2 = r2_score(y_test, y_pred_ridge)\n\nridge_mae, ridge_r2\n\n\n(46.13885766697452, 0.41915292635986545)\n\n\nCompare:\n\n\nCode\npd.DataFrame({\n    \"model\": [\"baseline\", \"ridge\"],\n    \"MAE\": [baseline_mae, ridge_mae],\n    \"R2\": [baseline_r2, ridge_r2]\n}).round(3)\n\n\n\n\n\n\n\n\n\nmodel\nMAE\nR2\n\n\n\n\n0\nbaseline\n42.794\n0.453\n\n\n1\nridge\n46.139\n0.419\n\n\n\n\n\n\n\nRegularization helps when:\n\nfeatures are correlated\n\nthe model is sensitive to small changes\n\nwe want more stable coefficients",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#strategy-3-tree-based-model",
+    "href": "11-model-improvement.html#strategy-3-tree-based-model",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Strategy 3 — Tree-Based Model",
+    "text": "Strategy 3 — Tree-Based Model\nDifferent models capture different structures.\n\n\nCode\nfrom sklearn.tree import DecisionTreeRegressor\n\ntree_model = DecisionTreeRegressor(random_state=42)\ntree_model.fit(X_train, y_train)\n\ny_pred_tree = tree_model.predict(X_test)\n\ntree_mae = mean_absolute_error(y_test, y_pred_tree)\ntree_r2 = r2_score(y_test, y_pred_tree)\n\ntree_mae, tree_r2\n\n\n(54.52808988764045, 0.060653981041140725)\n\n\nCompare all models:\n\n\nCode\ncomparison_df = pd.DataFrame({\n    \"model\": [\"baseline\", \"ridge\", \"tree\"],\n    \"MAE\": [baseline_mae, ridge_mae, tree_mae],\n    \"R2\": [baseline_r2, ridge_r2, tree_r2]\n}).round(3)\n\ncomparison_df\n\n\n\n\n\n\n\n\n\nmodel\nMAE\nR2\n\n\n\n\n0\nbaseline\n42.794\n0.453\n\n\n1\nridge\n46.139\n0.419\n\n\n2\ntree\n54.528\n0.061",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#interpreting-model-comparison",
+    "href": "11-model-improvement.html#interpreting-model-comparison",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Interpreting Model Comparison",
+    "text": "Interpreting Model Comparison\nWe compared three models:\n\nbaseline (linear regression)\n\nridge regression\n\ndecision tree\n\nThe results are now visible in the comparison table above.\n\nWhat this suggests\nThe baseline linear model performs best among the three:\n\nlowest error (MAE)\n\nhighest explained variance (R²)\n\nThis indicates that, for this dataset, the relationship between features and outcome is reasonably well captured by a linear structure.\n\n\nWhy ridge did not improve performance\nRidge regression introduces regularization to stabilize coefficients.\nHowever:\n\nthe baseline model may not be overfitting strongly\n\nregularization may slightly reduce flexibility\n\nthis can lead to slightly worse performance\n\nIn this case, ridge provides stability, but not improvement in predictive accuracy.\n\n\nWhy the decision tree performs poorly\nThe decision tree shows:\n\nmuch higher error\n\nvery low R²\n\nThis suggests:\n\nthe model may be overfitting the training data\n\nit may not generalize well to unseen data\n\nthe dataset may not contain strong nonlinear patterns that the tree can exploit\n\n\n\nImportant caution\nThese results are based on a single train/test split.\nThey do not establish that one model is universally better.\nThey show how these models behave under this specific data partition and configuration.\n\n\nCDI Insight\nBetter performance does not mean a model is “correct.”\nIt means the model is more useful for prediction under the current setup.\nUnderstanding why a model performs better is more important than simply observing that it does.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#interpreting-improvements",
+    "href": "11-model-improvement.html#interpreting-improvements",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Interpreting Improvements",
+    "text": "Interpreting Improvements\nImprovement is not just:\n\nlower MAE\n\nhigher R²\n\nWe must also consider:\n\nstability across splits\n\ninterpretability\n\nsensitivity to noise\n\nA more complex model may perform better on one split but worse in general.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#what-can-go-wrong",
+    "href": "11-model-improvement.html#what-can-go-wrong",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "What Can Go Wrong",
+    "text": "What Can Go Wrong\n\nChasing Metrics\nImproving a number does not always improve usefulness.\n\n\nOverfitting\nA model may fit training data very well but fail on new data.\n\n\nChanging Too Many Things\nIf scaling, features, and model type all change together:\n\nimprovement cannot be explained\n\n\n\nIgnoring Context\nThe “best” model depends on:\n\nthe problem\n\nthe data\n\nthe intended use",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#cdi-insight-1",
+    "href": "11-model-improvement.html#cdi-insight-1",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "CDI Insight",
+    "text": "CDI Insight\nModel improvement is not a search for the best number.\nIt is a process of understanding how changes affect behavior.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#summary",
+    "href": "11-model-improvement.html#summary",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "Summary",
+    "text": "Summary\n\nWe loaded the same project dataset from data/diabetes.csv\n\nWe started from a baseline model\n\nWe applied controlled changes one at a time\n\nWe compared results systematically\n\nWe considered stability and interpretability alongside metrics\n\nWe avoided treating performance improvement as the only goal",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "11-model-improvement.html#what-comes-next",
+    "href": "11-model-improvement.html#what-comes-next",
+    "title": "Improving Models Through Controlled Changes",
+    "section": "What Comes Next",
+    "text": "What Comes Next\nSo far, we have compared models using a single train/test split.\nThis provides a useful first view, but it is not the full picture.\nModel performance can vary depending on how the data is split.\nA model that appears better in one split may not perform the same in another.\nA strong result from a single split is a useful signal, but not sufficient evidence. A model is better when its performance remains stable across multiple splits of the data.\nIn the next lesson, we will introduce:\n\npipelines, to ensure transformations are applied consistently\n\ncross-validation, to evaluate models across multiple data splits\n\nThese tools allow us to move from a single estimate of performance to a more stable and reliable assessment.\nThis leads to an important realization:\n\nconclusions based on a single split may change when evaluated more rigorously.\n\nThis is a key step in moving from exploratory modeling to defensible inference.\n→ Building reproducible pipelines",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Improving Models Through Controlled Changes</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html",
+    "href": "12-pipelines-and-cross-validation.html",
+    "title": "Pipelines and Cross-Validation",
+    "section": "",
+    "text": "Load the Dataset\nIn previous lessons, we evaluated models using a single train/test split.\nThis provided a useful starting point.\nHowever, a single split gives only one estimate of performance.\nTo move toward reliable conclusions, we need:\nThis is where pipelines and cross-validation become essential.\nCode\nimport pandas as pd\n\ndf = pd.read_csv(\"data/diabetes.csv\")\n\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]\n\ndf.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\ndisease_progression\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n151.0\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n75.0\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n141.0\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n206.0\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n135.0",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html#why-pipelines-matter",
+    "href": "12-pipelines-and-cross-validation.html#why-pipelines-matter",
+    "title": "Pipelines and Cross-Validation",
+    "section": "Why Pipelines Matter",
+    "text": "Why Pipelines Matter\nSo far, preprocessing and modeling were done in separate steps.\nThis creates risks:\n\nforgetting transformations\n\ninconsistent application\n\ndata leakage\n\nA pipeline solves this by:\n\ncombining preprocessing and modeling into a single, reproducible workflow.\n\n\n\nCode\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LinearRegression\n\npipeline = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"model\", LinearRegression())\n])\n\npipeline\n\n\nPipeline(steps=[('scaler', StandardScaler()), ('model', LinearRegression())])In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.Pipeline?Documentation for PipelineiNot fitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nsteps steps: list of tuples\n\nList of (name of step, estimator) tuples that are to be chained in\nsequential order. To be compatible with the scikit-learn API, all steps\nmust define `fit`. All non-last steps must also define `transform`. See\n:ref:`Combining Estimators ` for more details.\n[('scaler', ...), ('model', ...)]\n\n\n\ntransform_input transform_input: list of str, default=None\n\nThe names of the :term:`metadata` parameters that should be transformed by the\npipeline before passing it to the step consuming it.\n\nThis enables transforming some input arguments to ``fit`` (other than ``X``)\nto be transformed by the steps of the pipeline up to the step which requires\nthem. Requirement is defined via :ref:`metadata routing `.\nFor instance, this can be used to pass a validation set through the pipeline.\n\nYou can only set this if metadata routing is enabled, which you\ncan enable using ``sklearn.set_config(enable_metadata_routing=True)``.\n\n.. versionadded:: 1.6\nNone\n\n\n\nmemory memory: str or object with the joblib.Memory interface, default=None\n\nUsed to cache the fitted transformers of the pipeline. The last step\nwill never be cached, even if it is a transformer. By default, no\ncaching is performed. If a string is given, it is the path to the\ncaching directory. Enabling caching triggers a clone of the transformers\nbefore fitting. Therefore, the transformer instance given to the\npipeline cannot be inspected directly. Use the attribute ``named_steps``\nor ``steps`` to inspect estimators within the pipeline. Caching the\ntransformers is advantageous when fitting is time consuming. See\n:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`\nfor an example on how to enable caching.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each step will be printed as it\nis completed.\nFalse\n\n\n\n\n            \n        \n    StandardScaler?Documentation for StandardScaler\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncopy copy: bool, default=True\n\nIf False, try to avoid a copy and do inplace scaling instead.\nThis is not guaranteed to always work inplace; e.g. if the data is\nnot a NumPy array or scipy.sparse CSR matrix, a copy may still be\nreturned.\nTrue\n\n\n\nwith_mean with_mean: bool, default=True\n\nIf True, center the data before scaling.\nThis does not work (and will raise an exception) when attempted on\nsparse matrices, because centering them entails building a dense\nmatrix which in common use cases is likely to be too large to fit in\nmemory.\nTrue\n\n\n\nwith_std with_std: bool, default=True\n\nIf True, scale the data to unit variance (or equivalently,\nunit standard deviation).\nTrue\n\n\n\n\n            \n        \n    LinearRegression?Documentation for LinearRegression\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nfit_intercept fit_intercept: bool, default=True\n\nWhether to calculate the intercept for this model. If set\nto False, no intercept will be used in calculations\n(i.e. data is expected to be centered).\nTrue\n\n\n\ncopy_X copy_X: bool, default=True\n\nIf True, X will be copied; else, it may be overwritten.\nTrue\n\n\n\ntol tol: float, default=1e-6\n\nThe precision of the solution (`coef_`) is determined by `tol` which\nspecifies a different convergence criterion for the `lsqr` solver.\n`tol` is set as `atol` and `btol` of :func:`scipy.sparse.linalg.lsqr` when\nfitting on sparse training data. This parameter has no effect when fitting\non dense data.\n\n.. versionadded:: 1.7\n1e-06\n\n\n\nn_jobs n_jobs: int, default=None\n\nThe number of jobs to use for the computation. This will only provide\nspeedup in case of sufficiently large problems, that is if firstly\n`n_targets &gt; 1` and secondly `X` is sparse or if `positive` is set\nto `True`. ``None`` means 1 unless in a\n:obj:`joblib.parallel_backend` context. ``-1`` means using all\nprocessors. See :term:`Glossary ` for more details.\nNone\n\n\n\npositive positive: bool, default=False\n\nWhen set to ``True``, forces the coefficients to be positive. This\noption is only supported for dense arrays.\n\nFor a comparison between a linear regression model with positive constraints\non the regression coefficients and a linear regression without such constraints,\nsee :ref:`sphx_glr_auto_examples_linear_model_plot_nnls.py`.\n\n.. versionadded:: 0.24\nFalse",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html#why-cross-validation-matters",
+    "href": "12-pipelines-and-cross-validation.html#why-cross-validation-matters",
+    "title": "Pipelines and Cross-Validation",
+    "section": "Why Cross-Validation Matters",
+    "text": "Why Cross-Validation Matters\nA single train/test split gives one estimate.\nBut performance depends on how the data is split.\nCross-validation addresses this by:\n\nevaluating the model across multiple splits of the data.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html#apply-cross-validation",
+    "href": "12-pipelines-and-cross-validation.html#apply-cross-validation",
+    "title": "Pipelines and Cross-Validation",
+    "section": "Apply Cross-Validation",
+    "text": "Apply Cross-Validation\n\n\nCode\nfrom sklearn.model_selection import cross_val_score\nimport numpy as np\n\nmae_scores = -cross_val_score(\n    pipeline,\n    X,\n    y,\n    cv=5,\n    scoring=\"neg_mean_absolute_error\"\n)\n\nr2_scores = cross_val_score(\n    pipeline,\n    X,\n    y,\n    cv=5,\n    scoring=\"r2\"\n)\n\nmae_scores, r2_scores\n\n\n(array([43.02616606, 44.8004801 , 48.1557102 , 43.0130322 , 42.3871076 ]),\n array([0.42955615, 0.52259939, 0.48268054, 0.42649776, 0.55024834]))",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html#summarize-results",
+    "href": "12-pipelines-and-cross-validation.html#summarize-results",
+    "title": "Pipelines and Cross-Validation",
+    "section": "Summarize Results",
+    "text": "Summarize Results\n\n\nCode\nresults_df = pd.DataFrame({\n    \"MAE\": mae_scores,\n    \"R2\": r2_scores\n}).round(3)\n\nresults_df\n\n\n\n\n\n\n\n\n\nMAE\nR2\n\n\n\n\n0\n43.026\n0.430\n\n\n1\n44.800\n0.523\n\n\n2\n48.156\n0.483\n\n\n3\n43.013\n0.426\n\n\n4\n42.387\n0.550\n\n\n\n\n\n\n\n\n\nCode\nsummary_df = pd.DataFrame({\n    \"metric\": [\"MAE\", \"R2\"],\n    \"mean\": [np.mean(mae_scores), np.mean(r2_scores)],\n    \"std\": [np.std(mae_scores), np.std(r2_scores)]\n}).round(3)\n\nsummary_df\n\n\n\n\n\n\n\n\n\nmetric\nmean\nstd\n\n\n\n\n0\nMAE\n44.276\n2.100\n\n\n1\nR2\n0.482\n0.049\n\n\n\n\n\n\n\nCross-validation replaces a single result with a distribution of outcomes.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html#visualizing-performance-across-folds",
+    "href": "12-pipelines-and-cross-validation.html#visualizing-performance-across-folds",
+    "title": "Pipelines and Cross-Validation",
+    "section": "Visualizing Performance Across Folds",
+    "text": "Visualizing Performance Across Folds\n\n\nCode\nimport matplotlib.pyplot as plt\n\nfolds = range(1, len(mae_scores) + 1)\n\nplt.figure(figsize=(7, 5))\nplt.plot(folds, mae_scores, marker=\"o\")\nplt.xlabel(\"Fold\")\nplt.ylabel(\"MAE\")\nplt.title(\"MAE Across Cross-Validation Folds\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nCode\nplt.figure(figsize=(7, 5))\nplt.plot(folds, r2_scores, marker=\"o\")\nplt.xlabel(\"Fold\")\nplt.ylabel(\"R²\")\nplt.title(\"R² Across Cross-Validation Folds\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\nThese plots show how model performance varies across the five folds.\nFor MAE:\n\nmost values fall within a relatively narrow range (~42–48)\n\none fold shows slightly higher error, but not dramatically so\n\nFor R²:\n\nvalues fluctuate between ~0.43 and ~0.55\n\nperformance improves in some folds and decreases in others\n\n\nWhat this reveals\nThe model does not perform identically across all splits, which is expected.\nHowever, the variation is moderate rather than extreme:\n\nthere are no folds with very poor performance\n\nthere are no folds with unusually high performance\n\nThis suggests that the model is reasonably stable, though not perfectly consistent.\n\n\n\nKey Insight\nEach fold exposes the model to a slightly different subset of the data.\nThis affects:\n\nwhich patterns are learned\n\nhow well those patterns generalize\n\nThe goal is not identical performance across folds,\nbut limited variability around a consistent average.\n\n\n\nCDI Interpretation\nThese plots reinforce an important principle:\n\nmodel evaluation should focus on patterns of performance, not single outcomes.\n\nHere, the pattern indicates:\n\nmoderate predictive ability\n\nacceptable stability\n\nno strong evidence of instability or overfitting\n\n\n\n\nWhat This Means\n\nThe model is reliable enough for baseline use\n\nThere is still room for improvement\n\nImprovements should aim to:\n\nreduce variability across folds\n\nincrease average performance\n\n\nThis is more informative than relying on a single train/test result.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html#summary",
+    "href": "12-pipelines-and-cross-validation.html#summary",
+    "title": "Pipelines and Cross-Validation",
+    "section": "Summary",
+    "text": "Summary\n\nPipelines ensure consistent preprocessing\n\nCross-validation evaluates performance across multiple splits\n\nTables summarize performance\n\nPlots reveal variability across folds\n\nStability is more informative than a single result",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html#next-step",
+    "href": "12-pipelines-and-cross-validation.html#next-step",
+    "title": "Pipelines and Cross-Validation",
+    "section": "Next Step",
+    "text": "Next Step\n→ Feature importance and model interpretation",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html",
+    "href": "13-feature-importance-and-interpretation.html",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "",
+    "text": "Load the Dataset\nIn the previous lesson, we focused on stability:\nNow we move to the next question:\nThis is the transition from:\nstable models → interpretable models\nCode\nimport pandas as pd\n\ndf = pd.read_csv(\"data/diabetes.csv\")\n\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]\n\ndf.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\ndisease_progression\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n151.0\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n75.0\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n141.0\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n206.0\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n135.0",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#fit-a-linear-model",
+    "href": "13-feature-importance-and-interpretation.html#fit-a-linear-model",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Fit a Linear Model",
+    "text": "Fit a Linear Model\n\n\nCode\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\ncoefficients = pd.Series(model.coef_, index=X.columns)\ncoefficients.sort_values(ascending=False)\n\n\ns5     736.198859\nbmi    542.428759\ns2     518.062277\nbp     347.703844\ns4     275.317902\ns3     163.419983\ns6      48.670657\nage     37.904021\nsex   -241.964362\ns1    -931.488846\ndtype: float64",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#understanding-coefficients",
+    "href": "13-feature-importance-and-interpretation.html#understanding-coefficients",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Understanding Coefficients",
+    "text": "Understanding Coefficients\nA coefficient reflects how much the model’s prediction changes when a feature changes,\nholding other features constant.\nLarger coefficients indicate stronger influence on the prediction.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#important-caution",
+    "href": "13-feature-importance-and-interpretation.html#important-caution",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Important Caution",
+    "text": "Important Caution\nThese coefficients are useful, but they must be interpreted carefully.\n\nA coefficient reflects how much the model’s prediction changes when a feature changes, **holding other features constant**.  \nIn this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.\n\nHowever, a coefficient does **not** automatically imply:\n\n- causation  \n- clinical importance  \n- independent biological truth  \n\nInstead, it describes how the fitted model uses that feature **within this dataset, under this specific modeling setup, and given the presence of other variables**.\n\nThis distinction is critical.\n\nCoefficients represent **model behavior**, not real-world mechanisms.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#visualizing-coefficients",
+    "href": "13-feature-importance-and-interpretation.html#visualizing-coefficients",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Visualizing Coefficients",
+    "text": "Visualizing Coefficients\n\n\nCode\nimport matplotlib.pyplot as plt\n\ncoefficients.sort_values().plot(kind=\"barh\")\nplt.title(\"Feature Coefficients (Linear Model)\")\nplt.xlabel(\"Coefficient Value\")\nplt.show()",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#tree-based-feature-importance",
+    "href": "13-feature-importance-and-interpretation.html#tree-based-feature-importance",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Tree-Based Feature Importance",
+    "text": "Tree-Based Feature Importance\nLinear models use coefficients.\nTree-based models use feature importance.\n\n\nCode\nfrom sklearn.tree import DecisionTreeRegressor\n\ntree = DecisionTreeRegressor(random_state=42)\ntree.fit(X_train, y_train)\n\nimportance = pd.Series(tree.feature_importances_, index=X.columns)\nimportance.sort_values(ascending=False)\n\n\nbmi    0.418232\ns5     0.155795\ns1     0.083177\nage    0.064586\ns3     0.063936\nbp     0.062494\ns6     0.061930\ns2     0.053389\ns4     0.029788\nsex    0.006673\ndtype: float64",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#visualizing-feature-importance",
+    "href": "13-feature-importance-and-interpretation.html#visualizing-feature-importance",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Visualizing Feature Importance",
+    "text": "Visualizing Feature Importance\n\n\nCode\nimportance.sort_values().plot(kind=\"barh\")\nplt.title(\"Feature Importance (Decision Tree)\")\nplt.xlabel(\"Importance\")\nplt.show()",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#interpreting-feature-influence",
+    "href": "13-feature-importance-and-interpretation.html#interpreting-feature-influence",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Interpreting Feature Influence",
+    "text": "Interpreting Feature Influence\nThese plots show how different models use features to make predictions.\n\nLinear Model (Coefficients)\nThe linear model provides both direction and magnitude:\n\nfeatures such as s5, bmi, and s2 have large positive coefficients\n→ higher values of these features are associated with higher predicted progression\ns1 shows a strong negative coefficient\n→ higher values are associated with lower predicted progression\nsome features (e.g., age, sex) have relatively small coefficients\n→ they contribute less to the prediction in this model\n\nThis reflects how the model distributes influence across features when forming predictions.\n\n\n\nDecision Tree (Feature Importance)\nThe decision tree provides relative importance, not direction:\n\nbmi dominates the model\n→ it is the most frequently used feature for splitting\ns5 and s1 also contribute meaningfully\n\nother features play smaller roles\n\nThis indicates that the tree relies more heavily on a small subset of features.\n\n\n\nComparing the Two Views\nThe two models highlight different aspects of feature influence:\n\nthe linear model distributes influence across multiple features\n\nthe tree model concentrates importance on a smaller subset\n\nThis difference reflects model structure, not disagreement about truth.\n\n\n\nCDI Interpretation\nThese results show how models use features differently to represent the same data.\nImportantly:\n\nfeature influence describes how the model behaves, not how the real world works.\n\nA feature appearing important means:\n\nthe model depends on it for prediction\n\nnot that it causes the outcome\n\n\n\n\nWhat This Means\n\ninterpretation should focus on model behavior\n\ndifferent models may highlight different features\n\nconsistent importance across models may strengthen confidence\n\nbut no single model provides definitive explanation\n\n\n\n\nKey Insight\nInterpretation is not about identifying a “true” feature.\nIt is about understanding:\n\nhow the model uses available information\n\nhow that usage changes across modeling approaches",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#summary",
+    "href": "13-feature-importance-and-interpretation.html#summary",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Summary",
+    "text": "Summary\n\nStable models can now be interpreted\n\nCoefficients show directional influence\n\nFeature importance shows relative contribution\n\nInterpretation must be cautious\n\nModels describe patterns, not mechanisms",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html#next-step",
+    "href": "13-feature-importance-and-interpretation.html#next-step",
+    "title": "Feature Importance and Model Interpretation",
+    "section": "Next Step",
+    "text": "Next Step\n→ From model outputs to real-world claims",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Feature Importance and Model Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html",
+    "href": "14-from-model-outputs-to-real-world-claims.html",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "",
+    "text": "Load the Dataset\nSo far, we have:\nNow we reach a critical step:\nCode\nimport pandas as pd\n\ndf = pd.read_csv(\"data/diabetes.csv\")\n\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#fit-a-model",
+    "href": "14-from-model-outputs-to-real-world-claims.html#fit-a-model",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Fit a Model",
+    "text": "Fit a Model\n\n\nCode\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\ny_pred = model.predict(X_test)",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#observed-vs-predicted",
+    "href": "14-from-model-outputs-to-real-world-claims.html#observed-vs-predicted",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Observed vs Predicted",
+    "text": "Observed vs Predicted\n\n\nCode\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nerror = np.abs(y_test - y_pred)\n\nplt.figure(figsize=(7, 5))\n\nscatter = plt.scatter(\n    y_test,\n    y_pred,\n    c=error,\n    cmap=\"viridis\",\n    edgecolors=\"black\",\n    linewidth=0.4,\n    alpha=0.9\n)\n\nmin_val = min(y_test.min(), y_pred.min())\nmax_val = max(y_test.max(), y_pred.max())\n\nplt.plot([min_val, max_val], [min_val, max_val], linestyle=\"--\", linewidth=1)\n\nplt.xlabel(\"Observed\")\nplt.ylabel(\"Predicted\")\nplt.title(\"Observed vs Predicted (Error Highlighted)\")\n\nplt.colorbar(scatter, label=\"Absolute Error\")\n\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\nPoints close to the diagonal line represent accurate predictions.\nPoints farther away indicate larger errors, highlighted by brighter colors.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#what-the-model-actually-provides",
+    "href": "14-from-model-outputs-to-real-world-claims.html#what-the-model-actually-provides",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "What the Model Actually Provides",
+    "text": "What the Model Actually Provides\nThe model provides:\n\npredictions (estimated outcomes)\n\nrelationships between features and predictions\n\npatterns learned from the dataset\n\nIt does not directly provide:\n\ncausal relationships\n\nclinical conclusions\n\ngeneral truths beyond the data",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#from-output-to-claim",
+    "href": "14-from-model-outputs-to-real-world-claims.html#from-output-to-claim",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "From Output to Claim",
+    "text": "From Output to Claim\nA common mistake is to move too quickly from:\nmodel output → real-world conclusion\nFor example:\n❌ “BMI causes disease progression”\nEven if BMI appears as one of the strongest features, this claim is still too strong.\nWhat the model shows is that BMI is an important predictor in this dataset.\nThat means BMI helps the model estimate disease progression,\nbut it does not prove that BMI is the direct cause of progression.\n\n\nA simple analogy\n\nUmbrella sales are a strong predictor of wet streets.\nBut umbrellas do not cause the streets to become wet.\n\nBoth are related to an underlying factor — rain.\n\n\n\nWhat this means\nIn the same way, a feature can be strongly associated with an outcome because it reflects:\n\nunderlying processes\n\ncorrelated variables\n\nor shared patterns in the data\n\nA strong feature supports prediction.\nIt does not automatically establish causation.\n\n\n\nCDI Insight\nModels can detect patterns,\nbut they do not explain why those patterns exist.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#correct-interpretation",
+    "href": "14-from-model-outputs-to-real-world-claims.html#correct-interpretation",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Correct Interpretation",
+    "text": "Correct Interpretation\nWhat we can say is:\nHigher BMI is associated with higher predicted disease progression in this model.\nThis statement is:\n\naccurate\n\ngrounded in the model\n\nappropriately limited to the dataset",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#why-this-distinction-matters",
+    "href": "14-from-model-outputs-to-real-world-claims.html#why-this-distinction-matters",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Why This Distinction Matters",
+    "text": "Why This Distinction Matters\nModel outputs depend on:\n\nthe dataset\n\nfeature representation\n\nmodeling assumptions\n\nChanging any of these can lead to different conclusions.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#strength-of-claims",
+    "href": "14-from-model-outputs-to-real-world-claims.html#strength-of-claims",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Strength of Claims",
+    "text": "Strength of Claims\nWe can think of claims at different levels:\n\nWeak (Descriptive)\n\nBMI is included in the model\n\n\n\nModerate (Model-Based)\n\nBMI has a strong positive coefficient\n\nBMI is important for prediction\n\n\n\nStrong (Not Supported Here)\n\nBMI causes disease progression\n\n\n\n\nCDI Insight\n\nThe strength of a claim must match the strength of the evidence.\n\nModels provide associations and patterns, not causation.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#connecting-back-to-stability",
+    "href": "14-from-model-outputs-to-real-world-claims.html#connecting-back-to-stability",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Connecting Back to Stability",
+    "text": "Connecting Back to Stability\nBecause we used:\n\ncross-validation\n\nconsistent pipelines\n\nwe can say:\n\nthe model is reasonably stable\n\nthe observed patterns are not driven by a single split\n\nHowever:\n\nthey remain model-based observations, not causal conclusions",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#what-this-means-in-practice",
+    "href": "14-from-model-outputs-to-real-world-claims.html#what-this-means-in-practice",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "What This Means in Practice",
+    "text": "What This Means in Practice\nWhen reporting results, focus on:\n\nwhat the model learned\n\nhow consistent the results are\n\nhow strong the predictive relationship is\n\nAvoid:\n\ncausal language\n\novergeneralization\n\nclaims beyond the data",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#example-statements",
+    "href": "14-from-model-outputs-to-real-world-claims.html#example-statements",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Example Statements",
+    "text": "Example Statements\n\nAppropriate\n\nThe model consistently uses BMI as a strong predictor of progression\n\nPredictions increase with higher BMI values in this dataset\n\n\n\nNot Appropriate\n\nBMI is the main cause of disease progression\n\nReducing BMI will reduce disease progression",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#summary",
+    "href": "14-from-model-outputs-to-real-world-claims.html#summary",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Summary",
+    "text": "Summary\n\nModels produce predictions and patterns\n\nInterpretation must remain within the model’s scope\n\nStability strengthens confidence, but does not establish causation\n\nClaims must match the level of evidence\n\nCareful wording is essential in real-world analysis",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-model-outputs-to-real-world-claims.html#next-step",
+    "href": "14-from-model-outputs-to-real-world-claims.html#next-step",
+    "title": "From Model Outputs to Real-World Claims",
+    "section": "Next Step",
+    "text": "Next Step\n→ Communicating results clearly and responsibly",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>From Model Outputs to Real-World Claims</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html",
+    "href": "15-communicating-results-clearly.html",
+    "title": "Communicating Results Clearly",
+    "section": "",
+    "text": "Why Communication Matters\nIn the previous lesson, we learned how to interpret models responsibly.\nNow we take the next step:\nThis is where many analyses fail.\nNot because the model is wrong,\nbut because the communication is misleading, vague, or overstated.\nModel results are rarely consumed by the person who built them.\nThey are read by:\nThis means:",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#why-communication-matters",
+    "href": "15-communicating-results-clearly.html#why-communication-matters",
+    "title": "Communicating Results Clearly",
+    "section": "",
+    "text": "collaborators\n\ndecision-makers\n\nclinicians or domain experts\n\nstakeholders without technical background\n\n\n\nclarity is not optional — it is part of the analysis.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#the-communication-gap",
+    "href": "15-communicating-results-clearly.html#the-communication-gap",
+    "title": "Communicating Results Clearly",
+    "section": "The Communication Gap",
+    "text": "The Communication Gap\nA model produces outputs such as:\n\ncoefficients\n\nmetrics (MAE, R²)\n\npredictions\n\nBut stakeholders need:\n\nmeaning\n\ncontext\n\nlimitations\n\nBridging this gap is the goal of this lesson.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#from-technical-output-to-clear-statement",
+    "href": "15-communicating-results-clearly.html#from-technical-output-to-clear-statement",
+    "title": "Communicating Results Clearly",
+    "section": "From Technical Output to Clear Statement",
+    "text": "From Technical Output to Clear Statement\nConsider this model result:\nR² = 0.48\nMAE = 44.3\n\nPoor Communication\n\n“The model performs reasonably well”\n“The results are acceptable”\n\nThese are vague and uninformative.\n\n\n\nBetter Communication\n\n“The model explains about 48% of the variation in disease progression”\n“Predictions are off by about 44 units on average”\n\nThis translates metrics into understandable meaning.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#explaining-model-behavior",
+    "href": "15-communicating-results-clearly.html#explaining-model-behavior",
+    "title": "Communicating Results Clearly",
+    "section": "Explaining Model Behavior",
+    "text": "Explaining Model Behavior\nInstead of listing coefficients:\nbmi coefficient = 529\n\nPoor Communication\n\n“BMI has a coefficient of 529”\n\n\n\n\nBetter Communication\n\n“Higher BMI values are associated with higher predicted disease progression”\n“BMI is one of the strongest predictors used by the model”",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#communicating-uncertainty",
+    "href": "15-communicating-results-clearly.html#communicating-uncertainty",
+    "title": "Communicating Results Clearly",
+    "section": "Communicating Uncertainty",
+    "text": "Communicating Uncertainty\nAll models have uncertainty.\nIgnoring it leads to overconfidence.\n\nInstead of saying:\n\n“The model is accurate”\n\n\n\nSay:\n\n“The model shows moderate predictive ability”\n“Performance is consistent across multiple data splits”",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#avoiding-common-mistakes",
+    "href": "15-communicating-results-clearly.html#avoiding-common-mistakes",
+    "title": "Communicating Results Clearly",
+    "section": "Avoiding Common Mistakes",
+    "text": "Avoiding Common Mistakes\n\n1. Overgeneralization\n❌ “This applies to all patients”\n✔ “This applies to this dataset and similar conditions”\n\n\n\n2. Causal Language\n❌ “BMI causes progression”\n✔ “BMI is associated with predicted progression”\n\n\n\n3. Overconfidence\n❌ “The model is highly reliable”\n✔ “The model is reasonably stable but has limitations”",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#structuring-a-clear-report",
+    "href": "15-communicating-results-clearly.html#structuring-a-clear-report",
+    "title": "Communicating Results Clearly",
+    "section": "Structuring a Clear Report",
+    "text": "Structuring a Clear Report\nA good result summary should include:\n\n1. Objective\n\nWhat problem was addressed?\n\n\n\n2. Data Context\n\nWhat dataset was used?\n\n\n\n3. Model Summary\n\nWhat model was applied?\n\n\n\n4. Key Results\n\nMetrics and main patterns\n\n\n\n5. Interpretation\n\nWhat the results mean\n\n\n\n6. Limitations\n\nWhat the model does not tell us",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#example-clear-communication",
+    "href": "15-communicating-results-clearly.html#example-clear-communication",
+    "title": "Communicating Results Clearly",
+    "section": "Example: Clear Communication",
+    "text": "Example: Clear Communication\nObjective:\nPredict disease progression using clinical features.\nResults:\nThe model explains about 48% of the variation in progression (R² ≈ 0.48).\nPredictions differ from actual values by about 44 units on average.\nInterpretation:\nBMI and related features are strong predictors in this dataset.\nLimitations:\nThese results reflect associations within the dataset and do not establish causation.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#cdi-insight",
+    "href": "15-communicating-results-clearly.html#cdi-insight",
+    "title": "Communicating Results Clearly",
+    "section": "CDI Insight",
+    "text": "CDI Insight\n\nGood analysis is not complete until it is clearly understood.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#what-this-means-in-practice",
+    "href": "15-communicating-results-clearly.html#what-this-means-in-practice",
+    "title": "Communicating Results Clearly",
+    "section": "What This Means in Practice",
+    "text": "What This Means in Practice\nWhen communicating results:\nFocus on:\n\nclarity over complexity\n\nmeaning over metrics\n\nhonesty over confidence\n\nAvoid:\n\nvague language\n\nunsupported claims\n\nunnecessary technical detail",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#key-insight",
+    "href": "15-communicating-results-clearly.html#key-insight",
+    "title": "Communicating Results Clearly",
+    "section": "Key Insight",
+    "text": "Key Insight\nClear communication does not simplify the analysis.\nIt makes the reasoning visible and trustworthy.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#summary",
+    "href": "15-communicating-results-clearly.html#summary",
+    "title": "Communicating Results Clearly",
+    "section": "Summary",
+    "text": "Summary\n\nModels produce technical outputs\n\nCommunication translates outputs into meaning\n\nClaims must remain aligned with evidence\n\nClarity improves trust and usability\n\nGood communication is part of good analysis",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html#next-step",
+    "href": "15-communicating-results-clearly.html#next-step",
+    "title": "Communicating Results Clearly",
+    "section": "Next Step",
+    "text": "Next Step\n→ From analysis to real-world decision-making",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html",
+    "href": "16-from-analysis-to-decision-making.html",
+    "title": "From Analysis to Decision-Making",
+    "section": "",
+    "text": "The Final Gap\nSo far, we have built a complete analytical pipeline:\nNow we take the final step:\nEven well-executed analyses can fail at the last step.\nWhy?\nBecause:\nThis lesson focuses on bridging that gap.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#the-final-gap",
+    "href": "16-from-analysis-to-decision-making.html#the-final-gap",
+    "title": "From Analysis to Decision-Making",
+    "section": "",
+    "text": "results are not clearly linked to decisions\n\nuncertainty is ignored or misunderstood\n\nstakeholders do not know how to act on the findings",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#what-decisions-require",
+    "href": "16-from-analysis-to-decision-making.html#what-decisions-require",
+    "title": "From Analysis to Decision-Making",
+    "section": "What Decisions Require",
+    "text": "What Decisions Require\nA decision is not based on:\n\na model\n\na metric\n\nor a plot\n\nA decision requires:\n\ncontext\n\ntrade-offs\n\nacceptable risk\n\ndomain knowledge\n\nModels inform decisions.\nThey do not make them.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#from-prediction-to-action",
+    "href": "16-from-analysis-to-decision-making.html#from-prediction-to-action",
+    "title": "From Analysis to Decision-Making",
+    "section": "From Prediction to Action",
+    "text": "From Prediction to Action\nSuppose the model predicts:\n\nhigher disease progression for certain patients\n\nThis does not automatically imply:\n\nimmediate intervention\n\ntreatment changes\n\npolicy decisions\n\nInstead, it raises a question:\n\nWhat should be done given this information?",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#decision-framing",
+    "href": "16-from-analysis-to-decision-making.html#decision-framing",
+    "title": "From Analysis to Decision-Making",
+    "section": "Decision Framing",
+    "text": "Decision Framing\nA useful structure:\n\n1. What is the goal?\n\nreduce disease progression\n\nidentify high-risk individuals\n\n\n\n2. What does the model provide?\n\npredicted progression\n\nrelative risk patterns\n\n\n\n3. What are the options?\n\nmonitor patients\n\nadjust treatment\n\ncollect more data\n\n\n\n4. What are the risks?\n\nfalse positives\n\nfalse negatives\n\nover-intervention",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#example-translating-results",
+    "href": "16-from-analysis-to-decision-making.html#example-translating-results",
+    "title": "From Analysis to Decision-Making",
+    "section": "Example: Translating Results",
+    "text": "Example: Translating Results\nModel Output: - Higher BMI associated with higher predicted progression\nIncorrect Action: - “All high BMI patients must receive treatment”\nBetter Framing: - “Patients with higher BMI may be at increased risk and could benefit from closer monitoring”",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#the-role-of-uncertainty",
+    "href": "16-from-analysis-to-decision-making.html#the-role-of-uncertainty",
+    "title": "From Analysis to Decision-Making",
+    "section": "The Role of Uncertainty",
+    "text": "The Role of Uncertainty\nNo model is perfect.\nDecisions must consider:\n\nprediction error\n\nvariability across data\n\nlimitations of the dataset\n\nA useful mindset:\n\nDecisions should be robust to uncertainty, not dependent on perfect predictions.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#cdi-insight",
+    "href": "16-from-analysis-to-decision-making.html#cdi-insight",
+    "title": "From Analysis to Decision-Making",
+    "section": "CDI Insight",
+    "text": "CDI Insight\n\nModels reduce uncertainty. They do not eliminate it.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#decision-thresholds",
+    "href": "16-from-analysis-to-decision-making.html#decision-thresholds",
+    "title": "From Analysis to Decision-Making",
+    "section": "Decision Thresholds",
+    "text": "Decision Thresholds\nOften, decisions require thresholds.\nFor example:\n\nintervene if predicted risk exceeds a certain level\n\nBut thresholds are:\n\ncontext-dependent\n\ninfluenced by cost and risk\n\nnot determined by the model alone",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#trade-offs",
+    "href": "16-from-analysis-to-decision-making.html#trade-offs",
+    "title": "From Analysis to Decision-Making",
+    "section": "Trade-Offs",
+    "text": "Trade-Offs\nEvery decision involves trade-offs:\n\nsensitivity vs specificity\n\nearly intervention vs unnecessary treatment\n\nsimplicity vs complexity\n\nThe “best” decision depends on priorities.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#communicating-for-decisions",
+    "href": "16-from-analysis-to-decision-making.html#communicating-for-decisions",
+    "title": "From Analysis to Decision-Making",
+    "section": "Communicating for Decisions",
+    "text": "Communicating for Decisions\nWhen presenting results for decision-making:\nInclude:\n\nwhat the model suggests\n\nhow reliable the results are\n\nwhat uncertainties remain\n\nwhat options are available\n\nAvoid:\n\nprescribing actions without context\n\npresenting results as definitive answers",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#example-decision-summary",
+    "href": "16-from-analysis-to-decision-making.html#example-decision-summary",
+    "title": "From Analysis to Decision-Making",
+    "section": "Example Decision Summary",
+    "text": "Example Decision Summary\nObjective:\nIdentify patients at higher risk of disease progression\nFindings:\nThe model shows moderate predictive ability and consistent performance across splits.\nHigher BMI is associated with higher predicted progression.\nInterpretation:\nBMI is a useful predictor in this dataset.\nDecision Context:\nPredictions can be used to flag individuals for closer monitoring,\nbut should not be used as the sole basis for treatment decisions.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#from-insight-to-action",
+    "href": "16-from-analysis-to-decision-making.html#from-insight-to-action",
+    "title": "From Analysis to Decision-Making",
+    "section": "From Insight to Action",
+    "text": "From Insight to Action\nA good decision process:\n\nUnderstand the model\n\nInterpret results carefully\n\nCommunicate clearly\n\nEvaluate risks and trade-offs\n\nDecide within context",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#key-insight",
+    "href": "16-from-analysis-to-decision-making.html#key-insight",
+    "title": "From Analysis to Decision-Making",
+    "section": "Key Insight",
+    "text": "Key Insight\nAnalysis supports decisions.\nIt does not replace judgment.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#summary",
+    "href": "16-from-analysis-to-decision-making.html#summary",
+    "title": "From Analysis to Decision-Making",
+    "section": "Summary",
+    "text": "Summary\n\nModels inform decisions, but do not make them\n\nDecisions require context, risk assessment, and domain knowledge\n\nUncertainty must be acknowledged\n\nClear communication enables actionable insight\n\nResponsible analysis leads to better decisions",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html#what-comes-next",
+    "href": "16-from-analysis-to-decision-making.html#what-comes-next",
+    "title": "From Analysis to Decision-Making",
+    "section": "What Comes Next",
+    "text": "What Comes Next\n→ End-to-end project: from data to decision",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html",
+    "href": "17-end-to-end-case-study.html",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "",
+    "text": "Case Study Objective\nIn the previous lessons, we built the premium workflow step by step:\nNow we bring these pieces together in a single case study.\nThe goal is not to introduce a new concept.\nThe goal is to show how the full CDI workflow operates from beginning to end on a real dataset.\nWe will use the diabetes dataset to answer a practical question:\nThis is not a causal question.\nIt is a structured prediction question.\nThat distinction matters from the beginning.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#case-study-objective",
+    "href": "17-end-to-end-case-study.html#case-study-objective",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "",
+    "text": "Can baseline clinical measurements support useful prediction of disease progression, and how should those predictions be interpreted for real-world use?",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#load-the-dataset",
+    "href": "17-end-to-end-case-study.html#load-the-dataset",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Load the Dataset",
+    "text": "Load the Dataset\n\n\nCode\nimport pandas as pd\n\ndf = pd.read_csv(\"data/diabetes.csv\")\ndf.head()\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\ndisease_progression\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n151.0\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n75.0\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n141.0\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n206.0\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n135.0",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#define-features-and-target",
+    "href": "17-end-to-end-case-study.html#define-features-and-target",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Define Features and Target",
+    "text": "Define Features and Target\n\n\nCode\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]\n\nX.shape, y.shape\n\n\n((442, 10), (442,))\n\n\nEach row represents one observation.\nEach column represents one measured feature.\nThe target is continuous, so this remains a regression problem.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-1-understand-the-data-structure",
+    "href": "17-end-to-end-case-study.html#step-1-understand-the-data-structure",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 1 — Understand the Data Structure",
+    "text": "Step 1 — Understand the Data Structure\nBefore modeling, it is useful to inspect the feature distribution.\n\n\nCode\nX.describe().round(3)\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\n\n\n\n\ncount\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n442.000\n\n\nmean\n-0.000\n0.000\n-0.000\n-0.000\n-0.000\n0.000\n0.000\n0.000\n0.000\n0.000\n\n\nstd\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n0.048\n\n\nmin\n-0.107\n-0.045\n-0.090\n-0.112\n-0.127\n-0.116\n-0.102\n-0.076\n-0.126\n-0.138\n\n\n25%\n-0.037\n-0.045\n-0.034\n-0.037\n-0.034\n-0.030\n-0.035\n-0.039\n-0.033\n-0.033\n\n\n50%\n0.005\n-0.045\n-0.007\n-0.006\n-0.004\n-0.004\n-0.007\n-0.003\n-0.002\n-0.001\n\n\n75%\n0.038\n0.051\n0.031\n0.036\n0.028\n0.030\n0.029\n0.034\n0.032\n0.028\n\n\nmax\n0.111\n0.051\n0.171\n0.132\n0.154\n0.199\n0.181\n0.185\n0.134\n0.136\n\n\n\n\n\n\n\nAt this stage, the key question is not whether the data is interesting.\nIt is whether the data is structured well enough to support a defensible workflow.\nHere, the answer is yes:\n\nthe dataset is tabular\n\nthe features are numeric\n\nthe target is clearly defined",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-2-build-a-reproducible-workflow",
+    "href": "17-end-to-end-case-study.html#step-2-build-a-reproducible-workflow",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 2 — Build a Reproducible Workflow",
+    "text": "Step 2 — Build a Reproducible Workflow\nWe use a pipeline so that scaling and modeling are applied consistently.\n\n\nCode\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LinearRegression\n\npipeline = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"model\", LinearRegression())\n])\n\npipeline\n\n\nPipeline(steps=[('scaler', StandardScaler()), ('model', LinearRegression())])In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.Pipeline?Documentation for PipelineiNot fitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nsteps steps: list of tuples\n\nList of (name of step, estimator) tuples that are to be chained in\nsequential order. To be compatible with the scikit-learn API, all steps\nmust define `fit`. All non-last steps must also define `transform`. See\n:ref:`Combining Estimators ` for more details.\n[('scaler', ...), ('model', ...)]\n\n\n\ntransform_input transform_input: list of str, default=None\n\nThe names of the :term:`metadata` parameters that should be transformed by the\npipeline before passing it to the step consuming it.\n\nThis enables transforming some input arguments to ``fit`` (other than ``X``)\nto be transformed by the steps of the pipeline up to the step which requires\nthem. Requirement is defined via :ref:`metadata routing `.\nFor instance, this can be used to pass a validation set through the pipeline.\n\nYou can only set this if metadata routing is enabled, which you\ncan enable using ``sklearn.set_config(enable_metadata_routing=True)``.\n\n.. versionadded:: 1.6\nNone\n\n\n\nmemory memory: str or object with the joblib.Memory interface, default=None\n\nUsed to cache the fitted transformers of the pipeline. The last step\nwill never be cached, even if it is a transformer. By default, no\ncaching is performed. If a string is given, it is the path to the\ncaching directory. Enabling caching triggers a clone of the transformers\nbefore fitting. Therefore, the transformer instance given to the\npipeline cannot be inspected directly. Use the attribute ``named_steps``\nor ``steps`` to inspect estimators within the pipeline. Caching the\ntransformers is advantageous when fitting is time consuming. See\n:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`\nfor an example on how to enable caching.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each step will be printed as it\nis completed.\nFalse\n\n\n\n\n            \n        \n    StandardScaler?Documentation for StandardScaler\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncopy copy: bool, default=True\n\nIf False, try to avoid a copy and do inplace scaling instead.\nThis is not guaranteed to always work inplace; e.g. if the data is\nnot a NumPy array or scipy.sparse CSR matrix, a copy may still be\nreturned.\nTrue\n\n\n\nwith_mean with_mean: bool, default=True\n\nIf True, center the data before scaling.\nThis does not work (and will raise an exception) when attempted on\nsparse matrices, because centering them entails building a dense\nmatrix which in common use cases is likely to be too large to fit in\nmemory.\nTrue\n\n\n\nwith_std with_std: bool, default=True\n\nIf True, scale the data to unit variance (or equivalently,\nunit standard deviation).\nTrue\n\n\n\n\n            \n        \n    LinearRegression?Documentation for LinearRegression\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nfit_intercept fit_intercept: bool, default=True\n\nWhether to calculate the intercept for this model. If set\nto False, no intercept will be used in calculations\n(i.e. data is expected to be centered).\nTrue\n\n\n\ncopy_X copy_X: bool, default=True\n\nIf True, X will be copied; else, it may be overwritten.\nTrue\n\n\n\ntol tol: float, default=1e-6\n\nThe precision of the solution (`coef_`) is determined by `tol` which\nspecifies a different convergence criterion for the `lsqr` solver.\n`tol` is set as `atol` and `btol` of :func:`scipy.sparse.linalg.lsqr` when\nfitting on sparse training data. This parameter has no effect when fitting\non dense data.\n\n.. versionadded:: 1.7\n1e-06\n\n\n\nn_jobs n_jobs: int, default=None\n\nThe number of jobs to use for the computation. This will only provide\nspeedup in case of sufficiently large problems, that is if firstly\n`n_targets &gt; 1` and secondly `X` is sparse or if `positive` is set\nto `True`. ``None`` means 1 unless in a\n:obj:`joblib.parallel_backend` context. ``-1`` means using all\nprocessors. See :term:`Glossary ` for more details.\nNone\n\n\n\npositive positive: bool, default=False\n\nWhen set to ``True``, forces the coefficients to be positive. This\noption is only supported for dense arrays.\n\nFor a comparison between a linear regression model with positive constraints\non the regression coefficients and a linear regression without such constraints,\nsee :ref:`sphx_glr_auto_examples_linear_model_plot_nnls.py`.\n\n.. versionadded:: 0.24\nFalse\n\n\n\n\n            \n        \n    \n\n\nThis makes the workflow easier to reproduce and reduces the chance of inconsistent preprocessing.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-3-evaluate-with-cross-validation",
+    "href": "17-end-to-end-case-study.html#step-3-evaluate-with-cross-validation",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 3 — Evaluate with Cross-Validation",
+    "text": "Step 3 — Evaluate with Cross-Validation\nA single split provides only one estimate of performance.\nWe use cross-validation to obtain a more stable view.\n\n\nCode\nfrom sklearn.model_selection import cross_val_score\nimport numpy as np\n\nmae_scores = -cross_val_score(\n    pipeline,\n    X,\n    y,\n    cv=5,\n    scoring=\"neg_mean_absolute_error\"\n)\n\nr2_scores = cross_val_score(\n    pipeline,\n    X,\n    y,\n    cv=5,\n    scoring=\"r2\"\n)\n\nmae_scores, r2_scores\n\n\n(array([43.02616606, 44.8004801 , 48.1557102 , 43.0130322 , 42.3871076 ]),\n array([0.42955615, 0.52259939, 0.48268054, 0.42649776, 0.55024834]))\n\n\n\n\nCode\ncv_summary = pd.DataFrame({\n    \"metric\": [\"MAE\", \"R2\"],\n    \"mean\": [np.mean(mae_scores), np.mean(r2_scores)],\n    \"std\": [np.std(mae_scores), np.std(r2_scores)]\n}).round(3)\n\ncv_summary\n\n\n\n\n\n\n\n\n\nmetric\nmean\nstd\n\n\n\n\n0\nMAE\n44.276\n2.100\n\n\n1\nR2\n0.482\n0.049\n\n\n\n\n\n\n\nThis gives us:\n\naverage performance\n\nvariability across folds\n\nThat is already more informative than a single score.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-4-visualize-stability-across-folds",
+    "href": "17-end-to-end-case-study.html#step-4-visualize-stability-across-folds",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 4 — Visualize Stability Across Folds",
+    "text": "Step 4 — Visualize Stability Across Folds\n\n\nCode\nimport matplotlib.pyplot as plt\n\nfolds = range(1, len(mae_scores) + 1)\n\nplt.figure(figsize=(7, 5))\nplt.plot(folds, mae_scores, marker=\"o\", linewidth=1)\nplt.xlabel(\"Fold\")\nplt.ylabel(\"MAE\")\nplt.title(\"MAE Across Cross-Validation Folds\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nCode\nplt.figure(figsize=(7, 5))\nplt.plot(folds, r2_scores, marker=\"o\", linewidth=1)\nplt.xlabel(\"Fold\")\nplt.ylabel(\"R²\")\nplt.title(\"R² Across Cross-Validation Folds\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\nThese plots help us see whether performance is:\n\nstable\n\nhighly variable\n\nor dependent on a small number of favorable splits\n\nHere, the variation is present but not extreme.\nThat suggests the model is reasonably stable.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-5-fit-a-model-for-interpretation",
+    "href": "17-end-to-end-case-study.html#step-5-fit-a-model-for-interpretation",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 5 — Fit a Model for Interpretation",
+    "text": "Step 5 — Fit a Model for Interpretation\nTo examine model behavior more directly, we fit the same workflow on a train/test split.\n\n\nCode\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\npipeline.fit(X_train, y_train)\ny_pred = pipeline.predict(X_test)\n\ntest_mae = mean_absolute_error(y_test, y_pred)\ntest_r2 = r2_score(y_test, y_pred)\n\ntest_mae, test_r2\n\n\n(42.79409467959995, 0.45260276297191915)\n\n\nThis gives us one specific fitted model for interpretation, while cross-validation remains the main source of stability evidence.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-6-compare-observed-and-predicted-values",
+    "href": "17-end-to-end-case-study.html#step-6-compare-observed-and-predicted-values",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 6 — Compare Observed and Predicted Values",
+    "text": "Step 6 — Compare Observed and Predicted Values\n\n\nCode\nerror = np.abs(y_test - y_pred)\n\nplt.figure(figsize=(7, 5))\n\nscatter = plt.scatter(\n    y_test,\n    y_pred,\n    c=error,\n    cmap=\"viridis\",\n    edgecolors=\"black\",\n    linewidth=0.4,\n    alpha=0.9\n)\n\nmin_val = min(y_test.min(), y_pred.min())\nmax_val = max(y_test.max(), y_pred.max())\n\nplt.plot([min_val, max_val], [min_val, max_val], linestyle=\"--\", linewidth=1)\n\nplt.xlabel(\"Observed progression\")\nplt.ylabel(\"Predicted progression\")\nplt.title(\"Observed vs Predicted (Error Highlighted)\")\nplt.colorbar(scatter, label=\"Absolute Error\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\nPoints close to the diagonal line represent more accurate predictions.\nPoints farther away indicate larger errors.\nThis visual reminds us that a model can be useful without being perfect.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-7-interpret-feature-influence",
+    "href": "17-end-to-end-case-study.html#step-7-interpret-feature-influence",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 7 — Interpret Feature Influence",
+    "text": "Step 7 — Interpret Feature Influence\nBecause the model inside the pipeline is linear regression, we can inspect coefficients.\n\n\nCode\ncoef_series = pd.Series(\n    pipeline.named_steps[\"model\"].coef_,\n    index=X.columns\n).sort_values()\n\ncoef_series\n\n\ns1    -44.448856\nsex   -11.511809\nage     1.753758\ns6      2.351364\ns3      7.676978\ns4     13.138784\nbp     16.828872\ns2     24.640954\nbmi    25.607121\ns5     35.161195\ndtype: float64\n\n\n\n\nCode\nplt.figure(figsize=(7, 5))\ncoef_series.plot(kind=\"barh\")\nplt.xlabel(\"Coefficient\")\nplt.title(\"Feature Coefficients from the Fitted Linear Model\")\nplt.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\n\n\nThese coefficients describe how the model uses features for prediction.\nThey do not establish causation.\nFor example, if BMI has a strong positive coefficient, we can say:\n\nBMI is an important feature for prediction in this model\n\nWe cannot say:\n\nBMI directly causes progression based on this model alone",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-8-translate-results-into-a-defensible-claim",
+    "href": "17-end-to-end-case-study.html#step-8-translate-results-into-a-defensible-claim",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 8 — Translate Results into a Defensible Claim",
+    "text": "Step 8 — Translate Results into a Defensible Claim\nAt this point, a careful claim might be:\n\nThe model shows moderate predictive ability, and features such as BMI and s5 contribute meaningfully to predicted disease progression in this dataset.\n\nThis is a model-based statement.\nIt is appropriately limited.\nIt does not overreach into causal or clinical certainty.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-9-translate-analysis-into-decision-context",
+    "href": "17-end-to-end-case-study.html#step-9-translate-analysis-into-decision-context",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 9 — Translate Analysis into Decision Context",
+    "text": "Step 9 — Translate Analysis into Decision Context\nNow we ask the practical question:\n\nWhat could someone do with this result?\n\nA reasonable decision-oriented interpretation is:\n\nuse the model as a screening or prioritization aid\n\nidentify observations that may deserve closer follow-up\n\navoid using predictions as the sole basis for intervention\n\nWhy?\nBecause the model is:\n\ninformative\n\nreasonably stable\n\nbut still imperfect\n\nThis is where analysis becomes useful without becoming overconfident.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#step-10-case-study-summary",
+    "href": "17-end-to-end-case-study.html#step-10-case-study-summary",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Step 10 — Case Study Summary",
+    "text": "Step 10 — Case Study Summary\n\nData\nWe used a structured health-related tabular dataset.\n\n\nModel\nWe built a reproducible pipeline with scaling and linear regression.\n\n\nEvaluation\nCross-validation showed moderate and fairly stable performance.\n\n\nInterpretation\nSeveral features, including BMI-related signals, contributed meaningfully to prediction.\n\n\nCommunication\nClaims were framed as predictive and associative, not causal.\n\n\nDecision Context\nThe model could support monitoring or prioritization, but not standalone decision-making.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#cdi-insight",
+    "href": "17-end-to-end-case-study.html#cdi-insight",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "CDI Insight",
+    "text": "CDI Insight\nAn end-to-end workflow is not complete when a model is fit.\nIt is complete when the path from:\n\ndata\n\nto model\n\nto interpretation\n\nto communication\n\nto decision context\n\nremains clear, disciplined, and defensible.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#key-takeaway",
+    "href": "17-end-to-end-case-study.html#key-takeaway",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Key Takeaway",
+    "text": "Key Takeaway\nThe value of a model is not only in its output.\nIt is in how responsibly that output is connected to real-world use.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "17-end-to-end-case-study.html#next-step",
+    "href": "17-end-to-end-case-study.html#next-step",
+    "title": "End-to-End Case Study: From Data to Decision",
+    "section": "Next Step",
+    "text": "Next Step\n→ Capstone reflection and next directions",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>End-to-End Case Study: From Data to Decision</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html",
+    "href": "18-limitations-and-responsible-use.html",
+    "title": "Limitations and Responsible Use",
+    "section": "",
+    "text": "Why This Matters\nIn the previous lesson, we completed an end-to-end workflow:\nNow we step back and ask a critical question:\nThis is where analytical maturity develops.\nOur model showed:\nIt is tempting to trust these results.\nBut every model has limits.\nUnderstanding those limits is part of responsible analysis.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#why-this-matters",
+    "href": "18-limitations-and-responsible-use.html#why-this-matters",
+    "title": "Limitations and Responsible Use",
+    "section": "",
+    "text": "moderate predictive ability\n\nreasonable stability\n\ninterpretable feature influence",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#dataset-limitations",
+    "href": "18-limitations-and-responsible-use.html#dataset-limitations",
+    "title": "Limitations and Responsible Use",
+    "section": "Dataset Limitations",
+    "text": "Dataset Limitations\nA model only learns from the data it is given.\nThis means:\n\nit cannot detect patterns that are not present\n\nit may reflect biases in the dataset\n\nit may not represent broader populations\n\nFor example:\n\nthe diabetes dataset represents a specific cohort\n\nit does not include all possible clinical variables\n\nit may not reflect different populations or settings",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#cdi-insight",
+    "href": "18-limitations-and-responsible-use.html#cdi-insight",
+    "title": "Limitations and Responsible Use",
+    "section": "CDI Insight",
+    "text": "CDI Insight\n\nModels inherit the strengths and weaknesses of their data.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#model-limitations",
+    "href": "18-limitations-and-responsible-use.html#model-limitations",
+    "title": "Limitations and Responsible Use",
+    "section": "Model Limitations",
+    "text": "Model Limitations\nModels simplify reality.\nFor example:\n\nlinear models assume linear relationships\n\ntree-based models depend on observed splits\n\nThese simplifications can:\n\nmiss complex relationships\n\nexaggerate certain patterns\n\nbehave differently under new conditions\n\nEven a well-performing model is still an approximation.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#generalization",
+    "href": "18-limitations-and-responsible-use.html#generalization",
+    "title": "Limitations and Responsible Use",
+    "section": "Generalization",
+    "text": "Generalization\nA model trained on one dataset:\n\nmay not perform the same on new data\n\nmay fail when conditions change\n\nGood performance here does not guarantee performance elsewhere.\nThis is especially important in:\n\nhealthcare\n\nfinance\n\nreal-world decision systems",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#cdi-insight-1",
+    "href": "18-limitations-and-responsible-use.html#cdi-insight-1",
+    "title": "Limitations and Responsible Use",
+    "section": "CDI Insight",
+    "text": "CDI Insight\n\nGood performance on one dataset is not proof of universal validity.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#confounding-and-hidden-structure",
+    "href": "18-limitations-and-responsible-use.html#confounding-and-hidden-structure",
+    "title": "Limitations and Responsible Use",
+    "section": "Confounding and Hidden Structure",
+    "text": "Confounding and Hidden Structure\nSome relationships appear strong because:\n\nvariables are correlated\n\nimportant variables are missing\n\nunderlying mechanisms are not observed\n\nFor example:\n\nBMI may appear important\n\nbut it may reflect other biological or behavioral factors\n\nThis is why:\n\nassociation is not causation",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#uncertainty-in-predictions",
+    "href": "18-limitations-and-responsible-use.html#uncertainty-in-predictions",
+    "title": "Limitations and Responsible Use",
+    "section": "Uncertainty in Predictions",
+    "text": "Uncertainty in Predictions\nAll predictions contain error.\nWe observed this through:\n\nMAE values\n\nresidual plots\n\nvariation across cross-validation folds\n\nThis means:\n\nindividual predictions may be inaccurate\n\nmodel outputs should not be treated as exact values",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#cdi-insight-2",
+    "href": "18-limitations-and-responsible-use.html#cdi-insight-2",
+    "title": "Limitations and Responsible Use",
+    "section": "CDI Insight",
+    "text": "CDI Insight\n\nModels reduce uncertainty. They do not eliminate it.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#sensitivity-to-data-and-design-choices",
+    "href": "18-limitations-and-responsible-use.html#sensitivity-to-data-and-design-choices",
+    "title": "Limitations and Responsible Use",
+    "section": "Sensitivity to Data and Design Choices",
+    "text": "Sensitivity to Data and Design Choices\nModel results depend on:\n\nfeature selection\n\npreprocessing steps\n\nmodel type\n\nparameter choices\n\nChanging any of these can lead to different results.\nThis reinforces:\n\nthe importance of reproducibility\n\nthe need for careful interpretation",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#responsible-use",
+    "href": "18-limitations-and-responsible-use.html#responsible-use",
+    "title": "Limitations and Responsible Use",
+    "section": "Responsible Use",
+    "text": "Responsible Use\nUsing models responsibly means:\n\nacknowledging limitations\n\navoiding overgeneralization\n\navoiding causal claims\n\ncommunicating uncertainty clearly",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#practical-questions-to-ask",
+    "href": "18-limitations-and-responsible-use.html#practical-questions-to-ask",
+    "title": "Limitations and Responsible Use",
+    "section": "Practical Questions to Ask",
+    "text": "Practical Questions to Ask\nBefore using a model in practice, ask:\n\nWhat data was this model trained on?\n\nWhere might this model fail?\n\nWhat assumptions does it rely on?\n\nWhat are the consequences of incorrect predictions?\n\nThese questions help prevent misuse.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#example-responsible-vs-irresponsible-use",
+    "href": "18-limitations-and-responsible-use.html#example-responsible-vs-irresponsible-use",
+    "title": "Limitations and Responsible Use",
+    "section": "Example: Responsible vs Irresponsible Use",
+    "text": "Example: Responsible vs Irresponsible Use\n\nIrresponsible\n\n“This model predicts disease progression accurately for all patients”\n\n“BMI is the main cause of progression”\n\n\n\nResponsible\n\n“This model shows moderate predictive ability within this dataset”\n\n“BMI is an important predictor in this model, but not necessarily causal”",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#key-insight",
+    "href": "18-limitations-and-responsible-use.html#key-insight",
+    "title": "Limitations and Responsible Use",
+    "section": "Key Insight",
+    "text": "Key Insight\nA useful model is not one that is perfect.\nIt is one that is:\n\nunderstood\n\nappropriately applied\n\nused with awareness of its limits",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#connecting-back-to-the-workflow",
+    "href": "18-limitations-and-responsible-use.html#connecting-back-to-the-workflow",
+    "title": "Limitations and Responsible Use",
+    "section": "Connecting Back to the Workflow",
+    "text": "Connecting Back to the Workflow\nEverything we built remains valid:\n\npipelines improve reproducibility\n\ncross-validation improves stability assessment\n\ninterpretation helps explain model behavior\n\nBut all of these operate within limits.\nRecognizing those limits is what turns:\nanalysis → responsible analysis",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#summary",
+    "href": "18-limitations-and-responsible-use.html#summary",
+    "title": "Limitations and Responsible Use",
+    "section": "Summary",
+    "text": "Summary\n\nAll models have limitations\n\nData defines what models can learn\n\nGeneralization is not guaranteed\n\nAssociations are not causation\n\nUncertainty is always present\n\nResponsible use is part of analysis",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-limitations-and-responsible-use.html#next-step",
+    "href": "18-limitations-and-responsible-use.html#next-step",
+    "title": "Limitations and Responsible Use",
+    "section": "Next Step",
+    "text": "Next Step\n→ From foundations to real-world practice",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html",
+    "href": "19-from-foundations-to-real-world-practice.html",
+    "title": "From Foundations to Real-World Practice",
+    "section": "",
+    "text": "What You Have Built\nYou have now completed the full CDI workflow:\nThis is not just a sequence of steps.\nIt is a way of thinking about data.\nYou can now:\nThis is already a complete analytical foundation.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#what-you-have-built",
+    "href": "19-from-foundations-to-real-world-practice.html#what-you-have-built",
+    "title": "From Foundations to Real-World Practice",
+    "section": "",
+    "text": "structure data analysis from start to finish\n\nbuild reproducible workflows\n\nevaluate models beyond a single result\n\ninterpret outputs carefully\n\ncommunicate findings clearly\n\nconnect results to real-world decisions",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#what-this-means",
+    "href": "19-from-foundations-to-real-world-practice.html#what-this-means",
+    "title": "From Foundations to Real-World Practice",
+    "section": "What This Means",
+    "text": "What This Means\nYou are no longer just:\n\nrunning code\n\napplying libraries\n\nfitting models\n\nYou are:\n\nreasoning about data\n\nevaluating evidence\n\nmaking disciplined claims\n\nThis is the difference between:\n\ntool usage\nand\n\nanalytical thinking",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#beyond-analysis",
+    "href": "19-from-foundations-to-real-world-practice.html#beyond-analysis",
+    "title": "From Foundations to Real-World Practice",
+    "section": "Beyond Analysis",
+    "text": "Beyond Analysis\nIn real-world environments, analysis is only one part of the system.\nModels are often expected to:\n\nrun automatically\n\nserve predictions to users\n\nintegrate with applications\n\noperate in changing environments\n\nThis introduces a new layer:\n\nmachine learning systems",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#from-model-to-system",
+    "href": "19-from-foundations-to-real-world-practice.html#from-model-to-system",
+    "title": "From Foundations to Real-World Practice",
+    "section": "From Model to System",
+    "text": "From Model to System\nSo far, you have worked with:\n\ndatasets\n\nnotebooks / Quarto\n\nlocal execution\n\nIn practice, models need to be:\n\nsaved and versioned\n\nexposed through interfaces\n\ndeployed to servers or cloud environments\n\nmonitored over time\n\nThis is where data science becomes engineering.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#what-comes-next",
+    "href": "19-from-foundations-to-real-world-practice.html#what-comes-next",
+    "title": "From Foundations to Real-World Practice",
+    "section": "What Comes Next",
+    "text": "What Comes Next\nThe next stage of CDI focuses on:\n\npackaging trained models\n\nbuilding APIs for predictions\n\ndeploying models into production environments\n\nmonitoring performance and data drift\n\nupdating models as data evolves\n\nThis is often referred to as:\n\nML → Deployment → DevOps",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#important-distinction",
+    "href": "19-from-foundations-to-real-world-practice.html#important-distinction",
+    "title": "From Foundations to Real-World Practice",
+    "section": "Important Distinction",
+    "text": "Important Distinction\nThis guide focused on:\n\nhow to think, analyze, and interpret correctly\n\nThe next stage focuses on:\n\nhow to build, deploy, and maintain systems\n\nBoth are important.\nBut they require different skills and different ways of thinking.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#cdi-insight",
+    "href": "19-from-foundations-to-real-world-practice.html#cdi-insight",
+    "title": "From Foundations to Real-World Practice",
+    "section": "CDI Insight",
+    "text": "CDI Insight\n\nStrong systems built on weak reasoning fail quietly.\nStrong reasoning is the foundation of reliable systems.",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#how-to-move-forward",
+    "href": "19-from-foundations-to-real-world-practice.html#how-to-move-forward",
+    "title": "From Foundations to Real-World Practice",
+    "section": "How to Move Forward",
+    "text": "How to Move Forward\nWhen transitioning to real-world practice:\nStart by asking:\n\nWhat problem am I solving?\n\nWhat data is available?\n\nWhat level of accuracy is sufficient?\n\nWhat are the risks of being wrong?\n\nThen extend into:\n\nhow predictions will be used\n\nhow the system will be maintained\n\nhow performance will be monitored",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#your-position-now",
+    "href": "19-from-foundations-to-real-world-practice.html#your-position-now",
+    "title": "From Foundations to Real-World Practice",
+    "section": "Your Position Now",
+    "text": "Your Position Now\nYou are now prepared to:\n\napproach real-world datasets with structure\n\nbuild models with discipline\n\ninterpret results responsibly\n\ncommunicate findings clearly\n\nThis is a strong foundation for:\n\nadvanced modeling\n\ndomain-specific applications\n\nproduction systems",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#final-reflection",
+    "href": "19-from-foundations-to-real-world-practice.html#final-reflection",
+    "title": "From Foundations to Real-World Practice",
+    "section": "Final Reflection",
+    "text": "Final Reflection\nA model is not the end of analysis.\nA result is not the end of reasoning.\nA prediction is not the end of decision-making.\nThe goal is not just to produce outputs.\nThe goal is to produce:\n\nunderstanding that can be used responsibly",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#where-to-go-next",
+    "href": "19-from-foundations-to-real-world-practice.html#where-to-go-next",
+    "title": "From Foundations to Real-World Practice",
+    "section": "Where to Go Next",
+    "text": "Where to Go Next\n→ ML → Deployment → DevOps Track\nIn the next track, you will learn how to:\n\nturn models into working systems\n\nexpose predictions through APIs\n\ndeploy models to real environments\n\nmonitor and improve systems over time",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
+    "objectID": "19-from-foundations-to-real-world-practice.html#closing-thought",
+    "href": "19-from-foundations-to-real-world-practice.html#closing-thought",
+    "title": "From Foundations to Real-World Practice",
+    "section": "Closing Thought",
+    "text": "Closing Thought\nData science is not only about building models.\nIt is about connecting:\ndata → understanding → action\nAnd doing so in a way that is:\n\nclear\n\nreproducible\n\nresponsible",
+    "crumbs": [
+      "Premium Foundations",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>From Foundations to Real-World Practice</span>"
+    ]
+  },
+  {
     "objectID": "999-appendix.html",
     "href": "999-appendix.html",
     "title": "Appendix",
@@ -622,7 +1964,7 @@
     "text": "Project Structure Overview\nThis appendix collects technical reference material that supports the Foundations Track.\nIt documents the project structure, environment setup, rendering workflow, and reusable patterns used throughout the guide.\nA standard CDI Quarto-first project looks like this:",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -633,7 +1975,7 @@
     "text": "data-science/\n├── index.qmd\n├── 00-preface.qmd\n├── 01-setting-up-environment.qmd\n├── ...\n├── data/\n├── figures/\n├── scripts/\n│   └── bash/\n├── docs/\n├── _quarto.yml\n└── requirements.txt\n\nKey Directories\n\ndata/\nstores raw and cleaned datasets\nfigures/\nstores plots that are explicitly saved during rendering\nscripts/bash/\ncontains helper scripts such as setup-env.sh and build.sh\ndocs/\ncontains the rendered Quarto site (GitHub Pages output)",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -644,7 +1986,7 @@
     "text": "Environment Setup Reference\nThis project uses a local virtual environment (.venv) for reproducibility.\n\nCreate environment manually\npython3 -m venv .venv\nsource .venv/bin/activate\npip install -r requirements.txt\n\n\nRender the book\nquarto render\nOr use the helper script:\nbash scripts/bash/build.sh",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -655,7 +1997,7 @@
     "text": "Quarto Workflow Summary\nThe workflow for this guide is:\nPython code\n    ↓\nQuarto chapter (.qmd)\n    ↓\nquarto render\n    ↓\ndocs/ (static site)\nAll figures and outputs are generated during rendering.",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -666,7 +2008,7 @@
     "text": "Reusable Pandas Patterns\n\nSelect columns\ndf[[\"col1\", \"col2\"]]\n\n\nFilter rows\ndf[df[\"col\"] &gt; value]\n\n\nGroup and aggregate\ndf.groupby(\"group_col\").agg(\n    metric=(\"value_col\", \"mean\")\n)\n\n\nHandle missing values\ndf[\"col\"] = df[\"col\"].fillna(df[\"col\"].median())\n\n\nConvert dtype\ndf[\"category_col\"] = df[\"category_col\"].astype(\"category\")",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -677,7 +2019,7 @@
     "text": "Reproducibility Checklist\nBefore finalizing any chapter:\n\nconfirm no missing values remain (unless justified)\n\nconfirm no unintended duplicates\n\nconfirm correct data types\n\nconfirm figures render correctly\n\nrebuild the book (quarto render)\n\nopen docs/index.html to verify output",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -688,7 +2030,7 @@
     "text": "Data Sources\n\nIris dataset (Fisher 1936)",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -699,7 +2041,7 @@
     "text": "Software and Tools\nThis guide uses a small set of widely adopted tools for data analysis and visualization:\n\nPython (Python Software Foundation 2024) — general-purpose programming language for data analysis\n\npandas (McKinney et al. 2010) — data manipulation and tabular data handling\n\nNumPy (Harris et al. 2020) — numerical computing and array operations\n\nmatplotlib (Hunter 2007) — foundational plotting library\n\nseaborn (Waskom 2021) — statistical data visualization built on matplotlib\n\nThese tools form a standard ecosystem for reproducible data science workflows.",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -710,7 +2052,7 @@
     "text": "Closing Note\nThe goal of this Foundations Track is not just to teach syntax.\nIt is to teach structure, discipline, and reproducibility.\nThe same workflow you used here can be applied to:\n\nnew datasets\n\nnew domains\n\nlarger analytical projects\n\nfuture CDI guides\n\n\n\n\n\nFisher, Ronald A. 1936. “The Use of Multiple Measurements in Taxonomic Problems.” Annals of Eugenics.\n\n\nHarris, Charles R. et al. 2020. “Array Programming with NumPy.” Nature. https://doi.org/10.1038/s41586-020-2649-2.\n\n\nHunter, J. D. 2007. “Matplotlib: A 2D Graphics Environment.” Computing in Science & Engineering. https://doi.org/10.1109/MCSE.2007.55.\n\n\nMcKinney, Wes et al. 2010. “Pandas-Dev/Pandas: Pandas.” Zenodo. https://doi.org/10.5281/zenodo.3509134.\n\n\nPython Software Foundation. 2024. “Python Language Reference.” https://www.python.org/.\n\n\nWaskom, Michael L. 2021. “Seaborn: Statistical Data Visualization.” Journal of Open Source Software. https://doi.org/10.21105/joss.03021.",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -721,7 +2063,7 @@
     "text": "Fisher, Ronald A. 1936. “The Use of Multiple Measurements in\nTaxonomic Problems.” Annals of Eugenics.\n\n\nHarris, Charles R. et al. 2020. “Array Programming with\nNumPy.” Nature. https://doi.org/10.1038/s41586-020-2649-2.\n\n\nHunter, J. D. 2007. “Matplotlib: A 2D Graphics\nEnvironment.” Computing in Science & Engineering. https://doi.org/10.1109/MCSE.2007.55.\n\n\nMcKinney, Wes et al. 2010. “Pandas-Dev/Pandas: Pandas.”\nZenodo. https://doi.org/10.5281/zenodo.3509134.\n\n\nPython Software Foundation. 2024. “Python Language\nReference.” https://www.python.org/.\n\n\nWaskom, Michael L. 2021. “Seaborn: Statistical Data\nVisualization.” Journal of Open Source Software. https://doi.org/10.21105/joss.03021.",
     "crumbs": [
       "Reference",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>References</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>References</span>"
     ]
   }
 ]

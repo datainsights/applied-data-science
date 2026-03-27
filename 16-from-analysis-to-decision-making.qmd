@@ -1,0 +1,233 @@
+# From Analysis to Decision-Making {#lesson16}
+
+:::cdi-message
+- **ID:** DS-L16
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** Translating analytical results into real-world decisions
+:::
+
+So far, we have built a complete analytical pipeline:
+
+- data → model → interpretation → communication  
+
+Now we take the final step:
+
+> How do we move from analysis to action?
+
+---
+
+## The Final Gap
+
+Even well-executed analyses can fail at the last step.
+
+Why?
+
+Because:
+
+- results are not clearly linked to decisions  
+- uncertainty is ignored or misunderstood  
+- stakeholders do not know how to act on the findings  
+
+This lesson focuses on bridging that gap.
+
+---
+
+## What Decisions Require
+
+A decision is not based on:
+
+- a model  
+- a metric  
+- or a plot  
+
+A decision requires:
+
+- context  
+- trade-offs  
+- acceptable risk  
+- domain knowledge  
+
+Models inform decisions.  
+They do not make them.
+
+---
+
+## From Prediction to Action
+
+Suppose the model predicts:
+
+- higher disease progression for certain patients  
+
+This does **not** automatically imply:
+
+- immediate intervention  
+- treatment changes  
+- policy decisions  
+
+Instead, it raises a question:
+
+> What should be done given this information?
+
+---
+
+## Decision Framing
+
+A useful structure:
+
+### 1. What is the goal?
+
+- reduce disease progression  
+- identify high-risk individuals  
+
+### 2. What does the model provide?
+
+- predicted progression  
+- relative risk patterns  
+
+### 3. What are the options?
+
+- monitor patients  
+- adjust treatment  
+- collect more data  
+
+### 4. What are the risks?
+
+- false positives  
+- false negatives  
+- over-intervention  
+
+---
+
+## Example: Translating Results
+
+**Model Output:**
+- Higher BMI associated with higher predicted progression  
+
+**Incorrect Action:**
+- “All high BMI patients must receive treatment”
+
+**Better Framing:**
+- “Patients with higher BMI may be at increased risk and could benefit from closer monitoring”
+
+---
+
+## The Role of Uncertainty
+
+No model is perfect.
+
+Decisions must consider:
+
+- prediction error  
+- variability across data  
+- limitations of the dataset  
+
+A useful mindset:
+
+> Decisions should be robust to uncertainty, not dependent on perfect predictions.
+
+---
+
+## CDI Insight
+
+> Models reduce uncertainty. They do not eliminate it.
+
+---
+
+## Decision Thresholds
+
+Often, decisions require thresholds.
+
+For example:
+
+- intervene if predicted risk exceeds a certain level  
+
+But thresholds are:
+
+- context-dependent  
+- influenced by cost and risk  
+- not determined by the model alone  
+
+---
+
+## Trade-Offs
+
+Every decision involves trade-offs:
+
+- sensitivity vs specificity  
+- early intervention vs unnecessary treatment  
+- simplicity vs complexity  
+
+The “best” decision depends on priorities.
+
+---
+
+## Communicating for Decisions
+
+When presenting results for decision-making:
+
+Include:
+
+- what the model suggests  
+- how reliable the results are  
+- what uncertainties remain  
+- what options are available  
+
+Avoid:
+
+- prescribing actions without context  
+- presenting results as definitive answers  
+
+---
+
+## Example Decision Summary
+
+**Objective:**  
+Identify patients at higher risk of disease progression  
+
+**Findings:**  
+The model shows moderate predictive ability and consistent performance across splits.  
+Higher BMI is associated with higher predicted progression.
+
+**Interpretation:**  
+BMI is a useful predictor in this dataset.
+
+**Decision Context:**  
+Predictions can be used to flag individuals for closer monitoring,  
+but should not be used as the sole basis for treatment decisions.
+
+---
+
+## From Insight to Action
+
+A good decision process:
+
+1. Understand the model  
+2. Interpret results carefully  
+3. Communicate clearly  
+4. Evaluate risks and trade-offs  
+5. Decide within context  
+
+---
+
+## Key Insight
+
+Analysis supports decisions.
+
+It does not replace judgment.
+
+---
+
+## Summary
+
+- Models inform decisions, but do not make them  
+- Decisions require context, risk assessment, and domain knowledge  
+- Uncertainty must be acknowledged  
+- Clear communication enables actionable insight  
+- Responsible analysis leads to better decisions  
+
+---
+
+## What Comes Next
+
+→ **End-to-end project: from data to decision**

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Data Science Foundations Premium</title>
+<title>From Foundations to Real-World Practice – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./999-appendix.html" rel="prev">
+<link href="./999-appendix.html" rel="next">
+<link href="./18-limitations-and-responsible-use.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,7 +84,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./19-from-foundations-to-real-world-practice.html"><span class="chapter-title">From Foundations to Real-World Practice</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -209,7 +191,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./19-from-foundations-to-real-world-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Foundations to Real-World Practice</span></a>
+  <a href="./19-from-foundations-to-real-world-practice.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">From Foundations to Real-World Practice</span></a>
   </div>
 </li>
       </ul>
@@ -230,7 +212,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./999-references.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">References</span></a>
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
       </ul>
@@ -240,15 +222,32 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-you-have-built" id="toc-what-you-have-built" class="nav-link active" data-scroll-target="#what-you-have-built">What You Have Built</a></li>
+  <li><a href="#what-this-means" id="toc-what-this-means" class="nav-link" data-scroll-target="#what-this-means">What This Means</a></li>
+  <li><a href="#beyond-analysis" id="toc-beyond-analysis" class="nav-link" data-scroll-target="#beyond-analysis">Beyond Analysis</a></li>
+  <li><a href="#from-model-to-system" id="toc-from-model-to-system" class="nav-link" data-scroll-target="#from-model-to-system">From Model to System</a></li>
+  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What Comes Next</a></li>
+  <li><a href="#important-distinction" id="toc-important-distinction" class="nav-link" data-scroll-target="#important-distinction">Important Distinction</a></li>
+  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
+  <li><a href="#how-to-move-forward" id="toc-how-to-move-forward" class="nav-link" data-scroll-target="#how-to-move-forward">How to Move Forward</a></li>
+  <li><a href="#your-position-now" id="toc-your-position-now" class="nav-link" data-scroll-target="#your-position-now">Your Position Now</a></li>
+  <li><a href="#final-reflection" id="toc-final-reflection" class="nav-link" data-scroll-target="#final-reflection">Final Reflection</a></li>
+  <li><a href="#where-to-go-next" id="toc-where-to-go-next" class="nav-link" data-scroll-target="#where-to-go-next">Where to Go Next</a></li>
+  <li><a href="#closing-thought" id="toc-closing-thought" class="nav-link" data-scroll-target="#closing-thought">Closing Thought</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./19-from-foundations-to-real-world-practice.html"><span class="chapter-title">From Foundations to Real-World Practice</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">References</span></h1>
+<h1 class="title"><span id="lesson19" class="quarto-section-identifier"><span class="chapter-title">From Foundations to Real-World Practice</span></span></h1>
 </div>
 
 
@@ -271,34 +270,251 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-iris" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1936. <span>“The Use of Multiple Measurements in
-Taxonomic Problems.”</span> <em>Annals of Eugenics</em>.
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> DS-L19</li>
+<li><strong>Type:</strong> Conclusion</li>
+<li><strong>Audience:</strong> Intermediate to Advanced</li>
+<li><strong>Theme:</strong> Transitioning from analytical thinking to real-world systems</li>
+</ul>
 </div>
-<div id="ref-numpy" class="csl-entry" role="listitem">
-Harris, Charles R. et al. 2020. <span>“Array Programming with
-<span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
-</div>
-<div id="ref-matplotlib" class="csl-entry" role="listitem">
-Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics
-Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
-</div>
-<div id="ref-pandas" class="csl-entry" role="listitem">
-McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span>
-<em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
-</div>
-<div id="ref-python" class="csl-entry" role="listitem">
-Python Software Foundation. 2024. <span>“Python Language
-Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
-</div>
-<div id="ref-seaborn" class="csl-entry" role="listitem">
-Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data
-Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
-</div>
-</div>
+<p>You have now completed the full CDI workflow:</p>
+<ul>
+<li>data<br>
+</li>
+<li>modeling<br>
+</li>
+<li>evaluation<br>
+</li>
+<li>interpretation<br>
+</li>
+<li>communication<br>
+</li>
+<li>decision context<br>
+</li>
+<li>limitations and responsible use</li>
+</ul>
+<p>This is not just a sequence of steps.</p>
+<p>It is a <strong>way of thinking about data</strong>.</p>
+<hr>
+<section id="what-you-have-built" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-have-built">What You Have Built</h2>
+<p>You can now:</p>
+<ul>
+<li>structure data analysis from start to finish<br>
+</li>
+<li>build reproducible workflows<br>
+</li>
+<li>evaluate models beyond a single result<br>
+</li>
+<li>interpret outputs carefully<br>
+</li>
+<li>communicate findings clearly<br>
+</li>
+<li>connect results to real-world decisions</li>
+</ul>
+<p>This is already a complete analytical foundation.</p>
+<hr>
+</section>
+<section id="what-this-means" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-means">What This Means</h2>
+<p>You are no longer just:</p>
+<ul>
+<li>running code<br>
+</li>
+<li>applying libraries<br>
+</li>
+<li>fitting models</li>
+</ul>
+<p>You are:</p>
+<ul>
+<li>reasoning about data<br>
+</li>
+<li>evaluating evidence<br>
+</li>
+<li>making disciplined claims</li>
+</ul>
+<p>This is the difference between:</p>
+<ul>
+<li>tool usage<br>
+and<br>
+</li>
+<li>analytical thinking</li>
+</ul>
+<hr>
+</section>
+<section id="beyond-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="beyond-analysis">Beyond Analysis</h2>
+<p>In real-world environments, analysis is only one part of the system.</p>
+<p>Models are often expected to:</p>
+<ul>
+<li>run automatically<br>
+</li>
+<li>serve predictions to users<br>
+</li>
+<li>integrate with applications<br>
+</li>
+<li>operate in changing environments</li>
+</ul>
+<p>This introduces a new layer:</p>
+<blockquote class="blockquote">
+<p><strong>machine learning systems</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="from-model-to-system" class="level2">
+<h2 class="anchored" data-anchor-id="from-model-to-system">From Model to System</h2>
+<p>So far, you have worked with:</p>
+<ul>
+<li>datasets<br>
+</li>
+<li>notebooks / Quarto<br>
+</li>
+<li>local execution</li>
+</ul>
+<p>In practice, models need to be:</p>
+<ul>
+<li>saved and versioned<br>
+</li>
+<li>exposed through interfaces<br>
+</li>
+<li>deployed to servers or cloud environments<br>
+</li>
+<li>monitored over time</li>
+</ul>
+<p>This is where data science becomes <strong>engineering</strong>.</p>
+<hr>
+</section>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What Comes Next</h2>
+<p>The next stage of CDI focuses on:</p>
+<ul>
+<li>packaging trained models<br>
+</li>
+<li>building APIs for predictions<br>
+</li>
+<li>deploying models into production environments<br>
+</li>
+<li>monitoring performance and data drift<br>
+</li>
+<li>updating models as data evolves</li>
+</ul>
+<p>This is often referred to as:</p>
+<blockquote class="blockquote">
+<p><strong>ML → Deployment → DevOps</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="important-distinction" class="level2">
+<h2 class="anchored" data-anchor-id="important-distinction">Important Distinction</h2>
+<p>This guide focused on:</p>
+<blockquote class="blockquote">
+<p>how to think, analyze, and interpret correctly</p>
+</blockquote>
+<p>The next stage focuses on:</p>
+<blockquote class="blockquote">
+<p>how to build, deploy, and maintain systems</p>
+</blockquote>
+<p>Both are important.</p>
+<p>But they require different skills and different ways of thinking.</p>
+<hr>
+</section>
+<section id="cdi-insight" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
+<blockquote class="blockquote">
+<p>Strong systems built on weak reasoning fail quietly.<br>
+Strong reasoning is the foundation of reliable systems.</p>
+</blockquote>
+<hr>
+</section>
+<section id="how-to-move-forward" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-move-forward">How to Move Forward</h2>
+<p>When transitioning to real-world practice:</p>
+<p>Start by asking:</p>
+<ul>
+<li>What problem am I solving?<br>
+</li>
+<li>What data is available?<br>
+</li>
+<li>What level of accuracy is sufficient?<br>
+</li>
+<li>What are the risks of being wrong?</li>
+</ul>
+<p>Then extend into:</p>
+<ul>
+<li>how predictions will be used<br>
+</li>
+<li>how the system will be maintained<br>
+</li>
+<li>how performance will be monitored</li>
+</ul>
+<hr>
+</section>
+<section id="your-position-now" class="level2">
+<h2 class="anchored" data-anchor-id="your-position-now">Your Position Now</h2>
+<p>You are now prepared to:</p>
+<ul>
+<li>approach real-world datasets with structure<br>
+</li>
+<li>build models with discipline<br>
+</li>
+<li>interpret results responsibly<br>
+</li>
+<li>communicate findings clearly</li>
+</ul>
+<p>This is a strong foundation for:</p>
+<ul>
+<li>advanced modeling<br>
+</li>
+<li>domain-specific applications<br>
+</li>
+<li>production systems</li>
+</ul>
+<hr>
+</section>
+<section id="final-reflection" class="level2">
+<h2 class="anchored" data-anchor-id="final-reflection">Final Reflection</h2>
+<p>A model is not the end of analysis.</p>
+<p>A result is not the end of reasoning.</p>
+<p>A prediction is not the end of decision-making.</p>
+<p>The goal is not just to produce outputs.</p>
+<p>The goal is to produce:</p>
+<blockquote class="blockquote">
+<p><strong>understanding that can be used responsibly</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="where-to-go-next" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-go-next">Where to Go Next</h2>
+<p>→ <strong>ML → Deployment → DevOps Track</strong></p>
+<p>In the next track, you will learn how to:</p>
+<ul>
+<li>turn models into working systems<br>
+</li>
+<li>expose predictions through APIs<br>
+</li>
+<li>deploy models to real environments<br>
+</li>
+<li>monitor and improve systems over time</li>
+</ul>
+<hr>
+</section>
+<section id="closing-thought" class="level2">
+<h2 class="anchored" data-anchor-id="closing-thought">Closing Thought</h2>
+<p>Data science is not only about building models.</p>
+<p>It is about connecting:</p>
+<p>data → understanding → action</p>
+<p>And doing so in a way that is:</p>
+<ul>
+<li>clear<br>
+</li>
+<li>reproducible<br>
+</li>
+<li>responsible</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -704,11 +920,14 @@ Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="http
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./999-appendix.html" class="pagination-link" aria-label="Appendix">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Appendix</span></span>
+      <a href="./18-limitations-and-responsible-use.html" class="pagination-link" aria-label="Limitations and Responsible Use">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Limitations and Responsible Use</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./999-appendix.html" class="pagination-link" aria-label="Appendix">
+        <span class="nav-page-text"><span class="chapter-title">Appendix</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

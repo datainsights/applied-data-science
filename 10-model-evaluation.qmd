@@ -27,19 +27,20 @@ A single evaluation result does not tell us whether a model is reliable.
 
 We continue using the diabetes dataset introduced in the previous lesson.
 
-Each chapter should remain runnable on its own, so we load the data again here.
+Because the dataset was saved into the project `data/` directory, we now load it directly from disk.
+
+This keeps the workflow consistent across lessons and reflects how real projects are usually organized.
 
 ```{python}
-#| label: 10-load-diabetes
+#| label: 10-load-diabetes-file
 import pandas as pd
-from sklearn.datasets import load_diabetes
 
-diabetes = load_diabetes()
+df = pd.read_csv("data/diabetes.csv")
 
-X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
-y = pd.Series(diabetes.target, name="disease_progression")
+X = df.drop(columns=["disease_progression"])
+y = df["disease_progression"]
 
-X.head()
+df.head()
 ```
 
 ---
@@ -221,29 +222,22 @@ residuals = y_test - y_pred
 
 plt.figure(figsize=(7, 5))
 
-# Scatter with contrast
 scatter = plt.scatter(
     y_pred,
     residuals,
-    c=np.abs(residuals),      # color by error magnitude
+    c=np.abs(residuals),
     cmap="viridis",
     edgecolors="black",
     linewidth=0.4,
     alpha=0.9
 )
 
-# Reference line at zero error
 plt.axhline(0, linestyle="--", linewidth=1)
-
 plt.xlabel("Predicted values")
 plt.ylabel("Residuals")
 plt.title("Residual Plot (Error Magnitude Highlighted)")
-
-# Colorbar for interpretation
 plt.colorbar(scatter, label="Absolute Error")
-
 plt.grid(alpha=0.2)
-
 plt.show()
 ```
 
@@ -258,7 +252,7 @@ It allows us to detect:
   If the spread of residuals changes across predicted values, the model performs inconsistently across ranges  
 
 - **regions of poor performance**  
-  Clusters of large residuals (highlighted by stronger color) indicate where the model struggles to capture the underlying pattern  
+  Clusters of large residuals, highlighted by stronger color, indicate where the model struggles to capture the underlying pattern  
 
 Rather than summarizing error with a single number, this plot reveals **how and where the model fails**, which is essential for reliable interpretation.
 

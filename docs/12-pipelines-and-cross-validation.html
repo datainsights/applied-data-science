@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Building Your First Model with Real-World Health Data – Data Science Foundations Premium</title>
+<title>Pipelines and Cross-Validation – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./10-model-evaluation.html" rel="next">
-<link href="./08-feature-engineering.html" rel="prev">
+<link href="./13-feature-importance-and-interpretation.html" rel="next">
+<link href="./11-model-improvement.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./09-model-building.html"><span class="chapter-title">Building Your First Model with Real-World Health Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./12-pipelines-and-cross-validation.html"><span class="chapter-title">Pipelines and Cross-Validation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-model-building.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Building Your First Model with Real-World Health Data</span></a>
+  <a href="./09-model-building.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Building Your First Model with Real-World Health Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
+  <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -265,26 +265,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-we-are-using-a-health-dataset" id="toc-why-we-are-using-a-health-dataset" class="nav-link active" data-scroll-target="#why-we-are-using-a-health-dataset">Why We Are Using a Health Dataset</a></li>
-  <li><a href="#the-prediction-task" id="toc-the-prediction-task" class="nav-link" data-scroll-target="#the-prediction-task">The Prediction Task</a></li>
-  <li><a href="#load-the-dataset-and-save-it-for-reuse" id="toc-load-the-dataset-and-save-it-for-reuse" class="nav-link" data-scroll-target="#load-the-dataset-and-save-it-for-reuse">Load the Dataset and Save It for Reuse</a></li>
-  <li><a href="#create-features-and-target" id="toc-create-features-and-target" class="nav-link" data-scroll-target="#create-features-and-target">Create Features and Target</a></li>
-  <li><a href="#understand-the-data-structure" id="toc-understand-the-data-structure" class="nav-link" data-scroll-target="#understand-the-data-structure">Understand the Data Structure</a></li>
-  <li><a href="#a-brief-look-at-the-features" id="toc-a-brief-look-at-the-features" class="nav-link" data-scroll-target="#a-brief-look-at-the-features">A Brief Look at the Features</a></li>
-  <li><a href="#split-the-data-properly" id="toc-split-the-data-properly" class="nav-link" data-scroll-target="#split-the-data-properly">Split the Data Properly</a></li>
-  <li><a href="#start-with-a-baseline-model" id="toc-start-with-a-baseline-model" class="nav-link" data-scroll-target="#start-with-a-baseline-model">Start with a Baseline Model</a></li>
-  <li><a href="#evaluate-the-model" id="toc-evaluate-the-model" class="nav-link" data-scroll-target="#evaluate-the-model">Evaluate the Model</a></li>
-  <li><a href="#compare-observed-and-predicted-values" id="toc-compare-observed-and-predicted-values" class="nav-link" data-scroll-target="#compare-observed-and-predicted-values">Compare Observed and Predicted Values</a></li>
-  <li><a href="#inspect-coefficients-carefully" id="toc-inspect-coefficients-carefully" class="nav-link" data-scroll-target="#inspect-coefficients-carefully">Inspect Coefficients Carefully</a></li>
-  <li><a href="#what-this-first-model-actually-tells-us" id="toc-what-this-first-model-actually-tells-us" class="nav-link" data-scroll-target="#what-this-first-model-actually-tells-us">What This First Model Actually Tells Us</a></li>
-  <li><a href="#what-can-go-wrong-at-this-stage" id="toc-what-can-go-wrong-at-this-stage" class="nav-link" data-scroll-target="#what-can-go-wrong-at-this-stage">What Can Go Wrong at This Stage</a>
+  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
+  <li><a href="#why-pipelines-matter" id="toc-why-pipelines-matter" class="nav-link" data-scroll-target="#why-pipelines-matter">Why Pipelines Matter</a></li>
+  <li><a href="#why-cross-validation-matters" id="toc-why-cross-validation-matters" class="nav-link" data-scroll-target="#why-cross-validation-matters">Why Cross-Validation Matters</a></li>
+  <li><a href="#apply-cross-validation" id="toc-apply-cross-validation" class="nav-link" data-scroll-target="#apply-cross-validation">Apply Cross-Validation</a></li>
+  <li><a href="#summarize-results" id="toc-summarize-results" class="nav-link" data-scroll-target="#summarize-results">Summarize Results</a></li>
+  <li><a href="#visualizing-performance-across-folds" id="toc-visualizing-performance-across-folds" class="nav-link" data-scroll-target="#visualizing-performance-across-folds">Visualizing Performance Across Folds</a>
   <ul class="collapse">
-  <li><a href="#leakage" id="toc-leakage" class="nav-link" data-scroll-target="#leakage">Leakage</a></li>
-  <li><a href="#over-interpretation" id="toc-over-interpretation" class="nav-link" data-scroll-target="#over-interpretation">Over-interpretation</a></li>
-  <li><a href="#false-confidence" id="toc-false-confidence" class="nav-link" data-scroll-target="#false-confidence">False confidence</a></li>
-  <li><a href="#confusing-association-with-explanation" id="toc-confusing-association-with-explanation" class="nav-link" data-scroll-target="#confusing-association-with-explanation">Confusing association with explanation</a></li>
+  <li><a href="#what-this-reveals" id="toc-what-this-reveals" class="nav-link" data-scroll-target="#what-this-reveals">What this reveals</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#cdi-interpretation" id="toc-cdi-interpretation" class="nav-link" data-scroll-target="#cdi-interpretation">CDI Interpretation</a></li>
+  <li><a href="#what-this-means" id="toc-what-this-means" class="nav-link" data-scroll-target="#what-this-means">What This Means</a></li>
   </ul></li>
-  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
   </ul>
@@ -293,9 +285,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./09-model-building.html"><span class="chapter-title">Building Your First Model with Real-World Health Data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./12-pipelines-and-cross-validation.html"><span class="chapter-title">Pipelines and Cross-Validation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="lesson09" class="quarto-section-identifier"><span class="chapter-title">Building Your First Model with Real-World Health Data</span></span></h1>
+<h1 class="title"><span id="lesson12" class="quarto-section-identifier"><span class="chapter-title">Pipelines and Cross-Validation</span></span></h1>
 </div>
 
 
@@ -320,81 +312,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cdi-message">
 <ul>
-<li><strong>ID:</strong> DS-L09</li>
+<li><strong>ID:</strong> DS-L12</li>
 <li><strong>Type:</strong> Premium</li>
 <li><strong>Audience:</strong> Intermediate to Advanced</li>
-<li><strong>Theme:</strong> Modeling begins when representation meets a real prediction task</li>
+<li><strong>Theme:</strong> From single results to stable, reproducible modeling</li>
 </ul>
 </div>
-<p>In the previous lesson, we worked with controlled examples to understand feature engineering.</p>
-<p>That was intentional.</p>
-<p>It allowed us to focus on how data representation affects what a model can learn.</p>
-<p>Now we move into a real-world dataset.</p>
-<p>This is where premium work begins to feel different.</p>
-<p>Real datasets are not just collections of variables.</p>
-<p>They represent a prediction problem, a measurement process, and a set of assumptions about what can be learned.</p>
-<p>In this lesson, we will use a health-related tabular dataset to build a first model in a way that is structured, cautious, and interpretable.</p>
-<hr>
-<section id="why-we-are-using-a-health-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="why-we-are-using-a-health-dataset">Why We Are Using a Health Dataset</h2>
-<p>Health-related data is useful for modeling lessons because it is both practical and consequential.</p>
-<p>Variables such as:</p>
+<p>In previous lessons, we evaluated models using a single train/test split.</p>
+<p>This provided a useful starting point.</p>
+<p>However, a single split gives only one estimate of performance.</p>
+<p>To move toward reliable conclusions, we need:</p>
 <ul>
-<li>age<br>
+<li>consistent preprocessing<br>
 </li>
-<li>body mass index<br>
-</li>
-<li>blood pressure<br>
-</li>
-<li>blood chemistry</li>
+<li>repeated evaluation across different splits</li>
 </ul>
-<p>can carry meaningful signals, but they also require careful interpretation.</p>
-<p>This makes health data a good setting for learning how modeling decisions affect results.</p>
-<p>Our goal is not to make a clinical claim.</p>
-<p>Our goal is to understand how a model behaves when applied to structured health data.</p>
+<p>This is where <strong>pipelines</strong> and <strong>cross-validation</strong> become essential.</p>
 <hr>
-</section>
-<section id="the-prediction-task" class="level2">
-<h2 class="anchored" data-anchor-id="the-prediction-task">The Prediction Task</h2>
-<p>We will use the diabetes dataset available in <code>scikit-learn</code>.</p>
-<p>This dataset contains ten baseline variables measured for each patient, along with a quantitative target related to disease progression.</p>
-<p>That gives us a <strong>regression task</strong>:</p>
-<blockquote class="blockquote">
-<p>use baseline patient measurements to predict a continuous outcome</p>
-</blockquote>
-<p>This is a good starting point because it allows us to focus on:</p>
-<ul>
-<li>feature matrix design<br>
-</li>
-<li>training and testing logic<br>
-</li>
-<li>baseline model behavior<br>
-</li>
-<li>interpretation of prediction error</li>
-</ul>
-<hr>
-</section>
-<section id="load-the-dataset-and-save-it-for-reuse" class="level2">
-<h2 class="anchored" data-anchor-id="load-the-dataset-and-save-it-for-reuse">Load the Dataset and Save It for Reuse</h2>
-<p>We first load the dataset from <code>scikit-learn</code>, then save it into the project <code>data/</code> directory.</p>
-<p>This makes the dataset part of the project itself.</p>
-<p>In later lessons, we will load the same file directly from disk so that the workflow remains consistent and reproducible.</p>
-<div id="cell-09-save-diabetes" class="cell" data-execution_count="1">
+<section id="load-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
+<div id="cell-12-load-data" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>diabetes <span class="op">=</span> load_diabetes()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(diabetes.data, columns<span class="op">=</span>diabetes.feature_names)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"disease_progression"</span>] <span class="op">=</span> diabetes.target</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"data/diabetes.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="save-diabetes" class="cell-output cell-output-display" data-execution_count="1">
+<div id="load-data" class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
 
@@ -494,356 +443,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="create-features-and-target" class="level2">
-<h2 class="anchored" data-anchor-id="create-features-and-target">Create Features and Target</h2>
-<div id="cell-09-create-x-y" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="create-x-y" class="cell-output cell-output-display" data-execution_count="2">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">sex</th>
-<th data-quarto-table-cell-role="th">bmi</th>
-<th data-quarto-table-cell-role="th">bp</th>
-<th data-quarto-table-cell-role="th">s1</th>
-<th data-quarto-table-cell-role="th">s2</th>
-<th data-quarto-table-cell-role="th">s3</th>
-<th data-quarto-table-cell-role="th">s4</th>
-<th data-quarto-table-cell-role="th">s5</th>
-<th data-quarto-table-cell-role="th">s6</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>0.038076</td>
-<td>0.050680</td>
-<td>0.061696</td>
-<td>0.021872</td>
-<td>-0.044223</td>
-<td>-0.034821</td>
-<td>-0.043401</td>
-<td>-0.002592</td>
-<td>0.019907</td>
-<td>-0.017646</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-0.001882</td>
-<td>-0.044642</td>
-<td>-0.051474</td>
-<td>-0.026328</td>
-<td>-0.008449</td>
-<td>-0.019163</td>
-<td>0.074412</td>
-<td>-0.039493</td>
-<td>-0.068332</td>
-<td>-0.092204</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.085299</td>
-<td>0.050680</td>
-<td>0.044451</td>
-<td>-0.005670</td>
-<td>-0.045599</td>
-<td>-0.034194</td>
-<td>-0.032356</td>
-<td>-0.002592</td>
-<td>0.002861</td>
-<td>-0.025930</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-0.089063</td>
-<td>-0.044642</td>
-<td>-0.011595</td>
-<td>-0.036656</td>
-<td>0.012191</td>
-<td>0.024991</td>
-<td>-0.036038</td>
-<td>0.034309</td>
-<td>0.022688</td>
-<td>-0.009362</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>0.005383</td>
-<td>-0.044642</td>
-<td>-0.036385</td>
-<td>0.021872</td>
-<td>0.003935</td>
-<td>0.015596</td>
-<td>0.008142</td>
-<td>-0.002592</td>
-<td>-0.031988</td>
-<td>-0.046641</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Let us also inspect the target.</p>
-<div id="cell-09-target-preview" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>y.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="target-preview" class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>0    151.0
-1     75.0
-2    141.0
-3    206.0
-4    135.0
-Name: disease_progression, dtype: float64</code></pre>
-</div>
-</div>
-<hr>
-</section>
-<section id="understand-the-data-structure" class="level2">
-<h2 class="anchored" data-anchor-id="understand-the-data-structure">Understand the Data Structure</h2>
-<p>Before modeling, confirm what the data represents.</p>
-<div id="cell-09-data-shape" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X.shape, y.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="data-shape" class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>((442, 10), (442,))</code></pre>
-</div>
-</div>
-<div id="cell-09-columns" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X.columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="columns" class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']</code></pre>
-</div>
-</div>
-<p>Each row represents one patient observation.</p>
-<p>Each column represents one measured feature.</p>
-<p>The target is a continuous variable, so this is not a classification problem.</p>
-<p>This distinction matters because it determines:</p>
+<section id="why-pipelines-matter" class="level2">
+<h2 class="anchored" data-anchor-id="why-pipelines-matter">Why Pipelines Matter</h2>
+<p>So far, preprocessing and modeling were done in separate steps.</p>
+<p>This creates risks:</p>
 <ul>
-<li>what model types are appropriate<br>
+<li>forgetting transformations<br>
 </li>
-<li>what evaluation metrics make sense<br>
+<li>inconsistent application<br>
 </li>
-<li>how results should be interpreted</li>
+<li>data leakage</li>
 </ul>
-<hr>
-</section>
-<section id="a-brief-look-at-the-features" class="level2">
-<h2 class="anchored" data-anchor-id="a-brief-look-at-the-features">A Brief Look at the Features</h2>
-<div id="cell-09-summary-stats" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X.describe().<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="summary-stats" class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">sex</th>
-<th data-quarto-table-cell-role="th">bmi</th>
-<th data-quarto-table-cell-role="th">bp</th>
-<th data-quarto-table-cell-role="th">s1</th>
-<th data-quarto-table-cell-role="th">s2</th>
-<th data-quarto-table-cell-role="th">s3</th>
-<th data-quarto-table-cell-role="th">s4</th>
-<th data-quarto-table-cell-role="th">s5</th>
-<th data-quarto-table-cell-role="th">s6</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">count</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-<td>442.000</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">mean</td>
-<td>-0.000</td>
-<td>0.000</td>
-<td>-0.000</td>
-<td>-0.000</td>
-<td>-0.000</td>
-<td>0.000</td>
-<td>-0.000</td>
-<td>-0.000</td>
-<td>0.000</td>
-<td>0.000</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">std</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-<td>0.048</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">min</td>
-<td>-0.107</td>
-<td>-0.045</td>
-<td>-0.090</td>
-<td>-0.112</td>
-<td>-0.127</td>
-<td>-0.116</td>
-<td>-0.102</td>
-<td>-0.076</td>
-<td>-0.126</td>
-<td>-0.138</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25%</td>
-<td>-0.037</td>
-<td>-0.045</td>
-<td>-0.034</td>
-<td>-0.037</td>
-<td>-0.034</td>
-<td>-0.030</td>
-<td>-0.035</td>
-<td>-0.039</td>
-<td>-0.033</td>
-<td>-0.033</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">50%</td>
-<td>0.005</td>
-<td>-0.045</td>
-<td>-0.007</td>
-<td>-0.006</td>
-<td>-0.004</td>
-<td>-0.004</td>
-<td>-0.007</td>
-<td>-0.003</td>
-<td>-0.002</td>
-<td>-0.001</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">75%</td>
-<td>0.038</td>
-<td>0.051</td>
-<td>0.031</td>
-<td>0.036</td>
-<td>0.028</td>
-<td>0.030</td>
-<td>0.029</td>
-<td>0.034</td>
-<td>0.032</td>
-<td>0.028</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">max</td>
-<td>0.111</td>
-<td>0.051</td>
-<td>0.171</td>
-<td>0.132</td>
-<td>0.154</td>
-<td>0.199</td>
-<td>0.181</td>
-<td>0.185</td>
-<td>0.134</td>
-<td>0.136</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>The features in this dataset are already numeric.</p>
-<p>That makes it suitable for a first regression workflow.</p>
-<p>But numeric does not mean automatically meaningful.</p>
-<p>We still need to think about:</p>
-<ul>
-<li>scale<br>
-</li>
-<li>signal strength<br>
-</li>
-<li>correlation structure<br>
-</li>
-<li>whether the relationship to the outcome is likely to be simple or complex</li>
-</ul>
-<hr>
-</section>
-<section id="split-the-data-properly" class="level2">
-<h2 class="anchored" data-anchor-id="split-the-data-properly">Split the Data Properly</h2>
-<p>A model should not be evaluated on the same data used to fit it.</p>
-<p>That would produce an overly optimistic result.</p>
-<p>We create separate training and testing sets so that performance is assessed on unseen data.</p>
-<div id="cell-09-train-test-split" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    X,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    y,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>X_train.shape, X_test.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="train-test-split" class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>((353, 10), (89, 10))</code></pre>
-</div>
-</div>
-<p>This is one of the first major shifts from exploratory analysis to modeling:</p>
+<p>A pipeline solves this by:</p>
 <blockquote class="blockquote">
-<p>we are no longer only asking what patterns exist<br>
-we are asking whether those patterns generalize beyond the data used to fit the model</p>
+<p>combining preprocessing and modeling into a single, reproducible workflow.</p>
 </blockquote>
-<hr>
-</section>
-<section id="start-with-a-baseline-model" class="level2">
-<h2 class="anchored" data-anchor-id="start-with-a-baseline-model">Start with a Baseline Model</h2>
-<p>Premium modeling should begin with a baseline, not with complexity.</p>
-<p>A simple model gives us a reference point.</p>
-<p>We will start with linear regression.</p>
-<div id="cell-09-fit-linear-model" class="cell" data-execution_count="8">
+<div id="cell-12-build-pipeline" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LinearRegression())</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fit-linear-model" class="cell-output cell-output-display" data-execution_count="8">
+<div id="build-pipeline" class="cell-output cell-output-display" data-execution_count="2">
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -1394,7 +1023,122 @@ a.param-doc-link::before {
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[('scaler', StandardScaler()), ('model', LinearRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox"><label for="sk-estimator-id-1" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link ">i<span>Not fitted</span></span></div></label><div class="sk-toggleable__content " data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=steps,-list%20of%20tuples" class="param-doc-link" rel="noreferrer" target="_blank">steps <span class="param-doc-description">steps: list of tuples<br>
+<br>
+List of (name of step, estimator) tuples that are to be chained in<br>
+sequential order. To be compatible with the scikit-learn API, all steps<br>
+must define `fit`. All non-last steps must also define `transform`. See<br>
+:ref:`Combining Estimators <combining_estimators>` for more details.</combining_estimators></span></a></td>
+<td class="value">[('scaler', ...), ('model', ...)]</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=transform_input,-list%20of%20str%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">transform_input <span class="param-doc-description">transform_input: list of str, default=None<br>
+<br>
+The names of the :term:`metadata` parameters that should be transformed by the<br>
+pipeline before passing it to the step consuming it.<br>
+<br>
+This enables transforming some input arguments to ``fit`` (other than ``X``)<br>
+to be transformed by the steps of the pipeline up to the step which requires<br>
+them. Requirement is defined via :ref:`metadata routing <metadata_routing>`.<br>
+For instance, this can be used to pass a validation set through the pipeline.<br>
+<br>
+You can only set this if metadata routing is enabled, which you<br>
+can enable using ``sklearn.set_config(enable_metadata_routing=True)``.<br>
+<br>
+.. versionadded:: 1.6</metadata_routing></span></a></td>
+<td class="value">None</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=memory,-str%20or%20object%20with%20the%20joblib.Memory%20interface%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">memory <span class="param-doc-description">memory: str or object with the joblib.Memory interface, default=None<br>
+<br>
+Used to cache the fitted transformers of the pipeline. The last step<br>
+will never be cached, even if it is a transformer. By default, no<br>
+caching is performed. If a string is given, it is the path to the<br>
+caching directory. Enabling caching triggers a clone of the transformers<br>
+before fitting. Therefore, the transformer instance given to the<br>
+pipeline cannot be inspected directly. Use the attribute ``named_steps``<br>
+or ``steps`` to inspect estimators within the pipeline. Caching the<br>
+transformers is advantageous when fitting is time consuming. See<br>
+:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`<br>
+for an example on how to enable caching.</span></a></td>
+<td class="value">None</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.pipeline.Pipeline.html#:~:text=verbose,-bool%2C%20default%3DFalse" class="param-doc-link" rel="noreferrer" target="_blank">verbose <span class="param-doc-description">verbose: bool, default=False<br>
+<br>
+If True, the time elapsed while fitting each step will be printed as it<br>
+is completed.</span></a></td>
+<td class="value">False</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"><label for="sk-estimator-id-2" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="scaler__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html#:~:text=copy,-bool%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">copy <span class="param-doc-description">copy: bool, default=True<br>
+<br>
+If False, try to avoid a copy and do inplace scaling instead.<br>
+This is not guaranteed to always work inplace; e.g. if the data is<br>
+not a NumPy array or scipy.sparse CSR matrix, a copy may still be<br>
+returned.</span></a></td>
+<td class="value">True</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html#:~:text=with_mean,-bool%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">with_mean <span class="param-doc-description">with_mean: bool, default=True<br>
+<br>
+If True, center the data before scaling.<br>
+This does not work (and will raise an exception) when attempted on<br>
+sparse matrices, because centering them entails building a dense<br>
+matrix which in common use cases is likely to be too large to fit in<br>
+memory.</span></a></td>
+<td class="value">True</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html#:~:text=with_std,-bool%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">with_std <span class="param-doc-description">with_std: bool, default=True<br>
+<br>
+If True, scale the data to unit variance (or equivalently,<br>
+unit standard deviation).</span></a></td>
+<td class="value">True</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label  sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a></div></label><div class="sk-toggleable__content " data-param-prefix="model__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -1466,7 +1210,7 @@ see :ref:`sphx_glr_auto_examples_linear_model_plot_nnls.py`.<br>
 
             </details>
         </div>
-    </div></div></div></div></div><script>function copyToClipboard(text, element) {
+    </div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
     // Get the parameter prefix from the closest toggleable content
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
@@ -1584,44 +1328,119 @@ function forceTheme(elementId) {
 forceTheme('sk-container-id-1');</script>
 </div>
 </div>
-<p>Now generate predictions on the test set.</p>
-<div id="cell-09-predict-linear-model" class="cell" data-execution_count="9">
+<hr>
+</section>
+<section id="why-cross-validation-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-cross-validation-matters">Why Cross-Validation Matters</h2>
+<p>A single train/test split gives one estimate.</p>
+<p>But performance depends on how the data is split.</p>
+<p>Cross-validation addresses this by:</p>
+<blockquote class="blockquote">
+<p>evaluating the model across multiple splits of the data.</p>
+</blockquote>
+<hr>
+</section>
+<section id="apply-cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="apply-cross-validation">Apply Cross-Validation</h2>
+<div id="cell-12-cross-validation" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>y_pred[:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mae_scores <span class="op">=</span> <span class="op">-</span>cross_val_score(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    pipeline,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"neg_mean_absolute_error"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>r2_scores <span class="op">=</span> cross_val_score(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    pipeline,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"r2"</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>mae_scores, r2_scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="predict-linear-model" class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>array([139.5475584 , 179.51720835, 134.03875572, 291.41702925,
-       123.78965872,  92.1723465 , 258.23238899, 181.33732057,
-        90.22411311, 108.63375858])</code></pre>
+<div id="cross-validation" class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>(array([43.02616606, 44.8004801 , 48.1557102 , 43.0130322 , 42.3871076 ]),
+ array([0.42955615, 0.52259939, 0.48268054, 0.42649776, 0.55024834]))</code></pre>
 </div>
 </div>
 <hr>
 </section>
-<section id="evaluate-the-model" class="level2">
-<h2 class="anchored" data-anchor-id="evaluate-the-model">Evaluate the Model</h2>
-<p>For regression, two common metrics are:</p>
-<ul>
-<li><strong>Mean Absolute Error (MAE)</strong>: average absolute difference between observed and predicted values<br>
-</li>
-<li><strong>R-squared (R²)</strong>: proportion of variability explained by the model</li>
-</ul>
-<div id="cell-09-evaluate-linear-model" class="cell" data-execution_count="10">
+<section id="summarize-results" class="level2">
+<h2 class="anchored" data-anchor-id="summarize-results">Summarize Results</h2>
+<div id="cell-12-results-table" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, r2_score</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> mean_absolute_error(y_test, y_pred)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"metric"</span>: [<span class="st">"MAE"</span>, <span class="st">"R-squared"</span>],</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"value"</span>: [mae, r2]</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MAE"</span>: mae_scores,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R2"</span>: r2_scores</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>results_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="evaluate-linear-model" class="cell-output cell-output-display" data-execution_count="10">
+<div id="results-table" class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">MAE</th>
+<th data-quarto-table-cell-role="th">R2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>43.026</td>
+<td>0.430</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>44.800</td>
+<td>0.523</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>48.156</td>
+<td>0.483</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>43.013</td>
+<td>0.426</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>42.387</td>
+<td>0.550</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-12-summary" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>summary_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"metric"</span>: [<span class="st">"MAE"</span>, <span class="st">"R2"</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mean"</span>: [np.mean(mae_scores), np.mean(r2_scores)],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"std"</span>: [np.std(mae_scores), np.std(r2_scores)]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>summary_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="summary" class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -1630,19 +1449,22 @@ forceTheme('sk-container-id-1');</script>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">metric</th>
-<th data-quarto-table-cell-role="th">value</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>MAE</td>
-<td>42.794</td>
+<td>44.276</td>
+<td>2.100</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>R-squared</td>
-<td>0.453</td>
+<td>R2</td>
+<td>0.482</td>
+<td>0.049</td>
 </tr>
 </tbody>
 </table>
@@ -1650,244 +1472,143 @@ forceTheme('sk-container-id-1');</script>
 </div>
 </div>
 </div>
-<p>These values are not simply “good” or “bad” in isolation.</p>
-<p>They must be interpreted relative to:</p>
-<ul>
-<li>the complexity of the problem<br>
-</li>
-<li>the amount of noise in the data<br>
-</li>
-<li>the expectations of the use case<br>
-</li>
-<li>alternative models or baselines</li>
-</ul>
+<p>Cross-validation replaces a single result with a <strong>distribution of outcomes</strong>.</p>
 <hr>
 </section>
-<section id="compare-observed-and-predicted-values" class="level2">
-<h2 class="anchored" data-anchor-id="compare-observed-and-predicted-values">Compare Observed and Predicted Values</h2>
-<div id="cell-09-observed-vs-predicted" class="cell" data-execution_count="11">
+<section id="visualizing-performance-across-folds" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-performance-across-folds">Visualizing Performance Across Folds</h2>
+<div id="cell-12-plot-mae" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"observed"</span>: y_test,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"predicted"</span>: y_pred</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>results_df[<span class="st">"error"</span>] <span class="op">=</span> np.<span class="bu">abs</span>(results_df[<span class="st">"observed"</span>] <span class="op">-</span> results_df[<span class="st">"predicted"</span>])</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    results_df[<span class="st">"observed"</span>],</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    results_df[<span class="st">"predicted"</span>],</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>results_df[<span class="st">"error"</span>],</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="bu">min</span>(results_df[<span class="st">"observed"</span>].<span class="bu">min</span>(), results_df[<span class="st">"predicted"</span>].<span class="bu">min</span>())</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>max_val <span class="op">=</span> <span class="bu">max</span>(results_df[<span class="st">"observed"</span>].<span class="bu">max</span>(), results_df[<span class="st">"predicted"</span>].<span class="bu">max</span>())</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>plt.plot([min_val, max_val], [min_val, max_val], linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed progression"</span>)</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted progression"</span>)</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Observed vs Predicted (Error Highlighted)"</span>)</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter, label<span class="op">=</span><span class="st">"Absolute Error"</span>)</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>folds <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(mae_scores) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.plot(folds, mae_scores, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Fold"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"MAE"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"MAE Across Cross-Validation Folds"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="09-model-building_files/figure-html/observed-vs-predicted-output-1.png" id="observed-vs-predicted" class="img-fluid figure-img"></p>
+<p><img src="12-pipelines-and-cross-validation_files/figure-html/plot-mae-output-1.png" id="plot-mae" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>A good diagnostic plot does more than show predictions.</p>
-<p>It reveals where the model is accurate and where it fails.</p>
-<p>Points close to the diagonal line represent accurate predictions.</p>
-<p>Points farther away indicate larger errors, which are highlighted here by color intensity.</p>
-<hr>
-</section>
-<section id="inspect-coefficients-carefully" class="level2">
-<h2 class="anchored" data-anchor-id="inspect-coefficients-carefully">Inspect Coefficients Carefully</h2>
-<div id="cell-09-model-coefficients" class="cell" data-execution_count="12">
+<div id="cell-12-plot-r2" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>coef_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"feature"</span>: X_train.columns,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coefficient"</span>: model.coef_</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>}).sort_values(<span class="st">"coefficient"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>coef_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.plot(folds, r2_scores, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Fold"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"R²"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"R² Across Cross-Validation Folds"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="model-coefficients" class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display">
 <div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">feature</th>
-<th data-quarto-table-cell-role="th">coefficient</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>s5</td>
-<td>736.198859</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>bmi</td>
-<td>542.428759</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>s2</td>
-<td>518.062277</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>bp</td>
-<td>347.703844</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>s4</td>
-<td>275.317902</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>s3</td>
-<td>163.419983</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>s6</td>
-<td>48.670657</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">0</td>
-<td>age</td>
-<td>37.904021</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>sex</td>
-<td>-241.964362</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>s1</td>
-<td>-931.488846</td>
-</tr>
-</tbody>
-</table>
-
+<figure class="figure">
+<p><img src="12-pipelines-and-cross-validation_files/figure-html/plot-r2-output-1.png" id="plot-r2" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
 </div>
-<p>These coefficients are useful, but they must be interpreted carefully.</p>
-<p>A coefficient reflects how much the model’s prediction changes when a feature changes, <strong>holding other features constant</strong>.<br>
-In this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.</p>
-<p>However, a coefficient does <strong>not</strong> automatically imply:</p>
+<p>These plots show how model performance varies across the five folds.</p>
+<p>For MAE:</p>
 <ul>
-<li>causation<br>
+<li>most values fall within a relatively narrow range (~42–48)<br>
 </li>
-<li>clinical importance<br>
-</li>
-<li>independent biological truth</li>
+<li>one fold shows slightly higher error, but not dramatically so</li>
 </ul>
-<p>Instead, it describes how the fitted model uses that feature <strong>within this dataset, under this specific modeling setup, and given the presence of other variables</strong>.</p>
-<p>This distinction is critical.</p>
-<p>Coefficients represent <strong>model behavior</strong>, not real-world mechanisms.</p>
-<hr>
-</section>
-<section id="what-this-first-model-actually-tells-us" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-first-model-actually-tells-us">What This First Model Actually Tells Us</h2>
-<p>At this stage, we have not proven that we can predict diabetes progression well in a real clinical sense.</p>
-<p>What we have shown is something more fundamental:</p>
+<p>For R²:</p>
 <ul>
-<li>the dataset supports a structured prediction task<br>
+<li>values fluctuate between ~0.43 and ~0.55<br>
 </li>
-<li>a baseline regression model can be fit successfully<br>
-</li>
-<li>predictions can be evaluated on held-out data<br>
-</li>
-<li>coefficients and errors can be inspected systematically</li>
+<li>performance improves in some folds and decreases in others</li>
 </ul>
-<p>This is the beginning of modeling discipline.</p>
+<section id="what-this-reveals" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-reveals">What this reveals</h3>
+<p>The model does not perform identically across all splits, which is expected.</p>
+<p>However, the variation is <strong>moderate rather than extreme</strong>:</p>
+<ul>
+<li>there are no folds with very poor performance<br>
+</li>
+<li>there are no folds with unusually high performance</li>
+</ul>
+<p>This suggests that the model is <strong>reasonably stable</strong>, though not perfectly consistent.</p>
 <hr>
 </section>
-<section id="what-can-go-wrong-at-this-stage" class="level2">
-<h2 class="anchored" data-anchor-id="what-can-go-wrong-at-this-stage">What Can Go Wrong at This Stage</h2>
-<p>Even a simple first model can fail for important reasons.</p>
-<section id="leakage" class="level3">
-<h3 class="anchored" data-anchor-id="leakage">Leakage</h3>
-<p>If preprocessing or feature selection uses the full dataset before splitting, test performance becomes misleading.</p>
-</section>
-<section id="over-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="over-interpretation">Over-interpretation</h3>
-<p>A moderate or weak metric does not mean the dataset is useless.<br>
-It may mean the problem is difficult, the model is simple, or the features are limited.</p>
-</section>
-<section id="false-confidence" class="level3">
-<h3 class="anchored" data-anchor-id="false-confidence">False confidence</h3>
-<p>A fitted model is not the same as a validated workflow.</p>
-<p>We still need to examine evaluation, robustness, and reproducibility more carefully.</p>
-</section>
-<section id="confusing-association-with-explanation" class="level3">
-<h3 class="anchored" data-anchor-id="confusing-association-with-explanation">Confusing association with explanation</h3>
-<p>A predictive relationship is not the same as a biological mechanism.</p>
+<section id="key-insight" class="level3">
+<h3 class="anchored" data-anchor-id="key-insight">Key Insight</h3>
+<p>Each fold exposes the model to a slightly different subset of the data.</p>
+<p>This affects:</p>
+<ul>
+<li>which patterns are learned<br>
+</li>
+<li>how well those patterns generalize</li>
+</ul>
+<p>The goal is not identical performance across folds,<br>
+but <strong>limited variability around a consistent average</strong>.</p>
 <hr>
 </section>
-</section>
-<section id="cdi-insight" class="level2">
-<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
-<p>In analysis, we often ask:</p>
+<section id="cdi-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="cdi-interpretation">CDI Interpretation</h3>
+<p>These plots reinforce an important principle:</p>
 <blockquote class="blockquote">
-<p>what patterns are present in the data?</p>
+<p>model evaluation should focus on patterns of performance, not single outcomes.</p>
 </blockquote>
-<p>In modeling, we must also ask:</p>
-<blockquote class="blockquote">
-<p>do these patterns remain useful when tested on unseen data?</p>
-</blockquote>
-<p>That is the beginning of reliable prediction.</p>
+<p>Here, the pattern indicates:</p>
+<ul>
+<li>moderate predictive ability<br>
+</li>
+<li>acceptable stability<br>
+</li>
+<li>no strong evidence of instability or overfitting</li>
+</ul>
 <hr>
+</section>
+<section id="what-this-means" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-means">What This Means</h3>
+<ul>
+<li>The model is <strong>reliable enough for baseline use</strong><br>
+</li>
+<li>There is still room for improvement<br>
+</li>
+<li>Improvements should aim to:
+<ul>
+<li>reduce variability across folds<br>
+</li>
+<li>increase average performance</li>
+</ul></li>
+</ul>
+<p>This is more informative than relying on a single train/test result.</p>
+<hr>
+</section>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <ul>
-<li>We introduced a real-world health-related tabular dataset<br>
+<li>Pipelines ensure consistent preprocessing<br>
 </li>
-<li>The diabetes dataset defines a regression task with clinical-style variables<br>
+<li>Cross-validation evaluates performance across multiple splits<br>
 </li>
-<li>We saved the dataset into <code>data/</code> so later lessons can reuse the same file<br>
+<li>Tables summarize performance<br>
 </li>
-<li>We created separate training and testing sets<br>
+<li>Plots reveal variability across folds<br>
 </li>
-<li>We fit a baseline linear regression model<br>
-</li>
-<li>We evaluated performance using MAE and R-squared<br>
-</li>
-<li>We examined observed versus predicted values and model coefficients<br>
-</li>
-<li>We interpreted results cautiously rather than treating model output as truth</li>
+<li>Stability is more informative than a single result</li>
 </ul>
 <hr>
 </section>
 <section id="next-step" class="level2">
 <h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
-<p>→ <strong>Evaluating models beyond a single split</strong></p>
+<p>→ <strong>Feature importance and model interpretation</strong></p>
 
 
 </section>
@@ -2296,13 +2017,13 @@ It may mean the problem is difficult, the model is simple, or the features are l
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./08-feature-engineering.html" class="pagination-link" aria-label="Feature Engineering and Data Representation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Feature Engineering and Data Representation</span></span>
+      <a href="./11-model-improvement.html" class="pagination-link" aria-label="Improving Models Through Controlled Changes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Improving Models Through Controlled Changes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./10-model-evaluation.html" class="pagination-link" aria-label="Evaluating Models Beyond a Single Result">
-        <span class="nav-page-text"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./13-feature-importance-and-interpretation.html" class="pagination-link" aria-label="Feature Importance and Model Interpretation">
+        <span class="nav-page-text"><span class="chapter-title">Feature Importance and Model Interpretation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

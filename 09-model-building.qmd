@@ -65,18 +65,37 @@ This is a good starting point because it allows us to focus on:
 
 ---
 
-## Load the Dataset
+## Load the Dataset and Save It for Reuse
+
+We first load the dataset from `scikit-learn`, then save it into the project `data/` directory.
+
+This makes the dataset part of the project itself.
+
+In later lessons, we will load the same file directly from disk so that the workflow remains consistent and reproducible.
 
 ```{python}
-#| label: 09-load-diabetes
+#| label: 09-save-diabetes
 import pandas as pd
-
 from sklearn.datasets import load_diabetes
 
 diabetes = load_diabetes()
 
-X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
-y = pd.Series(diabetes.target, name="disease_progression")
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+df["disease_progression"] = diabetes.target
+
+df.to_csv("data/diabetes.csv", index=False)
+
+df.head()
+```
+
+---
+
+## Create Features and Target
+
+```{python}
+#| label: 09-create-x-y
+X = df.drop(columns=["disease_progression"])
+y = df["disease_progression"]
 
 X.head()
 ```
@@ -233,14 +252,12 @@ They must be interpreted relative to:
 #| label: 09-observed-vs-predicted
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
 results_df = pd.DataFrame({
     "observed": y_test,
     "predicted": y_pred
 })
 
-# Absolute error
 results_df["error"] = np.abs(results_df["observed"] - results_df["predicted"])
 
 plt.figure(figsize=(7, 5))
@@ -249,37 +266,35 @@ scatter = plt.scatter(
     results_df["observed"],
     results_df["predicted"],
     c=results_df["error"],
-    cmap="viridis",          # strong contrast
-    edgecolors="black",      # separation between points
+    cmap="viridis",
+    edgecolors="black",
     linewidth=0.4,
     alpha=0.9
 )
 
-# Perfect prediction line
-min_val = results_df.min().min()
-max_val = results_df.max().max()
-plt.plot([min_val, max_val], [min_val, max_val], linestyle="--")
+min_val = min(results_df["observed"].min(), results_df["predicted"].min())
+max_val = max(results_df["observed"].max(), results_df["predicted"].max())
+plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", linewidth=1)
 
 plt.xlabel("Observed progression")
 plt.ylabel("Predicted progression")
 plt.title("Observed vs Predicted (Error Highlighted)")
-
 plt.colorbar(scatter, label="Absolute Error")
-
+plt.grid(alpha=0.2)
 plt.show()
 ```
 
-This plot helps us move beyond a single metric.
+A good diagnostic plot does more than show predictions.
 
-If the model performs well, predictions should generally align with observed values.
+It reveals where the model is accurate and where it fails.
 
-If they are widely scattered, then the model is capturing only part of the signal.
+Points close to the diagonal line represent accurate predictions.
+
+Points farther away indicate larger errors, which are highlighted here by color intensity.
 
 ---
 
 ## Inspect Coefficients Carefully
-
-Linear regression also gives us coefficients for each feature.
 
 ```{python}
 #| label: 09-model-coefficients
@@ -335,7 +350,7 @@ If preprocessing or feature selection uses the full dataset before splitting, te
 
 ### Over-interpretation
 
-A moderate or weak metric does not mean the dataset is useless.
+A moderate or weak metric does not mean the dataset is useless.  
 It may mean the problem is difficult, the model is simple, or the features are limited.
 
 ### False confidence
@@ -368,6 +383,7 @@ That is the beginning of reliable prediction.
 
 - We introduced a real-world health-related tabular dataset  
 - The diabetes dataset defines a regression task with clinical-style variables  
+- We saved the dataset into `data/` so later lessons can reuse the same file  
 - We created separate training and testing sets  
 - We fit a baseline linear regression model  
 - We evaluated performance using MAE and R-squared  

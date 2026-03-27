@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Data Science Foundations Premium</title>
+<title>From Model Outputs to Real-World Claims – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +65,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./999-appendix.html" rel="prev">
+<link href="./15-communicating-results-clearly.html" rel="next">
+<link href="./13-feature-importance-and-interpretation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,7 +119,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./14-from-model-outputs-to-real-world-claims.html"><span class="chapter-title">From Model Outputs to Real-World Claims</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -184,7 +201,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-from-model-outputs-to-real-world-claims.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Model Outputs to Real-World Claims</span></a>
+  <a href="./14-from-model-outputs-to-real-world-claims.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">From Model Outputs to Real-World Claims</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,7 +247,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./999-references.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">References</span></a>
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
       </ul>
@@ -240,15 +257,48 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
+  <li><a href="#fit-a-model" id="toc-fit-a-model" class="nav-link" data-scroll-target="#fit-a-model">Fit a Model</a></li>
+  <li><a href="#observed-vs-predicted" id="toc-observed-vs-predicted" class="nav-link" data-scroll-target="#observed-vs-predicted">Observed vs Predicted</a></li>
+  <li><a href="#what-the-model-actually-provides" id="toc-what-the-model-actually-provides" class="nav-link" data-scroll-target="#what-the-model-actually-provides">What the Model Actually Provides</a></li>
+  <li><a href="#from-output-to-claim" id="toc-from-output-to-claim" class="nav-link" data-scroll-target="#from-output-to-claim">From Output to Claim</a>
+  <ul class="collapse">
+  <li><a href="#a-simple-analogy" id="toc-a-simple-analogy" class="nav-link" data-scroll-target="#a-simple-analogy">A simple analogy</a></li>
+  <li><a href="#what-this-means" id="toc-what-this-means" class="nav-link" data-scroll-target="#what-this-means">What this means</a></li>
+  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
+  </ul></li>
+  <li><a href="#correct-interpretation" id="toc-correct-interpretation" class="nav-link" data-scroll-target="#correct-interpretation">Correct Interpretation</a></li>
+  <li><a href="#why-this-distinction-matters" id="toc-why-this-distinction-matters" class="nav-link" data-scroll-target="#why-this-distinction-matters">Why This Distinction Matters</a></li>
+  <li><a href="#strength-of-claims" id="toc-strength-of-claims" class="nav-link" data-scroll-target="#strength-of-claims">Strength of Claims</a>
+  <ul class="collapse">
+  <li><a href="#weak-descriptive" id="toc-weak-descriptive" class="nav-link" data-scroll-target="#weak-descriptive">Weak (Descriptive)</a></li>
+  <li><a href="#moderate-model-based" id="toc-moderate-model-based" class="nav-link" data-scroll-target="#moderate-model-based">Moderate (Model-Based)</a></li>
+  <li><a href="#strong-not-supported-here" id="toc-strong-not-supported-here" class="nav-link" data-scroll-target="#strong-not-supported-here">Strong (Not Supported Here)</a></li>
+  <li><a href="#cdi-insight-1" id="toc-cdi-insight-1" class="nav-link" data-scroll-target="#cdi-insight-1">CDI Insight</a></li>
+  </ul></li>
+  <li><a href="#connecting-back-to-stability" id="toc-connecting-back-to-stability" class="nav-link" data-scroll-target="#connecting-back-to-stability">Connecting Back to Stability</a></li>
+  <li><a href="#what-this-means-in-practice" id="toc-what-this-means-in-practice" class="nav-link" data-scroll-target="#what-this-means-in-practice">What This Means in Practice</a></li>
+  <li><a href="#example-statements" id="toc-example-statements" class="nav-link" data-scroll-target="#example-statements">Example Statements</a>
+  <ul class="collapse">
+  <li><a href="#appropriate" id="toc-appropriate" class="nav-link" data-scroll-target="#appropriate">Appropriate</a></li>
+  <li><a href="#not-appropriate" id="toc-not-appropriate" class="nav-link" data-scroll-target="#not-appropriate">Not Appropriate</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./14-from-model-outputs-to-real-world-claims.html"><span class="chapter-title">From Model Outputs to Real-World Claims</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">References</span></h1>
+<h1 class="title"><span id="lesson14" class="quarto-section-identifier"><span class="chapter-title">From Model Outputs to Real-World Claims</span></span></h1>
 </div>
 
 
@@ -271,34 +321,314 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-iris" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1936. <span>“The Use of Multiple Measurements in
-Taxonomic Problems.”</span> <em>Annals of Eugenics</em>.
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> DS-L14</li>
+<li><strong>Type:</strong> Premium</li>
+<li><strong>Audience:</strong> Intermediate to Advanced</li>
+<li><strong>Theme:</strong> Translating model results into defensible claims</li>
+</ul>
 </div>
-<div id="ref-numpy" class="csl-entry" role="listitem">
-Harris, Charles R. et al. 2020. <span>“Array Programming with
-<span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
+<p>So far, we have:</p>
+<ul>
+<li>built models<br>
+</li>
+<li>evaluated their performance<br>
+</li>
+<li>assessed stability<br>
+</li>
+<li>interpreted feature influence</li>
+</ul>
+<p>Now we reach a critical step:</p>
+<blockquote class="blockquote">
+<p>How do we translate model outputs into real-world statements?</p>
+</blockquote>
+<hr>
+<section id="load-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
+<div id="load-data" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div id="ref-matplotlib" class="csl-entry" role="listitem">
-Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics
-Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
+<hr>
+</section>
+<section id="fit-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-model">Fit a Model</h2>
+<div id="model" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div id="ref-pandas" class="csl-entry" role="listitem">
-McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span>
-<em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
+<hr>
+</section>
+<section id="observed-vs-predicted" class="level2">
+<h2 class="anchored" data-anchor-id="observed-vs-predicted">Observed vs Predicted</h2>
+<div id="cell-14-observed-vs-predicted" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> np.<span class="bu">abs</span>(y_test <span class="op">-</span> y_pred)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    y_pred,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>error,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="bu">min</span>(y_test.<span class="bu">min</span>(), y_pred.<span class="bu">min</span>())</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>max_val <span class="op">=</span> <span class="bu">max</span>(y_test.<span class="bu">max</span>(), y_pred.<span class="bu">max</span>())</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt.plot([min_val, max_val], [min_val, max_val], linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Observed vs Predicted (Error Highlighted)"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter, label<span class="op">=</span><span class="st">"Absolute Error"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14-from-model-outputs-to-real-world-claims_files/figure-html/observed-vs-predicted-output-1.png" id="observed-vs-predicted" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div id="ref-python" class="csl-entry" role="listitem">
-Python Software Foundation. 2024. <span>“Python Language
-Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
-</div>
-<div id="ref-seaborn" class="csl-entry" role="listitem">
-Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data
-Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
 </div>
 </div>
+<p>Points close to the diagonal line represent accurate predictions.<br>
+Points farther away indicate larger errors, highlighted by brighter colors.</p>
+<hr>
+</section>
+<section id="what-the-model-actually-provides" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-model-actually-provides">What the Model Actually Provides</h2>
+<p>The model provides:</p>
+<ul>
+<li>predictions (estimated outcomes)<br>
+</li>
+<li>relationships between features and predictions<br>
+</li>
+<li>patterns learned from the dataset</li>
+</ul>
+<p>It does <strong>not</strong> directly provide:</p>
+<ul>
+<li>causal relationships<br>
+</li>
+<li>clinical conclusions<br>
+</li>
+<li>general truths beyond the data</li>
+</ul>
+<hr>
+</section>
+<section id="from-output-to-claim" class="level2">
+<h2 class="anchored" data-anchor-id="from-output-to-claim">From Output to Claim</h2>
+<p>A common mistake is to move too quickly from:</p>
+<p>model output → real-world conclusion</p>
+<p>For example:</p>
+<p>❌ “BMI causes disease progression”</p>
+<p>Even if BMI appears as one of the strongest features, this claim is still too strong.</p>
+<p>What the model shows is that BMI is an important predictor in this dataset.</p>
+<p>That means BMI helps the model estimate disease progression,<br>
+but it does not prove that BMI is the direct cause of progression.</p>
+<hr>
+<section id="a-simple-analogy" class="level3">
+<h3 class="anchored" data-anchor-id="a-simple-analogy">A simple analogy</h3>
+<blockquote class="blockquote">
+<p>Umbrella sales are a strong predictor of wet streets.<br>
+But umbrellas do not cause the streets to become wet.</p>
+</blockquote>
+<p>Both are related to an underlying factor — rain.</p>
+<hr>
+</section>
+<section id="what-this-means" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-means">What this means</h3>
+<p>In the same way, a feature can be strongly associated with an outcome because it reflects:</p>
+<ul>
+<li>underlying processes<br>
+</li>
+<li>correlated variables<br>
+</li>
+<li>or shared patterns in the data</li>
+</ul>
+<p>A strong feature supports <strong>prediction</strong>.<br>
+It does not automatically establish <strong>causation</strong>.</p>
+<hr>
+</section>
+<section id="cdi-insight" class="level3">
+<h3 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h3>
+<p>Models can detect patterns,<br>
+but they do not explain why those patterns exist.</p>
+<hr>
+</section>
+</section>
+<section id="correct-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="correct-interpretation">Correct Interpretation</h2>
+<p>What we can say is:</p>
+<p>Higher BMI is associated with higher predicted disease progression in this model.</p>
+<p>This statement is:</p>
+<ul>
+<li>accurate<br>
+</li>
+<li>grounded in the model<br>
+</li>
+<li>appropriately limited to the dataset</li>
+</ul>
+<hr>
+</section>
+<section id="why-this-distinction-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-distinction-matters">Why This Distinction Matters</h2>
+<p>Model outputs depend on:</p>
+<ul>
+<li>the dataset<br>
+</li>
+<li>feature representation<br>
+</li>
+<li>modeling assumptions</li>
+</ul>
+<p>Changing any of these can lead to different conclusions.</p>
+<hr>
+</section>
+<section id="strength-of-claims" class="level2">
+<h2 class="anchored" data-anchor-id="strength-of-claims">Strength of Claims</h2>
+<p>We can think of claims at different levels:</p>
+<section id="weak-descriptive" class="level3">
+<h3 class="anchored" data-anchor-id="weak-descriptive">Weak (Descriptive)</h3>
+<ul>
+<li>BMI is included in the model</li>
+</ul>
+</section>
+<section id="moderate-model-based" class="level3">
+<h3 class="anchored" data-anchor-id="moderate-model-based">Moderate (Model-Based)</h3>
+<ul>
+<li>BMI has a strong positive coefficient<br>
+</li>
+<li>BMI is important for prediction</li>
+</ul>
+</section>
+<section id="strong-not-supported-here" class="level3">
+<h3 class="anchored" data-anchor-id="strong-not-supported-here">Strong (Not Supported Here)</h3>
+<ul>
+<li>BMI causes disease progression</li>
+</ul>
+<hr>
+</section>
+<section id="cdi-insight-1" class="level3">
+<h3 class="anchored" data-anchor-id="cdi-insight-1">CDI Insight</h3>
+<blockquote class="blockquote">
+<p>The strength of a claim must match the strength of the evidence.</p>
+</blockquote>
+<p>Models provide <strong>associations and patterns</strong>, not causation.</p>
+<hr>
+</section>
+</section>
+<section id="connecting-back-to-stability" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-back-to-stability">Connecting Back to Stability</h2>
+<p>Because we used:</p>
+<ul>
+<li>cross-validation<br>
+</li>
+<li>consistent pipelines</li>
+</ul>
+<p>we can say:</p>
+<ul>
+<li>the model is reasonably stable<br>
+</li>
+<li>the observed patterns are not driven by a single split</li>
+</ul>
+<p>However:</p>
+<ul>
+<li>they remain <strong>model-based observations</strong>, not causal conclusions</li>
+</ul>
+<hr>
+</section>
+<section id="what-this-means-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-means-in-practice">What This Means in Practice</h2>
+<p>When reporting results, focus on:</p>
+<ul>
+<li>what the model learned<br>
+</li>
+<li>how consistent the results are<br>
+</li>
+<li>how strong the predictive relationship is</li>
+</ul>
+<p>Avoid:</p>
+<ul>
+<li>causal language<br>
+</li>
+<li>overgeneralization<br>
+</li>
+<li>claims beyond the data</li>
+</ul>
+<hr>
+</section>
+<section id="example-statements" class="level2">
+<h2 class="anchored" data-anchor-id="example-statements">Example Statements</h2>
+<section id="appropriate" class="level3">
+<h3 class="anchored" data-anchor-id="appropriate">Appropriate</h3>
+<ul>
+<li>The model consistently uses BMI as a strong predictor of progression<br>
+</li>
+<li>Predictions increase with higher BMI values in this dataset</li>
+</ul>
+</section>
+<section id="not-appropriate" class="level3">
+<h3 class="anchored" data-anchor-id="not-appropriate">Not Appropriate</h3>
+<ul>
+<li>BMI is the main cause of disease progression<br>
+</li>
+<li>Reducing BMI will reduce disease progression</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>Models produce predictions and patterns<br>
+</li>
+<li>Interpretation must remain within the model’s scope<br>
+</li>
+<li>Stability strengthens confidence, but does not establish causation<br>
+</li>
+<li>Claims must match the level of evidence<br>
+</li>
+<li>Careful wording is essential in real-world analysis</li>
+</ul>
+<hr>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
+<p>→ <strong>Communicating results clearly and responsibly</strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -704,11 +1034,14 @@ Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="http
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./999-appendix.html" class="pagination-link" aria-label="Appendix">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Appendix</span></span>
+      <a href="./13-feature-importance-and-interpretation.html" class="pagination-link" aria-label="Feature Importance and Model Interpretation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Feature Importance and Model Interpretation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./15-communicating-results-clearly.html" class="pagination-link" aria-label="Communicating Results Clearly">
+        <span class="nav-page-text"><span class="chapter-title">Communicating Results Clearly</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

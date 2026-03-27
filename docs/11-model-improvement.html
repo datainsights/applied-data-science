@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Evaluating Models Beyond a Single Result – Data Science Foundations Premium</title>
+<title>Improving Models Through Controlled Changes – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./11-model-improvement.html" rel="next">
-<link href="./09-model-building.html" rel="prev">
+<link href="./12-pipelines-and-cross-validation.html" rel="next">
+<link href="./10-model-evaluation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./10-model-evaluation.html"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./11-model-improvement.html"><span class="chapter-title">Improving Models Through Controlled Changes</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -184,12 +184,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-model-evaluation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></a>
+  <a href="./10-model-evaluation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-model-improvement.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Improving Models Through Controlled Changes</span></a>
+  <a href="./11-model-improvement.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Improving Models Through Controlled Changes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -266,36 +266,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
-  <li><a href="#why-evaluation-is-not-a-single-number" id="toc-why-evaluation-is-not-a-single-number" class="nav-link" data-scroll-target="#why-evaluation-is-not-a-single-number">Why Evaluation Is Not a Single Number</a></li>
-  <li><a href="#repeating-the-split" id="toc-repeating-the-split" class="nav-link" data-scroll-target="#repeating-the-split">Repeating the Split</a></li>
-  <li><a href="#aggregating-results" id="toc-aggregating-results" class="nav-link" data-scroll-target="#aggregating-results">Aggregating Results</a></li>
-  <li><a href="#introducing-cross-validation" id="toc-introducing-cross-validation" class="nav-link" data-scroll-target="#introducing-cross-validation">Introducing Cross-Validation</a></li>
-  <li><a href="#interpreting-metrics-carefully" id="toc-interpreting-metrics-carefully" class="nav-link" data-scroll-target="#interpreting-metrics-carefully">Interpreting Metrics Carefully</a>
+  <li><a href="#why-improvement-must-be-controlled" id="toc-why-improvement-must-be-controlled" class="nav-link" data-scroll-target="#why-improvement-must-be-controlled">Why Improvement Must Be Controlled</a></li>
+  <li><a href="#baseline-model-recap" id="toc-baseline-model-recap" class="nav-link" data-scroll-target="#baseline-model-recap">Baseline Model (Recap)</a></li>
+  <li><a href="#strategy-1-feature-scaling" id="toc-strategy-1-feature-scaling" class="nav-link" data-scroll-target="#strategy-1-feature-scaling">Strategy 1 — Feature Scaling</a></li>
+  <li><a href="#strategy-2-regularization" id="toc-strategy-2-regularization" class="nav-link" data-scroll-target="#strategy-2-regularization">Strategy 2 — Regularization</a>
   <ul class="collapse">
-  <li><a href="#mean-absolute-error-mae" id="toc-mean-absolute-error-mae" class="nav-link" data-scroll-target="#mean-absolute-error-mae">Mean Absolute Error (MAE)</a></li>
-  <li><a href="#r-squared-r²" id="toc-r-squared-r²" class="nav-link" data-scroll-target="#r-squared-r²">R-squared (R²)</a></li>
+  <li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression">Ridge Regression</a></li>
   </ul></li>
-  <li><a href="#residual-analysis" id="toc-residual-analysis" class="nav-link" data-scroll-target="#residual-analysis">Residual Analysis</a></li>
-  <li><a href="#what-reliable-evaluation-requires" id="toc-what-reliable-evaluation-requires" class="nav-link" data-scroll-target="#what-reliable-evaluation-requires">What Reliable Evaluation Requires</a></li>
+  <li><a href="#strategy-3-tree-based-model" id="toc-strategy-3-tree-based-model" class="nav-link" data-scroll-target="#strategy-3-tree-based-model">Strategy 3 — Tree-Based Model</a></li>
+  <li><a href="#interpreting-model-comparison" id="toc-interpreting-model-comparison" class="nav-link" data-scroll-target="#interpreting-model-comparison">Interpreting Model Comparison</a>
+  <ul class="collapse">
+  <li><a href="#what-this-suggests" id="toc-what-this-suggests" class="nav-link" data-scroll-target="#what-this-suggests">What this suggests</a></li>
+  <li><a href="#why-ridge-did-not-improve-performance" id="toc-why-ridge-did-not-improve-performance" class="nav-link" data-scroll-target="#why-ridge-did-not-improve-performance">Why ridge did not improve performance</a></li>
+  <li><a href="#why-the-decision-tree-performs-poorly" id="toc-why-the-decision-tree-performs-poorly" class="nav-link" data-scroll-target="#why-the-decision-tree-performs-poorly">Why the decision tree performs poorly</a></li>
+  <li><a href="#important-caution" id="toc-important-caution" class="nav-link" data-scroll-target="#important-caution">Important caution</a></li>
+  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
+  </ul></li>
+  <li><a href="#interpreting-improvements" id="toc-interpreting-improvements" class="nav-link" data-scroll-target="#interpreting-improvements">Interpreting Improvements</a></li>
   <li><a href="#what-can-go-wrong" id="toc-what-can-go-wrong" class="nav-link" data-scroll-target="#what-can-go-wrong">What Can Go Wrong</a>
   <ul class="collapse">
-  <li><a href="#over-trusting-a-single-metric" id="toc-over-trusting-a-single-metric" class="nav-link" data-scroll-target="#over-trusting-a-single-metric">Over-trusting a Single Metric</a></li>
-  <li><a href="#ignoring-variability" id="toc-ignoring-variability" class="nav-link" data-scroll-target="#ignoring-variability">Ignoring Variability</a></li>
-  <li><a href="#misinterpreting-metrics" id="toc-misinterpreting-metrics" class="nav-link" data-scroll-target="#misinterpreting-metrics">Misinterpreting Metrics</a></li>
-  <li><a href="#skipping-error-analysis" id="toc-skipping-error-analysis" class="nav-link" data-scroll-target="#skipping-error-analysis">Skipping Error Analysis</a></li>
+  <li><a href="#chasing-metrics" id="toc-chasing-metrics" class="nav-link" data-scroll-target="#chasing-metrics">Chasing Metrics</a></li>
+  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting">Overfitting</a></li>
+  <li><a href="#changing-too-many-things" id="toc-changing-too-many-things" class="nav-link" data-scroll-target="#changing-too-many-things">Changing Too Many Things</a></li>
+  <li><a href="#ignoring-context" id="toc-ignoring-context" class="nav-link" data-scroll-target="#ignoring-context">Ignoring Context</a></li>
   </ul></li>
-  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
+  <li><a href="#cdi-insight-1" id="toc-cdi-insight-1" class="nav-link" data-scroll-target="#cdi-insight-1">CDI Insight</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What Comes Next</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./10-model-evaluation.html"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./11-model-improvement.html"><span class="chapter-title">Improving Models Through Controlled Changes</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="lesson10" class="quarto-section-identifier"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></span></h1>
+<h1 class="title"><span id="lesson11" class="quarto-section-identifier"><span class="chapter-title">Improving Models Through Controlled Changes</span></span></h1>
 </div>
 
 
@@ -320,26 +326,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cdi-message">
 <ul>
-<li><strong>ID:</strong> DS-L10</li>
+<li><strong>ID:</strong> DS-L11</li>
 <li><strong>Type:</strong> Premium</li>
 <li><strong>Audience:</strong> Intermediate to Advanced</li>
-<li><strong>Theme:</strong> Reliable models require stable and context-aware evaluation</li>
+<li><strong>Theme:</strong> Model improvement is a controlled and interpretable process</li>
 </ul>
 </div>
-<p>In the previous lesson, we built a model and evaluated it using a single train/test split.</p>
-<p>We obtained metrics.</p>
-<p>We visualized predictions.</p>
-<p>We inspected coefficients.</p>
-<p>That was necessary.</p>
-<p>But it is not sufficient.</p>
-<p>A single evaluation result does not tell us whether a model is reliable.</p>
+<p>In the previous lesson, we learned that model performance is not fixed.</p>
+<p>It varies depending on:</p>
+<ul>
+<li>how the data is split<br>
+</li>
+<li>how the model is evaluated<br>
+</li>
+<li>how stable the results are</li>
+</ul>
+<p>This leads to a natural next question:</p>
+<blockquote class="blockquote">
+<p>How do we improve a model in a way that is reliable and interpretable?</p>
+</blockquote>
 <hr>
 <section id="load-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
-<p>We continue using the diabetes dataset introduced in the previous lesson.</p>
-<p>Because the dataset was saved into the project <code>data/</code> directory, we now load it directly from disk.</p>
-<p>This keeps the workflow consistent across lessons and reflects how real projects are usually organized.</p>
-<div id="cell-10-load-diabetes-file" class="cell" data-execution_count="1">
+<p>We continue using the same diabetes dataset saved earlier in the project <code>data/</code> directory.</p>
+<p>Loading the same file keeps the workflow stable across lessons and avoids hidden dependencies between chapters.</p>
+<div id="cell-11-load-diabetes-file" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -451,88 +462,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="why-evaluation-is-not-a-single-number" class="level2">
-<h2 class="anchored" data-anchor-id="why-evaluation-is-not-a-single-number">Why Evaluation Is Not a Single Number</h2>
-<p>When we compute metrics such as:</p>
+<section id="why-improvement-must-be-controlled" class="level2">
+<h2 class="anchored" data-anchor-id="why-improvement-must-be-controlled">Why Improvement Must Be Controlled</h2>
+<p>Improving a model is not about trying many methods randomly.</p>
+<p>It is about making <strong>intentional changes</strong> and observing their effect.</p>
+<p>If multiple things change at once:</p>
 <ul>
-<li>Mean Absolute Error (MAE)<br>
+<li>we cannot tell what caused improvement<br>
 </li>
-<li>R-squared (R²)</li>
+<li>results become difficult to interpret<br>
+</li>
+<li>reproducibility is reduced</li>
 </ul>
-<p>we are summarizing model performance under one specific condition:</p>
+<p>A good workflow:</p>
 <ul>
-<li>one train/test split<br>
+<li>start with a baseline<br>
 </li>
-<li>one random state<br>
+<li>change one element<br>
 </li>
-<li>one sample of the data</li>
+<li>evaluate again<br>
+</li>
+<li>compare results</li>
 </ul>
-<p>This raises an important question:</p>
-<blockquote class="blockquote">
-<p>What happens if the data is split differently?</p>
-</blockquote>
 <hr>
 </section>
-<section id="repeating-the-split" class="level2">
-<h2 class="anchored" data-anchor-id="repeating-the-split">Repeating the Split</h2>
-<p>Let us repeat the modeling process using different random splits.</p>
-<div id="cell-10-repeat-split" class="cell" data-execution_count="2">
+<section id="baseline-model-recap" class="level2">
+<h2 class="anchored" data-anchor-id="baseline-model-recap">Baseline Model (Recap)</h2>
+<p>We start from the same linear regression model.</p>
+<div id="cell-11-baseline-model" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, r2_score</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_once(X, y, random_state):</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>random_state</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> LinearRegression()</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    model.fit(X_train, y_train)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    mae <span class="op">=</span> mean_absolute_error(y_test, y_pred)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mae, r2</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> [evaluate_once(X, y, rs) <span class="cf">for</span> rs <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>baseline_model <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>baseline_model.fit(X_train, y_train)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>y_pred_baseline <span class="op">=</span> baseline_model.predict(X_test)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>baseline_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_baseline)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>baseline_r2 <span class="op">=</span> r2_score(y_test, y_pred_baseline)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>baseline_mae, baseline_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="repeat-split" class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>[(46.17358500370479, 0.3322332173106184),
- (41.97492114949365, 0.43843162133692803),
- (45.213034190469045, 0.4399338661568968),
- (44.8482071131121, 0.4161792211496944),
- (42.78068694547003, 0.461098899284209)]</code></pre>
+<div id="baseline-model" class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(42.79409467959996, 0.4526027629719189)</code></pre>
 </div>
 </div>
-<p>Even though:</p>
-<ul>
-<li>the data is the same<br>
-</li>
-<li>the model is the same</li>
-</ul>
-<p>the performance changes.</p>
-<p>This tells us something important:</p>
-<blockquote class="blockquote">
-<p>model performance is not fixed<br>
-it depends on how the data is partitioned</p>
-</blockquote>
+<p>This is our reference point.</p>
 <hr>
 </section>
-<section id="aggregating-results" class="level2">
-<h2 class="anchored" data-anchor-id="aggregating-results">Aggregating Results</h2>
-<div id="cell-10-aggregate-results" class="cell" data-execution_count="3">
+<section id="strategy-1-feature-scaling" class="level2">
+<h2 class="anchored" data-anchor-id="strategy-1-feature-scaling">Strategy 1 — Feature Scaling</h2>
+<p>Some models benefit from consistent feature scale.</p>
+<div id="cell-11-scaling-model" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(results, columns<span class="op">=</span>[<span class="st">"MAE"</span>, <span class="st">"R2"</span>])</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>results_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>scaling_model <span class="op">=</span> Pipeline([</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LinearRegression())</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>scaling_model.fit(X_train, y_train)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>y_pred_scaled <span class="op">=</span> scaling_model.predict(X_test)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>scaled_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_scaled)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>scaled_r2 <span class="op">=</span> r2_score(y_test, y_pred_scaled)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>scaled_mae, scaled_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="aggregate-results" class="cell-output cell-output-display" data-execution_count="3">
+<div id="scaling-model" class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>(42.79409467959995, 0.45260276297191915)</code></pre>
+</div>
+</div>
+<p>Compare with baseline:</p>
+<div id="cell-11-compare-scaled" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: [<span class="st">"baseline"</span>, <span class="st">"scaled"</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MAE"</span>: [baseline_mae, scaled_mae],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R2"</span>: [baseline_r2, scaled_r2]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="compare-scaled" class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -540,6 +561,7 @@ it depends on how the data is partitioned</p>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
 <th data-quarto-table-cell-role="th">MAE</th>
 <th data-quarto-table-cell-role="th">R2</th>
 </tr>
@@ -547,28 +569,15 @@ it depends on how the data is partitioned</p>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>46.173585</td>
-<td>0.332233</td>
+<td>baseline</td>
+<td>42.794</td>
+<td>0.453</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>41.974921</td>
-<td>0.438432</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>45.213034</td>
-<td>0.439934</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>44.848207</td>
-<td>0.416179</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>42.780687</td>
-<td>0.461099</td>
+<td>scaled</td>
+<td>42.794</td>
+<td>0.453</td>
 </tr>
 </tbody>
 </table>
@@ -576,12 +585,44 @@ it depends on how the data is partitioned</p>
 </div>
 </div>
 </div>
-<div id="cell-10-summary-results" class="cell" data-execution_count="4">
+<p>Scaling may or may not improve performance, but it ensures consistency.</p>
+<hr>
+</section>
+<section id="strategy-2-regularization" class="level2">
+<h2 class="anchored" data-anchor-id="strategy-2-regularization">Strategy 2 — Regularization</h2>
+<p>Linear regression can be extended with regularization to control model complexity.</p>
+<section id="ridge-regression" class="level3">
+<h3 class="anchored" data-anchor-id="ridge-regression">Ridge Regression</h3>
+<div id="cell-11-ridge-model" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>results_df.describe().<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ridge_model <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ridge_model.fit(X_train, y_train)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>y_pred_ridge <span class="op">=</span> ridge_model.predict(X_test)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ridge_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_ridge)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ridge_r2 <span class="op">=</span> r2_score(y_test, y_pred_ridge)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ridge_mae, ridge_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="summary-results" class="cell-output cell-output-display" data-execution_count="4">
+<div id="ridge-model" class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>(46.13885766697452, 0.41915292635986545)</code></pre>
+</div>
+</div>
+<p>Compare:</p>
+<div id="cell-11-compare-ridge" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: [<span class="st">"baseline"</span>, <span class="st">"ridge"</span>],</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MAE"</span>: [baseline_mae, ridge_mae],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R2"</span>: [baseline_r2, ridge_r2]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="compare-ridge" class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -589,50 +630,23 @@ it depends on how the data is partitioned</p>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
 <th data-quarto-table-cell-role="th">MAE</th>
 <th data-quarto-table-cell-role="th">R2</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">count</td>
-<td>5.000</td>
-<td>5.000</td>
+<td data-quarto-table-cell-role="th">0</td>
+<td>baseline</td>
+<td>42.794</td>
+<td>0.453</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">mean</td>
-<td>44.198</td>
-<td>0.418</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">std</td>
-<td>1.754</td>
-<td>0.050</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">min</td>
-<td>41.975</td>
-<td>0.332</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25%</td>
-<td>42.781</td>
-<td>0.416</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">50%</td>
-<td>44.848</td>
-<td>0.438</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">75%</td>
-<td>45.213</td>
-<td>0.440</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">max</td>
-<td>46.174</td>
-<td>0.461</td>
+<td data-quarto-table-cell-role="th">1</td>
+<td>ridge</td>
+<td>46.139</td>
+<td>0.419</td>
 </tr>
 </tbody>
 </table>
@@ -640,44 +654,52 @@ it depends on how the data is partitioned</p>
 </div>
 </div>
 </div>
-<p>Instead of a single value, we now see a <strong>range of performance</strong>.</p>
-<p>This is a more realistic view.</p>
+<p>Regularization helps when:</p>
+<ul>
+<li>features are correlated<br>
+</li>
+<li>the model is sensitive to small changes<br>
+</li>
+<li>we want more stable coefficients</li>
+</ul>
 <hr>
 </section>
-<section id="introducing-cross-validation" class="level2">
-<h2 class="anchored" data-anchor-id="introducing-cross-validation">Introducing Cross-Validation</h2>
-<p>To make evaluation more stable, we can systematically repeat this process.</p>
-<p>This is the idea behind cross-validation.</p>
-<div id="cell-10-cross-validation" class="cell" data-execution_count="5">
+</section>
+<section id="strategy-3-tree-based-model" class="level2">
+<h2 class="anchored" data-anchor-id="strategy-3-tree-based-model">Strategy 3 — Tree-Based Model</h2>
+<p>Different models capture different structures.</p>
+<div id="cell-11-tree-model" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> cross_val_score(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    model,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    X,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    y,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"r2"</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>cv_scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>tree_model.fit(X_train, y_train)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>y_pred_tree <span class="op">=</span> tree_model.predict(X_test)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>tree_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_tree)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>tree_r2 <span class="op">=</span> r2_score(y_test, y_pred_tree)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>tree_mae, tree_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="cross-validation" class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>array([0.42955615, 0.52259939, 0.48268054, 0.42649776, 0.55024834])</code></pre>
+<div id="tree-model" class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>(54.52808988764045, 0.060653981041140725)</code></pre>
 </div>
 </div>
-<div id="cell-10-cv-summary" class="cell" data-execution_count="6">
+<p>Compare all models:</p>
+<div id="cell-11-compare-all" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cv_fold"</span>: <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(cv_scores) <span class="op">+</span> <span class="dv">1</span>),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"r2"</span>: cv_scores</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>comparison_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: [<span class="st">"baseline"</span>, <span class="st">"ridge"</span>, <span class="st">"tree"</span>],</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MAE"</span>: [baseline_mae, ridge_mae, tree_mae],</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R2"</span>: [baseline_r2, ridge_r2, tree_r2]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>comparison_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="cv-summary" class="cell-output cell-output-display" data-execution_count="6">
+<div id="compare-all" class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -685,35 +707,29 @@ it depends on how the data is partitioned</p>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">cv_fold</th>
-<th data-quarto-table-cell-role="th">r2</th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">MAE</th>
+<th data-quarto-table-cell-role="th">R2</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>0.430</td>
+<td>baseline</td>
+<td>42.794</td>
+<td>0.453</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
-<td>0.523</td>
+<td>ridge</td>
+<td>46.139</td>
+<td>0.419</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>3</td>
-<td>0.483</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>0.426</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>5</td>
-<td>0.550</td>
+<td>tree</td>
+<td>54.528</td>
+<td>0.061</td>
 </tr>
 </tbody>
 </table>
@@ -721,185 +737,165 @@ it depends on how the data is partitioned</p>
 </div>
 </div>
 </div>
-<div id="cell-10-cv-mean-std" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cv_scores.mean(), cv_scores.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="cv-mean-std" class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>(np.float64(0.48231643590864215), np.float64(0.049268577511903784))</code></pre>
-</div>
-</div>
-<p>Cross-validation gives us:</p>
-<ul>
-<li>an average performance<br>
-</li>
-<li>a measure of variability</li>
-</ul>
-<p>This is more informative than a single split.</p>
 <hr>
 </section>
-<section id="interpreting-metrics-carefully" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-metrics-carefully">Interpreting Metrics Carefully</h2>
-<p>Metrics are useful, but incomplete.</p>
-<section id="mean-absolute-error-mae" class="level3">
-<h3 class="anchored" data-anchor-id="mean-absolute-error-mae">Mean Absolute Error (MAE)</h3>
+<section id="interpreting-model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-model-comparison">Interpreting Model Comparison</h2>
+<p>We compared three models:</p>
 <ul>
-<li>easy to interpret<br>
+<li>baseline (linear regression)<br>
 </li>
-<li>sensitive to scale</li>
+<li>ridge regression<br>
+</li>
+<li>decision tree</li>
 </ul>
-<p>But it does not tell us:</p>
+<p>The results are now visible in the comparison table above.</p>
+<section id="what-this-suggests" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-suggests">What this suggests</h3>
+<p>The <strong>baseline linear model performs best</strong> among the three:</p>
 <ul>
-<li>where errors occur<br>
+<li>lowest error (MAE)<br>
 </li>
-<li>whether errors are systematic</li>
+<li>highest explained variance (R²)</li>
+</ul>
+<p>This indicates that, for this dataset, the relationship between features and outcome is reasonably well captured by a <strong>linear structure</strong>.</p>
+</section>
+<section id="why-ridge-did-not-improve-performance" class="level3">
+<h3 class="anchored" data-anchor-id="why-ridge-did-not-improve-performance">Why ridge did not improve performance</h3>
+<p>Ridge regression introduces regularization to stabilize coefficients.</p>
+<p>However:</p>
+<ul>
+<li>the baseline model may not be overfitting strongly<br>
+</li>
+<li>regularization may slightly reduce flexibility<br>
+</li>
+<li>this can lead to slightly worse performance</li>
+</ul>
+<p>In this case, ridge provides <strong>stability</strong>, but not improvement in predictive accuracy.</p>
+</section>
+<section id="why-the-decision-tree-performs-poorly" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-decision-tree-performs-poorly">Why the decision tree performs poorly</h3>
+<p>The decision tree shows:</p>
+<ul>
+<li>much higher error<br>
+</li>
+<li>very low R²</li>
+</ul>
+<p>This suggests:</p>
+<ul>
+<li>the model may be <strong>overfitting the training data</strong><br>
+</li>
+<li>it may not generalize well to unseen data<br>
+</li>
+<li>the dataset may not contain strong nonlinear patterns that the tree can exploit</li>
 </ul>
 </section>
-<section id="r-squared-r²" class="level3">
-<h3 class="anchored" data-anchor-id="r-squared-r²">R-squared (R²)</h3>
-<ul>
-<li>measures explained variance</li>
-</ul>
-<p>But it can be misleading:</p>
-<ul>
-<li>a moderate R² may still be useful<br>
-</li>
-<li>a high R² does not guarantee generalization</li>
-</ul>
+<section id="important-caution" class="level3">
+<h3 class="anchored" data-anchor-id="important-caution">Important caution</h3>
+<p>These results are based on a <strong>single train/test split</strong>.</p>
+<p>They do not establish that one model is universally better.</p>
+<p>They show how these models behave <strong>under this specific data partition and configuration</strong>.</p>
+</section>
+<section id="cdi-insight" class="level3">
+<h3 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h3>
+<p>Better performance does not mean a model is “correct.”</p>
+<p>It means the model is <strong>more useful for prediction under the current setup</strong>.</p>
+<p>Understanding <em>why</em> a model performs better is more important than simply observing that it does.</p>
 <hr>
 </section>
 </section>
-<section id="residual-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="residual-analysis">Residual Analysis</h2>
-<p>To examine residuals clearly, we recompute predictions using a defined train/test split.</p>
-<div id="residual-setup" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>residual_model <span class="op">=</span> LinearRegression()</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>residual_model.fit(X_train, y_train)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> residual_model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div id="cell-10-residual-plot" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    y_pred,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    residuals,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>np.<span class="bu">abs</span>(residuals),</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted values"</span>)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Residuals"</span>)</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Residual Plot (Error Magnitude Highlighted)"</span>)</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter, label<span class="op">=</span><span class="st">"Absolute Error"</span>)</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-model-evaluation_files/figure-html/residual-plot-output-1.png" id="residual-plot" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>This plot helps us examine how prediction errors behave across the range of model outputs.</p>
-<p>It allows us to detect:</p>
+<section id="interpreting-improvements" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-improvements">Interpreting Improvements</h2>
+<p>Improvement is not just:</p>
 <ul>
-<li><p><strong>systematic bias</strong><br>
-If residuals are mostly above or below zero, the model consistently over- or under-predicts</p></li>
-<li><p><strong>uneven error distribution (heteroscedasticity)</strong><br>
-If the spread of residuals changes across predicted values, the model performs inconsistently across ranges</p></li>
-<li><p><strong>regions of poor performance</strong><br>
-Clusters of large residuals, highlighted by stronger color, indicate where the model struggles to capture the underlying pattern</p></li>
+<li>lower MAE<br>
+</li>
+<li>higher R²</li>
 </ul>
-<p>Rather than summarizing error with a single number, this plot reveals <strong>how and where the model fails</strong>, which is essential for reliable interpretation.</p>
-<hr>
-</section>
-<section id="what-reliable-evaluation-requires" class="level2">
-<h2 class="anchored" data-anchor-id="what-reliable-evaluation-requires">What Reliable Evaluation Requires</h2>
-<p>A model is not reliable because:</p>
+<p>We must also consider:</p>
 <ul>
-<li>it produces a number<br>
+<li>stability across splits<br>
 </li>
-<li>it performs well on one split</li>
+<li>interpretability<br>
+</li>
+<li>sensitivity to noise</li>
 </ul>
-<p>A model becomes more reliable when:</p>
-<ul>
-<li>performance is stable across splits<br>
-</li>
-<li>errors are understood, not just measured<br>
-</li>
-<li>evaluation reflects how the model will be used</li>
-</ul>
+<p>A more complex model may perform better on one split but worse in general.</p>
 <hr>
 </section>
 <section id="what-can-go-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="what-can-go-wrong">What Can Go Wrong</h2>
-<section id="over-trusting-a-single-metric" class="level3">
-<h3 class="anchored" data-anchor-id="over-trusting-a-single-metric">Over-trusting a Single Metric</h3>
-<p>One number cannot capture full model behavior.</p>
+<section id="chasing-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="chasing-metrics">Chasing Metrics</h3>
+<p>Improving a number does not always improve usefulness.</p>
 </section>
-<section id="ignoring-variability" class="level3">
-<h3 class="anchored" data-anchor-id="ignoring-variability">Ignoring Variability</h3>
-<p>Performance that changes across splits indicates instability.</p>
+<section id="overfitting" class="level3">
+<h3 class="anchored" data-anchor-id="overfitting">Overfitting</h3>
+<p>A model may fit training data very well but fail on new data.</p>
 </section>
-<section id="misinterpreting-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="misinterpreting-metrics">Misinterpreting Metrics</h3>
-<p>Metrics must be interpreted in context.</p>
+<section id="changing-too-many-things" class="level3">
+<h3 class="anchored" data-anchor-id="changing-too-many-things">Changing Too Many Things</h3>
+<p>If scaling, features, and model type all change together:</p>
+<ul>
+<li>improvement cannot be explained</li>
+</ul>
 </section>
-<section id="skipping-error-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="skipping-error-analysis">Skipping Error Analysis</h3>
-<p>Without examining residuals, important patterns may be missed.</p>
+<section id="ignoring-context" class="level3">
+<h3 class="anchored" data-anchor-id="ignoring-context">Ignoring Context</h3>
+<p>The “best” model depends on:</p>
+<ul>
+<li>the problem<br>
+</li>
+<li>the data<br>
+</li>
+<li>the intended use</li>
+</ul>
 <hr>
 </section>
 </section>
-<section id="cdi-insight" class="level2">
-<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
-<p>A model is not evaluated once.</p>
-<p>It is evaluated across conditions.</p>
-<p>Reliability comes from consistency, not a single result.</p>
+<section id="cdi-insight-1" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight-1">CDI Insight</h2>
+<p>Model improvement is not a search for the best number.</p>
+<p>It is a process of understanding how changes affect behavior.</p>
 <hr>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <ul>
-<li>A single train/test split provides limited insight<br>
+<li>We loaded the same project dataset from <code>data/diabetes.csv</code><br>
 </li>
-<li>Model performance varies depending on data partitioning<br>
+<li>We started from a baseline model<br>
 </li>
-<li>Cross-validation provides a more stable estimate<br>
+<li>We applied controlled changes one at a time<br>
 </li>
-<li>Metrics must be interpreted carefully<br>
+<li>We compared results systematically<br>
 </li>
-<li>Residual analysis reveals patterns hidden by summary statistics<br>
+<li>We considered stability and interpretability alongside metrics<br>
 </li>
-<li>Reliable evaluation requires multiple perspectives</li>
+<li>We avoided treating performance improvement as the only goal</li>
 </ul>
 <hr>
 </section>
-<section id="next-step" class="level2">
-<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
-<p>→ <strong>Improving models through controlled changes</strong></p>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What Comes Next</h2>
+<p>So far, we have compared models using a single train/test split.</p>
+<p>This provides a useful first view, but it is not the full picture.</p>
+<p>Model performance can vary depending on how the data is split.<br>
+A model that appears better in one split may not perform the same in another.</p>
+<p>A strong result from a single split is a useful signal, but not sufficient evidence. A model is better when its performance remains stable across multiple splits of the data.</p>
+<p>In the next lesson, we will introduce:</p>
+<ul>
+<li><strong>pipelines</strong>, to ensure transformations are applied consistently<br>
+</li>
+<li><strong>cross-validation</strong>, to evaluate models across multiple data splits</li>
+</ul>
+<p>These tools allow us to move from a single estimate of performance to a more <strong>stable and reliable assessment</strong>.</p>
+<p>This leads to an important realization:</p>
+<blockquote class="blockquote">
+<p>conclusions based on a single split may change when evaluated more rigorously.</p>
+</blockquote>
+<p>This is a key step in moving from exploratory modeling to <strong>defensible inference</strong>.</p>
+<p>→ <strong>Building reproducible pipelines</strong></p>
 
 
 </section>
@@ -1308,13 +1304,13 @@ Clusters of large residuals, highlighted by stronger color, indicate where the m
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./09-model-building.html" class="pagination-link" aria-label="Building Your First Model with Real-World Health Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Building Your First Model with Real-World Health Data</span></span>
+      <a href="./10-model-evaluation.html" class="pagination-link" aria-label="Evaluating Models Beyond a Single Result">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./11-model-improvement.html" class="pagination-link" aria-label="Improving Models Through Controlled Changes">
-        <span class="nav-page-text"><span class="chapter-title">Improving Models Through Controlled Changes</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./12-pipelines-and-cross-validation.html" class="pagination-link" aria-label="Pipelines and Cross-Validation">
+        <span class="nav-page-text"><span class="chapter-title">Pipelines and Cross-Validation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

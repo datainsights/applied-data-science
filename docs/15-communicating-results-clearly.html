@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Data Science Foundations Premium</title>
+<title>Communicating Results Clearly – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +65,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./999-appendix.html" rel="prev">
+<link href="./16-from-analysis-to-decision-making.html" rel="next">
+<link href="./14-from-model-outputs-to-real-world-claims.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,7 +119,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html"><span class="chapter-title">Communicating Results Clearly</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -189,7 +206,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communicating Results Clearly</span></a>
+  <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Communicating Results Clearly</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,7 +247,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./999-references.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">References</span></a>
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
       </ul>
@@ -240,15 +257,58 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-communication-matters" id="toc-why-communication-matters" class="nav-link active" data-scroll-target="#why-communication-matters">Why Communication Matters</a></li>
+  <li><a href="#the-communication-gap" id="toc-the-communication-gap" class="nav-link" data-scroll-target="#the-communication-gap">The Communication Gap</a></li>
+  <li><a href="#from-technical-output-to-clear-statement" id="toc-from-technical-output-to-clear-statement" class="nav-link" data-scroll-target="#from-technical-output-to-clear-statement">From Technical Output to Clear Statement</a>
+  <ul class="collapse">
+  <li><a href="#poor-communication" id="toc-poor-communication" class="nav-link" data-scroll-target="#poor-communication">Poor Communication</a></li>
+  <li><a href="#better-communication" id="toc-better-communication" class="nav-link" data-scroll-target="#better-communication">Better Communication</a></li>
+  </ul></li>
+  <li><a href="#explaining-model-behavior" id="toc-explaining-model-behavior" class="nav-link" data-scroll-target="#explaining-model-behavior">Explaining Model Behavior</a>
+  <ul class="collapse">
+  <li><a href="#poor-communication-1" id="toc-poor-communication-1" class="nav-link" data-scroll-target="#poor-communication-1">Poor Communication</a></li>
+  <li><a href="#better-communication-1" id="toc-better-communication-1" class="nav-link" data-scroll-target="#better-communication-1">Better Communication</a></li>
+  </ul></li>
+  <li><a href="#communicating-uncertainty" id="toc-communicating-uncertainty" class="nav-link" data-scroll-target="#communicating-uncertainty">Communicating Uncertainty</a>
+  <ul class="collapse">
+  <li><a href="#instead-of-saying" id="toc-instead-of-saying" class="nav-link" data-scroll-target="#instead-of-saying">Instead of saying:</a></li>
+  <li><a href="#say" id="toc-say" class="nav-link" data-scroll-target="#say">Say:</a></li>
+  </ul></li>
+  <li><a href="#avoiding-common-mistakes" id="toc-avoiding-common-mistakes" class="nav-link" data-scroll-target="#avoiding-common-mistakes">Avoiding Common Mistakes</a>
+  <ul class="collapse">
+  <li><a href="#overgeneralization" id="toc-overgeneralization" class="nav-link" data-scroll-target="#overgeneralization">1. Overgeneralization</a></li>
+  <li><a href="#causal-language" id="toc-causal-language" class="nav-link" data-scroll-target="#causal-language">2. Causal Language</a></li>
+  <li><a href="#overconfidence" id="toc-overconfidence" class="nav-link" data-scroll-target="#overconfidence">3. Overconfidence</a></li>
+  </ul></li>
+  <li><a href="#structuring-a-clear-report" id="toc-structuring-a-clear-report" class="nav-link" data-scroll-target="#structuring-a-clear-report">Structuring a Clear Report</a>
+  <ul class="collapse">
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">1. Objective</a></li>
+  <li><a href="#data-context" id="toc-data-context" class="nav-link" data-scroll-target="#data-context">2. Data Context</a></li>
+  <li><a href="#model-summary" id="toc-model-summary" class="nav-link" data-scroll-target="#model-summary">3. Model Summary</a></li>
+  <li><a href="#key-results" id="toc-key-results" class="nav-link" data-scroll-target="#key-results">4. Key Results</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">5. Interpretation</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">6. Limitations</a></li>
+  </ul></li>
+  <li><a href="#example-clear-communication" id="toc-example-clear-communication" class="nav-link" data-scroll-target="#example-clear-communication">Example: Clear Communication</a></li>
+  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
+  <li><a href="#what-this-means-in-practice" id="toc-what-this-means-in-practice" class="nav-link" data-scroll-target="#what-this-means-in-practice">What This Means in Practice</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html"><span class="chapter-title">Communicating Results Clearly</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">References</span></h1>
+<h1 class="title"><span id="lesson15" class="quarto-section-identifier"><span class="chapter-title">Communicating Results Clearly</span></span></h1>
 </div>
 
 
@@ -271,34 +331,256 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-iris" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1936. <span>“The Use of Multiple Measurements in
-Taxonomic Problems.”</span> <em>Annals of Eugenics</em>.
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> DS-L15</li>
+<li><strong>Type:</strong> Premium</li>
+<li><strong>Audience:</strong> Intermediate to Advanced</li>
+<li><strong>Theme:</strong> Translating correct interpretation into clear communication</li>
+</ul>
 </div>
-<div id="ref-numpy" class="csl-entry" role="listitem">
-Harris, Charles R. et al. 2020. <span>“Array Programming with
-<span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
-</div>
-<div id="ref-matplotlib" class="csl-entry" role="listitem">
-Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics
-Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
-</div>
-<div id="ref-pandas" class="csl-entry" role="listitem">
-McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span>
-<em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
-</div>
-<div id="ref-python" class="csl-entry" role="listitem">
-Python Software Foundation. 2024. <span>“Python Language
-Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
-</div>
-<div id="ref-seaborn" class="csl-entry" role="listitem">
-Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data
-Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
-</div>
-</div>
+<p>In the previous lesson, we learned how to <strong>interpret models responsibly</strong>.</p>
+<p>Now we take the next step:</p>
+<blockquote class="blockquote">
+<p>How do we communicate those interpretations clearly to others?</p>
+</blockquote>
+<p>This is where many analyses fail.</p>
+<p>Not because the model is wrong,<br>
+but because the <strong>communication is misleading, vague, or overstated</strong>.</p>
+<hr>
+<section id="why-communication-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-communication-matters">Why Communication Matters</h2>
+<p>Model results are rarely consumed by the person who built them.</p>
+<p>They are read by:</p>
+<ul>
+<li>collaborators<br>
+</li>
+<li>decision-makers<br>
+</li>
+<li>clinicians or domain experts<br>
+</li>
+<li>stakeholders without technical background</li>
+</ul>
+<p>This means:</p>
+<blockquote class="blockquote">
+<p>clarity is not optional — it is part of the analysis.</p>
+</blockquote>
+<hr>
+</section>
+<section id="the-communication-gap" class="level2">
+<h2 class="anchored" data-anchor-id="the-communication-gap">The Communication Gap</h2>
+<p>A model produces outputs such as:</p>
+<ul>
+<li>coefficients<br>
+</li>
+<li>metrics (MAE, R²)<br>
+</li>
+<li>predictions</li>
+</ul>
+<p>But stakeholders need:</p>
+<ul>
+<li>meaning<br>
+</li>
+<li>context<br>
+</li>
+<li>limitations</li>
+</ul>
+<p>Bridging this gap is the goal of this lesson.</p>
+<hr>
+</section>
+<section id="from-technical-output-to-clear-statement" class="level2">
+<h2 class="anchored" data-anchor-id="from-technical-output-to-clear-statement">From Technical Output to Clear Statement</h2>
+<p>Consider this model result:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R² <span class="op">=</span> <span class="fl">0.48</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>MAE <span class="op">=</span> <span class="fl">44.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="poor-communication" class="level3">
+<h3 class="anchored" data-anchor-id="poor-communication">Poor Communication</h3>
+<ul>
+<li>“The model performs reasonably well”</li>
+<li>“The results are acceptable”</li>
+</ul>
+<p>These are vague and uninformative.</p>
+<hr>
+</section>
+<section id="better-communication" class="level3">
+<h3 class="anchored" data-anchor-id="better-communication">Better Communication</h3>
+<ul>
+<li>“The model explains about 48% of the variation in disease progression”</li>
+<li>“Predictions are off by about 44 units on average”</li>
+</ul>
+<p>This translates metrics into <strong>understandable meaning</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="explaining-model-behavior" class="level2">
+<h2 class="anchored" data-anchor-id="explaining-model-behavior">Explaining Model Behavior</h2>
+<p>Instead of listing coefficients:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bmi coefficient <span class="op">=</span> <span class="dv">529</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="poor-communication-1" class="level3">
+<h3 class="anchored" data-anchor-id="poor-communication-1">Poor Communication</h3>
+<ul>
+<li>“BMI has a coefficient of 529”</li>
+</ul>
+<hr>
+</section>
+<section id="better-communication-1" class="level3">
+<h3 class="anchored" data-anchor-id="better-communication-1">Better Communication</h3>
+<ul>
+<li>“Higher BMI values are associated with higher predicted disease progression”</li>
+<li>“BMI is one of the strongest predictors used by the model”</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="communicating-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="communicating-uncertainty">Communicating Uncertainty</h2>
+<p>All models have uncertainty.</p>
+<p>Ignoring it leads to overconfidence.</p>
+<section id="instead-of-saying" class="level3">
+<h3 class="anchored" data-anchor-id="instead-of-saying">Instead of saying:</h3>
+<ul>
+<li>“The model is accurate”</li>
+</ul>
+</section>
+<section id="say" class="level3">
+<h3 class="anchored" data-anchor-id="say">Say:</h3>
+<ul>
+<li>“The model shows moderate predictive ability”</li>
+<li>“Performance is consistent across multiple data splits”</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="avoiding-common-mistakes" class="level2">
+<h2 class="anchored" data-anchor-id="avoiding-common-mistakes">Avoiding Common Mistakes</h2>
+<section id="overgeneralization" class="level3">
+<h3 class="anchored" data-anchor-id="overgeneralization">1. Overgeneralization</h3>
+<p>❌ “This applies to all patients”<br>
+✔ “This applies to this dataset and similar conditions”</p>
+<hr>
+</section>
+<section id="causal-language" class="level3">
+<h3 class="anchored" data-anchor-id="causal-language">2. Causal Language</h3>
+<p>❌ “BMI causes progression”<br>
+✔ “BMI is associated with predicted progression”</p>
+<hr>
+</section>
+<section id="overconfidence" class="level3">
+<h3 class="anchored" data-anchor-id="overconfidence">3. Overconfidence</h3>
+<p>❌ “The model is highly reliable”<br>
+✔ “The model is reasonably stable but has limitations”</p>
+<hr>
+</section>
+</section>
+<section id="structuring-a-clear-report" class="level2">
+<h2 class="anchored" data-anchor-id="structuring-a-clear-report">Structuring a Clear Report</h2>
+<p>A good result summary should include:</p>
+<section id="objective" class="level3">
+<h3 class="anchored" data-anchor-id="objective">1. Objective</h3>
+<ul>
+<li>What problem was addressed?</li>
+</ul>
+</section>
+<section id="data-context" class="level3">
+<h3 class="anchored" data-anchor-id="data-context">2. Data Context</h3>
+<ul>
+<li>What dataset was used?</li>
+</ul>
+</section>
+<section id="model-summary" class="level3">
+<h3 class="anchored" data-anchor-id="model-summary">3. Model Summary</h3>
+<ul>
+<li>What model was applied?</li>
+</ul>
+</section>
+<section id="key-results" class="level3">
+<h3 class="anchored" data-anchor-id="key-results">4. Key Results</h3>
+<ul>
+<li>Metrics and main patterns</li>
+</ul>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">5. Interpretation</h3>
+<ul>
+<li>What the results mean</li>
+</ul>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">6. Limitations</h3>
+<ul>
+<li>What the model does not tell us</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="example-clear-communication" class="level2">
+<h2 class="anchored" data-anchor-id="example-clear-communication">Example: Clear Communication</h2>
+<p><strong>Objective:</strong><br>
+Predict disease progression using clinical features.</p>
+<p><strong>Results:</strong><br>
+The model explains about 48% of the variation in progression (R² ≈ 0.48).<br>
+Predictions differ from actual values by about 44 units on average.</p>
+<p><strong>Interpretation:</strong><br>
+BMI and related features are strong predictors in this dataset.</p>
+<p><strong>Limitations:</strong><br>
+These results reflect associations within the dataset and do not establish causation.</p>
+<hr>
+</section>
+<section id="cdi-insight" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
+<blockquote class="blockquote">
+<p>Good analysis is not complete until it is clearly understood.</p>
+</blockquote>
+<hr>
+</section>
+<section id="what-this-means-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-means-in-practice">What This Means in Practice</h2>
+<p>When communicating results:</p>
+<p>Focus on:</p>
+<ul>
+<li>clarity over complexity<br>
+</li>
+<li>meaning over metrics<br>
+</li>
+<li>honesty over confidence</li>
+</ul>
+<p>Avoid:</p>
+<ul>
+<li>vague language<br>
+</li>
+<li>unsupported claims<br>
+</li>
+<li>unnecessary technical detail</li>
+</ul>
+<hr>
+</section>
+<section id="key-insight" class="level2">
+<h2 class="anchored" data-anchor-id="key-insight">Key Insight</h2>
+<p>Clear communication does not simplify the analysis.</p>
+<p>It makes the reasoning <strong>visible and trustworthy</strong>.</p>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>Models produce technical outputs<br>
+</li>
+<li>Communication translates outputs into meaning<br>
+</li>
+<li>Claims must remain aligned with evidence<br>
+</li>
+<li>Clarity improves trust and usability<br>
+</li>
+<li>Good communication is part of good analysis</li>
+</ul>
+<hr>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
+<p>→ <strong>From analysis to real-world decision-making</strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -704,11 +986,14 @@ Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="http
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./999-appendix.html" class="pagination-link" aria-label="Appendix">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Appendix</span></span>
+      <a href="./14-from-model-outputs-to-real-world-claims.html" class="pagination-link" aria-label="From Model Outputs to Real-World Claims">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">From Model Outputs to Real-World Claims</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./16-from-analysis-to-decision-making.html" class="pagination-link" aria-label="From Analysis to Decision-Making">
+        <span class="nav-page-text"><span class="chapter-title">From Analysis to Decision-Making</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Data Science Foundations Premium</title>
+<title>From Analysis to Decision-Making – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./999-appendix.html" rel="prev">
+<link href="./17-end-to-end-case-study.html" rel="next">
+<link href="./15-communicating-results-clearly.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,7 +84,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./16-from-analysis-to-decision-making.html"><span class="chapter-title">From Analysis to Decision-Making</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -194,7 +176,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Analysis to Decision-Making</span></a>
+  <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">From Analysis to Decision-Making</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,7 +212,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./999-references.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">References</span></a>
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
       </ul>
@@ -240,15 +222,41 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-final-gap" id="toc-the-final-gap" class="nav-link active" data-scroll-target="#the-final-gap">The Final Gap</a></li>
+  <li><a href="#what-decisions-require" id="toc-what-decisions-require" class="nav-link" data-scroll-target="#what-decisions-require">What Decisions Require</a></li>
+  <li><a href="#from-prediction-to-action" id="toc-from-prediction-to-action" class="nav-link" data-scroll-target="#from-prediction-to-action">From Prediction to Action</a></li>
+  <li><a href="#decision-framing" id="toc-decision-framing" class="nav-link" data-scroll-target="#decision-framing">Decision Framing</a>
+  <ul class="collapse">
+  <li><a href="#what-is-the-goal" id="toc-what-is-the-goal" class="nav-link" data-scroll-target="#what-is-the-goal">1. What is the goal?</a></li>
+  <li><a href="#what-does-the-model-provide" id="toc-what-does-the-model-provide" class="nav-link" data-scroll-target="#what-does-the-model-provide">2. What does the model provide?</a></li>
+  <li><a href="#what-are-the-options" id="toc-what-are-the-options" class="nav-link" data-scroll-target="#what-are-the-options">3. What are the options?</a></li>
+  <li><a href="#what-are-the-risks" id="toc-what-are-the-risks" class="nav-link" data-scroll-target="#what-are-the-risks">4. What are the risks?</a></li>
+  </ul></li>
+  <li><a href="#example-translating-results" id="toc-example-translating-results" class="nav-link" data-scroll-target="#example-translating-results">Example: Translating Results</a></li>
+  <li><a href="#the-role-of-uncertainty" id="toc-the-role-of-uncertainty" class="nav-link" data-scroll-target="#the-role-of-uncertainty">The Role of Uncertainty</a></li>
+  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
+  <li><a href="#decision-thresholds" id="toc-decision-thresholds" class="nav-link" data-scroll-target="#decision-thresholds">Decision Thresholds</a></li>
+  <li><a href="#trade-offs" id="toc-trade-offs" class="nav-link" data-scroll-target="#trade-offs">Trade-Offs</a></li>
+  <li><a href="#communicating-for-decisions" id="toc-communicating-for-decisions" class="nav-link" data-scroll-target="#communicating-for-decisions">Communicating for Decisions</a></li>
+  <li><a href="#example-decision-summary" id="toc-example-decision-summary" class="nav-link" data-scroll-target="#example-decision-summary">Example Decision Summary</a></li>
+  <li><a href="#from-insight-to-action" id="toc-from-insight-to-action" class="nav-link" data-scroll-target="#from-insight-to-action">From Insight to Action</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What Comes Next</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./16-from-analysis-to-decision-making.html"><span class="chapter-title">From Analysis to Decision-Making</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">References</span></h1>
+<h1 class="title"><span id="lesson16" class="quarto-section-identifier"><span class="chapter-title">From Analysis to Decision-Making</span></span></h1>
 </div>
 
 
@@ -271,34 +279,262 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-iris" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1936. <span>“The Use of Multiple Measurements in
-Taxonomic Problems.”</span> <em>Annals of Eugenics</em>.
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> DS-L16</li>
+<li><strong>Type:</strong> Premium</li>
+<li><strong>Audience:</strong> Intermediate to Advanced</li>
+<li><strong>Theme:</strong> Translating analytical results into real-world decisions</li>
+</ul>
 </div>
-<div id="ref-numpy" class="csl-entry" role="listitem">
-Harris, Charles R. et al. 2020. <span>“Array Programming with
-<span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
-</div>
-<div id="ref-matplotlib" class="csl-entry" role="listitem">
-Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics
-Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
-</div>
-<div id="ref-pandas" class="csl-entry" role="listitem">
-McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span>
-<em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
-</div>
-<div id="ref-python" class="csl-entry" role="listitem">
-Python Software Foundation. 2024. <span>“Python Language
-Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
-</div>
-<div id="ref-seaborn" class="csl-entry" role="listitem">
-Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data
-Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
-</div>
-</div>
+<p>So far, we have built a complete analytical pipeline:</p>
+<ul>
+<li>data → model → interpretation → communication</li>
+</ul>
+<p>Now we take the final step:</p>
+<blockquote class="blockquote">
+<p>How do we move from analysis to action?</p>
+</blockquote>
+<hr>
+<section id="the-final-gap" class="level2">
+<h2 class="anchored" data-anchor-id="the-final-gap">The Final Gap</h2>
+<p>Even well-executed analyses can fail at the last step.</p>
+<p>Why?</p>
+<p>Because:</p>
+<ul>
+<li>results are not clearly linked to decisions<br>
+</li>
+<li>uncertainty is ignored or misunderstood<br>
+</li>
+<li>stakeholders do not know how to act on the findings</li>
+</ul>
+<p>This lesson focuses on bridging that gap.</p>
+<hr>
+</section>
+<section id="what-decisions-require" class="level2">
+<h2 class="anchored" data-anchor-id="what-decisions-require">What Decisions Require</h2>
+<p>A decision is not based on:</p>
+<ul>
+<li>a model<br>
+</li>
+<li>a metric<br>
+</li>
+<li>or a plot</li>
+</ul>
+<p>A decision requires:</p>
+<ul>
+<li>context<br>
+</li>
+<li>trade-offs<br>
+</li>
+<li>acceptable risk<br>
+</li>
+<li>domain knowledge</li>
+</ul>
+<p>Models inform decisions.<br>
+They do not make them.</p>
+<hr>
+</section>
+<section id="from-prediction-to-action" class="level2">
+<h2 class="anchored" data-anchor-id="from-prediction-to-action">From Prediction to Action</h2>
+<p>Suppose the model predicts:</p>
+<ul>
+<li>higher disease progression for certain patients</li>
+</ul>
+<p>This does <strong>not</strong> automatically imply:</p>
+<ul>
+<li>immediate intervention<br>
+</li>
+<li>treatment changes<br>
+</li>
+<li>policy decisions</li>
+</ul>
+<p>Instead, it raises a question:</p>
+<blockquote class="blockquote">
+<p>What should be done given this information?</p>
+</blockquote>
+<hr>
+</section>
+<section id="decision-framing" class="level2">
+<h2 class="anchored" data-anchor-id="decision-framing">Decision Framing</h2>
+<p>A useful structure:</p>
+<section id="what-is-the-goal" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-the-goal">1. What is the goal?</h3>
+<ul>
+<li>reduce disease progression<br>
+</li>
+<li>identify high-risk individuals</li>
+</ul>
+</section>
+<section id="what-does-the-model-provide" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-the-model-provide">2. What does the model provide?</h3>
+<ul>
+<li>predicted progression<br>
+</li>
+<li>relative risk patterns</li>
+</ul>
+</section>
+<section id="what-are-the-options" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-options">3. What are the options?</h3>
+<ul>
+<li>monitor patients<br>
+</li>
+<li>adjust treatment<br>
+</li>
+<li>collect more data</li>
+</ul>
+</section>
+<section id="what-are-the-risks" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-risks">4. What are the risks?</h3>
+<ul>
+<li>false positives<br>
+</li>
+<li>false negatives<br>
+</li>
+<li>over-intervention</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="example-translating-results" class="level2">
+<h2 class="anchored" data-anchor-id="example-translating-results">Example: Translating Results</h2>
+<p><strong>Model Output:</strong> - Higher BMI associated with higher predicted progression</p>
+<p><strong>Incorrect Action:</strong> - “All high BMI patients must receive treatment”</p>
+<p><strong>Better Framing:</strong> - “Patients with higher BMI may be at increased risk and could benefit from closer monitoring”</p>
+<hr>
+</section>
+<section id="the-role-of-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="the-role-of-uncertainty">The Role of Uncertainty</h2>
+<p>No model is perfect.</p>
+<p>Decisions must consider:</p>
+<ul>
+<li>prediction error<br>
+</li>
+<li>variability across data<br>
+</li>
+<li>limitations of the dataset</li>
+</ul>
+<p>A useful mindset:</p>
+<blockquote class="blockquote">
+<p>Decisions should be robust to uncertainty, not dependent on perfect predictions.</p>
+</blockquote>
+<hr>
+</section>
+<section id="cdi-insight" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
+<blockquote class="blockquote">
+<p>Models reduce uncertainty. They do not eliminate it.</p>
+</blockquote>
+<hr>
+</section>
+<section id="decision-thresholds" class="level2">
+<h2 class="anchored" data-anchor-id="decision-thresholds">Decision Thresholds</h2>
+<p>Often, decisions require thresholds.</p>
+<p>For example:</p>
+<ul>
+<li>intervene if predicted risk exceeds a certain level</li>
+</ul>
+<p>But thresholds are:</p>
+<ul>
+<li>context-dependent<br>
+</li>
+<li>influenced by cost and risk<br>
+</li>
+<li>not determined by the model alone</li>
+</ul>
+<hr>
+</section>
+<section id="trade-offs" class="level2">
+<h2 class="anchored" data-anchor-id="trade-offs">Trade-Offs</h2>
+<p>Every decision involves trade-offs:</p>
+<ul>
+<li>sensitivity vs specificity<br>
+</li>
+<li>early intervention vs unnecessary treatment<br>
+</li>
+<li>simplicity vs complexity</li>
+</ul>
+<p>The “best” decision depends on priorities.</p>
+<hr>
+</section>
+<section id="communicating-for-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="communicating-for-decisions">Communicating for Decisions</h2>
+<p>When presenting results for decision-making:</p>
+<p>Include:</p>
+<ul>
+<li>what the model suggests<br>
+</li>
+<li>how reliable the results are<br>
+</li>
+<li>what uncertainties remain<br>
+</li>
+<li>what options are available</li>
+</ul>
+<p>Avoid:</p>
+<ul>
+<li>prescribing actions without context<br>
+</li>
+<li>presenting results as definitive answers</li>
+</ul>
+<hr>
+</section>
+<section id="example-decision-summary" class="level2">
+<h2 class="anchored" data-anchor-id="example-decision-summary">Example Decision Summary</h2>
+<p><strong>Objective:</strong><br>
+Identify patients at higher risk of disease progression</p>
+<p><strong>Findings:</strong><br>
+The model shows moderate predictive ability and consistent performance across splits.<br>
+Higher BMI is associated with higher predicted progression.</p>
+<p><strong>Interpretation:</strong><br>
+BMI is a useful predictor in this dataset.</p>
+<p><strong>Decision Context:</strong><br>
+Predictions can be used to flag individuals for closer monitoring,<br>
+but should not be used as the sole basis for treatment decisions.</p>
+<hr>
+</section>
+<section id="from-insight-to-action" class="level2">
+<h2 class="anchored" data-anchor-id="from-insight-to-action">From Insight to Action</h2>
+<p>A good decision process:</p>
+<ol type="1">
+<li>Understand the model<br>
+</li>
+<li>Interpret results carefully<br>
+</li>
+<li>Communicate clearly<br>
+</li>
+<li>Evaluate risks and trade-offs<br>
+</li>
+<li>Decide within context</li>
+</ol>
+<hr>
+</section>
+<section id="key-insight" class="level2">
+<h2 class="anchored" data-anchor-id="key-insight">Key Insight</h2>
+<p>Analysis supports decisions.</p>
+<p>It does not replace judgment.</p>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>Models inform decisions, but do not make them<br>
+</li>
+<li>Decisions require context, risk assessment, and domain knowledge<br>
+</li>
+<li>Uncertainty must be acknowledged<br>
+</li>
+<li>Clear communication enables actionable insight<br>
+</li>
+<li>Responsible analysis leads to better decisions</li>
+</ul>
+<hr>
+</section>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What Comes Next</h2>
+<p>→ <strong>End-to-end project: from data to decision</strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -704,11 +940,14 @@ Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="http
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./999-appendix.html" class="pagination-link" aria-label="Appendix">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Appendix</span></span>
+      <a href="./15-communicating-results-clearly.html" class="pagination-link" aria-label="Communicating Results Clearly">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Communicating Results Clearly</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./17-end-to-end-case-study.html" class="pagination-link" aria-label="End-to-End Case Study: From Data to Decision">
+        <span class="nav-page-text"><span class="chapter-title">End-to-End Case Study: From Data to Decision</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

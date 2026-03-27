@@ -1,0 +1,399 @@
+# End-to-End Case Study: From Data to Decision {#lesson17}
+
+:::cdi-message
+- **ID:** DS-L17
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** Integrating the full CDI workflow on a real dataset
+:::
+
+In the previous lessons, we built the premium workflow step by step:
+
+- feature engineering  
+- modeling  
+- evaluation  
+- interpretation  
+- communication  
+- decision-making  
+
+Now we bring these pieces together in a single case study.
+
+The goal is not to introduce a new concept.
+
+The goal is to show how the full CDI workflow operates from beginning to end on a real dataset.
+
+---
+
+## Case Study Objective
+
+We will use the diabetes dataset to answer a practical question:
+
+> Can baseline clinical measurements support useful prediction of disease progression, and how should those predictions be interpreted for real-world use?
+
+This is not a causal question.
+
+It is a structured prediction question.
+
+That distinction matters from the beginning.
+
+---
+
+## Load the Dataset
+
+```{python}
+#| label: 17-load-data
+import pandas as pd
+
+df = pd.read_csv("data/diabetes.csv")
+df.head()
+```
+
+---
+
+## Define Features and Target
+
+```{python}
+#| label: 17-define-features-target
+X = df.drop(columns=["disease_progression"])
+y = df["disease_progression"]
+
+X.shape, y.shape
+```
+
+Each row represents one observation.
+
+Each column represents one measured feature.
+
+The target is continuous, so this remains a regression problem.
+
+---
+
+## Step 1 — Understand the Data Structure
+
+Before modeling, it is useful to inspect the feature distribution.
+
+```{python}
+#| label: 17-summary-stats
+X.describe().round(3)
+```
+
+At this stage, the key question is not whether the data is interesting.
+
+It is whether the data is structured well enough to support a defensible workflow.
+
+Here, the answer is yes:
+
+- the dataset is tabular  
+- the features are numeric  
+- the target is clearly defined  
+
+---
+
+## Step 2 — Build a Reproducible Workflow
+
+We use a pipeline so that scaling and modeling are applied consistently.
+
+```{python}
+#| label: 17-build-pipeline
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LinearRegression())
+])
+
+pipeline
+```
+
+This makes the workflow easier to reproduce and reduces the chance of inconsistent preprocessing.
+
+---
+
+## Step 3 — Evaluate with Cross-Validation
+
+A single split provides only one estimate of performance.
+
+We use cross-validation to obtain a more stable view.
+
+```{python}
+#| label: 17-cross-validation
+from sklearn.model_selection import cross_val_score
+import numpy as np
+
+mae_scores = -cross_val_score(
+    pipeline,
+    X,
+    y,
+    cv=5,
+    scoring="neg_mean_absolute_error"
+)
+
+r2_scores = cross_val_score(
+    pipeline,
+    X,
+    y,
+    cv=5,
+    scoring="r2"
+)
+
+mae_scores, r2_scores
+```
+
+```{python}
+#| label: 17-cv-summary
+cv_summary = pd.DataFrame({
+    "metric": ["MAE", "R2"],
+    "mean": [np.mean(mae_scores), np.mean(r2_scores)],
+    "std": [np.std(mae_scores), np.std(r2_scores)]
+}).round(3)
+
+cv_summary
+```
+
+This gives us:
+
+- average performance  
+- variability across folds  
+
+That is already more informative than a single score.
+
+---
+
+## Step 4 — Visualize Stability Across Folds
+
+```{python}
+#| label: 17-cv-mae-plot
+import matplotlib.pyplot as plt
+
+folds = range(1, len(mae_scores) + 1)
+
+plt.figure(figsize=(7, 5))
+plt.plot(folds, mae_scores, marker="o", linewidth=1)
+plt.xlabel("Fold")
+plt.ylabel("MAE")
+plt.title("MAE Across Cross-Validation Folds")
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+```{python}
+#| label: 17-cv-r2-plot
+plt.figure(figsize=(7, 5))
+plt.plot(folds, r2_scores, marker="o", linewidth=1)
+plt.xlabel("Fold")
+plt.ylabel("R²")
+plt.title("R² Across Cross-Validation Folds")
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+These plots help us see whether performance is:
+
+- stable  
+- highly variable  
+- or dependent on a small number of favorable splits  
+
+Here, the variation is present but not extreme.
+
+That suggests the model is reasonably stable.
+
+---
+
+## Step 5 — Fit a Model for Interpretation
+
+To examine model behavior more directly, we fit the same workflow on a train/test split.
+
+```{python}
+#| label: 17-train-test-fit
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, r2_score
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+pipeline.fit(X_train, y_train)
+y_pred = pipeline.predict(X_test)
+
+test_mae = mean_absolute_error(y_test, y_pred)
+test_r2 = r2_score(y_test, y_pred)
+
+test_mae, test_r2
+```
+
+This gives us one specific fitted model for interpretation, while cross-validation remains the main source of stability evidence.
+
+---
+
+## Step 6 — Compare Observed and Predicted Values
+
+```{python}
+#| label: 17-observed-vs-predicted
+error = np.abs(y_test - y_pred)
+
+plt.figure(figsize=(7, 5))
+
+scatter = plt.scatter(
+    y_test,
+    y_pred,
+    c=error,
+    cmap="viridis",
+    edgecolors="black",
+    linewidth=0.4,
+    alpha=0.9
+)
+
+min_val = min(y_test.min(), y_pred.min())
+max_val = max(y_test.max(), y_pred.max())
+
+plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", linewidth=1)
+
+plt.xlabel("Observed progression")
+plt.ylabel("Predicted progression")
+plt.title("Observed vs Predicted (Error Highlighted)")
+plt.colorbar(scatter, label="Absolute Error")
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+Points close to the diagonal line represent more accurate predictions.
+
+Points farther away indicate larger errors.
+
+This visual reminds us that a model can be useful without being perfect.
+
+---
+
+## Step 7 — Interpret Feature Influence
+
+Because the model inside the pipeline is linear regression, we can inspect coefficients.
+
+```{python}
+#| label: 17-extract-coefficients
+coef_series = pd.Series(
+    pipeline.named_steps["model"].coef_,
+    index=X.columns
+).sort_values()
+
+coef_series
+```
+
+```{python}
+#| label: 17-coefficient-plot
+plt.figure(figsize=(7, 5))
+coef_series.plot(kind="barh")
+plt.xlabel("Coefficient")
+plt.title("Feature Coefficients from the Fitted Linear Model")
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+These coefficients describe how the model uses features for prediction.
+
+They do **not** establish causation.
+
+For example, if BMI has a strong positive coefficient, we can say:
+
+- BMI is an important feature for prediction in this model  
+
+We cannot say:
+
+- BMI directly causes progression based on this model alone  
+
+---
+
+## Step 8 — Translate Results into a Defensible Claim
+
+At this point, a careful claim might be:
+
+> The model shows moderate predictive ability, and features such as BMI and s5 contribute meaningfully to predicted disease progression in this dataset.
+
+This is a model-based statement.
+
+It is appropriately limited.
+
+It does not overreach into causal or clinical certainty.
+
+---
+
+## Step 9 — Translate Analysis into Decision Context
+
+Now we ask the practical question:
+
+> What could someone do with this result?
+
+A reasonable decision-oriented interpretation is:
+
+- use the model as a **screening or prioritization aid**  
+- identify observations that may deserve closer follow-up  
+- avoid using predictions as the sole basis for intervention  
+
+Why?
+
+Because the model is:
+
+- informative  
+- reasonably stable  
+- but still imperfect  
+
+This is where analysis becomes useful without becoming overconfident.
+
+---
+
+## Step 10 — Case Study Summary
+
+### Data
+
+We used a structured health-related tabular dataset.
+
+### Model
+
+We built a reproducible pipeline with scaling and linear regression.
+
+### Evaluation
+
+Cross-validation showed moderate and fairly stable performance.
+
+### Interpretation
+
+Several features, including BMI-related signals, contributed meaningfully to prediction.
+
+### Communication
+
+Claims were framed as predictive and associative, not causal.
+
+### Decision Context
+
+The model could support monitoring or prioritization, but not standalone decision-making.
+
+---
+
+## CDI Insight
+
+An end-to-end workflow is not complete when a model is fit.
+
+It is complete when the path from:
+
+- data  
+- to model  
+- to interpretation  
+- to communication  
+- to decision context  
+
+remains clear, disciplined, and defensible.
+
+---
+
+## Key Takeaway
+
+The value of a model is not only in its output.
+
+It is in how responsibly that output is connected to real-world use.
+
+---
+
+## Next Step
+
+→ **Capstone reflection and next directions**

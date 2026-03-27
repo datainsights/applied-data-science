@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Data Science Foundations Premium</title>
+<title>Limitations and Responsible Use – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./999-appendix.html" rel="prev">
+<link href="./19-from-foundations-to-real-world-practice.html" rel="next">
+<link href="./17-end-to-end-case-study.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,7 +84,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./18-limitations-and-responsible-use.html"><span class="chapter-title">Limitations and Responsible Use</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -204,7 +186,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Limitations and Responsible Use</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,7 +212,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./999-references.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">References</span></a>
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
       </ul>
@@ -240,15 +222,41 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters">Why This Matters</a></li>
+  <li><a href="#dataset-limitations" id="toc-dataset-limitations" class="nav-link" data-scroll-target="#dataset-limitations">Dataset Limitations</a></li>
+  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
+  <li><a href="#model-limitations" id="toc-model-limitations" class="nav-link" data-scroll-target="#model-limitations">Model Limitations</a></li>
+  <li><a href="#generalization" id="toc-generalization" class="nav-link" data-scroll-target="#generalization">Generalization</a></li>
+  <li><a href="#cdi-insight-1" id="toc-cdi-insight-1" class="nav-link" data-scroll-target="#cdi-insight-1">CDI Insight</a></li>
+  <li><a href="#confounding-and-hidden-structure" id="toc-confounding-and-hidden-structure" class="nav-link" data-scroll-target="#confounding-and-hidden-structure">Confounding and Hidden Structure</a></li>
+  <li><a href="#uncertainty-in-predictions" id="toc-uncertainty-in-predictions" class="nav-link" data-scroll-target="#uncertainty-in-predictions">Uncertainty in Predictions</a></li>
+  <li><a href="#cdi-insight-2" id="toc-cdi-insight-2" class="nav-link" data-scroll-target="#cdi-insight-2">CDI Insight</a></li>
+  <li><a href="#sensitivity-to-data-and-design-choices" id="toc-sensitivity-to-data-and-design-choices" class="nav-link" data-scroll-target="#sensitivity-to-data-and-design-choices">Sensitivity to Data and Design Choices</a></li>
+  <li><a href="#responsible-use" id="toc-responsible-use" class="nav-link" data-scroll-target="#responsible-use">Responsible Use</a></li>
+  <li><a href="#practical-questions-to-ask" id="toc-practical-questions-to-ask" class="nav-link" data-scroll-target="#practical-questions-to-ask">Practical Questions to Ask</a></li>
+  <li><a href="#example-responsible-vs-irresponsible-use" id="toc-example-responsible-vs-irresponsible-use" class="nav-link" data-scroll-target="#example-responsible-vs-irresponsible-use">Example: Responsible vs Irresponsible Use</a>
+  <ul class="collapse">
+  <li><a href="#irresponsible" id="toc-irresponsible" class="nav-link" data-scroll-target="#irresponsible">Irresponsible</a></li>
+  <li><a href="#responsible" id="toc-responsible" class="nav-link" data-scroll-target="#responsible">Responsible</a></li>
+  </ul></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#connecting-back-to-the-workflow" id="toc-connecting-back-to-the-workflow" class="nav-link" data-scroll-target="#connecting-back-to-the-workflow">Connecting Back to the Workflow</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./18-limitations-and-responsible-use.html"><span class="chapter-title">Limitations and Responsible Use</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">References</span></h1>
+<h1 class="title"><span id="lesson18" class="quarto-section-identifier"><span class="chapter-title">Limitations and Responsible Use</span></span></h1>
 </div>
 
 
@@ -271,34 +279,292 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-iris" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1936. <span>“The Use of Multiple Measurements in
-Taxonomic Problems.”</span> <em>Annals of Eugenics</em>.
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> DS-L18</li>
+<li><strong>Type:</strong> Premium</li>
+<li><strong>Audience:</strong> Intermediate to Advanced</li>
+<li><strong>Theme:</strong> Understanding the limits of models and responsible use of results</li>
+</ul>
 </div>
-<div id="ref-numpy" class="csl-entry" role="listitem">
-Harris, Charles R. et al. 2020. <span>“Array Programming with
-<span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
-</div>
-<div id="ref-matplotlib" class="csl-entry" role="listitem">
-Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics
-Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
-</div>
-<div id="ref-pandas" class="csl-entry" role="listitem">
-McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span>
-<em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
-</div>
-<div id="ref-python" class="csl-entry" role="listitem">
-Python Software Foundation. 2024. <span>“Python Language
-Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
-</div>
-<div id="ref-seaborn" class="csl-entry" role="listitem">
-Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data
-Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
-</div>
-</div>
+<p>In the previous lesson, we completed an end-to-end workflow:</p>
+<ul>
+<li>data<br>
+</li>
+<li>modeling<br>
+</li>
+<li>evaluation<br>
+</li>
+<li>interpretation<br>
+</li>
+<li>communication<br>
+</li>
+<li>decision context</li>
+</ul>
+<p>Now we step back and ask a critical question:</p>
+<blockquote class="blockquote">
+<p>What are the limits of everything we just did?</p>
+</blockquote>
+<p>This is where analytical maturity develops.</p>
+<hr>
+<section id="why-this-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters">Why This Matters</h2>
+<p>Our model showed:</p>
+<ul>
+<li>moderate predictive ability<br>
+</li>
+<li>reasonable stability<br>
+</li>
+<li>interpretable feature influence</li>
+</ul>
+<p>It is tempting to trust these results.</p>
+<p>But every model has limits.</p>
+<p>Understanding those limits is part of responsible analysis.</p>
+<hr>
+</section>
+<section id="dataset-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-limitations">Dataset Limitations</h2>
+<p>A model only learns from the data it is given.</p>
+<p>This means:</p>
+<ul>
+<li>it cannot detect patterns that are not present<br>
+</li>
+<li>it may reflect biases in the dataset<br>
+</li>
+<li>it may not represent broader populations</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li>the diabetes dataset represents a specific cohort<br>
+</li>
+<li>it does not include all possible clinical variables<br>
+</li>
+<li>it may not reflect different populations or settings</li>
+</ul>
+<hr>
+</section>
+<section id="cdi-insight" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
+<blockquote class="blockquote">
+<p>Models inherit the strengths and weaknesses of their data.</p>
+</blockquote>
+<hr>
+</section>
+<section id="model-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="model-limitations">Model Limitations</h2>
+<p>Models simplify reality.</p>
+<p>For example:</p>
+<ul>
+<li>linear models assume linear relationships<br>
+</li>
+<li>tree-based models depend on observed splits</li>
+</ul>
+<p>These simplifications can:</p>
+<ul>
+<li>miss complex relationships<br>
+</li>
+<li>exaggerate certain patterns<br>
+</li>
+<li>behave differently under new conditions</li>
+</ul>
+<p>Even a well-performing model is still an approximation.</p>
+<hr>
+</section>
+<section id="generalization" class="level2">
+<h2 class="anchored" data-anchor-id="generalization">Generalization</h2>
+<p>A model trained on one dataset:</p>
+<ul>
+<li>may not perform the same on new data<br>
+</li>
+<li>may fail when conditions change</li>
+</ul>
+<p>Good performance here does not guarantee performance elsewhere.</p>
+<p>This is especially important in:</p>
+<ul>
+<li>healthcare<br>
+</li>
+<li>finance<br>
+</li>
+<li>real-world decision systems</li>
+</ul>
+<hr>
+</section>
+<section id="cdi-insight-1" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight-1">CDI Insight</h2>
+<blockquote class="blockquote">
+<p>Good performance on one dataset is not proof of universal validity.</p>
+</blockquote>
+<hr>
+</section>
+<section id="confounding-and-hidden-structure" class="level2">
+<h2 class="anchored" data-anchor-id="confounding-and-hidden-structure">Confounding and Hidden Structure</h2>
+<p>Some relationships appear strong because:</p>
+<ul>
+<li>variables are correlated<br>
+</li>
+<li>important variables are missing<br>
+</li>
+<li>underlying mechanisms are not observed</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li>BMI may appear important<br>
+</li>
+<li>but it may reflect other biological or behavioral factors</li>
+</ul>
+<p>This is why:</p>
+<blockquote class="blockquote">
+<p>association is not causation</p>
+</blockquote>
+<hr>
+</section>
+<section id="uncertainty-in-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="uncertainty-in-predictions">Uncertainty in Predictions</h2>
+<p>All predictions contain error.</p>
+<p>We observed this through:</p>
+<ul>
+<li>MAE values<br>
+</li>
+<li>residual plots<br>
+</li>
+<li>variation across cross-validation folds</li>
+</ul>
+<p>This means:</p>
+<ul>
+<li>individual predictions may be inaccurate<br>
+</li>
+<li>model outputs should not be treated as exact values</li>
+</ul>
+<hr>
+</section>
+<section id="cdi-insight-2" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight-2">CDI Insight</h2>
+<blockquote class="blockquote">
+<p>Models reduce uncertainty. They do not eliminate it.</p>
+</blockquote>
+<hr>
+</section>
+<section id="sensitivity-to-data-and-design-choices" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-to-data-and-design-choices">Sensitivity to Data and Design Choices</h2>
+<p>Model results depend on:</p>
+<ul>
+<li>feature selection<br>
+</li>
+<li>preprocessing steps<br>
+</li>
+<li>model type<br>
+</li>
+<li>parameter choices</li>
+</ul>
+<p>Changing any of these can lead to different results.</p>
+<p>This reinforces:</p>
+<ul>
+<li>the importance of reproducibility<br>
+</li>
+<li>the need for careful interpretation</li>
+</ul>
+<hr>
+</section>
+<section id="responsible-use" class="level2">
+<h2 class="anchored" data-anchor-id="responsible-use">Responsible Use</h2>
+<p>Using models responsibly means:</p>
+<ul>
+<li>acknowledging limitations<br>
+</li>
+<li>avoiding overgeneralization<br>
+</li>
+<li>avoiding causal claims<br>
+</li>
+<li>communicating uncertainty clearly</li>
+</ul>
+<hr>
+</section>
+<section id="practical-questions-to-ask" class="level2">
+<h2 class="anchored" data-anchor-id="practical-questions-to-ask">Practical Questions to Ask</h2>
+<p>Before using a model in practice, ask:</p>
+<ul>
+<li>What data was this model trained on?<br>
+</li>
+<li>Where might this model fail?<br>
+</li>
+<li>What assumptions does it rely on?<br>
+</li>
+<li>What are the consequences of incorrect predictions?</li>
+</ul>
+<p>These questions help prevent misuse.</p>
+<hr>
+</section>
+<section id="example-responsible-vs-irresponsible-use" class="level2">
+<h2 class="anchored" data-anchor-id="example-responsible-vs-irresponsible-use">Example: Responsible vs Irresponsible Use</h2>
+<section id="irresponsible" class="level3">
+<h3 class="anchored" data-anchor-id="irresponsible">Irresponsible</h3>
+<ul>
+<li>“This model predicts disease progression accurately for all patients”<br>
+</li>
+<li>“BMI is the main cause of progression”</li>
+</ul>
+</section>
+<section id="responsible" class="level3">
+<h3 class="anchored" data-anchor-id="responsible">Responsible</h3>
+<ul>
+<li>“This model shows moderate predictive ability within this dataset”<br>
+</li>
+<li>“BMI is an important predictor in this model, but not necessarily causal”</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="key-insight" class="level2">
+<h2 class="anchored" data-anchor-id="key-insight">Key Insight</h2>
+<p>A useful model is not one that is perfect.</p>
+<p>It is one that is:</p>
+<ul>
+<li>understood<br>
+</li>
+<li>appropriately applied<br>
+</li>
+<li>used with awareness of its limits</li>
+</ul>
+<hr>
+</section>
+<section id="connecting-back-to-the-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="connecting-back-to-the-workflow">Connecting Back to the Workflow</h2>
+<p>Everything we built remains valid:</p>
+<ul>
+<li>pipelines improve reproducibility<br>
+</li>
+<li>cross-validation improves stability assessment<br>
+</li>
+<li>interpretation helps explain model behavior</li>
+</ul>
+<p>But all of these operate within limits.</p>
+<p>Recognizing those limits is what turns:</p>
+<p>analysis → responsible analysis</p>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>All models have limitations<br>
+</li>
+<li>Data defines what models can learn<br>
+</li>
+<li>Generalization is not guaranteed<br>
+</li>
+<li>Associations are not causation<br>
+</li>
+<li>Uncertainty is always present<br>
+</li>
+<li>Responsible use is part of analysis</li>
+</ul>
+<hr>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
+<p>→ <strong>From foundations to real-world practice</strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -704,11 +970,14 @@ Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="http
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./999-appendix.html" class="pagination-link" aria-label="Appendix">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Appendix</span></span>
+      <a href="./17-end-to-end-case-study.html" class="pagination-link" aria-label="End-to-End Case Study: From Data to Decision">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">End-to-End Case Study: From Data to Decision</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./19-from-foundations-to-real-world-practice.html" class="pagination-link" aria-label="From Foundations to Real-World Practice">
+        <span class="nav-page-text"><span class="chapter-title">From Foundations to Real-World Practice</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

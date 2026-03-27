@@ -1,0 +1,243 @@
+# Pipelines and Cross-Validation {#lesson12}
+
+:::cdi-message
+- **ID:** DS-L12
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** From single results to stable, reproducible modeling
+:::
+
+In previous lessons, we evaluated models using a single train/test split.
+
+This provided a useful starting point.
+
+However, a single split gives only one estimate of performance.
+
+To move toward reliable conclusions, we need:
+
+- consistent preprocessing  
+- repeated evaluation across different splits  
+
+This is where **pipelines** and **cross-validation** become essential.
+
+---
+
+## Load the Dataset
+
+```{python}
+#| label: 12-load-data
+import pandas as pd
+
+df = pd.read_csv("data/diabetes.csv")
+
+X = df.drop(columns=["disease_progression"])
+y = df["disease_progression"]
+
+df.head()
+```
+
+---
+
+## Why Pipelines Matter
+
+So far, preprocessing and modeling were done in separate steps.
+
+This creates risks:
+
+- forgetting transformations  
+- inconsistent application  
+- data leakage  
+
+A pipeline solves this by:
+
+> combining preprocessing and modeling into a single, reproducible workflow.
+
+```{python}
+#| label: 12-build-pipeline
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LinearRegression())
+])
+
+pipeline
+```
+
+---
+
+## Why Cross-Validation Matters
+
+A single train/test split gives one estimate.
+
+But performance depends on how the data is split.
+
+Cross-validation addresses this by:
+
+> evaluating the model across multiple splits of the data.
+
+---
+
+## Apply Cross-Validation
+
+```{python}
+#| label: 12-cross-validation
+from sklearn.model_selection import cross_val_score
+import numpy as np
+
+mae_scores = -cross_val_score(
+    pipeline,
+    X,
+    y,
+    cv=5,
+    scoring="neg_mean_absolute_error"
+)
+
+r2_scores = cross_val_score(
+    pipeline,
+    X,
+    y,
+    cv=5,
+    scoring="r2"
+)
+
+mae_scores, r2_scores
+```
+
+---
+
+## Summarize Results
+
+```{python}
+#| label: 12-results-table
+results_df = pd.DataFrame({
+    "MAE": mae_scores,
+    "R2": r2_scores
+}).round(3)
+
+results_df
+```
+
+```{python}
+#| label: 12-summary
+summary_df = pd.DataFrame({
+    "metric": ["MAE", "R2"],
+    "mean": [np.mean(mae_scores), np.mean(r2_scores)],
+    "std": [np.std(mae_scores), np.std(r2_scores)]
+}).round(3)
+
+summary_df
+```
+
+Cross-validation replaces a single result with a **distribution of outcomes**.
+
+---
+
+## Visualizing Performance Across Folds
+
+```{python}
+#| label: 12-plot-mae
+import matplotlib.pyplot as plt
+
+folds = range(1, len(mae_scores) + 1)
+
+plt.figure(figsize=(7, 5))
+plt.plot(folds, mae_scores, marker="o")
+plt.xlabel("Fold")
+plt.ylabel("MAE")
+plt.title("MAE Across Cross-Validation Folds")
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+```{python}
+#| label: 12-plot-r2
+plt.figure(figsize=(7, 5))
+plt.plot(folds, r2_scores, marker="o")
+plt.xlabel("Fold")
+plt.ylabel("R²")
+plt.title("R² Across Cross-Validation Folds")
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+These plots show how model performance varies across the five folds.
+
+For MAE:
+
+- most values fall within a relatively narrow range (~42–48)  
+- one fold shows slightly higher error, but not dramatically so  
+
+For R²:
+
+- values fluctuate between ~0.43 and ~0.55  
+- performance improves in some folds and decreases in others  
+
+### What this reveals
+
+The model does not perform identically across all splits, which is expected.
+
+However, the variation is **moderate rather than extreme**:
+
+- there are no folds with very poor performance  
+- there are no folds with unusually high performance  
+
+This suggests that the model is **reasonably stable**, though not perfectly consistent.
+
+---
+
+### Key Insight
+
+Each fold exposes the model to a slightly different subset of the data.
+
+This affects:
+
+- which patterns are learned  
+- how well those patterns generalize  
+
+The goal is not identical performance across folds,  
+but **limited variability around a consistent average**.
+
+---
+
+### CDI Interpretation
+
+These plots reinforce an important principle:
+
+> model evaluation should focus on patterns of performance, not single outcomes.
+
+Here, the pattern indicates:
+
+- moderate predictive ability  
+- acceptable stability  
+- no strong evidence of instability or overfitting  
+
+---
+
+### What This Means
+
+- The model is **reliable enough for baseline use**  
+- There is still room for improvement  
+- Improvements should aim to:
+  - reduce variability across folds  
+  - increase average performance  
+
+This is more informative than relying on a single train/test result.
+
+---
+
+## Summary
+
+- Pipelines ensure consistent preprocessing  
+- Cross-validation evaluates performance across multiple splits  
+- Tables summarize performance  
+- Plots reveal variability across folds  
+- Stability is more informative than a single result  
+
+---
+
+## Next Step
+
+→ **Feature importance and model interpretation**

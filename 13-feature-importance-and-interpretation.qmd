@@ -1,0 +1,229 @@
+# Feature Importance and Model Interpretation {#lesson13}
+
+:::cdi-message
+- **ID:** DS-L13
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** From stable models to interpretable models
+:::
+
+In the previous lesson, we focused on **stability**:
+
+- pipelines ensured consistent processing  
+- cross-validation provided reliable evaluation  
+
+Now we move to the next question:
+
+> What is the model actually using to make predictions?
+
+This is the transition from:
+
+**stable models → interpretable models**
+
+---
+
+## Load the Dataset
+
+```{python}
+#| label: 13-load-data
+import pandas as pd
+
+df = pd.read_csv("data/diabetes.csv")
+
+X = df.drop(columns=["disease_progression"])
+y = df["disease_progression"]
+
+df.head()
+```
+
+---
+
+## Fit a Linear Model
+
+```{python}
+#| label: 13-linear-model
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+coefficients = pd.Series(model.coef_, index=X.columns)
+coefficients.sort_values(ascending=False)
+```
+
+---
+
+## Understanding Coefficients
+
+A coefficient reflects how much the model’s prediction changes when a feature changes,  
+**holding other features constant**.
+
+Larger coefficients indicate stronger influence on the prediction.
+
+---
+
+## Important Caution
+
+```markdown
+These coefficients are useful, but they must be interpreted carefully.
+
+A coefficient reflects how much the model’s prediction changes when a feature changes, **holding other features constant**.  
+In this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.
+
+However, a coefficient does **not** automatically imply:
+
+- causation  
+- clinical importance  
+- independent biological truth  
+
+Instead, it describes how the fitted model uses that feature **within this dataset, under this specific modeling setup, and given the presence of other variables**.
+
+This distinction is critical.
+
+Coefficients represent **model behavior**, not real-world mechanisms.
+```
+
+---
+
+## Visualizing Coefficients
+
+```{python}
+#| label: 13-plot-coefficients
+import matplotlib.pyplot as plt
+
+coefficients.sort_values().plot(kind="barh")
+plt.title("Feature Coefficients (Linear Model)")
+plt.xlabel("Coefficient Value")
+plt.show()
+```
+
+---
+
+## Tree-Based Feature Importance
+
+Linear models use coefficients.
+
+Tree-based models use **feature importance**.
+
+```{python}
+#| label: 13-tree-model
+from sklearn.tree import DecisionTreeRegressor
+
+tree = DecisionTreeRegressor(random_state=42)
+tree.fit(X_train, y_train)
+
+importance = pd.Series(tree.feature_importances_, index=X.columns)
+importance.sort_values(ascending=False)
+```
+
+---
+
+## Visualizing Feature Importance
+
+```{python}
+#| label: 13-plot-importance
+importance.sort_values().plot(kind="barh")
+plt.title("Feature Importance (Decision Tree)")
+plt.xlabel("Importance")
+plt.show()
+```
+
+## Interpreting Feature Influence
+
+These plots show how different models use features to make predictions.
+
+### Linear Model (Coefficients)
+
+The linear model provides both **direction and magnitude**:
+
+- features such as **s5, bmi, and s2** have large positive coefficients  
+  → higher values of these features are associated with higher predicted progression  
+
+- **s1** shows a strong negative coefficient  
+  → higher values are associated with lower predicted progression  
+
+- some features (e.g., age, sex) have relatively small coefficients  
+  → they contribute less to the prediction in this model  
+
+This reflects how the model distributes influence across features when forming predictions.
+
+---
+
+### Decision Tree (Feature Importance)
+
+The decision tree provides **relative importance**, not direction:
+
+- **bmi** dominates the model  
+  → it is the most frequently used feature for splitting  
+
+- **s5 and s1** also contribute meaningfully  
+- other features play smaller roles  
+
+This indicates that the tree relies more heavily on a small subset of features.
+
+---
+
+### Comparing the Two Views
+
+The two models highlight different aspects of feature influence:
+
+- the linear model distributes influence across multiple features  
+- the tree model concentrates importance on a smaller subset  
+
+This difference reflects **model structure**, not disagreement about truth.
+
+---
+
+### CDI Interpretation
+
+These results show how models use features differently to represent the same data.
+
+Importantly:
+
+> feature influence describes how the model behaves, not how the real world works.
+
+A feature appearing important means:
+
+- the model depends on it for prediction  
+- not that it causes the outcome  
+
+---
+
+### What This Means
+
+- interpretation should focus on **model behavior**  
+- different models may highlight different features  
+- consistent importance across models may strengthen confidence  
+- but no single model provides definitive explanation  
+
+---
+
+### Key Insight
+
+Interpretation is not about identifying a “true” feature.
+
+It is about understanding:
+
+- how the model uses available information  
+- how that usage changes across modeling approaches  
+
+---
+
+## Summary
+
+- Stable models can now be interpreted  
+- Coefficients show directional influence  
+- Feature importance shows relative contribution  
+- Interpretation must be cautious  
+- Models describe patterns, not mechanisms  
+
+---
+
+## Next Step
+
+→ **From model outputs to real-world claims**

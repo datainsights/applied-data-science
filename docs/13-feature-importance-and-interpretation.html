@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – Data Science Foundations Premium</title>
+<title>Feature Importance and Model Interpretation – Data Science Foundations Premium</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,36 +20,53 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./999-appendix.html" rel="prev">
+<link href="./14-from-model-outputs-to-real-world-claims.html" rel="next">
+<link href="./12-pipelines-and-cross-validation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -88,6 +105,9 @@ div.csl-indent {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="assets/css/cdi.css">
@@ -102,7 +122,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./13-feature-importance-and-interpretation.html"><span class="chapter-title">Feature Importance and Model Interpretation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,7 +199,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-feature-importance-and-interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Importance and Model Interpretation</span></a>
+  <a href="./13-feature-importance-and-interpretation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Feature Importance and Model Interpretation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,7 +250,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./999-references.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">References</span></a>
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
       </ul>
@@ -240,15 +260,38 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
+  <li><a href="#fit-a-linear-model" id="toc-fit-a-linear-model" class="nav-link" data-scroll-target="#fit-a-linear-model">Fit a Linear Model</a></li>
+  <li><a href="#understanding-coefficients" id="toc-understanding-coefficients" class="nav-link" data-scroll-target="#understanding-coefficients">Understanding Coefficients</a></li>
+  <li><a href="#important-caution" id="toc-important-caution" class="nav-link" data-scroll-target="#important-caution">Important Caution</a></li>
+  <li><a href="#visualizing-coefficients" id="toc-visualizing-coefficients" class="nav-link" data-scroll-target="#visualizing-coefficients">Visualizing Coefficients</a></li>
+  <li><a href="#tree-based-feature-importance" id="toc-tree-based-feature-importance" class="nav-link" data-scroll-target="#tree-based-feature-importance">Tree-Based Feature Importance</a></li>
+  <li><a href="#visualizing-feature-importance" id="toc-visualizing-feature-importance" class="nav-link" data-scroll-target="#visualizing-feature-importance">Visualizing Feature Importance</a></li>
+  <li><a href="#interpreting-feature-influence" id="toc-interpreting-feature-influence" class="nav-link" data-scroll-target="#interpreting-feature-influence">Interpreting Feature Influence</a>
+  <ul class="collapse">
+  <li><a href="#linear-model-coefficients" id="toc-linear-model-coefficients" class="nav-link" data-scroll-target="#linear-model-coefficients">Linear Model (Coefficients)</a></li>
+  <li><a href="#decision-tree-feature-importance" id="toc-decision-tree-feature-importance" class="nav-link" data-scroll-target="#decision-tree-feature-importance">Decision Tree (Feature Importance)</a></li>
+  <li><a href="#comparing-the-two-views" id="toc-comparing-the-two-views" class="nav-link" data-scroll-target="#comparing-the-two-views">Comparing the Two Views</a></li>
+  <li><a href="#cdi-interpretation" id="toc-cdi-interpretation" class="nav-link" data-scroll-target="#cdi-interpretation">CDI Interpretation</a></li>
+  <li><a href="#what-this-means" id="toc-what-this-means" class="nav-link" data-scroll-target="#what-this-means">What This Means</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Reference</a></li><li class="breadcrumb-item"><a href="./999-references.html"><span class="chapter-title">References</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./13-feature-importance-and-interpretation.html"><span class="chapter-title">Feature Importance and Model Interpretation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">References</span></h1>
+<h1 class="title"><span id="lesson13" class="quarto-section-identifier"><span class="chapter-title">Feature Importance and Model Interpretation</span></span></h1>
 </div>
 
 
@@ -271,34 +314,376 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-iris" class="csl-entry" role="listitem">
-Fisher, Ronald A. 1936. <span>“The Use of Multiple Measurements in
-Taxonomic Problems.”</span> <em>Annals of Eugenics</em>.
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> DS-L13</li>
+<li><strong>Type:</strong> Premium</li>
+<li><strong>Audience:</strong> Intermediate to Advanced</li>
+<li><strong>Theme:</strong> From stable models to interpretable models</li>
+</ul>
 </div>
-<div id="ref-numpy" class="csl-entry" role="listitem">
-Harris, Charles R. et al. 2020. <span>“Array Programming with
-<span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
-</div>
-<div id="ref-matplotlib" class="csl-entry" role="listitem">
-Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics
-Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
-</div>
-<div id="ref-pandas" class="csl-entry" role="listitem">
-McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span>
-<em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
-</div>
-<div id="ref-python" class="csl-entry" role="listitem">
-Python Software Foundation. 2024. <span>“Python Language
-Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
-</div>
-<div id="ref-seaborn" class="csl-entry" role="listitem">
-Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data
-Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
-</div>
-</div>
+<p>In the previous lesson, we focused on <strong>stability</strong>:</p>
+<ul>
+<li>pipelines ensured consistent processing<br>
+</li>
+<li>cross-validation provided reliable evaluation</li>
+</ul>
+<p>Now we move to the next question:</p>
+<blockquote class="blockquote">
+<p>What is the model actually using to make predictions?</p>
+</blockquote>
+<p>This is the transition from:</p>
+<p><strong>stable models → interpretable models</strong></p>
+<hr>
+<section id="load-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
+<div id="cell-13-load-data" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="load-data" class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">bmi</th>
+<th data-quarto-table-cell-role="th">bp</th>
+<th data-quarto-table-cell-role="th">s1</th>
+<th data-quarto-table-cell-role="th">s2</th>
+<th data-quarto-table-cell-role="th">s3</th>
+<th data-quarto-table-cell-role="th">s4</th>
+<th data-quarto-table-cell-role="th">s5</th>
+<th data-quarto-table-cell-role="th">s6</th>
+<th data-quarto-table-cell-role="th">disease_progression</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.038076</td>
+<td>0.050680</td>
+<td>0.061696</td>
+<td>0.021872</td>
+<td>-0.044223</td>
+<td>-0.034821</td>
+<td>-0.043401</td>
+<td>-0.002592</td>
+<td>0.019907</td>
+<td>-0.017646</td>
+<td>151.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-0.001882</td>
+<td>-0.044642</td>
+<td>-0.051474</td>
+<td>-0.026328</td>
+<td>-0.008449</td>
+<td>-0.019163</td>
+<td>0.074412</td>
+<td>-0.039493</td>
+<td>-0.068332</td>
+<td>-0.092204</td>
+<td>75.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.085299</td>
+<td>0.050680</td>
+<td>0.044451</td>
+<td>-0.005670</td>
+<td>-0.045599</td>
+<td>-0.034194</td>
+<td>-0.032356</td>
+<td>-0.002592</td>
+<td>0.002861</td>
+<td>-0.025930</td>
+<td>141.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-0.089063</td>
+<td>-0.044642</td>
+<td>-0.011595</td>
+<td>-0.036656</td>
+<td>0.012191</td>
+<td>0.024991</td>
+<td>-0.036038</td>
+<td>0.034309</td>
+<td>0.022688</td>
+<td>-0.009362</td>
+<td>206.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0.005383</td>
+<td>-0.044642</td>
+<td>-0.036385</td>
+<td>0.021872</td>
+<td>0.003935</td>
+<td>0.015596</td>
+<td>0.008142</td>
+<td>-0.002592</td>
+<td>-0.031988</td>
+<td>-0.046641</td>
+<td>135.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="fit-a-linear-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-linear-model">Fit a Linear Model</h2>
+<div id="cell-13-linear-model" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>coefficients <span class="op">=</span> pd.Series(model.coef_, index<span class="op">=</span>X.columns)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>coefficients.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="linear-model" class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>s5     736.198859
+bmi    542.428759
+s2     518.062277
+bp     347.703844
+s4     275.317902
+s3     163.419983
+s6      48.670657
+age     37.904021
+sex   -241.964362
+s1    -931.488846
+dtype: float64</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="understanding-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-coefficients">Understanding Coefficients</h2>
+<p>A coefficient reflects how much the model’s prediction changes when a feature changes,<br>
+<strong>holding other features constant</strong>.</p>
+<p>Larger coefficients indicate stronger influence on the prediction.</p>
+<hr>
+</section>
+<section id="important-caution" class="level2">
+<h2 class="anchored" data-anchor-id="important-caution">Important Caution</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>These coefficients are useful, but they must be interpreted carefully.</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>A coefficient reflects how much the model’s prediction changes when a feature changes, **holding other features constant**.  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>In this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>However, a coefficient does **not** automatically imply:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>causation  </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>clinical importance  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>independent biological truth  </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Instead, it describes how the fitted model uses that feature **within this dataset, under this specific modeling setup, and given the presence of other variables**.</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>This distinction is critical.</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>Coefficients represent **model behavior**, not real-world mechanisms.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="visualizing-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-coefficients">Visualizing Coefficients</h2>
+<div id="cell-13-plot-coefficients" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>coefficients.sort_values().plot(kind<span class="op">=</span><span class="st">"barh"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Feature Coefficients (Linear Model)"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Coefficient Value"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13-feature-importance-and-interpretation_files/figure-html/plot-coefficients-output-1.png" id="plot-coefficients" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="tree-based-feature-importance" class="level2">
+<h2 class="anchored" data-anchor-id="tree-based-feature-importance">Tree-Based Feature Importance</h2>
+<p>Linear models use coefficients.</p>
+<p>Tree-based models use <strong>feature importance</strong>.</p>
+<div id="cell-13-tree-model" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tree.fit(X_train, y_train)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> pd.Series(tree.feature_importances_, index<span class="op">=</span>X.columns)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>importance.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tree-model" class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>bmi    0.418232
+s5     0.155795
+s1     0.083177
+age    0.064586
+s3     0.063936
+bp     0.062494
+s6     0.061930
+s2     0.053389
+s4     0.029788
+sex    0.006673
+dtype: float64</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="visualizing-feature-importance" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-feature-importance">Visualizing Feature Importance</h2>
+<div id="cell-13-plot-importance" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>importance.sort_values().plot(kind<span class="op">=</span><span class="st">"barh"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Feature Importance (Decision Tree)"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Importance"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13-feature-importance-and-interpretation_files/figure-html/plot-importance-output-1.png" id="plot-importance" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-feature-influence" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-feature-influence">Interpreting Feature Influence</h2>
+<p>These plots show how different models use features to make predictions.</p>
+<section id="linear-model-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="linear-model-coefficients">Linear Model (Coefficients)</h3>
+<p>The linear model provides both <strong>direction and magnitude</strong>:</p>
+<ul>
+<li><p>features such as <strong>s5, bmi, and s2</strong> have large positive coefficients<br>
+→ higher values of these features are associated with higher predicted progression</p></li>
+<li><p><strong>s1</strong> shows a strong negative coefficient<br>
+→ higher values are associated with lower predicted progression</p></li>
+<li><p>some features (e.g., age, sex) have relatively small coefficients<br>
+→ they contribute less to the prediction in this model</p></li>
+</ul>
+<p>This reflects how the model distributes influence across features when forming predictions.</p>
+<hr>
+</section>
+<section id="decision-tree-feature-importance" class="level3">
+<h3 class="anchored" data-anchor-id="decision-tree-feature-importance">Decision Tree (Feature Importance)</h3>
+<p>The decision tree provides <strong>relative importance</strong>, not direction:</p>
+<ul>
+<li><p><strong>bmi</strong> dominates the model<br>
+→ it is the most frequently used feature for splitting</p></li>
+<li><p><strong>s5 and s1</strong> also contribute meaningfully<br>
+</p></li>
+<li><p>other features play smaller roles</p></li>
+</ul>
+<p>This indicates that the tree relies more heavily on a small subset of features.</p>
+<hr>
+</section>
+<section id="comparing-the-two-views" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-the-two-views">Comparing the Two Views</h3>
+<p>The two models highlight different aspects of feature influence:</p>
+<ul>
+<li>the linear model distributes influence across multiple features<br>
+</li>
+<li>the tree model concentrates importance on a smaller subset</li>
+</ul>
+<p>This difference reflects <strong>model structure</strong>, not disagreement about truth.</p>
+<hr>
+</section>
+<section id="cdi-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="cdi-interpretation">CDI Interpretation</h3>
+<p>These results show how models use features differently to represent the same data.</p>
+<p>Importantly:</p>
+<blockquote class="blockquote">
+<p>feature influence describes how the model behaves, not how the real world works.</p>
+</blockquote>
+<p>A feature appearing important means:</p>
+<ul>
+<li>the model depends on it for prediction<br>
+</li>
+<li>not that it causes the outcome</li>
+</ul>
+<hr>
+</section>
+<section id="what-this-means" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-means">What This Means</h3>
+<ul>
+<li>interpretation should focus on <strong>model behavior</strong><br>
+</li>
+<li>different models may highlight different features<br>
+</li>
+<li>consistent importance across models may strengthen confidence<br>
+</li>
+<li>but no single model provides definitive explanation</li>
+</ul>
+<hr>
+</section>
+<section id="key-insight" class="level3">
+<h3 class="anchored" data-anchor-id="key-insight">Key Insight</h3>
+<p>Interpretation is not about identifying a “true” feature.</p>
+<p>It is about understanding:</p>
+<ul>
+<li>how the model uses available information<br>
+</li>
+<li>how that usage changes across modeling approaches</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>Stable models can now be interpreted<br>
+</li>
+<li>Coefficients show directional influence<br>
+</li>
+<li>Feature importance shows relative contribution<br>
+</li>
+<li>Interpretation must be cautious<br>
+</li>
+<li>Models describe patterns, not mechanisms</li>
+</ul>
+<hr>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
+<p>→ <strong>From model outputs to real-world claims</strong></p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -704,11 +1089,14 @@ Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="http
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./999-appendix.html" class="pagination-link" aria-label="Appendix">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Appendix</span></span>
+      <a href="./12-pipelines-and-cross-validation.html" class="pagination-link" aria-label="Pipelines and Cross-Validation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Pipelines and Cross-Validation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./14-from-model-outputs-to-real-world-claims.html" class="pagination-link" aria-label="From Model Outputs to Real-World Claims">
+        <span class="nav-page-text"><span class="chapter-title">From Model Outputs to Real-World Claims</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

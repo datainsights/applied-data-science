@@ -20,9 +20,15 @@ book:
         - 08-feature-engineering.qmd
         - 09-model-building.qmd
         - 10-model-evaluation.qmd
-        # - 11-model-improvement.qmd
-        # - 12-pipelines-and-reproducibility.qmd
-        # - 13-model-interpretation.qmd
+        - 11-model-improvement.qmd
+        - 12-pipelines-and-cross-validation.qmd
+        - 13-feature-importance-and-interpretation.qmd
+        - 14-from-model-outputs-to-real-world-claims.qmd
+        - 15-communicating-results-clearly.qmd
+        - 16-from-analysis-to-decision-making.qmd
+        - 17-end-to-end-case-study.qmd
+        - 18-limitations-and-responsible-use.qmd
+        - 19-from-foundations-to-real-world-practice.qmd
         # - 14-packaging-models.qmd
         # - 15-building-api.qmd
         # - 16-deployment-concepts.qmd

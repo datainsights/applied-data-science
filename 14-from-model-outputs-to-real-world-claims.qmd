@@ -1,0 +1,274 @@
+# From Model Outputs to Real-World Claims {#lesson14}
+
+:::cdi-message
+- **ID:** DS-L14
+- **Type:** Premium
+- **Audience:** Intermediate to Advanced
+- **Theme:** Translating model results into defensible claims
+:::
+
+So far, we have:
+
+- built models  
+- evaluated their performance  
+- assessed stability  
+- interpreted feature influence  
+
+Now we reach a critical step:
+
+> How do we translate model outputs into real-world statements?
+
+---
+
+## Load the Dataset
+
+```{python}
+#| label: 14-load-data
+import pandas as pd
+
+df = pd.read_csv("data/diabetes.csv")
+
+X = df.drop(columns=["disease_progression"])
+y = df["disease_progression"]
+```
+
+---
+
+## Fit a Model
+
+```{python}
+#| label: 14-model
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+```
+
+---
+
+## Observed vs Predicted
+
+```{python}
+#| label: 14-observed-vs-predicted
+import matplotlib.pyplot as plt
+import numpy as np
+
+error = np.abs(y_test - y_pred)
+
+plt.figure(figsize=(7, 5))
+
+scatter = plt.scatter(
+    y_test,
+    y_pred,
+    c=error,
+    cmap="viridis",
+    edgecolors="black",
+    linewidth=0.4,
+    alpha=0.9
+)
+
+min_val = min(y_test.min(), y_pred.min())
+max_val = max(y_test.max(), y_pred.max())
+
+plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", linewidth=1)
+
+plt.xlabel("Observed")
+plt.ylabel("Predicted")
+plt.title("Observed vs Predicted (Error Highlighted)")
+
+plt.colorbar(scatter, label="Absolute Error")
+
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+Points close to the diagonal line represent accurate predictions.  
+Points farther away indicate larger errors, highlighted by brighter colors.
+
+---
+
+## What the Model Actually Provides
+
+The model provides:
+
+- predictions (estimated outcomes)  
+- relationships between features and predictions  
+- patterns learned from the dataset  
+
+It does **not** directly provide:
+
+- causal relationships  
+- clinical conclusions  
+- general truths beyond the data  
+
+---
+
+## From Output to Claim
+
+A common mistake is to move too quickly from:
+
+model output → real-world conclusion  
+
+For example:
+
+❌ “BMI causes disease progression”
+
+Even if BMI appears as one of the strongest features, this claim is still too strong.
+
+What the model shows is that BMI is an important predictor in this dataset.
+
+That means BMI helps the model estimate disease progression,  
+but it does not prove that BMI is the direct cause of progression.
+
+---
+
+### A simple analogy
+
+> Umbrella sales are a strong predictor of wet streets.  
+> But umbrellas do not cause the streets to become wet.
+
+Both are related to an underlying factor — rain.
+
+---
+
+### What this means
+
+In the same way, a feature can be strongly associated with an outcome because it reflects:
+
+- underlying processes  
+- correlated variables  
+- or shared patterns in the data  
+
+A strong feature supports **prediction**.  
+It does not automatically establish **causation**.
+
+---
+
+### CDI Insight
+
+Models can detect patterns,  
+but they do not explain why those patterns exist.
+
+---
+
+## Correct Interpretation
+
+What we can say is:
+
+Higher BMI is associated with higher predicted disease progression in this model.
+
+This statement is:
+
+- accurate  
+- grounded in the model  
+- appropriately limited to the dataset  
+
+---
+
+## Why This Distinction Matters
+
+Model outputs depend on:
+
+- the dataset  
+- feature representation  
+- modeling assumptions  
+
+Changing any of these can lead to different conclusions.
+
+---
+
+## Strength of Claims
+
+We can think of claims at different levels:
+
+### Weak (Descriptive)
+
+- BMI is included in the model  
+
+### Moderate (Model-Based)
+
+- BMI has a strong positive coefficient  
+- BMI is important for prediction  
+
+### Strong (Not Supported Here)
+
+- BMI causes disease progression  
+
+---
+
+### CDI Insight
+
+> The strength of a claim must match the strength of the evidence.
+
+Models provide **associations and patterns**, not causation.
+
+---
+
+## Connecting Back to Stability
+
+Because we used:
+
+- cross-validation  
+- consistent pipelines  
+
+we can say:
+
+- the model is reasonably stable  
+- the observed patterns are not driven by a single split  
+
+However:
+
+- they remain **model-based observations**, not causal conclusions  
+
+---
+
+## What This Means in Practice
+
+When reporting results, focus on:
+
+- what the model learned  
+- how consistent the results are  
+- how strong the predictive relationship is  
+
+Avoid:
+
+- causal language  
+- overgeneralization  
+- claims beyond the data  
+
+---
+
+## Example Statements
+
+### Appropriate
+
+- The model consistently uses BMI as a strong predictor of progression  
+- Predictions increase with higher BMI values in this dataset  
+
+### Not Appropriate
+
+- BMI is the main cause of disease progression  
+- Reducing BMI will reduce disease progression  
+
+---
+
+## Summary
+
+- Models produce predictions and patterns  
+- Interpretation must remain within the model’s scope  
+- Stability strengthens confidence, but does not establish causation  
+- Claims must match the level of evidence  
+- Careful wording is essential in real-world analysis  
+
+---
+
+## Next Step
+
+→ **Communicating results clearly and responsibly**
