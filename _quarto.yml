@@ -7,40 +7,46 @@ date: last-modified
 date-format: "MMM YYYY"
 
 book:
-  title: "Data Science Foundations Premium"
+  title: "Applied Data Science System"
   subtitle: "From Analysis to Real-World Analytical Systems"
+  author: "Teresia Mrema Buza | Complex Data Insights"
 
   chapters:
     - index.qmd
 
-    - part: "Premium Foundations"
+    - part: "System Orientation"
       chapters:
         - 00-preface.qmd
         - 01-setting-up-environment.qmd
+
+    - part: "Feature Engineering and Modeling"
+      chapters:
         - 08-feature-engineering.qmd
         - 09-model-building.qmd
         - 10-model-evaluation.qmd
         - 11-model-improvement.qmd
+
+    - part: "Pipelines and Interpretation"
+      chapters:
         - 12-pipelines-and-cross-validation.qmd
         - 13-feature-importance-and-interpretation.qmd
         - 14-from-model-outputs-to-real-world-claims.qmd
+
+    - part: "Communication and Decision-Making"
+      chapters:
         - 15-communicating-results-clearly.qmd
         - 16-from-analysis-to-decision-making.qmd
+
+    - part: "End-to-End Practice"
+      chapters:
         - 17-end-to-end-case-study.qmd
         - 18-limitations-and-responsible-use.qmd
         - 19-from-foundations-to-real-world-practice.qmd
-        # - 14-packaging-models.qmd
-        # - 15-building-api.qmd
-        # - 16-deployment-concepts.qmd
-        # - 17-monitoring-and-drift.qmd
-        # - 18-continuous-improvement.qmd
-        # - 19-capstone-project.qmd
 
     - part: "Reference"
       chapters:
         - 999-appendix.qmd
         - 999-references.qmd
-
 format:
   html:
     toc: true

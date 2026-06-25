@@ -451,6 +451,62 @@ A task to reinforce understanding</p></li>
 </div>
 </div>
 </div>
+<div class="cell" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  A[Deploy] --&gt; B[Interpret]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  B --&gt; C[Communicate]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  C --&gt; D[Decide]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  D --&gt; E[System]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  E --&gt; F[Feedback]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  F --&gt; G[Decision Gate]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  G --&gt;|Validated| H[Update System]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  G --&gt;|Rejected / Hold| I[Monitor]</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  H --&gt; A</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  classDef stage fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  classDef decision fill:#fff7ed,stroke:#f59e0b,stroke-width:2px,color:#7c2d12;</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  class A,B,C,D,E,F,H,I stage;</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  class G decision;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+  A[Deploy] --&gt; B[Interpret]
+  B --&gt; C[Communicate]
+  C --&gt; D[Decide]
+  D --&gt; E[System]
+
+  E --&gt; F[Feedback]
+
+  F --&gt; G[Decision Gate]
+
+  G --&gt;|Validated| H[Update System]
+  G --&gt;|Rejected / Hold| I[Monitor]
+
+  H --&gt; A
+
+  classDef stage fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
+  classDef decision fill:#fff7ed,stroke:#f59e0b,stroke-width:2px,color:#7c2d12;
+
+  class A,B,C,D,E,F,H,I stage;
+  class G decision;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>This extended workflow reflects how real analytical systems operate.</p>
 <p>Each stage introduces new considerations, including validation, reproducibility, and reliability.</p>
 

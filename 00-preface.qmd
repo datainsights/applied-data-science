@@ -122,6 +122,55 @@ flowchart TB
   H --> B
 ```
 
+
+```{mermaid}
+flowchart LR
+
+  A[Deploy] --> B[Interpret]
+  B --> C[Communicate]
+  C --> D[Decide]
+  D --> E[System]
+
+  E --> F[Feedback]
+
+  F --> G[Decision Gate]
+
+  G -->|Validated| H[Update System]
+  G -->|Rejected / Hold| I[Monitor]
+
+  H --> A
+
+  classDef stage fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
+  classDef decision fill:#fff7ed,stroke:#f59e0b,stroke-width:2px,color:#7c2d12;
+
+  class A,B,C,D,E,F,H,I stage;
+  class G decision;
+```
+
 This extended workflow reflects how real analytical systems operate.
 
 Each stage introduces new considerations, including validation, reproducibility, and reliability.
+
+```{mermaid}
+flowchart TD
+
+A[CDI Open Guides<br/>Learn the foundations] --> B[System Build 01<br/>Data Science]
+
+B --> C[Raw Data]
+C --> D[Data Understanding]
+D --> E[Cleaning & Preparation]
+E --> F[Exploratory Analysis]
+F --> G[Model Building]
+G --> H[Model Evaluation]
+H --> I[Interpretation]
+I --> J[Final Decision Output]
+
+J --> K[Portfolio Proof<br/>Reproducible repo + Quarto report]
+K --> L[Mentorship Review<br/>Feedback + refinement]
+L --> M[Deployment / DevOps Track<br/>APIs, apps, monitoring]
+
+B --> N[System Build Template]
+N --> O[System Build 02<br/>Bioinformatics]
+N --> P[System Build 03<br/>Clinical Data]
+N --> Q[System Build 04<br/>Business Analytics]
+```
