@@ -73,8 +73,7 @@ This makes the dataset part of the project itself.
 
 In later lessons, we will load the same file directly from disk so that the workflow remains consistent and reproducible.
 
-```{python}
-#| label: 09-save-diabetes
+```python
 import pandas as pd
 from sklearn.datasets import load_diabetes
 
@@ -88,12 +87,35 @@ df.to_csv("data/diabetes.csv", index=False)
 df.head()
 ```
 
+For a reusable version, use the prepared script below.
+
+---
+
+## Script 09A — Save the Diabetes Dataset
+
+Create a file called:
+
+```text
+scripts/python/09a_save_diabetes_dataset.py
+```
+
+Run it with:
+
+```bash
+python scripts/python/09a_save_diabetes_dataset.py
+```
+
+Expected output:
+
+```text
+data/diabetes.csv
+```
+
 ---
 
 ## Create Features and Target
 
-```{python}
-#| label: 09-create-x-y
+```python
 X = df.drop(columns=["disease_progression"])
 y = df["disease_progression"]
 
@@ -102,8 +124,7 @@ X.head()
 
 Let us also inspect the target.
 
-```{python}
-#| label: 09-target-preview
+```python
 y.head()
 ```
 
@@ -113,13 +134,11 @@ y.head()
 
 Before modeling, confirm what the data represents.
 
-```{python}
-#| label: 09-data-shape
+```python
 X.shape, y.shape
 ```
 
-```{python}
-#| label: 09-columns
+```python
 X.columns.tolist()
 ```
 
@@ -139,8 +158,7 @@ This distinction matters because it determines:
 
 ## A Brief Look at the Features
 
-```{python}
-#| label: 09-summary-stats
+```python
 X.describe().round(3)
 ```
 
@@ -167,8 +185,7 @@ That would produce an overly optimistic result.
 
 We create separate training and testing sets so that performance is assessed on unseen data.
 
-```{python}
-#| label: 09-train-test-split
+```python
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -196,8 +213,7 @@ A simple model gives us a reference point.
 
 We will start with linear regression.
 
-```{python}
-#| label: 09-fit-linear-model
+```python
 from sklearn.linear_model import LinearRegression
 
 model = LinearRegression()
@@ -206,8 +222,7 @@ model.fit(X_train, y_train)
 
 Now generate predictions on the test set.
 
-```{python}
-#| label: 09-predict-linear-model
+```python
 y_pred = model.predict(X_test)
 
 y_pred[:10]
@@ -222,8 +237,7 @@ For regression, two common metrics are:
 - **Mean Absolute Error (MAE)**: average absolute difference between observed and predicted values  
 - **R-squared (R²)**: proportion of variability explained by the model  
 
-```{python}
-#| label: 09-evaluate-linear-model
+```python
 from sklearn.metrics import mean_absolute_error, r2_score
 
 mae = mean_absolute_error(y_test, y_pred)
@@ -246,12 +260,47 @@ They must be interpreted relative to:
 
 ---
 
+## Script 09B — Train and Evaluate the Baseline Model
+
+Create a file called:
+
+```text
+scripts/python/09b_train_baseline_linear_model.py
+```
+
+Run it with:
+
+```bash
+python scripts/python/09b_train_baseline_linear_model.py
+```
+
+Expected outputs:
+
+```text
+models/diabetes-linear-regression.joblib
+reports/diabetes-model-metrics.csv
+reports/diabetes-observed-vs-predicted.csv
+reports/diabetes-model-coefficients.csv
+```
+
+This script creates the reusable modeling outputs for this lesson.
+
+---
+
 ## Compare Observed and Predicted Values
 
-```{python}
-#| label: 09-observed-vs-predicted
+A good diagnostic plot does more than show predictions.
+
+It reveals where the model is accurate and where it fails.
+
+Points close to the diagonal line represent accurate predictions.
+
+Points farther away indicate larger errors.
+
+```python
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 results_df = pd.DataFrame({
     "observed": y_test,
@@ -278,26 +327,39 @@ plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", linewidth=1)
 
 plt.xlabel("Observed progression")
 plt.ylabel("Predicted progression")
-plt.title("Observed vs Predicted (Error Highlighted)")
+plt.title("Observed vs Predicted")
 plt.colorbar(scatter, label="Absolute Error")
 plt.grid(alpha=0.2)
 plt.show()
 ```
 
-A good diagnostic plot does more than show predictions.
+---
 
-It reveals where the model is accurate and where it fails.
+## Script 09C — Plot Observed vs Predicted Results
 
-Points close to the diagonal line represent accurate predictions.
+Create a file called:
 
-Points farther away indicate larger errors, which are highlighted here by color intensity.
+```text
+scripts/python/09c_plot_observed_vs_predicted.py
+```
+
+Run it with:
+
+```bash
+python scripts/python/09c_plot_observed_vs_predicted.py
+```
+
+Expected output:
+
+```text
+reports/figures/diabetes-observed-vs-predicted.png
+```
 
 ---
 
 ## Inspect Coefficients Carefully
 
-```{python}
-#| label: 09-model-coefficients
+```python
 coef_df = pd.DataFrame({
     "feature": X_train.columns,
     "coefficient": model.coef_
@@ -308,7 +370,8 @@ coef_df
 
 These coefficients are useful, but they must be interpreted carefully.
 
-A coefficient reflects how much the model’s prediction changes when a feature changes, **holding other features constant**.  
+A coefficient reflects how much the model’s prediction changes when a feature changes, **holding other features constant**.
+
 In this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.
 
 However, a coefficient does **not** automatically imply:
@@ -350,16 +413,17 @@ If preprocessing or feature selection uses the full dataset before splitting, te
 
 ### Over-interpretation
 
-A moderate or weak metric does not mean the dataset is useless.  
+A moderate or weak metric does not mean the dataset is useless.
+
 It may mean the problem is difficult, the model is simple, or the features are limited.
 
-### False confidence
+### False Confidence
 
 A fitted model is not the same as a validated workflow.
 
 We still need to examine evaluation, robustness, and reproducibility more carefully.
 
-### Confusing association with explanation
+### Confusing Association with Explanation
 
 A predictive relationship is not the same as a biological mechanism.
 
@@ -381,17 +445,40 @@ That is the beginning of reliable prediction.
 
 ## Summary
 
-- We introduced a real-world health-related tabular dataset  
-- The diabetes dataset defines a regression task with clinical-style variables  
-- We saved the dataset into `data/` so later lessons can reuse the same file  
-- We created separate training and testing sets  
-- We fit a baseline linear regression model  
-- We evaluated performance using MAE and R-squared  
-- We examined observed versus predicted values and model coefficients  
-- We interpreted results cautiously rather than treating model output as truth  
+- We introduced a real-world health-related tabular dataset.  
+- The diabetes dataset defines a regression task with clinical-style variables.  
+- We saved the dataset into `data/` so later lessons can reuse the same file.  
+- We created separate training and testing sets.  
+- We fit a baseline linear regression model.  
+- We evaluated performance using MAE and R-squared.  
+- We examined observed versus predicted values and model coefficients.  
+- We interpreted results cautiously rather than treating model output as truth.  
 
 ---
 
-## Next Step
+## Exercise
 
-→ **Evaluating models beyond a single split**
+Run the three scripts for this lesson.
+
+Then answer:
+
+1. What is the target variable?
+2. Is this a regression or classification task?
+3. What does MAE tell you?
+4. What does R-squared tell you?
+5. Why should coefficients not be treated as causal explanations?
+6. What could go wrong if evaluation is done on the training data?
+
+---
+
+## Looking Ahead
+
+In the next lesson, we evaluate models beyond a single train-test split.
+
+The focus shifts from asking:
+
+> Can this model fit once?
+
+to asking:
+
+> How stable and trustworthy is this model when evaluated more carefully?

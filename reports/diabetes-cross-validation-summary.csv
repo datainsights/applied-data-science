@@ -1,0 +1,5 @@
+metric,value
+mean_r2,0.482
+std_r2,0.049
+min_r2,0.426
+max_r2,0.55

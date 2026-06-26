@@ -31,8 +31,7 @@ Because the dataset was saved into the project `data/` directory, we now load it
 
 This keeps the workflow consistent across lessons and reflects how real projects are usually organized.
 
-```{python}
-#| label: 10-load-diabetes-file
+```python
 import pandas as pd
 
 df = pd.read_csv("data/diabetes.csv")
@@ -68,8 +67,7 @@ This raises an important question:
 
 Let us repeat the modeling process using different random splits.
 
-```{python}
-#| label: 10-repeat-split
+```python
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, r2_score
@@ -110,14 +108,12 @@ This tells us something important:
 
 ## Aggregating Results
 
-```{python}
-#| label: 10-aggregate-results
+```python
 results_df = pd.DataFrame(results, columns=["MAE", "R2"])
 results_df
 ```
 
-```{python}
-#| label: 10-summary-results
+```python
 results_df.describe().round(3)
 ```
 
@@ -127,14 +123,38 @@ This is a more realistic view.
 
 ---
 
+## Script 10A — Evaluate Repeated Train/Test Splits
+
+Create a file called:
+
+```text
+scripts/python/10a_evaluate_repeated_splits.py
+```
+
+Run it with:
+
+```bash
+python scripts/python/10a_evaluate_repeated_splits.py
+```
+
+Expected outputs:
+
+```text
+reports/diabetes-repeated-split-metrics.csv
+reports/diabetes-repeated-split-summary.csv
+```
+
+This script repeats model fitting across multiple random train/test splits and summarizes how performance changes.
+
+---
+
 ## Introducing Cross-Validation
 
 To make evaluation more stable, we can systematically repeat this process.
 
 This is the idea behind cross-validation.
 
-```{python}
-#| label: 10-cross-validation
+```python
 from sklearn.model_selection import cross_val_score
 
 model = LinearRegression()
@@ -150,16 +170,14 @@ cv_scores = cross_val_score(
 cv_scores
 ```
 
-```{python}
-#| label: 10-cv-summary
+```python
 pd.DataFrame({
     "cv_fold": range(1, len(cv_scores) + 1),
     "r2": cv_scores
 }).round(3)
 ```
 
-```{python}
-#| label: 10-cv-mean-std
+```python
 cv_scores.mean(), cv_scores.std()
 ```
 
@@ -169,6 +187,31 @@ Cross-validation gives us:
 - a measure of variability  
 
 This is more informative than a single split.
+
+---
+
+## Script 10B — Run Cross-Validation
+
+Create a file called:
+
+```text
+scripts/python/10b_cross_validate_linear_model.py
+```
+
+Run it with:
+
+```bash
+python scripts/python/10b_cross_validate_linear_model.py
+```
+
+Expected outputs:
+
+```text
+reports/diabetes-cross-validation-r2.csv
+reports/diabetes-cross-validation-summary.csv
+```
+
+This script evaluates the model across cross-validation folds and records both fold-level and summary results.
 
 ---
 
@@ -201,8 +244,7 @@ But it can be misleading:
 
 To examine residuals clearly, we recompute predictions using a defined train/test split.
 
-```{python}
-#| label: 10-residual-setup
+```python
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
@@ -213,8 +255,7 @@ residual_model.fit(X_train, y_train)
 y_pred = residual_model.predict(X_test)
 ```
 
-```{python}
-#| label: 10-residual-plot
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -235,7 +276,7 @@ scatter = plt.scatter(
 plt.axhline(0, linestyle="--", linewidth=1)
 plt.xlabel("Predicted values")
 plt.ylabel("Residuals")
-plt.title("Residual Plot (Error Magnitude Highlighted)")
+plt.title("Residual Plot")
 plt.colorbar(scatter, label="Absolute Error")
 plt.grid(alpha=0.2)
 plt.show()
@@ -248,13 +289,36 @@ It allows us to detect:
 - **systematic bias**  
   If residuals are mostly above or below zero, the model consistently over- or under-predicts  
 
-- **uneven error distribution (heteroscedasticity)**  
+- **uneven error distribution**  
   If the spread of residuals changes across predicted values, the model performs inconsistently across ranges  
 
 - **regions of poor performance**  
-  Clusters of large residuals, highlighted by stronger color, indicate where the model struggles to capture the underlying pattern  
+  Clusters of large residuals indicate where the model struggles to capture the underlying pattern  
 
 Rather than summarizing error with a single number, this plot reveals **how and where the model fails**, which is essential for reliable interpretation.
+
+---
+
+## Script 10C — Create Residual Plot
+
+Create a file called:
+
+```text
+scripts/python/10c_plot_residuals.py
+```
+
+Run it with:
+
+```bash
+python scripts/python/10c_plot_residuals.py
+```
+
+Expected outputs:
+
+```text
+reports/diabetes-residuals.csv
+reports/figures/diabetes-residual-plot.png
+```
 
 ---
 
@@ -305,15 +369,38 @@ Reliability comes from consistency, not a single result.
 
 ## Summary
 
-- A single train/test split provides limited insight  
-- Model performance varies depending on data partitioning  
-- Cross-validation provides a more stable estimate  
-- Metrics must be interpreted carefully  
-- Residual analysis reveals patterns hidden by summary statistics  
-- Reliable evaluation requires multiple perspectives  
+- A single train/test split provides limited insight.  
+- Model performance varies depending on data partitioning.  
+- Cross-validation provides a more stable estimate.  
+- Metrics must be interpreted carefully.  
+- Residual analysis reveals patterns hidden by summary statistics.  
+- Reliable evaluation requires multiple perspectives.  
 
 ---
 
-## Next Step
+## Exercise
 
-→ **Improving models through controlled changes**
+Run the three scripts for this lesson.
+
+Then answer:
+
+1. How much does MAE vary across repeated splits?
+2. How much does R-squared vary across repeated splits?
+3. What does cross-validation reveal that a single split does not?
+4. Are residuals evenly distributed around zero?
+5. Where does the model appear to make larger errors?
+6. Why is stable performance more trustworthy than a single strong score?
+
+---
+
+## Looking Ahead
+
+In the next lesson, we begin improving models through controlled changes.
+
+The focus shifts from asking:
+
+> How did this model perform?
+
+to asking:
+
+> What should we change, and how do we know whether the change helped?

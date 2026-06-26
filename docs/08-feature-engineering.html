@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Feature Engineering and Data Representation – Data Science Foundations Premium</title>
+<title>Feature Engineering and Data Representation – Applied Data Science System</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,9 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="assets/css/cdi.css">
@@ -122,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./08-feature-engineering.html"><span class="chapter-title">Feature Engineering and Data Representation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-feature-engineering.html">Feature Engineering and Modeling</a></li><li class="breadcrumb-item"><a href="./08-feature-engineering.html"><span class="chapter-title">Feature Engineering and Data Representation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -137,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Science Foundations Premium</a> 
+      <a href="./">Applied Data Science System</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -155,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Premium Foundations</span></a>
+ <span class="menu-text">System Orientation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -172,6 +169,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <a href="./01-setting-up-environment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Feature Engineering and Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-feature-engineering.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Feature Engineering and Data Representation</span></a>
@@ -192,6 +200,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <a href="./11-model-improvement.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Improving Models Through Controlled Changes</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pipelines and Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
@@ -207,6 +226,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <a href="./14-from-model-outputs-to-real-world-claims.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Model Outputs to Real-World Claims</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communication and Decision-Making</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communicating Results Clearly</span></a>
@@ -217,6 +247,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Analysis to Decision-Making</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">End-to-End Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-end-to-end-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Case Study: From Data to Decision</span></a>
@@ -236,13 +277,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Reference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix and References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./999-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix</span></a>
@@ -270,18 +311,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-1-making-variables-comparable" id="toc-step-1-making-variables-comparable" class="nav-link" data-scroll-target="#step-1-making-variables-comparable">Step 1 — Making Variables Comparable</a></li>
   <li><a href="#step-2-making-categories-visible" id="toc-step-2-making-categories-visible" class="nav-link" data-scroll-target="#step-2-making-categories-visible">Step 2 — Making Categories Visible</a></li>
   <li><a href="#step-3-making-relationships-explicit" id="toc-step-3-making-relationships-explicit" class="nav-link" data-scroll-target="#step-3-making-relationships-explicit">Step 3 — Making Relationships Explicit</a></li>
+  <li><a href="#important-warning-about-leakage" id="toc-important-warning-about-leakage" class="nav-link" data-scroll-target="#important-warning-about-leakage">Important Warning About Leakage</a></li>
   <li><a href="#transition-to-real-world-data" id="toc-transition-to-real-world-data" class="nav-link" data-scroll-target="#transition-to-real-world-data">Transition to Real-World Data</a></li>
   <li><a href="#preparing-your-own-data" id="toc-preparing-your-own-data" class="nav-link" data-scroll-target="#preparing-your-own-data">Preparing Your Own Data</a></li>
+  <li><a href="#script-08a-create-an-example-dataset" id="toc-script-08a-create-an-example-dataset" class="nav-link" data-scroll-target="#script-08a-create-an-example-dataset">Script 08A — Create an Example Dataset</a></li>
+  <li><a href="#script-08b-build-a-model-ready-feature-table" id="toc-script-08b-build-a-model-ready-feature-table" class="nav-link" data-scroll-target="#script-08b-build-a-model-ready-feature-table">Script 08B — Build a Model-Ready Feature Table</a></li>
+  <li><a href="#feature-engineering-checklist" id="toc-feature-engineering-checklist" class="nav-link" data-scroll-target="#feature-engineering-checklist">Feature Engineering Checklist</a></li>
   <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./08-feature-engineering.html"><span class="chapter-title">Feature Engineering and Data Representation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-feature-engineering.html">Feature Engineering and Modeling</a></li><li class="breadcrumb-item"><a href="./08-feature-engineering.html"><span class="chapter-title">Feature Engineering and Data Representation</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="lesson08" class="quarto-section-identifier"><span class="chapter-title">Feature Engineering and Data Representation</span></span></h1>
 </div>
@@ -294,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Mar 2026</p>
+      <p class="date">Jun 2026</p>
     </div>
   </div>
   
@@ -326,12 +372,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="representation-comes-before-modeling" class="level2">
 <h2 class="anchored" data-anchor-id="representation-comes-before-modeling">Representation Comes Before Modeling</h2>
 <p>Models do not understand raw data.</p>
-<p>They operate on numerical representations.</p>
+<p>They operate on structured representations.</p>
+<p>In most applied data science workflows, this means numerical or encoded variables arranged in a model-ready table.</p>
 <p>This means:</p>
 <ul>
-<li>the model does not “discover” structure on its own<br>
+<li>the model does not understand context automatically<br>
 </li>
-<li>it can only learn from what is made visible</li>
+<li>it can only learn from what is made visible<br>
+</li>
+<li>it can only use information that has been represented correctly<br>
+</li>
+<li>it may ignore important structure if that structure is hidden</li>
 </ul>
 <p>Feature engineering determines:</p>
 <ul>
@@ -339,276 +390,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>which relationships are emphasized<br>
 </li>
-<li>which signals are ignored</li>
+<li>which signals are ignored<br>
+</li>
+<li>which sources of variation become available to the model</li>
 </ul>
 <p>Two datasets with the same information can lead to very different models depending on how features are constructed.</p>
+<p>This is why feature engineering is not only a technical step.</p>
+<p>It is a modeling design decision.</p>
 <hr>
 </section>
 <section id="a-simple-example" class="level2">
 <h2 class="anchored" data-anchor-id="a-simple-example">A Simple Example</h2>
-<div id="8413a0bb" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<p>Start with a small table.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: [<span class="dv">22</span>, <span class="dv">35</span>, <span class="dv">47</span>, <span class="dv">51</span>],</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"income"</span>: [<span class="dv">25000</span>, <span class="dv">48000</span>, <span class="dv">52000</span>, <span class="dv">61000</span>],</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"city"</span>: [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"C"</span>]</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">income</th>
-<th data-quarto-table-cell-role="th">city</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>22</td>
-<td>25000</td>
-<td>A</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>35</td>
-<td>48000</td>
-<td>B</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>47</td>
-<td>52000</td>
-<td>A</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>51</td>
-<td>61000</td>
-<td>C</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>people</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>At this stage:</p>
 <ul>
-<li>scales are inconsistent<br>
+<li>numerical variables have different scales<br>
 </li>
-<li>categorical data is not usable<br>
+<li>categorical data is not yet represented numerically<br>
 </li>
-<li>relationships are implicit</li>
+<li>relationships between variables are implicit<br>
+</li>
+<li>the table is understandable to a person, but not yet ready for many models</li>
 </ul>
 <p>This is not yet a modeling dataset.</p>
 <hr>
 </section>
 <section id="step-1-making-variables-comparable" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-making-variables-comparable">Step 1 — Making Variables Comparable</h2>
-<div id="e476d802" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<p>Some models are sensitive to the scale of input variables.</p>
+<p>For example, income is measured in thousands, while age is measured in years.</p>
+<p>Without scaling, a model may give more influence to a variable simply because its values are larger.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df_scaled <span class="op">=</span> df.copy()</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df_scaled[[<span class="st">"age"</span>, <span class="st">"income"</span>]] <span class="op">=</span> scaler.fit_transform(df[[<span class="st">"age"</span>, <span class="st">"income"</span>]])</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df_scaled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">income</th>
-<th data-quarto-table-cell-role="th">city</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-1.479422</td>
-<td>-1.619474</td>
-<td>A</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-0.331214</td>
-<td>0.112987</td>
-<td>B</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.728670</td>
-<td>0.414284</td>
-<td>A</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1.081965</td>
-<td>1.092203</td>
-<td>C</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>people_scaled <span class="op">=</span> people.copy()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>people_scaled[[<span class="st">"age"</span>, <span class="st">"income"</span>]] <span class="op">=</span> scaler.fit_transform(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    people[[<span class="st">"age"</span>, <span class="st">"income"</span>]]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>people_scaled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Scaling does not change the meaning of the variables.</p>
+<p>It changes how the values are represented for the model.</p>
+<p>This helps numerical variables become more comparable.</p>
 <hr>
 </section>
 <section id="step-2-making-categories-visible" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-making-categories-visible">Step 2 — Making Categories Visible</h2>
-<div id="e46615be" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_encoded <span class="op">=</span> pd.get_dummies(df_scaled, columns<span class="op">=</span>[<span class="st">"city"</span>])</span>
+<p>Many models cannot use text categories directly.</p>
+<p>The <code>city</code> column contains meaningful information, but it must be encoded before modeling.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>people_encoded <span class="op">=</span> pd.get_dummies(people_scaled, columns<span class="op">=</span>[<span class="st">"city"</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_encoded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">income</th>
-<th data-quarto-table-cell-role="th">city_A</th>
-<th data-quarto-table-cell-role="th">city_B</th>
-<th data-quarto-table-cell-role="th">city_C</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-1.479422</td>
-<td>-1.619474</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-0.331214</td>
-<td>0.112987</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.728670</td>
-<td>0.414284</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1.081965</td>
-<td>1.092203</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>people_encoded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This converts the city categories into indicator variables.</p>
+<p>Now the model can use city information as part of the input representation.</p>
+<p>The goal is not to make the data look more complicated.</p>
+<p>The goal is to make useful information visible to the model.</p>
 <hr>
 </section>
 <section id="step-3-making-relationships-explicit" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-making-relationships-explicit">Step 3 — Making Relationships Explicit</h2>
-<div id="25b2724c" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_features <span class="op">=</span> df_encoded.copy()</span>
+<p>Some relationships are not directly visible in the original columns.</p>
+<p>For example, income relative to age may carry different information from income alone.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>people_features <span class="op">=</span> people_encoded.copy()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_features[<span class="st">"income_per_age"</span>] <span class="op">=</span> df_features[<span class="st">"income"</span>] <span class="op">/</span> (df_features[<span class="st">"age"</span>] <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df_features</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">income</th>
-<th data-quarto-table-cell-role="th">city_A</th>
-<th data-quarto-table-cell-role="th">city_B</th>
-<th data-quarto-table-cell-role="th">city_C</th>
-<th data-quarto-table-cell-role="th">income_per_age</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-1.479422</td>
-<td>-1.619474</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>3.377974</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-0.331214</td>
-<td>0.112987</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>0.168943</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.728670</td>
-<td>0.414284</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>0.239655</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>1.081965</td>
-<td>1.092203</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>0.524602</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>people_features[<span class="st">"income_per_age"</span>] <span class="op">=</span> (</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    people_features[<span class="st">"income"</span>] <span class="op">/</span> (people_features[<span class="st">"age"</span>] <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>people_features</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a derived feature.</p>
+<p>A derived feature is a new variable created from existing variables.</p>
+<p>Derived features can help expose relationships that may otherwise be difficult for a model to learn.</p>
+<p>However, derived features should be created carefully.</p>
+<p>A feature should be meaningful, reproducible, and explainable.</p>
+<hr>
+</section>
+<section id="important-warning-about-leakage" class="level2">
+<h2 class="anchored" data-anchor-id="important-warning-about-leakage">Important Warning About Leakage</h2>
+<p>Feature engineering must avoid data leakage.</p>
+<p>Data leakage occurs when information is used during modeling that would not be available at the time of prediction.</p>
+<p>Examples include:</p>
+<ul>
+<li>using future outcomes to create a feature<br>
+</li>
+<li>scaling data before splitting into training and testing sets<br>
+</li>
+<li>using post-event information to predict a pre-event decision<br>
+</li>
+<li>including variables that directly reveal the answer</li>
+</ul>
+<p>Leakage can make a model look strong during evaluation but fail in real use.</p>
+<p>In applied data science, a good feature is not only predictive.</p>
+<p>It must also be valid for the real decision context.</p>
 <hr>
 </section>
 <section id="transition-to-real-world-data" class="level2">
@@ -621,9 +504,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>larger<br>
 </li>
+<li>messier<br>
+</li>
 <li>less consistent<br>
 </li>
-<li>less explicit in their structure</li>
+<li>less explicit in their structure<br>
+</li>
+<li>shaped by collection processes, measurement limits, and human decisions</li>
 </ul>
 <p>As we move forward, we will begin working with real-world data.</p>
 <p>This introduces a new responsibility:</p>
@@ -642,7 +529,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>each column has a consistent data type<br>
 </li>
-<li>missing values are handled or explicitly represented</li>
+<li>missing values are handled or explicitly represented<br>
+</li>
+<li>target variables are separated from predictor variables<br>
+</li>
+<li>identifiers are preserved but not accidentally used as model signals</li>
 </ul>
 <p>In CDI terms, this is a <strong>tidy and structured dataset</strong>.</p>
 <p>If your data does not follow this structure:</p>
@@ -651,8 +542,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>models become unreliable<br>
 </li>
-<li>results become difficult to interpret</li>
+<li>results become difficult to interpret<br>
+</li>
+<li>the workflow becomes difficult to reuse</li>
 </ul>
+<p>A model-ready table should be understandable both to the computer and to the analyst.</p>
+<hr>
+</section>
+<section id="script-08a-create-an-example-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="script-08a-create-an-example-dataset">Script 08A — Create an Example Dataset</h2>
+<p>Create a file called:</p>
+<pre class="text"><code>scripts/python/08a_create_example_people_dataset.py</code></pre>
+<p>This script creates a small example dataset and saves it in <code>data/raw/</code>.</p>
+<p>Run it with:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/08a_create_example_people_dataset.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>data/raw/people-example.csv</code></pre>
+<hr>
+</section>
+<section id="script-08b-build-a-model-ready-feature-table" class="level2">
+<h2 class="anchored" data-anchor-id="script-08b-build-a-model-ready-feature-table">Script 08B — Build a Model-Ready Feature Table</h2>
+<p>Create a file called:</p>
+<pre class="text"><code>scripts/python/08b_build_feature_table.py</code></pre>
+<p>This script reads the raw example dataset, scales numerical variables, encodes the categorical variable, creates a derived feature, and saves a model-ready table.</p>
+<p>Run it with:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/08b_build_feature_table.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>data/processed/model-ready-example.csv</code></pre>
+<p>This script is intentionally simple.</p>
+<p>Later chapters will improve this pattern by using training and testing splits, pipelines, and evaluation workflows.</p>
+<hr>
+</section>
+<section id="feature-engineering-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering-checklist">Feature Engineering Checklist</h2>
+<p>Before moving into model building, ask:</p>
+<ol type="1">
+<li>What is the prediction or modeling objective?</li>
+<li>What is the observation unit?</li>
+<li>Which columns are predictors?</li>
+<li>Which column is the target, if supervised learning is used?</li>
+<li>Which variables are numerical?</li>
+<li>Which variables are categorical?</li>
+<li>Which variables require scaling?</li>
+<li>Which variables require encoding?</li>
+<li>Are any derived features meaningful?</li>
+<li>Could any feature introduce leakage?</li>
+</ol>
+<p>This checklist helps keep feature engineering connected to the real analytical question.</p>
 <hr>
 </section>
 <section id="cdi-insight" class="level2">
@@ -660,26 +596,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Controlled examples teach concepts.</p>
 <p>Real datasets test your ability to apply them.</p>
 <p>The transition between the two is where analytical skill develops.</p>
+<p>Feature engineering is where domain understanding, data structure, and modeling objectives meet.</p>
 <hr>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <ul>
-<li>Models learn from representations, not raw data<br>
+<li>Models learn from representations, not raw data.<br>
 </li>
-<li>Scaling controls how variables influence learning<br>
+<li>Scaling controls how numerical variables influence learning.<br>
 </li>
-<li>Encoding makes categorical information usable<br>
+<li>Encoding makes categorical information usable.<br>
 </li>
-<li>Derived features expose relationships<br>
+<li>Derived features expose relationships.<br>
 </li>
-<li>Feature engineering is a design process with direct impact on model behavior</li>
+<li>Feature engineering must avoid leakage.<br>
+</li>
+<li>A model-ready dataset should be tidy, structured, and aligned with the decision context.<br>
+</li>
+<li>Feature engineering is a design process with direct impact on model behavior.</li>
 </ul>
 <hr>
 </section>
-<section id="next-step" class="level2">
-<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
-<p>→ Building models with intention and control</p>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<p>Using a small dataset of your choice, identify:</p>
+<ol type="1">
+<li>the observation unit<br>
+</li>
+<li>the target variable, if one exists<br>
+</li>
+<li>at least two numerical predictors<br>
+</li>
+<li>at least one categorical predictor<br>
+</li>
+<li>one feature that may need scaling<br>
+</li>
+<li>one feature that may need encoding<br>
+</li>
+<li>one possible derived feature<br>
+</li>
+<li>one possible leakage risk</li>
+</ol>
+<p>Then create a model-ready version of the dataset.</p>
+<p>Save the output as:</p>
+<pre class="text"><code>data/processed/model-ready-example.csv</code></pre>
+<hr>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
+<p>In the next lesson, we begin building models with intention and control.</p>
+<p>The focus shifts from preparing model-ready inputs to asking:</p>
+<blockquote class="blockquote">
+<p>Which model should we build, and how do we know whether it is useful?</p>
+</blockquote>
 
 
 </section>

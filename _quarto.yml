@@ -43,7 +43,7 @@ book:
         - 18-limitations-and-responsible-use.qmd
         - 19-from-foundations-to-real-world-practice.qmd
 
-    - part: "Reference"
+    - part: "Appendix and References"
       chapters:
         - 999-appendix.qmd
         - 999-references.qmd

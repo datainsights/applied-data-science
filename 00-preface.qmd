@@ -15,37 +15,46 @@ You have already learned how to:
 - clean and prepare data  
 - visualize patterns  
 - summarize findings  
+- communicate basic results  
 
 These are essential foundations.
 
 But in practice, analysis alone is not enough.
 
-What matters next is how we move from:
+Real-world data work requires moving from:
 
 - structured insight  
 to  
 - reliable analytical systems  
 
-This track focuses on that transition.
+The **Applied Data Science System** focuses on that transition.
 
-It extends data science from a **process of reasoning** into a **process of building systems that produce reliable results**.
+It extends data science from a **process of reasoning** into a **process of building systems that produce reliable, reusable, and interpretable results**.
+
+This guide is not only about building models.
+
+It is about understanding how data, features, models, evaluation, interpretation, reporting, and decision-making connect inside a working analytical system.
 
 ---
 
 ## What You Will Learn
 
-This track focuses on extending your analytical workflow into real-world practice:
+This track focuses on extending analytical workflows into real-world practice.
 
-- transforming data into model-ready representations  
-- building and evaluating machine learning models  
-- structuring pipelines to ensure reproducibility  
-- interpreting model behavior carefully  
-- packaging models for reuse  
-- exposing models through simple APIs  
-- understanding deployment concepts  
-- recognizing model failure, drift, and limitations  
+You will learn how to:
 
-The goal is not to introduce more tools.
+- transform cleaned data into model-ready representations  
+- engineer useful features  
+- build and evaluate machine learning models  
+- structure pipelines for reproducibility  
+- interpret model behavior carefully  
+- communicate model results responsibly  
+- package analytical workflows for reuse  
+- expose models through simple APIs  
+- understand deployment concepts  
+- recognize model failure, drift, and limitations  
+
+The goal is not simply to introduce more tools.
 
 The goal is to understand how analytical components work together as a system.
 
@@ -72,7 +81,7 @@ Each chapter follows a consistent pattern:
 
 This structure remains intentional.
 
-As the workflow becomes more complex, clarity becomes more important.
+As workflows become more complex, clarity becomes more important.
 
 ---
 
@@ -82,7 +91,8 @@ This track assumes you are already comfortable with:
 
 - basic data exploration  
 - data cleaning and transformation  
-- visualization and interpretation  
+- visualization  
+- interpretation of analytical results  
 
 Here, the focus shifts to:
 
@@ -90,10 +100,19 @@ Here, the focus shifts to:
 - understanding how decisions affect outcomes  
 - recognizing where errors can occur  
 - building systems that can be reused and extended  
+- moving from analysis to decision-ready outputs  
 
 Do not rush through implementation.
 
 Take time to understand how each step fits into the larger system.
+
+The most important question is not only:
+
+> Does the code run?
+
+but also:
+
+> Can this workflow produce reliable results again, with new data, new users, or new decisions?
 
 ---
 
@@ -103,42 +122,81 @@ In the foundations track, the focus was:
 
 > data → exploration → insight  
 
-In practice, analytical work extends beyond this.
+In applied data science, the workflow extends beyond insight.
 
 ```{mermaid}
 flowchart TB
-  A[Question or Problem] --> B[Load & Explore Data]
 
-  B --> C[Clean & Prepare]
-  B --> D[Visualize Patterns]
+  A[Question or Problem] --> B[Load & Understand Data]
 
-  C --> D
+  B --> C[Clean & Prepare Data]
+  C --> D[Explore & Visualize Patterns]
   D --> E[Summarize & Interpret]
 
-  E --> F[Modeling & Evaluation]
-  F --> G[System & Deployment]
+  E --> F[Feature Engineering]
+  F --> G[Model Building]
+  G --> H[Model Evaluation]
+  H --> I[Model Interpretation]
 
-  G --> H[Monitoring & Feedback]
-  H --> B
+  I --> J[Decision-Ready Output]
+  J --> K[Reusable Analytical System]
+
+  K --> L[Deployment or Operational Use]
+  L --> M[Monitoring & Feedback]
+  M --> B
+
+  classDef stage fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
+  class A,B,C,D,E,F,G,H,I,J,K,L,M stage;
 ```
 
+This extended workflow reflects how real analytical systems operate.
+
+Each stage introduces new considerations, including:
+
+- validity  
+- reproducibility  
+- interpretability  
+- reliability  
+- communication  
+- maintenance  
+
+A result is not complete simply because a model was trained.
+
+A result becomes useful when it can support a clear decision, be explained, and be reused responsibly.
+
+---
+
+## From Analysis to System
+
+Applied data science is not a straight line.
+
+A model may fail evaluation.
+
+A useful pattern may not support a real-world claim.
+
+A technically strong result may not be suitable for deployment.
+
+A deployed system may drift as new data arrives.
+
+For this reason, applied data science requires feedback loops.
 
 ```{mermaid}
 flowchart LR
 
-  A[Deploy] --> B[Interpret]
+  A[Model Output] --> B[Interpret]
   B --> C[Communicate]
-  C --> D[Decide]
-  D --> E[System]
+  C --> D[Decision Review]
+  D --> E[System Use]
 
   E --> F[Feedback]
 
   F --> G[Decision Gate]
 
   G -->|Validated| H[Update System]
-  G -->|Rejected / Hold| I[Monitor]
+  G -->|Rejected or Hold| I[Monitor or Revise]
 
   H --> A
+  I --> B
 
   classDef stage fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
   classDef decision fill:#fff7ed,stroke:#f59e0b,stroke-width:2px,color:#7c2d12;
@@ -147,30 +205,90 @@ flowchart LR
   class G decision;
 ```
 
-This extended workflow reflects how real analytical systems operate.
+The purpose of this guide is to help you understand these connections.
 
-Each stage introduces new considerations, including validation, reproducibility, and reliability.
+You are not only learning how to build models.
+
+You are learning how to build analytical systems that can be checked, interpreted, communicated, and improved.
+
+---
+
+## The Role of This System in CDI Pathways
+
+The **Applied Data Science System** acts as a parent analytical layer for other CDI systems.
+
+Many specialized pathways eventually produce structured analytical tables.
+
+For example:
+
+- a bioinformatics workflow may produce a feature table or differential results table  
+- a clinical data workflow may produce a cleaned patient-level analysis table  
+- a business analytics workflow may produce a decision or performance dataset  
+- an omics workflow may produce ranked genes, proteins, taxa, or pathways  
+
+Once a pathway reaches a structured, analysis-ready table, the ideas in this guide become reusable.
 
 ```{mermaid}
 flowchart TD
 
-A[CDI Open Guides<br/>Learn the foundations] --> B[System Build 01<br/>Data Science]
+  A[CDI Open Guides<br/>Foundational Learning] --> B[Applied Data Science System]
 
-B --> C[Raw Data]
-C --> D[Data Understanding]
-D --> E[Cleaning & Preparation]
-E --> F[Exploratory Analysis]
-F --> G[Model Building]
-G --> H[Model Evaluation]
-H --> I[Interpretation]
-I --> J[Final Decision Output]
+  B --> C[Analysis-Ready Table]
+  C --> D[Feature Engineering]
+  D --> E[Model Building]
+  E --> F[Model Evaluation]
+  F --> G[Interpretation]
+  G --> H[Decision-Ready Output]
 
-J --> K[Portfolio Proof<br/>Reproducible repo + Quarto report]
-K --> L[Mentorship Review<br/>Feedback + refinement]
-L --> M[Deployment / DevOps Track<br/>APIs, apps, monitoring]
+  H --> I[Portfolio Proof<br/>Reproducible Repository + Quarto Report]
+  I --> J[Mentorship Review<br/>Feedback + Refinement]
+  J --> K[Deployment / DevOps Track<br/>APIs, Apps, Monitoring]
 
-B --> N[System Build Template]
-N --> O[System Build 02<br/>Bioinformatics]
-N --> P[System Build 03<br/>Clinical Data]
-N --> Q[System Build 04<br/>Business Analytics]
+  B --> L[Reusable System Template]
+
+  L --> M[Bioinformatics Systems]
+  L --> N[Clinical & Medical Data Systems]
+  L --> O[Business Analytics Systems]
+  L --> P[AI, Thinking & Decision Systems]
+
+  classDef core fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
+  classDef output fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#064e3b;
+  classDef pathway fill:#fff7ed,stroke:#f59e0b,stroke-width:2px,color:#7c2d12;
+
+  class A,B,C,D,E,F,G,H,I,J,K,L core;
+  class H,I output;
+  class M,N,O,P pathway;
 ```
+
+This is why applied data science sits near the top of the CDI learning architecture.
+
+It provides the shared analytical logic that many domain-specific systems can reuse.
+
+---
+
+## What This Guide Is Not
+
+This guide is not a complete software engineering course.
+
+It is also not a full machine learning theory textbook.
+
+Instead, it is a practical bridge between:
+
+- exploratory data analysis  
+- machine learning  
+- reproducible workflows  
+- interpretation  
+- decision support  
+- deployment awareness  
+
+The focus is on building enough system-level understanding to make analytical work more reliable in real-world settings.
+
+---
+
+## Looking Ahead
+
+The next chapter begins by setting up the working environment.
+
+From there, we move step by step from prepared data into feature engineering, model building, evaluation, interpretation, reporting, and system-level thinking.
+
+By the end of this guide, you should be able to move beyond isolated analysis and begin building reusable analytical systems.

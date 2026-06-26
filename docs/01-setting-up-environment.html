@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setting Up a Reproducible Analytical System – Data Science Foundations Premium</title>
+<title>Setting Up a Reproducible Analytical System – Applied Data Science System</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -84,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./01-setting-up-environment.html"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">System Orientation</a></li><li class="breadcrumb-item"><a href="./01-setting-up-environment.html"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +134,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Science Foundations Premium</a> 
+      <a href="./">Applied Data Science System</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -117,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Premium Foundations</span></a>
+ <span class="menu-text">System Orientation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -134,6 +169,17 @@ ul.task-list li input[type="checkbox"] {
   <a href="./01-setting-up-environment.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Feature Engineering and Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-feature-engineering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Engineering and Data Representation</span></a>
@@ -154,6 +200,17 @@ ul.task-list li input[type="checkbox"] {
   <a href="./11-model-improvement.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Improving Models Through Controlled Changes</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pipelines and Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
@@ -169,6 +226,17 @@ ul.task-list li input[type="checkbox"] {
   <a href="./14-from-model-outputs-to-real-world-claims.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Model Outputs to Real-World Claims</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communication and Decision-Making</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communicating Results Clearly</span></a>
@@ -179,6 +247,17 @@ ul.task-list li input[type="checkbox"] {
   <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Analysis to Decision-Making</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">End-to-End Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-end-to-end-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Case Study: From Data to Decision</span></a>
@@ -198,13 +277,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Reference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix and References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./999-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix</span></a>
@@ -227,22 +306,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-this-setup-supports" id="toc-what-this-setup-supports" class="nav-link active" data-scroll-target="#what-this-setup-supports">What This Setup Supports</a></li>
-  <li><a href="#project-structure-important" id="toc-project-structure-important" class="nav-link" data-scroll-target="#project-structure-important">Project Structure (Important)</a></li>
-  <li><a href="#project-structure-important-1" id="toc-project-structure-important-1" class="nav-link" data-scroll-target="#project-structure-important-1">Project Structure (Important)</a></li>
+  <li><a href="#why-setup-matters" id="toc-why-setup-matters" class="nav-link active" data-scroll-target="#why-setup-matters">Why Setup Matters</a></li>
+  <li><a href="#what-this-setup-supports" id="toc-what-this-setup-supports" class="nav-link" data-scroll-target="#what-this-setup-supports">What This Setup Supports</a></li>
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project Structure</a></li>
+  <li><a href="#create-the-project-folders" id="toc-create-the-project-folders" class="nav-link" data-scroll-target="#create-the-project-folders">Create the Project Folders</a></li>
+  <li><a href="#python-environment" id="toc-python-environment" class="nav-link" data-scroll-target="#python-environment">Python Environment</a></li>
   <li><a href="#dependency-control" id="toc-dependency-control" class="nav-link" data-scroll-target="#dependency-control">Dependency Control</a></li>
-  <li><a href="#build-the-project" id="toc-build-the-project" class="nav-link" data-scroll-target="#build-the-project">Build the Project</a></li>
-  <li><a href="#sanity-check" id="toc-sanity-check" class="nav-link" data-scroll-target="#sanity-check">Sanity Check</a></li>
+  <li><a href="#quarto-project-check" id="toc-quarto-project-check" class="nav-link" data-scroll-target="#quarto-project-check">Quarto Project Check</a></li>
+  <li><a href="#script-01a-create-project-structure" id="toc-script-01a-create-project-structure" class="nav-link" data-scroll-target="#script-01a-create-project-structure">Script 01A — Create Project Structure</a></li>
+  <li><a href="#script-01b-check-python-environment" id="toc-script-01b-check-python-environment" class="nav-link" data-scroll-target="#script-01b-check-python-environment">Script 01B — Check Python Environment</a></li>
+  <li><a href="#script-01c-build-the-quarto-project" id="toc-script-01c-build-the-quarto-project" class="nav-link" data-scroll-target="#script-01c-build-the-quarto-project">Script 01C — Build the Quarto Project</a></li>
+  <li><a href="#script-01d-freeze-dependency-versions" id="toc-script-01d-freeze-dependency-versions" class="nav-link" data-scroll-target="#script-01d-freeze-dependency-versions">Script 01D — Freeze Dependency Versions</a></li>
+  <li><a href="#recommended-setup-workflow" id="toc-recommended-setup-workflow" class="nav-link" data-scroll-target="#recommended-setup-workflow">Recommended Setup Workflow</a></li>
+  <li><a href="#open-the-rendered-guide" id="toc-open-the-rendered-guide" class="nav-link" data-scroll-target="#open-the-rendered-guide">Open the Rendered Guide</a></li>
   <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Premium Foundations</a></li><li class="breadcrumb-item"><a href="./01-setting-up-environment.html"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">System Orientation</a></li><li class="breadcrumb-item"><a href="./01-setting-up-environment.html"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="lesson01" class="quarto-section-identifier"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></span></h1>
 </div>
@@ -255,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Mar 2026</p>
+      <p class="date">Jun 2026</p>
     </div>
   </div>
   
@@ -275,22 +362,46 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Reproducibility and structure enable reliable systems</li>
 </ul>
 </div>
-<p>In the foundations track, you learned how to run analysis.</p>
+<p>In the foundations track, you learned how to run analyses.</p>
 <p>In this track, you will build workflows that must remain:</p>
 <ul>
 <li>reproducible<br>
 </li>
 <li>structured<br>
 </li>
-<li>reliable over time</li>
+<li>reliable over time<br>
+</li>
+<li>ready for extension</li>
 </ul>
 <p>This requires a more deliberate setup.</p>
 <p>An environment is not just where code runs.</p>
-<p>It is the <strong>foundation of the system you are building</strong>.</p>
+<p>It is the <strong>foundation of the analytical system you are building</strong>.</p>
 <hr>
+<section id="why-setup-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-setup-matters">Why Setup Matters</h2>
+<p>A data science workflow may start as a notebook, a script, or a small experiment.</p>
+<p>But as soon as the work becomes important, the setup matters.</p>
+<p>A reliable analytical system should make it clear:</p>
+<ul>
+<li>where data is stored<br>
+</li>
+<li>where code lives<br>
+</li>
+<li>where outputs are written<br>
+</li>
+<li>which dependencies are required<br>
+</li>
+<li>how the project can be rebuilt<br>
+</li>
+<li>how another person can reproduce the work</li>
+</ul>
+<p>Without this structure, analysis becomes difficult to trust and difficult to reuse.</p>
+<p>The goal of this lesson is to create a stable project foundation before moving into feature engineering, modeling, evaluation, interpretation, and deployment concepts.</p>
+<hr>
+</section>
 <section id="what-this-setup-supports" class="level2">
 <h2 class="anchored" data-anchor-id="what-this-setup-supports">What This Setup Supports</h2>
-<p>By the end of this lesson, you will have a working environment that supports:</p>
+<p>By the end of this lesson, you should have a working environment that supports:</p>
 <ul>
 <li>consistent execution across sessions<br>
 </li>
@@ -300,79 +411,369 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>reproducible builds<br>
 </li>
+<li>reusable scripts<br>
+</li>
 <li>preparation for modeling, pipelines, and deployment</li>
 </ul>
+<p>This setup is intentionally simple.</p>
+<p>The goal is not to over-engineer the project.</p>
+<p>The goal is to make the project understandable, repeatable, and ready to grow.</p>
 <hr>
 </section>
-<section id="project-structure-important" class="level2">
-<h2 class="anchored" data-anchor-id="project-structure-important">Project Structure (Important)</h2>
-</section>
-<section id="project-structure-important-1" class="level2">
-<h2 class="anchored" data-anchor-id="project-structure-important-1">Project Structure (Important)</h2>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project Structure</h2>
+<p>A recommended structure for this guide is shown below.</p>
 <pre class="text"><code>project-root/
 │
 ├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── reference/
+│
 ├── scripts/
 │   ├── bash/
 │   └── python/
+│
+├── notebooks/
 ├── models/
+├── reports/
 ├── docs/
+│
 ├── requirements.txt
+├── requirements-lock.txt
 ├── _quarto.yml
 │
+├── index.qmd
 ├── 00-preface.qmd
 ├── 01-setting-up-environment.qmd
 ├── 08-feature-engineering.qmd
-...
-
----
-
-## Python Environment
-
-Activate:
-
-```{bash}
-source .venv/bin/activate</code></pre>
-<p>Verify:</p>
-<pre class="{bash}"><code>which python
-python --version</code></pre>
+├── 09-model-building.qmd
+├── 10-model-evaluation.qmd
+└── ...</code></pre>
+<p>Each folder has a clear role.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Folder or file</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>data/raw/</code></td>
+<td>Original input data that should not be edited manually</td>
+</tr>
+<tr class="even">
+<td><code>data/processed/</code></td>
+<td>Cleaned or transformed data used for analysis</td>
+</tr>
+<tr class="odd">
+<td><code>data/reference/</code></td>
+<td>Lookup tables, metadata, labels, or supporting files</td>
+</tr>
+<tr class="even">
+<td><code>scripts/bash/</code></td>
+<td>Shell scripts for setup, checks, and project builds</td>
+</tr>
+<tr class="odd">
+<td><code>scripts/python/</code></td>
+<td>Python scripts for data preparation, modeling, and validation</td>
+</tr>
+<tr class="even">
+<td><code>notebooks/</code></td>
+<td>Exploratory notebooks, if used</td>
+</tr>
+<tr class="odd">
+<td><code>models/</code></td>
+<td>Saved model objects and model-related outputs</td>
+</tr>
+<tr class="even">
+<td><code>reports/</code></td>
+<td>Analytical summaries, tables, and generated outputs</td>
+</tr>
+<tr class="odd">
+<td><code>docs/</code></td>
+<td>Rendered Quarto website or book output</td>
+</tr>
+<tr class="even">
+<td><code>requirements.txt</code></td>
+<td>Python dependency list</td>
+</tr>
+<tr class="odd">
+<td><code>requirements-lock.txt</code></td>
+<td>Exact installed dependency versions</td>
+</tr>
+<tr class="even">
+<td><code>_quarto.yml</code></td>
+<td>Quarto project configuration</td>
+</tr>
+</tbody>
+</table>
+<p>A clear structure reduces confusion.</p>
+<p>It also makes the project easier to review, teach, publish, and extend.</p>
+<hr>
+</section>
+<section id="create-the-project-folders" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-project-folders">Create the Project Folders</h2>
+<p>From the project root, create the core folders.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> data/raw data/processed data/reference</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts/bash scripts/python</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> notebooks models reports docs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check that the folders were created.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-maxdepth</span> 2 <span class="at">-type</span> d <span class="kw">|</span> <span class="fu">sort</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should see the main project directories listed.</p>
+<hr>
+</section>
+<section id="python-environment" class="level2">
+<h2 class="anchored" data-anchor-id="python-environment">Python Environment</h2>
+<p>A virtual environment keeps project dependencies separate from the rest of your computer.</p>
+<p>Create a virtual environment:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Activate it:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Verify that the environment is active:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When the environment is active, the Python path should point inside <code>.venv</code>.</p>
+<p>This means the project is using its own isolated Python installation.</p>
 <hr>
 </section>
 <section id="dependency-control" class="level2">
 <h2 class="anchored" data-anchor-id="dependency-control">Dependency Control</h2>
-<pre class="{bash}"><code>pip install -r requirements.txt</code></pre>
+<p>Dependencies should be written down so the project can be rebuilt later.</p>
+<p>Create a <code>requirements.txt</code> file.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For this guide, a practical starter set is:</p>
+<pre class="text"><code>pandas
+numpy
+scikit-learn
+matplotlib
+joblib
+fastapi
+uvicorn
+jupyter</code></pre>
+<p>Install the dependencies:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After installing packages, you can record the exact installed versions.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements-lock.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>requirements.txt</code> file describes the intended dependencies.</p>
+<p>The <code>requirements-lock.txt</code> file records the exact versions installed in the current environment.</p>
 <hr>
 </section>
-<section id="build-the-project" class="level2">
-<h2 class="anchored" data-anchor-id="build-the-project">Build the Project</h2>
-<pre class="{bash}"><code>bash scripts/bash/build.sh</code></pre>
+<section id="quarto-project-check" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-project-check">Quarto Project Check</h2>
+<p>This guide uses Quarto for reproducible reporting and publishing.</p>
+<p>Check that Quarto is available:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Render the project:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If the project renders successfully, the output should be written to the configured output directory, usually <code>docs/</code>.</p>
 <hr>
 </section>
-<section id="sanity-check" class="level2">
-<h2 class="anchored" data-anchor-id="sanity-check">Sanity Check</h2>
-<p>Open:</p>
-<pre class="{bash}"><code>open docs/index.html</code></pre>
+<section id="script-01a-create-project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="script-01a-create-project-structure">Script 01A — Create Project Structure</h2>
+<p>Instead of manually creating folders every time, place the setup commands in a reusable script.</p>
+<p>Create a file called:</p>
+<pre class="text"><code>scripts/bash/01a-create-project-structure.sh</code></pre>
+<p>Add the following content:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Creating Applied Data Science System project structure..."</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> data/raw data/processed data/reference</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts/bash scripts/python</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> notebooks models reports docs</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Project folders created."</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Current project structure:"</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-maxdepth</span> 2 <span class="at">-type</span> d <span class="kw">|</span> <span class="fu">sort</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the script:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/01a-create-project-structure.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This script creates the core folders required by the project.</p>
+<hr>
+</section>
+<section id="script-01b-check-python-environment" class="level2">
+<h2 class="anchored" data-anchor-id="script-01b-check-python-environment">Script 01B — Check Python Environment</h2>
+<p>A reliable system should be able to check whether the expected environment and folders exist.</p>
+<p>Create a file called:</p>
+<pre class="text"><code>scripts/python/01b_check_environment.py</code></pre>
+<p>Add the following content:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>required_dirs <span class="op">=</span> [</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/raw"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/processed"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/reference"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scripts/bash"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scripts/python"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"notebooks"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"models"</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reports"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"docs"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>required_files <span class="op">=</span> [</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"requirements.txt"</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_quarto.yml"</span>,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>missing_dirs <span class="op">=</span> [path <span class="cf">for</span> path <span class="kw">in</span> required_dirs <span class="cf">if</span> <span class="kw">not</span> Path(path).exists()]</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>missing_files <span class="op">=</span> [path <span class="cf">for</span> path <span class="kw">in</span> required_files <span class="cf">if</span> <span class="kw">not</span> Path(path).exists()]</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Python executable:"</span>, sys.executable)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Python version:"</span>, sys.version.split()[<span class="dv">0</span>])</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing_dirs:</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Missing directories:"</span>)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> path <span class="kw">in</span> missing_dirs:</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"- </span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing_files:</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Missing files:"</span>)</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> path <span class="kw">in</span> missing_files:</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"- </span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing_dirs <span class="kw">or</span> missing_files:</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">SystemExit</span>(<span class="st">"Environment check failed."</span>)</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Environment check passed."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the check:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/01b_check_environment.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If everything is set up correctly, the script should print:</p>
+<pre class="text"><code>Environment check passed.</code></pre>
+<p>This is a small example of a larger principle.</p>
+<p>Reliable systems should be checkable.</p>
+<hr>
+</section>
+<section id="script-01c-build-the-quarto-project" class="level2">
+<h2 class="anchored" data-anchor-id="script-01c-build-the-quarto-project">Script 01C — Build the Quarto Project</h2>
+<p>A build script makes the project easier to rerun.</p>
+<p>Create a file called:</p>
+<pre class="text"><code>scripts/bash/01c-build-project.sh</code></pre>
+<p>Add the following content:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Checking Python environment..."</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/01b_check_environment.py</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Rendering Quarto project..."</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Build complete."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the build script:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/01c-build-project.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a single command for checking and rebuilding the project.</p>
+<p>As the system grows, this script can also run data preparation, model training, report generation, and validation checks.</p>
+<hr>
+</section>
+<section id="script-01d-freeze-dependency-versions" class="level2">
+<h2 class="anchored" data-anchor-id="script-01d-freeze-dependency-versions">Script 01D — Freeze Dependency Versions</h2>
+<p>After installing dependencies, freeze the exact versions used in the current environment.</p>
+<p>Create a file called:</p>
+<pre class="text"><code>scripts/bash/01d-freeze-dependencies.sh</code></pre>
+<p>Add the following content:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Freezing Python dependency versions..."</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements-lock.txt</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Dependency lock file written to requirements-lock.txt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the script:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/01d-freeze-dependencies.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The lock file helps document the exact package versions used when the project was built.</p>
+<hr>
+</section>
+<section id="recommended-setup-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-setup-workflow">Recommended Setup Workflow</h2>
+<p>A clean setup can now follow this sequence:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/01a-create-project-structure.sh</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/01d-freeze-dependencies.sh</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/01b_check_environment.py</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/01c-build-project.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This workflow gives the project a repeatable starting point.</p>
+<hr>
+</section>
+<section id="open-the-rendered-guide" class="level2">
+<h2 class="anchored" data-anchor-id="open-the-rendered-guide">Open the Rendered Guide</h2>
+<p>After rendering the project, open the generated site.</p>
+<p>On macOS:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> docs/index.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you are using another operating system, open <code>docs/index.html</code> manually in a browser.</p>
 <hr>
 </section>
 <section id="cdi-insight" class="level2">
 <h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
-<p>Reliable systems depend on stable foundations.</p>
+<p>Reliable analytical systems depend on stable foundations.</p>
+<p>A good setup does not make the analysis correct by itself.</p>
+<p>But it makes correctness easier to check.</p>
+<p>It also makes the workflow easier to rerun, review, debug, and extend.</p>
+<p>In applied data science, reproducibility is not an extra feature.</p>
+<p>It is part of the system.</p>
 <hr>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this lesson, you prepared the foundation for the Applied Data Science System.</p>
+<p>You created:</p>
 <ul>
-<li><code>.venv</code> is active<br>
+<li>a structured project directory<br>
 </li>
-<li>dependencies are controlled<br>
+<li>an isolated Python environment<br>
 </li>
-<li>build pipeline works</li>
+<li>a dependency file<br>
+</li>
+<li>a dependency lock file<br>
+</li>
+<li>a Quarto build workflow<br>
+</li>
+<li>reusable setup and build scripts<br>
+</li>
+<li>a basic environment sanity check</li>
 </ul>
+<p>These pieces will support the later chapters on feature engineering, modeling, evaluation, interpretation, APIs, deployment, and monitoring.</p>
 <hr>
 </section>
-<section id="next-step" class="level2">
-<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
-<p>→ Feature engineering and data representation</p>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<p>Create and run the setup scripts.</p>
+<p>Then answer the following questions:</p>
+<ol type="1">
+<li>Which Python executable is your project using?</li>
+<li>Which directories are required for this project?</li>
+<li>What happens if one required directory is missing?</li>
+<li>Why is a build script useful in a reproducible analytical system?</li>
+<li>What is the difference between <code>requirements.txt</code> and <code>requirements-lock.txt</code>?</li>
+</ol>
+<hr>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
+<p>In the next lesson, we begin moving from prepared data into <strong>feature engineering and data representation</strong>.</p>
+<p>This is where raw analytical tables become model-ready inputs.</p>
 
 
 </section>

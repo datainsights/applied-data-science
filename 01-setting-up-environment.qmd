@@ -7,114 +7,504 @@
 - **Theme:** Reproducibility and structure enable reliable systems
 :::
 
-In the foundations track, you learned how to run analysis.
+In the foundations track, you learned how to run analyses.
 
 In this track, you will build workflows that must remain:
 
 - reproducible  
 - structured  
 - reliable over time  
+- ready for extension  
 
 This requires a more deliberate setup.
 
 An environment is not just where code runs.
 
-It is the **foundation of the system you are building**.
+It is the **foundation of the analytical system you are building**.
+
+---
+
+## Why Setup Matters
+
+A data science workflow may start as a notebook, a script, or a small experiment.
+
+But as soon as the work becomes important, the setup matters.
+
+A reliable analytical system should make it clear:
+
+- where data is stored  
+- where code lives  
+- where outputs are written  
+- which dependencies are required  
+- how the project can be rebuilt  
+- how another person can reproduce the work  
+
+Without this structure, analysis becomes difficult to trust and difficult to reuse.
+
+The goal of this lesson is to create a stable project foundation before moving into feature engineering, modeling, evaluation, interpretation, and deployment concepts.
 
 ---
 
 ## What This Setup Supports
 
-By the end of this lesson, you will have a working environment that supports:
+By the end of this lesson, you should have a working environment that supports:
 
 - consistent execution across sessions  
 - controlled dependencies  
 - structured project organization  
 - reproducible builds  
+- reusable scripts  
 - preparation for modeling, pipelines, and deployment  
+
+This setup is intentionally simple.
+
+The goal is not to over-engineer the project.
+
+The goal is to make the project understandable, repeatable, and ready to grow.
 
 ---
 
-## Project Structure (Important)
+## Project Structure
 
-## Project Structure (Important)
+A recommended structure for this guide is shown below.
 
 ```text
 project-root/
 │
 ├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── reference/
+│
 ├── scripts/
 │   ├── bash/
 │   └── python/
+│
+├── notebooks/
 ├── models/
+├── reports/
 ├── docs/
+│
 ├── requirements.txt
+├── requirements-lock.txt
 ├── _quarto.yml
 │
+├── index.qmd
 ├── 00-preface.qmd
 ├── 01-setting-up-environment.qmd
 ├── 08-feature-engineering.qmd
-...
+├── 09-model-building.qmd
+├── 10-model-evaluation.qmd
+└── ...
+```
+
+Each folder has a clear role.
+
+| Folder or file | Purpose |
+|---|---|
+| `data/raw/` | Original input data that should not be edited manually |
+| `data/processed/` | Cleaned or transformed data used for analysis |
+| `data/reference/` | Lookup tables, metadata, labels, or supporting files |
+| `scripts/bash/` | Shell scripts for setup, checks, and project builds |
+| `scripts/python/` | Python scripts for data preparation, modeling, and validation |
+| `notebooks/` | Exploratory notebooks, if used |
+| `models/` | Saved model objects and model-related outputs |
+| `reports/` | Analytical summaries, tables, and generated outputs |
+| `docs/` | Rendered Quarto website or book output |
+| `requirements.txt` | Python dependency list |
+| `requirements-lock.txt` | Exact installed dependency versions |
+| `_quarto.yml` | Quarto project configuration |
+
+A clear structure reduces confusion.
+
+It also makes the project easier to review, teach, publish, and extend.
+
+---
+
+## Create the Project Folders
+
+From the project root, create the core folders.
+
+```bash
+mkdir -p data/raw data/processed data/reference
+mkdir -p scripts/bash scripts/python
+mkdir -p notebooks models reports docs
+```
+
+Check that the folders were created.
+
+```bash
+find . -maxdepth 2 -type d | sort
+```
+
+You should see the main project directories listed.
 
 ---
 
 ## Python Environment
 
-Activate:
+A virtual environment keeps project dependencies separate from the rest of your computer.
 
-```{bash}
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate it:
+
+```bash
 source .venv/bin/activate
 ```
 
-Verify:
+Verify that the environment is active:
 
-```{bash}
+```bash
 which python
 python --version
 ```
+
+When the environment is active, the Python path should point inside `.venv`.
+
+This means the project is using its own isolated Python installation.
 
 ---
 
 ## Dependency Control
 
-```{bash}
+Dependencies should be written down so the project can be rebuilt later.
+
+Create a `requirements.txt` file.
+
+```bash
+touch requirements.txt
+```
+
+For this guide, a practical starter set is:
+
+```text
+pandas
+numpy
+scikit-learn
+matplotlib
+joblib
+fastapi
+uvicorn
+jupyter
+```
+
+Install the dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
----
+After installing packages, you can record the exact installed versions.
 
-## Build the Project
-
-```{bash}
-bash scripts/bash/build.sh
+```bash
+pip freeze > requirements-lock.txt
 ```
 
+The `requirements.txt` file describes the intended dependencies.
+
+The `requirements-lock.txt` file records the exact versions installed in the current environment.
+
 ---
 
-## Sanity Check
+## Quarto Project Check
 
-Open:
+This guide uses Quarto for reproducible reporting and publishing.
 
-```{bash}
+Check that Quarto is available:
+
+```bash
+quarto --version
+```
+
+Render the project:
+
+```bash
+quarto render
+```
+
+If the project renders successfully, the output should be written to the configured output directory, usually `docs/`.
+
+---
+
+## Script 01A — Create Project Structure
+
+Instead of manually creating folders every time, place the setup commands in a reusable script.
+
+Create a file called:
+
+```text
+scripts/bash/01a-create-project-structure.sh
+```
+
+Add the following content:
+
+```bash
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Creating Applied Data Science System project structure..."
+
+mkdir -p data/raw data/processed data/reference
+mkdir -p scripts/bash scripts/python
+mkdir -p notebooks models reports docs
+
+echo "Project folders created."
+echo
+echo "Current project structure:"
+find . -maxdepth 2 -type d | sort
+```
+
+Run the script:
+
+```bash
+bash scripts/bash/01a-create-project-structure.sh
+```
+
+This script creates the core folders required by the project.
+
+---
+
+## Script 01B — Check Python Environment
+
+A reliable system should be able to check whether the expected environment and folders exist.
+
+Create a file called:
+
+```text
+scripts/python/01b_check_environment.py
+```
+
+Add the following content:
+
+```python
+from pathlib import Path
+import sys
+
+required_dirs = [
+    "data/raw",
+    "data/processed",
+    "data/reference",
+    "scripts/bash",
+    "scripts/python",
+    "notebooks",
+    "models",
+    "reports",
+    "docs",
+]
+
+required_files = [
+    "requirements.txt",
+    "_quarto.yml",
+]
+
+missing_dirs = [path for path in required_dirs if not Path(path).exists()]
+missing_files = [path for path in required_files if not Path(path).exists()]
+
+print("Python executable:", sys.executable)
+print("Python version:", sys.version.split()[0])
+print()
+
+if missing_dirs:
+    print("Missing directories:")
+    for path in missing_dirs:
+        print(f"- {path}")
+    print()
+
+if missing_files:
+    print("Missing files:")
+    for path in missing_files:
+        print(f"- {path}")
+    print()
+
+if missing_dirs or missing_files:
+    raise SystemExit("Environment check failed.")
+
+print("Environment check passed.")
+```
+
+Run the check:
+
+```bash
+python scripts/python/01b_check_environment.py
+```
+
+If everything is set up correctly, the script should print:
+
+```text
+Environment check passed.
+```
+
+This is a small example of a larger principle.
+
+Reliable systems should be checkable.
+
+---
+
+## Script 01C — Build the Quarto Project
+
+A build script makes the project easier to rerun.
+
+Create a file called:
+
+```text
+scripts/bash/01c-build-project.sh
+```
+
+Add the following content:
+
+```bash
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Checking Python environment..."
+python scripts/python/01b_check_environment.py
+
+echo
+echo "Rendering Quarto project..."
+quarto render
+
+echo
+echo "Build complete."
+```
+
+Run the build script:
+
+```bash
+bash scripts/bash/01c-build-project.sh
+```
+
+This creates a single command for checking and rebuilding the project.
+
+As the system grows, this script can also run data preparation, model training, report generation, and validation checks.
+
+---
+
+## Script 01D — Freeze Dependency Versions
+
+After installing dependencies, freeze the exact versions used in the current environment.
+
+Create a file called:
+
+```text
+scripts/bash/01d-freeze-dependencies.sh
+```
+
+Add the following content:
+
+```bash
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Freezing Python dependency versions..."
+
+python -m pip freeze > requirements-lock.txt
+
+echo "Dependency lock file written to requirements-lock.txt"
+```
+
+Run the script:
+
+```bash
+bash scripts/bash/01d-freeze-dependencies.sh
+```
+
+The lock file helps document the exact package versions used when the project was built.
+
+---
+
+## Recommended Setup Workflow
+
+A clean setup can now follow this sequence:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+
+bash scripts/bash/01a-create-project-structure.sh
+
+pip install -r requirements.txt
+bash scripts/bash/01d-freeze-dependencies.sh
+
+python scripts/python/01b_check_environment.py
+bash scripts/bash/01c-build-project.sh
+```
+
+This workflow gives the project a repeatable starting point.
+
+---
+
+## Open the Rendered Guide
+
+After rendering the project, open the generated site.
+
+On macOS:
+
+```bash
 open docs/index.html
 ```
+
+If you are using another operating system, open `docs/index.html` manually in a browser.
 
 ---
 
 ## CDI Insight
 
-Reliable systems depend on stable foundations.
+Reliable analytical systems depend on stable foundations.
+
+A good setup does not make the analysis correct by itself.
+
+But it makes correctness easier to check.
+
+It also makes the workflow easier to rerun, review, debug, and extend.
+
+In applied data science, reproducibility is not an extra feature.
+
+It is part of the system.
 
 ---
 
 ## Summary
 
-- `.venv` is active  
-- dependencies are controlled  
-- build pipeline works  
+In this lesson, you prepared the foundation for the Applied Data Science System.
+
+You created:
+
+- a structured project directory  
+- an isolated Python environment  
+- a dependency file  
+- a dependency lock file  
+- a Quarto build workflow  
+- reusable setup and build scripts  
+- a basic environment sanity check  
+
+These pieces will support the later chapters on feature engineering, modeling, evaluation, interpretation, APIs, deployment, and monitoring.
 
 ---
 
-## Next Step
+## Exercise
 
-→ Feature engineering and data representation
+Create and run the setup scripts.
+
+Then answer the following questions:
+
+1. Which Python executable is your project using?
+2. Which directories are required for this project?
+3. What happens if one required directory is missing?
+4. Why is a build script useful in a reproducible analytical system?
+5. What is the difference between `requirements.txt` and `requirements-lock.txt`?
+
+---
+
+## Looking Ahead
+
+In the next lesson, we begin moving from prepared data into **feature engineering and data representation**.
+
+This is where raw analytical tables become model-ready inputs.

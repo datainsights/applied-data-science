@@ -25,42 +25,54 @@ This is the role of feature engineering.
 
 Models do not understand raw data.
 
-They operate on numerical representations.
+They operate on structured representations.
+
+In most applied data science workflows, this means numerical or encoded variables arranged in a model-ready table.
 
 This means:
 
-- the model does not “discover” structure on its own  
+- the model does not understand context automatically  
 - it can only learn from what is made visible  
+- it can only use information that has been represented correctly  
+- it may ignore important structure if that structure is hidden  
 
 Feature engineering determines:
 
 - which patterns are detectable  
 - which relationships are emphasized  
 - which signals are ignored  
+- which sources of variation become available to the model  
 
 Two datasets with the same information can lead to very different models depending on how features are constructed.
+
+This is why feature engineering is not only a technical step.
+
+It is a modeling design decision.
 
 ---
 
 ## A Simple Example
 
-```{python}
+Start with a small table.
+
+```python
 import pandas as pd
 
-df = pd.DataFrame({
+people = pd.DataFrame({
     "age": [22, 35, 47, 51],
     "income": [25000, 48000, 52000, 61000],
     "city": ["A", "B", "A", "C"]
 })
 
-df
+people
 ```
 
 At this stage:
 
-- scales are inconsistent  
-- categorical data is not usable  
-- relationships are implicit  
+- numerical variables have different scales  
+- categorical data is not yet represented numerically  
+- relationships between variables are implicit  
+- the table is understandable to a person, but not yet ready for many models  
 
 This is not yet a modeling dataset.
 
@@ -68,38 +80,101 @@ This is not yet a modeling dataset.
 
 ## Step 1 — Making Variables Comparable
 
-```{python}
+Some models are sensitive to the scale of input variables.
+
+For example, income is measured in thousands, while age is measured in years.
+
+Without scaling, a model may give more influence to a variable simply because its values are larger.
+
+```python
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
 
-df_scaled = df.copy()
-df_scaled[["age", "income"]] = scaler.fit_transform(df[["age", "income"]])
+people_scaled = people.copy()
+people_scaled[["age", "income"]] = scaler.fit_transform(
+    people[["age", "income"]]
+)
 
-df_scaled
+people_scaled
 ```
+
+Scaling does not change the meaning of the variables.
+
+It changes how the values are represented for the model.
+
+This helps numerical variables become more comparable.
 
 ---
 
 ## Step 2 — Making Categories Visible
 
-```{python}
-df_encoded = pd.get_dummies(df_scaled, columns=["city"])
+Many models cannot use text categories directly.
 
-df_encoded
+The `city` column contains meaningful information, but it must be encoded before modeling.
+
+```python
+people_encoded = pd.get_dummies(people_scaled, columns=["city"])
+
+people_encoded
 ```
+
+This converts the city categories into indicator variables.
+
+Now the model can use city information as part of the input representation.
+
+The goal is not to make the data look more complicated.
+
+The goal is to make useful information visible to the model.
 
 ---
 
 ## Step 3 — Making Relationships Explicit
 
-```{python}
-df_features = df_encoded.copy()
+Some relationships are not directly visible in the original columns.
 
-df_features["income_per_age"] = df_features["income"] / (df_features["age"] + 1)
+For example, income relative to age may carry different information from income alone.
 
-df_features
+```python
+people_features = people_encoded.copy()
+
+people_features["income_per_age"] = (
+    people_features["income"] / (people_features["age"] + 1)
+)
+
+people_features
 ```
+
+This creates a derived feature.
+
+A derived feature is a new variable created from existing variables.
+
+Derived features can help expose relationships that may otherwise be difficult for a model to learn.
+
+However, derived features should be created carefully.
+
+A feature should be meaningful, reproducible, and explainable.
+
+---
+
+## Important Warning About Leakage
+
+Feature engineering must avoid data leakage.
+
+Data leakage occurs when information is used during modeling that would not be available at the time of prediction.
+
+Examples include:
+
+- using future outcomes to create a feature  
+- scaling data before splitting into training and testing sets  
+- using post-event information to predict a pre-event decision  
+- including variables that directly reveal the answer  
+
+Leakage can make a model look strong during evaluation but fail in real use.
+
+In applied data science, a good feature is not only predictive.
+
+It must also be valid for the real decision context.
 
 ---
 
@@ -116,8 +191,10 @@ In practice, however, data rarely arrives in this form.
 Real datasets are:
 
 - larger  
+- messier  
 - less consistent  
 - less explicit in their structure  
+- shaped by collection processes, measurement limits, and human decisions  
 
 As we move forward, we will begin working with real-world data.
 
@@ -135,6 +212,8 @@ Before applying models, your dataset should follow a clear tabular structure:
 - each column represents one variable  
 - each column has a consistent data type  
 - missing values are handled or explicitly represented  
+- target variables are separated from predictor variables  
+- identifiers are preserved but not accidentally used as model signals  
 
 In CDI terms, this is a **tidy and structured dataset**.
 
@@ -143,6 +222,80 @@ If your data does not follow this structure:
 - feature engineering becomes inconsistent  
 - models become unreliable  
 - results become difficult to interpret  
+- the workflow becomes difficult to reuse  
+
+A model-ready table should be understandable both to the computer and to the analyst.
+
+---
+
+## Script 08A — Create an Example Dataset
+
+Create a file called:
+
+```text
+scripts/python/08a_create_example_people_dataset.py
+```
+
+This script creates a small example dataset and saves it in `data/raw/`.
+
+Run it with:
+
+```bash
+python scripts/python/08a_create_example_people_dataset.py
+```
+
+Expected output:
+
+```text
+data/raw/people-example.csv
+```
+
+---
+
+## Script 08B — Build a Model-Ready Feature Table
+
+Create a file called:
+
+```text
+scripts/python/08b_build_feature_table.py
+```
+
+This script reads the raw example dataset, scales numerical variables, encodes the categorical variable, creates a derived feature, and saves a model-ready table.
+
+Run it with:
+
+```bash
+python scripts/python/08b_build_feature_table.py
+```
+
+Expected output:
+
+```text
+data/processed/model-ready-example.csv
+```
+
+This script is intentionally simple.
+
+Later chapters will improve this pattern by using training and testing splits, pipelines, and evaluation workflows.
+
+---
+
+## Feature Engineering Checklist
+
+Before moving into model building, ask:
+
+1. What is the prediction or modeling objective?
+2. What is the observation unit?
+3. Which columns are predictors?
+4. Which column is the target, if supervised learning is used?
+5. Which variables are numerical?
+6. Which variables are categorical?
+7. Which variables require scaling?
+8. Which variables require encoding?
+9. Are any derived features meaningful?
+10. Could any feature introduce leakage?
+
+This checklist helps keep feature engineering connected to the real analytical question.
 
 ---
 
@@ -154,18 +307,49 @@ Real datasets test your ability to apply them.
 
 The transition between the two is where analytical skill develops.
 
+Feature engineering is where domain understanding, data structure, and modeling objectives meet.
+
 ---
 
 ## Summary
 
-- Models learn from representations, not raw data  
-- Scaling controls how variables influence learning  
-- Encoding makes categorical information usable  
-- Derived features expose relationships  
-- Feature engineering is a design process with direct impact on model behavior  
+- Models learn from representations, not raw data.  
+- Scaling controls how numerical variables influence learning.  
+- Encoding makes categorical information usable.  
+- Derived features expose relationships.  
+- Feature engineering must avoid leakage.  
+- A model-ready dataset should be tidy, structured, and aligned with the decision context.  
+- Feature engineering is a design process with direct impact on model behavior.  
 
 ---
 
-## Next Step
+## Exercise
 
-→ Building models with intention and control
+Using a small dataset of your choice, identify:
+
+1. the observation unit  
+2. the target variable, if one exists  
+3. at least two numerical predictors  
+4. at least one categorical predictor  
+5. one feature that may need scaling  
+6. one feature that may need encoding  
+7. one possible derived feature  
+8. one possible leakage risk  
+
+Then create a model-ready version of the dataset.
+
+Save the output as:
+
+```text
+data/processed/model-ready-example.csv
+```
+
+---
+
+## Looking Ahead
+
+In the next lesson, we begin building models with intention and control.
+
+The focus shifts from preparing model-ready inputs to asking:
+
+> Which model should we build, and how do we know whether it is useful?
