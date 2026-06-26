@@ -1,0 +1,7 @@
+decision_component,decision_framing
+Goal,Identify individuals who may have higher predicted disease progression.
+Model evidence,The model shows moderate predictive ability and uses features such as BMI in prediction.
+Possible use,Use predictions as one input for prioritizing closer monitoring or further review.
+Main uncertainty,Predictions have error and are based on associations in this dataset.
+Reasonable action,Flag higher-risk cases for review while combining model output with domain expertise.
+Unsupported action,Do not use the model alone to prescribe treatment or claim causation.

@@ -4,45 +4,96 @@
 - **ID:** DS-L14
 - **Type:** Premium
 - **Audience:** Intermediate to Advanced
-- **Theme:** Translating model results into defensible claims
+- **Theme:** Translating model outputs into defensible real-world claims
 :::
 
 So far, we have:
 
-- built models  
-- evaluated their performance  
-- assessed stability  
-- interpreted feature influence  
+- built baseline models
+- evaluated model performance
+- assessed stability using cross-validation
+- interpreted how models use features
 
 Now we reach a critical step:
 
-> How do we translate model outputs into real-world statements?
+> How do we translate model outputs into real-world statements without overstating what the model proves?
+
+This lesson connects model evaluation and interpretation to one of the most important applied data science skills: making claims that match the evidence.
+
+A model can produce predictions.
+
+A model can show associations.
+
+A model can reveal patterns in a dataset.
+
+But a model does not automatically prove why those patterns exist.
+
+---
+
+## How to Run This Lesson
+
+Run the supporting script from the project root:
+
+```bash
+python scripts/python/14a_translate_model_outputs_to_claims.py
+```
+
+This creates the expected outputs in the `reports/` directory:
+
+```text
+reports/diabetes-claim-review-table.csv
+reports/diabetes-model-claim-summary.txt
+reports/figures/diabetes-observed-vs-predicted-error-highlighted.png
+```
+
+Then render the Quarto site:
+
+```bash
+quarto render
+```
+
+You can also run the code blocks inside this chapter interactively.
+
+The script-based workflow is preferred for reproducibility because it leaves behind files that can be inspected, compared, committed, or reused in later chapters.
 
 ---
 
 ## Load the Dataset
 
-```{python}
-#| label: 14-load-data
+We continue using the saved diabetes dataset.
+
+```python
 import pandas as pd
 
 df = pd.read_csv("data/diabetes.csv")
 
 X = df.drop(columns=["disease_progression"])
 y = df["disease_progression"]
+
+df.head()
 ```
+
+The dataset gives us features and an outcome.
+
+The model will learn predictive patterns from these data.
+
+The claims we make later must stay within that scope.
 
 ---
 
-## Fit a Model
+## Fit a Baseline Model
 
-```{python}
-#| label: 14-model
+We fit the same type of baseline model used in earlier lessons.
+
+```python
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
 )
 
 model = LinearRegression()
@@ -51,12 +102,19 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 ```
 
+This model provides predicted disease progression values for the test set.
+
+Those predictions can be evaluated and interpreted.
+
+But they are not automatically clinical conclusions.
+
 ---
 
-## Observed vs Predicted
+## Visualize Observed vs Predicted Values
 
-```{python}
-#| label: 14-observed-vs-predicted
+An observed-versus-predicted plot helps us see where the model performs well and where it makes larger errors.
+
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -79,18 +137,63 @@ max_val = max(y_test.max(), y_pred.max())
 
 plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", linewidth=1)
 
-plt.xlabel("Observed")
-plt.ylabel("Predicted")
-plt.title("Observed vs Predicted (Error Highlighted)")
+plt.xlabel("Observed disease progression")
+plt.ylabel("Predicted disease progression")
+plt.title("Observed vs Predicted Values")
 
-plt.colorbar(scatter, label="Absolute Error")
-
+plt.colorbar(scatter, label="Absolute error")
 plt.grid(alpha=0.2)
 plt.show()
 ```
 
-Points close to the diagonal line represent accurate predictions.  
-Points farther away indicate larger errors, highlighted by brighter colors.
+Points close to the diagonal line represent more accurate predictions.
+
+Points farther from the diagonal indicate larger errors.
+
+This plot supports a statement about predictive performance.
+
+It does not support a causal statement.
+
+---
+
+## Save the Plot as a Project Output
+
+In an applied workflow, important figures should be saved as reusable artifacts.
+
+```python
+from pathlib import Path
+
+Path("reports/figures").mkdir(parents=True, exist_ok=True)
+
+plt.figure(figsize=(7, 5))
+
+scatter = plt.scatter(
+    y_test,
+    y_pred,
+    c=error,
+    cmap="viridis",
+    edgecolors="black",
+    linewidth=0.4,
+    alpha=0.9
+)
+
+plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", linewidth=1)
+plt.xlabel("Observed disease progression")
+plt.ylabel("Predicted disease progression")
+plt.title("Observed vs Predicted Values")
+plt.colorbar(scatter, label="Absolute error")
+plt.grid(alpha=0.2)
+plt.tight_layout()
+
+plt.savefig(
+    "reports/figures/diabetes-observed-vs-predicted-error-highlighted.png",
+    dpi=300
+)
+
+plt.show()
+```
+
+The figure is now part of the project record.
 
 ---
 
@@ -98,15 +201,21 @@ Points farther away indicate larger errors, highlighted by brighter colors.
 
 The model provides:
 
-- predictions (estimated outcomes)  
-- relationships between features and predictions  
-- patterns learned from the dataset  
+- predicted outcomes
+- estimated relationships between features and predictions
+- patterns learned from the dataset
+- evidence about model behavior under this setup
 
-It does **not** directly provide:
+It does not directly provide:
 
-- causal relationships  
-- clinical conclusions  
-- general truths beyond the data  
+- causal proof
+- clinical recommendations
+- biological mechanisms
+- universal truths beyond the data
+
+This distinction is central to responsible analysis.
+
+A model output is not the same as a real-world explanation.
 
 ---
 
@@ -114,161 +223,345 @@ It does **not** directly provide:
 
 A common mistake is to move too quickly from:
 
-model output → real-world conclusion  
+```text
+model output → real-world conclusion
+```
 
-For example:
+For example, suppose BMI appears as an important predictor.
 
-❌ “BMI causes disease progression”
+A weak statement would be:
 
-Even if BMI appears as one of the strongest features, this claim is still too strong.
+```text
+BMI is included in the model.
+```
 
-What the model shows is that BMI is an important predictor in this dataset.
+A stronger but still defensible statement would be:
 
-That means BMI helps the model estimate disease progression,  
-but it does not prove that BMI is the direct cause of progression.
+```text
+BMI is an important predictor of disease progression in this fitted model.
+```
+
+An unsupported statement would be:
+
+```text
+BMI causes disease progression.
+```
+
+The model may show that BMI helps predict disease progression in this dataset.
+
+It does not prove that BMI is the direct cause of disease progression.
 
 ---
 
-### A simple analogy
+## A Simple Analogy
 
-> Umbrella sales are a strong predictor of wet streets.  
-> But umbrellas do not cause the streets to become wet.
+Umbrella sales may strongly predict wet streets.
 
-Both are related to an underlying factor — rain.
+But umbrellas do not cause streets to become wet.
 
----
-
-### What this means
+Both are related to another factor: rain.
 
 In the same way, a feature can be strongly associated with an outcome because it reflects:
 
-- underlying processes  
-- correlated variables  
-- or shared patterns in the data  
+- underlying processes
+- correlated variables
+- shared patterns in the data
+- measurement structure
+- unobserved factors
 
-A strong feature supports **prediction**.  
-It does not automatically establish **causation**.
+A strong feature can support prediction.
+
+It does not automatically establish causation.
 
 ---
 
-### CDI Insight
+## Build a Claim Review Table
 
-Models can detect patterns,  
-but they do not explain why those patterns exist.
+One useful applied practice is to explicitly classify claims by how strongly they are supported.
+
+```python
+claim_review_df = pd.DataFrame({
+    "claim": [
+        "BMI is included as a feature in the model.",
+        "BMI contributes to predictions in this fitted model.",
+        "Higher BMI is associated with higher predicted disease progression in this model.",
+        "BMI causes disease progression.",
+        "Reducing BMI will reduce disease progression for a patient."
+    ],
+    "claim_strength": [
+        "descriptive",
+        "model_based",
+        "model_based_association",
+        "causal",
+        "intervention_effect"
+    ],
+    "supported_by_this_workflow": [
+        "yes",
+        "yes",
+        "yes_with_scope_limits",
+        "no",
+        "no"
+    ],
+    "reason": [
+        "The feature table contains BMI.",
+        "The fitted model uses BMI when forming predictions.",
+        "The statement is limited to model behavior and association.",
+        "The workflow is predictive, not causal.",
+        "The workflow does not estimate intervention effects."
+    ]
+})
+
+claim_review_df
+```
+
+This table turns interpretation into a reviewable artifact.
+
+Instead of relying on vague wording, it forces us to ask whether each claim is supported by the workflow.
+
+---
+
+## Save the Claim Review Table
+
+```python
+Path("reports").mkdir(exist_ok=True)
+
+claim_review_df.to_csv(
+    "reports/diabetes-claim-review-table.csv",
+    index=False
+)
+```
+
+The saved table can be reused in reports, presentations, or decision memos.
 
 ---
 
 ## Correct Interpretation
 
-What we can say is:
+A defensible statement is:
 
-Higher BMI is associated with higher predicted disease progression in this model.
+> Higher BMI is associated with higher predicted disease progression in this fitted model, using this dataset and this modeling setup.
 
 This statement is:
 
-- accurate  
-- grounded in the model  
-- appropriately limited to the dataset  
+- accurate
+- grounded in the model
+- limited to the analysis performed
+- careful about causation
+- clear about scope
+
+The phrase “in this fitted model” matters.
+
+It reminds the reader that we are describing model behavior, not proving a biological mechanism.
 
 ---
 
-## Why This Distinction Matters
+## Why Scope Matters
 
 Model outputs depend on:
 
-- the dataset  
-- feature representation  
-- modeling assumptions  
+- the dataset
+- the features included
+- preprocessing choices
+- train/test split strategy
+- model type
+- evaluation method
+- assumptions behind the analysis
 
-Changing any of these can lead to different conclusions.
+Changing any of these can change the result.
 
----
+This is why a claim should not sound broader than the workflow that produced it.
 
-## Strength of Claims
-
-We can think of claims at different levels:
-
-### Weak (Descriptive)
-
-- BMI is included in the model  
-
-### Moderate (Model-Based)
-
-- BMI has a strong positive coefficient  
-- BMI is important for prediction  
-
-### Strong (Not Supported Here)
-
-- BMI causes disease progression  
+A narrow, accurate claim is stronger than a broad, unsupported one.
 
 ---
 
-### CDI Insight
+## Levels of Claim Strength
 
-> The strength of a claim must match the strength of the evidence.
+We can think of claims at different levels.
 
-Models provide **associations and patterns**, not causation.
+### Descriptive Claims
+
+These describe what is present in the data or workflow.
+
+Examples:
+
+- BMI is included as a feature.
+- The model was trained on the diabetes dataset.
+- The test set predictions were compared with observed values.
+
+These are usually easy to support.
+
+### Model-Based Claims
+
+These describe how the fitted model behaves.
+
+Examples:
+
+- BMI contributes to the model predictions.
+- The model assigns a positive coefficient to BMI.
+- The model has moderate predictive performance under this evaluation setup.
+
+These are valid when tied to the model and dataset.
+
+### Generalized Claims
+
+These extend beyond the immediate dataset.
+
+Examples:
+
+- The model will perform similarly in another population.
+- The same features will matter in another setting.
+
+These require stronger external validation.
+
+### Causal Claims
+
+These describe cause-and-effect relationships.
+
+Examples:
+
+- BMI causes disease progression.
+- Changing BMI will change disease progression.
+
+These are not supported by a standard predictive modeling workflow.
+
+They require causal study design, assumptions, and evidence beyond what we have done here.
 
 ---
 
 ## Connecting Back to Stability
 
-Because we used:
+In previous lessons, we used repeated evaluation and cross-validation.
 
-- cross-validation  
-- consistent pipelines  
+That strengthens our confidence that the model behavior is not entirely driven by one lucky split.
 
-we can say:
+However, stability does not establish causation.
 
-- the model is reasonably stable  
-- the observed patterns are not driven by a single split  
+A stable predictive pattern is still a predictive pattern.
 
-However:
+It should be reported as such.
 
-- they remain **model-based observations**, not causal conclusions  
+Cross-validation can support claims like:
+
+- the model shows reasonably stable predictive performance
+- performance varies moderately across folds
+- the model is not being judged from a single split alone
+
+It cannot support claims like:
+
+- this feature causes the outcome
+- changing this feature will change the outcome
+
+---
+
+## Write a Short Model Claim Summary
+
+We can write a short summary that respects the evidence.
+
+```python
+summary_text = """
+The fitted linear regression model shows moderate predictive ability for disease progression
+using the diabetes dataset. Observed-versus-predicted values indicate that some predictions
+are close to the observed outcome, while others show meaningful error. Feature-level patterns
+should be interpreted as model-based associations, not causal mechanisms. Claims from this
+workflow should therefore focus on prediction, model behavior, and association within the
+current dataset and modeling setup.
+""".strip()
+
+Path("reports/diabetes-model-claim-summary.txt").write_text(summary_text)
+
+print(summary_text)
+```
+
+This creates a reusable plain-language interpretation.
 
 ---
 
 ## What This Means in Practice
 
-When reporting results, focus on:
+When reporting model results, focus on:
 
-- what the model learned  
-- how consistent the results are  
-- how strong the predictive relationship is  
+- what the model predicts
+- how well it predicts
+- how stable the performance is
+- which features the model uses
+- what the results do and do not support
 
 Avoid:
 
-- causal language  
-- overgeneralization  
-- claims beyond the data  
+- causal language without causal evidence
+- clinical or policy recommendations unsupported by the workflow
+- claims beyond the dataset
+- claims that ignore uncertainty or error
+- presenting model interpretation as objective truth
 
 ---
 
-## Example Statements
+## Better and Worse Example Statements
 
 ### Appropriate
 
-- The model consistently uses BMI as a strong predictor of progression  
-- Predictions increase with higher BMI values in this dataset  
+- The model uses BMI as an important predictor of disease progression.
+- Higher BMI is associated with higher predicted progression in this fitted model.
+- The model shows moderate predictive performance under the current evaluation setup.
+- These findings describe model behavior and should not be interpreted as causal evidence.
 
 ### Not Appropriate
 
-- BMI is the main cause of disease progression  
-- Reducing BMI will reduce disease progression  
+- BMI is the main cause of disease progression.
+- Reducing BMI will reduce disease progression.
+- The model explains the biological mechanism of disease progression.
+- The same findings will apply to all future populations.
+
+The difference is not just wording.
+
+The difference is scientific and analytical honesty.
+
+---
+
+## CDI Insight
+
+The strength of a claim must match the strength of the evidence.
+
+Predictive models can support predictive claims.
+
+Interpretable models can support model-behavior claims.
+
+They do not automatically support causal claims.
+
+A defensible data science system protects this boundary.
 
 ---
 
 ## Summary
 
-- Models produce predictions and patterns  
-- Interpretation must remain within the model’s scope  
-- Stability strengthens confidence, but does not establish causation  
-- Claims must match the level of evidence  
-- Careful wording is essential in real-world analysis  
+In this lesson, we moved from model outputs to real-world claims.
+
+We:
+
+- fitted a baseline model
+- visualized observed versus predicted values
+- distinguished predictions from explanations
+- separated association from causation
+- created a claim review table
+- saved a plain-language claim summary
+- practiced wording claims at the correct strength
+
+The key idea is:
+
+> Good analysis is not only about producing outputs. It is about making claims that the outputs can actually support.
 
 ---
 
-## Next Step
+## What Comes Next
+
+Once claims are appropriately scoped, they still need to be communicated clearly.
+
+In the next lesson, we will focus on:
+
+- communicating model results clearly
+- writing responsible summaries
+- explaining uncertainty
+- presenting findings to decision-makers without overstating the evidence
 
 → **Communicating results clearly and responsibly**

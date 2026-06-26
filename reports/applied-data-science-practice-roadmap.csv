@@ -1,0 +1,9 @@
+stage,core_question,real_world_output
+Data structure,Is the data organized enough to support analysis?,Documented dataset and feature table
+Modeling,Can the data support useful prediction or explanation?,Saved model and baseline results
+Evaluation,How stable and reliable is the model?,"Metrics, plots, and validation summaries"
+Interpretation,What is the model using to make predictions?,Feature influence tables and interpretation notes
+Communication,Can the results be explained clearly?,Clear written summary
+Decision context,How could the results inform action?,Decision framing table
+Responsible use,What are the limits and risks?,Limitations and responsible use checklist
+System transition,How would this become a maintained workflow?,Deployment and monitoring roadmap

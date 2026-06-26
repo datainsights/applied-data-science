@@ -1,0 +1,8 @@
+limitation_area,limitation,responsible_response
+Dataset scope,The dataset represents a specific sample and should not be assumed to represent all populations.,Describe the data source and avoid broad claims beyond the dataset.
+Feature coverage,Only available measured variables can be used by the model.,State that unmeasured factors may influence outcomes.
+Model structure,Linear regression simplifies relationships as additive and linear.,Treat the model as an interpretable approximation.
+Generalization,Cross-validation estimates internal stability but does not replace external validation.,Validate on new data before deployment in a new setting.
+Causality,Predictive associations do not establish causal mechanisms.,Use association language unless causal evidence is available.
+Individual prediction error,Individual predictions may have meaningful error even when average performance is acceptable.,Communicate prediction uncertainty and avoid exact individual claims.
+Decision use,"The model should support judgment, not replace domain expertise or clinical decision-making.",Use outputs as decision support only within a defined context.

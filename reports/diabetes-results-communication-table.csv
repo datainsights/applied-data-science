@@ -1,0 +1,6 @@
+technical_output,plain_language,careful_statement
+R2 score,How much outcome variation the model explains,"The model explains part of the variation in disease progression, but not all of it."
+Mean absolute error,Average size of prediction error,Predictions differ from observed values by a measurable average amount.
+Model coefficient,How the model changes prediction when a feature changes,"A larger coefficient means the model relies more strongly on that feature, not that the feature causes the outcome."
+Cross-validation variability,How much performance changes across data splits,"Stable performance across folds increases confidence, but does not prove causation."
+Feature importance,How strongly the model uses a feature for prediction,A feature can be useful for prediction without being a causal driver.

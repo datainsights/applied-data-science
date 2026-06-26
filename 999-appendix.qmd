@@ -4,95 +4,373 @@
 - **ID:** DS-APP
 - **Type:** Reference
 - **Audience:** Public
-- **Theme:** Environment, structure, and reproducibility reference
+- **Theme:** Environment, project structure, reproducibility, and reusable workflow patterns
 :::
 
-This appendix collects technical reference material that supports the Foundations Track.
+This appendix collects technical reference material that supports the **Applied Data Science System**.
 
-It documents the project structure, environment setup, rendering workflow, and reusable patterns used throughout the guide.
+It documents the project structure, environment setup, rendering workflow, script-based execution pattern, and reusable Python patterns used throughout the guide.
+
+The purpose of the appendix is simple:
+
+> make the workflow easier to rerun, inspect, adapt, and extend.
+
+---
+
+## How to Use This Appendix
+
+Use this appendix as a reference when you need to:
+
+- recreate the project environment
+- understand the folder structure
+- rerun lesson scripts
+- regenerate reports and figures
+- render the Quarto site
+- prepare changes for GitHub Pages
+
+Most chapters in this guide can be run in two ways:
+
+1. interactively, by reading and running the code blocks in the chapter
+2. reproducibly, by running the supporting Python script from the project root
+
+The script-based workflow is preferred when preparing a public or production-facing version of the guide.
 
 ---
 
 ## Project Structure Overview
 
-A standard CDI Quarto-first project looks like this:
+A standard CDI applied data science project uses a Quarto-first structure with supporting scripts and saved outputs.
 
-```
-data-science/
+```text
+applied-data-science/
 ├── index.qmd
 ├── 00-preface.qmd
 ├── 01-setting-up-environment.qmd
-├── ...
+├── 08-feature-engineering.qmd
+├── 09-model-building.qmd
+├── 10-model-evaluation.qmd
+├── 11-model-improvement.qmd
+├── 12-pipelines-and-cross-validation.qmd
+├── 13-feature-importance-and-interpretation.qmd
+├── 14-from-model-outputs-to-real-world-claims.qmd
+├── 15-communicating-results-clearly.qmd
+├── 16-from-analysis-to-decision-making.qmd
+├── 17-end-to-end-case-study.qmd
+├── 18-limitations-and-responsible-use.qmd
+├── 19-from-foundations-to-real-world-practice.qmd
+├── 999-appendix.qmd
+├── 999-references.qmd
 ├── data/
-├── figures/
+│   ├── README.md
+│   ├── diabetes.csv
+│   ├── raw/
+│   │   └── people-example.csv
+│   └── processed/
+│       └── model-ready-example.csv
+├── models/
+│   └── diabetes-linear-regression.joblib
+├── reports/
+│   ├── *.csv
+│   ├── *.md
+│   └── figures/
+│       └── *.png
 ├── scripts/
-│   └── bash/
+│   ├── bash/
+│   └── python/
 ├── docs/
 ├── _quarto.yml
-└── requirements.txt
+├── requirements.txt
+├── requirements-lock.txt
+└── .gitignore
 ```
 
-### Key Directories
+This layout separates source files, data, scripts, generated reports, model artifacts, and rendered documentation.
 
-- `data/`  
-  stores raw and cleaned datasets  
+---
 
-- `figures/`  
-  stores plots that are explicitly saved during rendering 
+## Key Directories
 
-- `scripts/bash/`  
-  contains helper scripts such as `setup-env.sh` and `build.sh`  
+### `data/`
 
-- `docs/`  
-  contains the rendered Quarto site (GitHub Pages output)  
+The `data/` directory stores project datasets.
+
+In this guide, it includes:
+
+```text
+data/diabetes.csv
+data/raw/people-example.csv
+data/processed/model-ready-example.csv
+```
+
+The diabetes dataset supports the modeling lessons.
+
+The people example supports feature engineering and model-ready table construction.
+
+---
+
+### `scripts/python/`
+
+The `scripts/python/` directory contains executable lesson scripts.
+
+These scripts turn chapter logic into reusable project workflows.
+
+Examples include:
+
+```text
+scripts/python/09b_train_baseline_linear_model.py
+scripts/python/10a_evaluate_repeated_splits.py
+scripts/python/12a_cross_validate_pipeline.py
+scripts/python/17a_run_end_to_end_case_study.py
+```
+
+Each script should be runnable from the project root.
+
+---
+
+### `scripts/bash/`
+
+The `scripts/bash/` directory contains helper scripts for project setup and build operations.
+
+Examples include:
+
+```text
+scripts/bash/01a-create-project-structure.sh
+scripts/bash/01c-build-project.sh
+scripts/bash/01d-freeze-dependencies.sh
+```
+
+These scripts support repeatable project management.
+
+---
+
+### `reports/`
+
+The `reports/` directory stores reusable outputs created by the scripts.
+
+These may include:
+
+- model metrics
+- cross-validation summaries
+- coefficient tables
+- communication summaries
+- responsible-use checklists
+- decision framing tables
+
+Saved reports make the workflow auditable.
+
+They also allow later chapters to refer to previous outputs without hiding the work that created them.
+
+---
+
+### `reports/figures/`
+
+The `reports/figures/` directory stores saved plots.
+
+Examples include:
+
+```text
+reports/figures/diabetes-observed-vs-predicted.png
+reports/figures/diabetes-residual-plot.png
+reports/figures/diabetes-cross-validation-mae.png
+```
+
+Saving figures as files makes them easier to reuse in reports, slides, websites, and README pages.
+
+---
+
+### `models/`
+
+The `models/` directory stores trained teaching models.
+
+For example:
+
+```text
+models/diabetes-linear-regression.joblib
+```
+
+In this guide, the model artifact is small and intentional.
+
+In larger projects, model artifacts should be tracked carefully because they can become large or sensitive.
+
+---
+
+### `docs/`
+
+The `docs/` directory contains the rendered Quarto website.
+
+For GitHub Pages using a `docs/` deployment workflow, this is the public site output directory.
+
+Do not edit files inside `docs/` manually unless there is a specific reason.
+
+Instead, edit the `.qmd` source files and rerender the site.
 
 ---
 
 ## Environment Setup Reference
 
-This project uses a local virtual environment (`.venv`) for reproducibility.
+This project uses a local Python virtual environment.
 
-### Create environment manually
+Create and activate the environment from the project root:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
+
+Install the required packages:
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Render the book
-
-```bash
-quarto render
-```
-
-Or use the helper script:
-
-```bash
-bash scripts/bash/build.sh
-```
+The `requirements.txt` file defines the main dependencies needed to run the project.
 
 ---
 
-## Quarto Workflow Summary
+## Reproducibility Lock File
 
-The workflow for this guide is:
+The project may also include:
 
+```text
+requirements-lock.txt
 ```
-Python code
+
+This file records an exact package snapshot.
+
+A useful distinction is:
+
+```text
+requirements.txt       = minimal dependency list
+requirements-lock.txt  = frozen reproducibility snapshot
+```
+
+To refresh the lock file after installing packages:
+
+```bash
+pip freeze > requirements-lock.txt
+```
+
+The lock file helps preserve the environment used when the guide was built.
+
+---
+
+## Running a Lesson Script
+
+Most applied lessons include a supporting Python script.
+
+Run scripts from the project root.
+
+For example:
+
+```bash
+python scripts/python/12a_cross_validate_pipeline.py
+```
+
+A script should usually create outputs in:
+
+```text
+reports/
+reports/figures/
+models/
+data/processed/
+```
+
+depending on the lesson.
+
+---
+
+## Rendering the Quarto Site
+
+After running scripts, render the site:
+
+```bash
+quarto render
+```
+
+The rendered output is written to:
+
+```text
+docs/
+```
+
+Open the site locally:
+
+```bash
+open docs/index.html
+```
+
+On non-macOS systems, open `docs/index.html` using your file browser or web browser.
+
+---
+
+## Standard Lesson Workflow
+
+A typical lesson workflow is:
+
+```text
+source data
     ↓
-Quarto chapter (.qmd)
+Python script
+    ↓
+reports and figures
+    ↓
+Quarto chapter
     ↓
 quarto render
     ↓
-docs/ (static site)
+docs site
 ```
 
-All figures and outputs are generated during rendering.
+The preferred pattern is:
+
+```bash
+python scripts/python/<lesson-script>.py
+quarto render
+```
+
+This ensures that outputs are regenerated before the site is rebuilt.
+
+---
+
+## GitHub Pages Workflow
+
+For a public Quarto site using GitHub Pages, the usual workflow is:
+
+```text
+edit .qmd files and scripts
+    ↓
+run scripts
+    ↓
+quarto render
+    ↓
+commit source and docs
+    ↓
+push to GitHub
+    ↓
+GitHub Pages publishes docs/
+```
+
+If a custom domain is used, the rendered site should include a `CNAME` file containing the domain.
+
+For this project, the custom domain is:
+
+```text
+applied-datascience.complexdatainsights.com
+```
+
+If the workflow creates the `CNAME` file automatically, confirm that the deployed `docs/` output preserves it.
 
 ---
 
 ## Reusable Pandas Patterns
+
+### Read a CSV file
+
+```python
+import pandas as pd
+
+df = pd.read_csv("data/diabetes.csv")
+```
 
 ### Select columns
 
@@ -100,18 +378,37 @@ All figures and outputs are generated during rendering.
 df[["col1", "col2"]]
 ```
 
+### Drop columns
+
+```python
+X = df.drop(columns=["target"])
+```
+
+### Select a target column
+
+```python
+y = df["target"]
+```
+
 ### Filter rows
 
 ```python
-df[df["col"] > value]
+filtered_df = df[df["value"] > 0]
+```
+
+### Create a new column
+
+```python
+df["new_column"] = df["col1"] + df["col2"]
 ```
 
 ### Group and aggregate
 
 ```python
-df.groupby("group_col").agg(
-    metric=("value_col", "mean")
-)
+summary_df = df.groupby("group_col").agg(
+    mean_value=("value_col", "mean"),
+    count=("value_col", "count")
+).reset_index()
 ```
 
 ### Handle missing values
@@ -120,56 +417,273 @@ df.groupby("group_col").agg(
 df["col"] = df["col"].fillna(df["col"].median())
 ```
 
-### Convert dtype
+### Convert data type
 
 ```python
 df["category_col"] = df["category_col"].astype("category")
+```
+
+### Save a result
+
+```python
+df.to_csv("reports/output-table.csv", index=False)
+```
+
+---
+
+## Reusable Scikit-Learn Patterns
+
+### Define features and target
+
+```python
+X = df.drop(columns=["disease_progression"])
+y = df["disease_progression"]
+```
+
+### Split data
+
+```python
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+```
+
+### Fit a baseline model
+
+```python
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+```
+
+### Generate predictions
+
+```python
+predictions = model.predict(X_test)
+```
+
+### Evaluate predictions
+
+```python
+from sklearn.metrics import mean_absolute_error, r2_score
+
+mae = mean_absolute_error(y_test, predictions)
+r2 = r2_score(y_test, predictions)
+```
+
+### Build a pipeline
+
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LinearRegression())
+])
+```
+
+### Run cross-validation
+
+```python
+from sklearn.model_selection import cross_val_score
+
+mae_scores = -cross_val_score(
+    pipeline,
+    X,
+    y,
+    cv=5,
+    scoring="neg_mean_absolute_error"
+)
+```
+
+### Save a trained model
+
+```python
+import joblib
+
+joblib.dump(model, "models/diabetes-linear-regression.joblib")
+```
+
+### Load a trained model
+
+```python
+import joblib
+
+model = joblib.load("models/diabetes-linear-regression.joblib")
+```
+
+---
+
+## Reusable Matplotlib Patterns
+
+### Basic scatter plot
+
+```python
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(7, 5))
+plt.scatter(x, y)
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Scatter Plot")
+plt.tight_layout()
+plt.show()
+```
+
+### Save a figure
+
+```python
+plt.savefig("reports/figures/example-figure.png", dpi=300, bbox_inches="tight")
+```
+
+### Observed vs predicted plot
+
+```python
+plt.figure(figsize=(7, 5))
+plt.scatter(observed, predicted)
+
+min_value = min(observed.min(), predicted.min())
+max_value = max(observed.max(), predicted.max())
+
+plt.plot([min_value, max_value], [min_value, max_value], linestyle="--")
+plt.xlabel("Observed")
+plt.ylabel("Predicted")
+plt.title("Observed vs Predicted")
+plt.tight_layout()
+plt.show()
 ```
 
 ---
 
 ## Reproducibility Checklist
 
-Before finalizing any chapter:
+Before finalizing any chapter, confirm that:
 
-- confirm no missing values remain (unless justified)  
-- confirm no unintended duplicates  
-- confirm correct data types  
-- confirm figures render correctly  
-- rebuild the book (`quarto render`)  
-- open `docs/index.html` to verify output  
+- the lesson script runs from the project root
+- expected outputs are created
+- paths are relative, not machine-specific
+- no private files or credentials are included
+- code blocks use the same workflow described in the chapter
+- figures render correctly
+- saved report files are updated
+- the Quarto site builds successfully
+- `docs/index.html` opens locally
+- `git status` shows only expected changes
+
+A useful final check is:
+
+```bash
+quarto render
+git status
+```
 
 ---
 
+## Public Repository Safety Checklist
+
+Before making a project public, check for sensitive files or accidental local paths.
+
+Search for common sensitive terms:
+
+```bash
+grep -R "password\|token\|secret\|api_key\|apikey\|Users/" . \
+  --exclude-dir=.git \
+  --exclude-dir=.venv \
+  --exclude-dir=docs
+```
+
+Check for large files:
+
+```bash
+find . -type f -size +10M \
+  -not -path "./.git/*" \
+  -not -path "./.venv/*"
+```
+
+Review tracked files:
+
+```bash
+git status
+git diff --cached --name-status
+```
+
+These checks help keep public CDI repositories clean and safe.
+
+---
+
+## Running the Full System
+```bash
+bash scripts/bash/end-to-end-workflow.sh
+```
+
 ## Data Sources
 
-- **Iris dataset** [@iris]
+This guide uses the diabetes dataset distributed through scikit-learn and saved locally as:
+
+```text
+data/diabetes.csv
+```
+
+The dataset is used for educational modeling examples throughout the applied lessons.
 
 ---
 
 ## Software and Tools
 
-This guide uses a small set of widely adopted tools for data analysis and visualization:
+This guide uses a small set of widely adopted tools for reproducible applied data science:
 
-- **Python** [@python] — general-purpose programming language for data analysis  
-- **pandas** [@pandas] — data manipulation and tabular data handling  
-- **NumPy** [@numpy] — numerical computing and array operations  
-- **matplotlib** [@matplotlib] — foundational plotting library  
-- **seaborn** [@seaborn] — statistical data visualization built on matplotlib  
+- **Python** [@python]
+- **pandas** [@pandas]
+- **NumPy** [@numpy]
+- **matplotlib** [@matplotlib]
+- **scikit-learn** [@scikit-learn]
+- **joblib** [@joblib]
+- **Quarto** [@quarto]
 
-These tools form a standard ecosystem for reproducible data science workflows.
+Together, these tools support tabular data handling, modeling, evaluation, visualization, reproducible reporting, and static site publishing.
 
 ---
 
 ## Closing Note
 
-The goal of this Foundations Track is not just to teach syntax.
+The goal of the **Applied Data Science System** is not only to teach syntax.
 
-It is to teach structure, discipline, and reproducibility.
+It is to teach a disciplined workflow:
 
-The same workflow you used here can be applied to:
+```text
+data
+    ↓
+analysis
+    ↓
+modeling
+    ↓
+evaluation
+    ↓
+interpretation
+    ↓
+communication
+    ↓
+decision context
+    ↓
+responsible use
+```
 
-- new datasets  
-- new domains  
-- larger analytical projects  
-- future CDI guides  
+The same structure can be reused across:
+
+- new datasets
+- client projects
+- public guides
+- domain-specific CDI pathways
+- future analytical systems
+
+A strong data science workflow does more than produce outputs.
+
+It produces evidence that can be inspected, explained, reproduced, and used responsibly.

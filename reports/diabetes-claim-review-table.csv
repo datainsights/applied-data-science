@@ -1,0 +1,6 @@
+claim,claim_strength,supported_by_this_workflow,reason
+BMI is included as a feature in the model.,descriptive,yes,The feature table contains BMI.
+BMI contributes to predictions in this fitted model.,model_based,yes,The fitted model uses BMI when forming predictions.
+Higher BMI is associated with higher predicted disease progression in this model.,model_based_association,yes_with_scope_limits,The statement is limited to model behavior and association.
+BMI causes disease progression.,causal,no,"The workflow is predictive, not causal."
+Reducing BMI will reduce disease progression for a patient.,intervention_effect,no,The workflow does not estimate intervention effects.

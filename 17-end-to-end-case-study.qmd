@@ -7,20 +7,57 @@
 - **Theme:** Integrating the full CDI workflow on a real dataset
 :::
 
-In the previous lessons, we built the premium workflow step by step:
+In the previous lessons, we built the applied data science workflow step by step:
 
-- feature engineering  
-- modeling  
-- evaluation  
-- interpretation  
-- communication  
-- decision-making  
+- feature engineering
+- model building
+- model evaluation
+- model improvement
+- pipelines and cross-validation
+- model interpretation
+- responsible claims
+- clear communication
+- decision framing
 
-Now we bring these pieces together in a single case study.
+Now we bring these pieces together in one case study.
 
 The goal is not to introduce a new concept.
 
 The goal is to show how the full CDI workflow operates from beginning to end on a real dataset.
+
+---
+
+## How to Run This Lesson
+
+Run the supporting script from the project root:
+
+```bash
+python scripts/python/17a_run_end_to_end_case_study.py
+```
+
+This creates the expected outputs in the `reports/` directory:
+
+```text
+reports/diabetes-end-to-end-cross-validation-folds.csv
+reports/diabetes-end-to-end-cross-validation-summary.csv
+reports/diabetes-end-to-end-test-metrics.csv
+reports/diabetes-end-to-end-coefficients.csv
+reports/diabetes-end-to-end-case-summary.md
+reports/figures/diabetes-end-to-end-cv-mae.png
+reports/figures/diabetes-end-to-end-cv-r2.png
+reports/figures/diabetes-end-to-end-observed-vs-predicted.png
+reports/figures/diabetes-end-to-end-coefficients.png
+```
+
+Then render the Quarto site:
+
+```bash
+quarto render
+```
+
+You can also run the code blocks inside this chapter interactively.
+
+The script-based workflow is preferred because it leaves behind reproducible project artifacts that can be inspected, compared, committed, or reused.
 
 ---
 
@@ -36,24 +73,30 @@ It is a structured prediction question.
 
 That distinction matters from the beginning.
 
+A prediction workflow can tell us whether the available measurements are useful for estimating future outcomes.
+
+It cannot, by itself, prove that changing one measurement will cause the outcome to change.
+
 ---
 
 ## Load the Dataset
 
-```{python}
-#| label: 17-load-data
+```python
 import pandas as pd
 
 df = pd.read_csv("data/diabetes.csv")
 df.head()
 ```
 
+The dataset is already stored inside the project `data/` directory.
+
+This keeps the case study connected to the earlier lessons and avoids hidden data dependencies.
+
 ---
 
 ## Define Features and Target
 
-```{python}
-#| label: 17-define-features-target
+```python
 X = df.drop(columns=["disease_progression"])
 y = df["disease_progression"]
 
@@ -64,37 +107,38 @@ Each row represents one observation.
 
 Each column represents one measured feature.
 
-The target is continuous, so this remains a regression problem.
+The target is continuous, so this is a regression problem.
 
 ---
 
-## Step 1 — Understand the Data Structure
+## Step 1: Understand the Data Structure
 
-Before modeling, it is useful to inspect the feature distribution.
+Before modeling, we inspect the feature table.
 
-```{python}
-#| label: 17-summary-stats
+```python
 X.describe().round(3)
 ```
 
-At this stage, the key question is not whether the data is interesting.
+At this stage, the key question is not whether the data is exciting.
 
-It is whether the data is structured well enough to support a defensible workflow.
+The key question is whether the data is structured well enough to support a defensible workflow.
 
 Here, the answer is yes:
 
-- the dataset is tabular  
-- the features are numeric  
-- the target is clearly defined  
+- the dataset is tabular
+- the features are numeric
+- the target is clearly defined
+- the project has a stable input file
+
+This is the minimum foundation needed for reproducible applied modeling.
 
 ---
 
-## Step 2 — Build a Reproducible Workflow
+## Step 2: Build a Reproducible Workflow
 
 We use a pipeline so that scaling and modeling are applied consistently.
 
-```{python}
-#| label: 17-build-pipeline
+```python
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
@@ -107,18 +151,21 @@ pipeline = Pipeline([
 pipeline
 ```
 
-This makes the workflow easier to reproduce and reduces the chance of inconsistent preprocessing.
+The pipeline combines preprocessing and modeling into one object.
+
+This reduces the chance of applying transformations inconsistently.
+
+It also makes the workflow easier to reuse in scripts, reports, and later projects.
 
 ---
 
-## Step 3 — Evaluate with Cross-Validation
+## Step 3: Evaluate With Cross-Validation
 
-A single split provides only one estimate of performance.
+A single train/test split provides only one estimate of performance.
 
-We use cross-validation to obtain a more stable view.
+Cross-validation provides a more stable view by evaluating the workflow across multiple folds.
 
-```{python}
-#| label: 17-cross-validation
+```python
 from sklearn.model_selection import cross_val_score
 import numpy as np
 
@@ -141,8 +188,7 @@ r2_scores = cross_val_score(
 mae_scores, r2_scores
 ```
 
-```{python}
-#| label: 17-cv-summary
+```python
 cv_summary = pd.DataFrame({
     "metric": ["MAE", "R2"],
     "mean": [np.mean(mae_scores), np.mean(r2_scores)],
@@ -152,19 +198,18 @@ cv_summary = pd.DataFrame({
 cv_summary
 ```
 
-This gives us:
+This gives us two important views:
 
-- average performance  
-- variability across folds  
+- average model performance
+- variability across folds
 
-That is already more informative than a single score.
+That is more informative than a single score.
 
 ---
 
-## Step 4 — Visualize Stability Across Folds
+## Step 4: Visualize Stability Across Folds
 
-```{python}
-#| label: 17-cv-mae-plot
+```python
 import matplotlib.pyplot as plt
 
 folds = range(1, len(mae_scores) + 1)
@@ -178,8 +223,7 @@ plt.grid(alpha=0.2)
 plt.show()
 ```
 
-```{python}
-#| label: 17-cv-r2-plot
+```python
 plt.figure(figsize=(7, 5))
 plt.plot(folds, r2_scores, marker="o", linewidth=1)
 plt.xlabel("Fold")
@@ -191,27 +235,31 @@ plt.show()
 
 These plots help us see whether performance is:
 
-- stable  
-- highly variable  
-- or dependent on a small number of favorable splits  
+- stable
+- highly variable
+- dependent on a small number of favorable splits
 
 Here, the variation is present but not extreme.
 
-That suggests the model is reasonably stable.
+That suggests the model is reasonably stable as a baseline system.
 
 ---
 
-## Step 5 — Fit a Model for Interpretation
+## Step 5: Fit a Model for Interpretation
 
-To examine model behavior more directly, we fit the same workflow on a train/test split.
+Cross-validation gives us stability evidence.
 
-```{python}
-#| label: 17-train-test-fit
+For interpretation and visualization, we also fit one model on a train/test split.
+
+```python
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
 )
 
 pipeline.fit(X_train, y_train)
@@ -223,14 +271,17 @@ test_r2 = r2_score(y_test, y_pred)
 test_mae, test_r2
 ```
 
-This gives us one specific fitted model for interpretation, while cross-validation remains the main source of stability evidence.
+This gives us one fitted model for inspection.
+
+The single split should not replace cross-validation.
+
+It is used here as a practical way to inspect predictions, residual behavior, and coefficients.
 
 ---
 
-## Step 6 — Compare Observed and Predicted Values
+## Step 6: Compare Observed and Predicted Values
 
-```{python}
-#| label: 17-observed-vs-predicted
+```python
 error = np.abs(y_test - y_pred)
 
 plt.figure(figsize=(7, 5))
@@ -239,7 +290,6 @@ scatter = plt.scatter(
     y_test,
     y_pred,
     c=error,
-    cmap="viridis",
     edgecolors="black",
     linewidth=0.4,
     alpha=0.9
@@ -252,7 +302,7 @@ plt.plot([min_val, max_val], [min_val, max_val], linestyle="--", linewidth=1)
 
 plt.xlabel("Observed progression")
 plt.ylabel("Predicted progression")
-plt.title("Observed vs Predicted (Error Highlighted)")
+plt.title("Observed vs Predicted")
 plt.colorbar(scatter, label="Absolute Error")
 plt.grid(alpha=0.2)
 plt.show()
@@ -266,12 +316,13 @@ This visual reminds us that a model can be useful without being perfect.
 
 ---
 
-## Step 7 — Interpret Feature Influence
+## Step 7: Interpret Feature Influence
 
 Because the model inside the pipeline is linear regression, we can inspect coefficients.
 
-```{python}
-#| label: 17-extract-coefficients
+The coefficients are attached to the scaled features because the model was fit after `StandardScaler`.
+
+```python
 coef_series = pd.Series(
     pipeline.named_steps["model"].coef_,
     index=X.columns
@@ -280,8 +331,7 @@ coef_series = pd.Series(
 coef_series
 ```
 
-```{python}
-#| label: 17-coefficient-plot
+```python
 plt.figure(figsize=(7, 5))
 coef_series.plot(kind="barh")
 plt.xlabel("Coefficient")
@@ -292,19 +342,21 @@ plt.show()
 
 These coefficients describe how the model uses features for prediction.
 
-They do **not** establish causation.
+They do not establish causation.
 
 For example, if BMI has a strong positive coefficient, we can say:
 
-- BMI is an important feature for prediction in this model  
+- BMI is an important feature for prediction in this model.
 
 We cannot say:
 
-- BMI directly causes progression based on this model alone  
+- BMI directly causes disease progression based on this model alone.
+
+This distinction is one of the most important parts of responsible model interpretation.
 
 ---
 
-## Step 8 — Translate Results into a Defensible Claim
+## Step 8: Translate Results Into a Defensible Claim
 
 At this point, a careful claim might be:
 
@@ -316,9 +368,11 @@ It is appropriately limited.
 
 It does not overreach into causal or clinical certainty.
 
+A stronger claim such as “BMI causes disease progression” is not supported by this workflow.
+
 ---
 
-## Step 9 — Translate Analysis into Decision Context
+## Step 9: Translate Analysis Into Decision Context
 
 Now we ask the practical question:
 
@@ -326,23 +380,43 @@ Now we ask the practical question:
 
 A reasonable decision-oriented interpretation is:
 
-- use the model as a **screening or prioritization aid**  
-- identify observations that may deserve closer follow-up  
-- avoid using predictions as the sole basis for intervention  
+- use the model as a screening or prioritization aid
+- identify observations that may deserve closer follow-up
+- avoid using predictions as the sole basis for intervention
 
 Why?
 
 Because the model is:
 
-- informative  
-- reasonably stable  
-- but still imperfect  
+- informative
+- reasonably stable
+- but still imperfect
 
 This is where analysis becomes useful without becoming overconfident.
 
 ---
 
-## Step 10 — Case Study Summary
+## Step 10: Save the Case Study Outputs
+
+The script for this lesson saves the case study outputs into `reports/`.
+
+Those outputs include:
+
+- cross-validation fold results
+- cross-validation summary
+- test-set metrics
+- model coefficients
+- interpretation summary
+- decision framing summary
+- figures for model performance and interpretation
+
+Saving these files turns the case study from an interactive analysis into a reproducible project artifact.
+
+That is the difference between a one-time notebook and an applied analytical system.
+
+---
+
+## Case Study Summary
 
 ### Data
 
@@ -376,11 +450,12 @@ An end-to-end workflow is not complete when a model is fit.
 
 It is complete when the path from:
 
-- data  
-- to model  
-- to interpretation  
-- to communication  
-- to decision context  
+- data
+- to model
+- to evaluation
+- to interpretation
+- to communication
+- to decision context
 
 remains clear, disciplined, and defensible.
 
@@ -394,6 +469,12 @@ It is in how responsibly that output is connected to real-world use.
 
 ---
 
-## Next Step
+## What Comes Next
 
-→ **Capstone reflection and next directions**
+In the next lesson, we will reflect on limitations and responsible use.
+
+This is important because even a complete workflow has boundaries.
+
+A responsible analyst must understand what the system can support and what it cannot.
+
+→ **Limitations and responsible use**

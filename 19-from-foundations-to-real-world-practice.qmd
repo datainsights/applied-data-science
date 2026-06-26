@@ -7,34 +7,143 @@
 - **Theme:** Transitioning from analytical thinking to real-world systems
 :::
 
-You have now completed the full CDI workflow:
+You have now completed the full Applied Data Science System workflow:
 
-- data  
-- modeling  
-- evaluation  
-- interpretation  
-- communication  
-- decision context  
-- limitations and responsible use  
+- data preparation
+- feature engineering
+- model building
+- model evaluation
+- model improvement
+- pipelines and cross-validation
+- interpretation
+- communication
+- decision context
+- limitations and responsible use
 
-This is not just a sequence of steps.
+This is not just a sequence of technical steps.
 
-It is a **way of thinking about data**.
+It is a way of thinking about data.
+
+The goal of this guide has been to move from isolated analysis toward a reproducible analytical system.
+
+---
+
+## How to Run This Lesson
+
+Run the supporting script from the project root:
+
+```bash
+python scripts/python/19a_build_practice_transition_summary.py
+```
+
+This creates a final transition summary in the `reports/` directory.
+
+Then render the Quarto site:
+
+```bash
+quarto render
+```
+
+Expected outputs:
+
+```text
+reports/applied-data-science-practice-transition.md
+reports/applied-data-science-practice-roadmap.csv
+```
+
+You can also read this chapter directly as a final reflection.
+
+The script-based workflow is useful because it turns the closing ideas into reusable project artifacts that can be referenced in future CDI pathways.
 
 ---
 
 ## What You Have Built
 
-You can now:
+You can now structure an applied data science workflow from start to finish.
 
-- structure data analysis from start to finish  
-- build reproducible workflows  
-- evaluate models beyond a single result  
-- interpret outputs carefully  
-- communicate findings clearly  
-- connect results to real-world decisions  
+You have practiced how to:
+
+- create a project structure
+- save example data
+- build feature tables
+- train a baseline model
+- save model artifacts
+- evaluate performance
+- compare model variants
+- use pipelines
+- apply cross-validation
+- interpret model behavior
+- communicate results carefully
+- frame decisions responsibly
+- document limitations
 
 This is already a complete analytical foundation.
+
+It is also a reusable parent layer for other CDI pathways.
+
+Once a project has a clean table of features and outcomes, the same reasoning applies across many domains:
+
+- clinical and medical data
+- omics analysis results
+- business analytics
+- monitoring systems
+- decision support tools
+- AI-assisted analytical workflows
+
+The domain may change.
+
+The reasoning discipline remains.
+
+---
+
+## Load the Practice Roadmap
+
+This final lesson uses a small roadmap table to summarize the transition from foundation skills to real-world practice.
+
+```python
+import pandas as pd
+
+roadmap = pd.DataFrame({
+    "stage": [
+        "Data structure",
+        "Modeling",
+        "Evaluation",
+        "Interpretation",
+        "Communication",
+        "Decision context",
+        "Responsible use",
+        "System transition"
+    ],
+    "core_question": [
+        "Is the data organized enough to support analysis?",
+        "Can the data support useful prediction or explanation?",
+        "How stable and reliable is the model?",
+        "What is the model using to make predictions?",
+        "Can the results be explained clearly?",
+        "How could the results inform action?",
+        "What are the limits and risks?",
+        "How would this become a maintained workflow?"
+    ],
+    "real_world_output": [
+        "Documented dataset and feature table",
+        "Saved model and baseline results",
+        "Metrics, plots, and validation summaries",
+        "Feature influence tables and interpretation notes",
+        "Clear written summary",
+        "Decision framing table",
+        "Limitations and responsible use checklist",
+        "Deployment and monitoring roadmap"
+    ]
+})
+
+roadmap
+```
+
+This table shows the main shift made throughout the guide.
+
+The workflow is no longer only about producing code.
+
+It is about producing traceable evidence.
 
 ---
 
@@ -42,38 +151,89 @@ This is already a complete analytical foundation.
 
 You are no longer just:
 
-- running code  
-- applying libraries  
-- fitting models  
+- running code
+- applying libraries
+- fitting models
+- checking metrics
 
 You are:
 
-- reasoning about data  
-- evaluating evidence  
-- making disciplined claims  
+- reasoning about data quality
+- evaluating evidence
+- comparing results fairly
+- making disciplined claims
+- connecting analysis to use
+- documenting uncertainty
 
-This is the difference between:
+This is the difference between tool usage and analytical thinking.
 
-- tool usage  
-and  
-- analytical thinking  
+A tool can fit a model.
+
+A data scientist must decide whether the model is meaningful, stable, useful, and safe to communicate.
+
+---
+
+## The CDI Analytical Pattern
+
+Across the guide, we used the same pattern repeatedly:
+
+```text
+Input data
+    ↓
+Reproducible processing
+    ↓
+Model or analysis output
+    ↓
+Evaluation
+    ↓
+Interpretation
+    ↓
+Communication
+    ↓
+Decision context
+    ↓
+Responsible use
+```
+
+This pattern is intentionally general.
+
+It can be reused whenever analytical work needs to support a claim, report, decision, or system.
+
+The important point is that every stage leaves behind evidence.
+
+A real analytical workflow should make it possible to answer:
+
+- What data was used?
+- What code produced the result?
+- What assumptions were made?
+- How was the result evaluated?
+- What does the result mean?
+- What does it not mean?
+- How should it be used?
+
+That is what makes the work defensible.
 
 ---
 
 ## Beyond Analysis
 
-In real-world environments, analysis is only one part of the system.
+In real-world environments, analysis is only one part of a larger system.
 
 Models are often expected to:
 
-- run automatically  
-- serve predictions to users  
-- integrate with applications  
-- operate in changing environments  
+- run automatically
+- serve predictions to users
+- integrate with applications
+- operate under changing data conditions
+- support reporting or decision workflows
 
 This introduces a new layer:
 
-> **machine learning systems**
+> machine learning systems.
+
+In this guide, the emphasis was on reasoning and reproducibility.
+
+In production settings, the emphasis expands to engineering, operations, and maintenance.
 
 ---
 
@@ -81,34 +241,27 @@ This introduces a new layer:
 
 So far, you have worked with:
 
-- datasets  
-- notebooks / Quarto  
-- local execution  
+- local datasets
+- scripts
+- reports
+- saved model artifacts
+- Quarto documentation
 
-In practice, models need to be:
+In practice, models may need to be:
 
-- saved and versioned  
-- exposed through interfaces  
-- deployed to servers or cloud environments  
-- monitored over time  
+- packaged
+- versioned
+- exposed through an API
+- deployed to a server or cloud environment
+- monitored over time
+- retrained when data changes
+- governed by clear usage rules
 
-This is where data science becomes **engineering**.
+This is where applied data science connects to deployment and DevOps.
 
----
+The model itself is only one piece.
 
-## What Comes Next
-
-The next stage of CDI focuses on:
-
-- packaging trained models  
-- building APIs for predictions  
-- deploying models into production environments  
-- monitoring performance and data drift  
-- updating models as data evolves  
-
-This is often referred to as:
-
-> **ML → Deployment → DevOps**
+The system around the model determines whether it can be used reliably.
 
 ---
 
@@ -116,58 +269,104 @@ This is often referred to as:
 
 This guide focused on:
 
-> how to think, analyze, and interpret correctly  
+> how to think, analyze, evaluate, interpret, and communicate correctly.
 
 The next stage focuses on:
 
-> how to build, deploy, and maintain systems  
+> how to build, deploy, monitor, and maintain analytical systems.
 
 Both are important.
 
-But they require different skills and different ways of thinking.
+But they require different skills.
+
+A strong deployment cannot rescue weak reasoning.
+
+A beautiful dashboard cannot fix unsupported claims.
+
+A production model is only as trustworthy as the analytical foundation beneath it.
 
 ---
 
 ## CDI Insight
 
-> Strong systems built on weak reasoning fail quietly.  
-> Strong reasoning is the foundation of reliable systems.
+Strong systems built on weak reasoning fail quietly.
+
+Strong reasoning is the foundation of reliable systems.
+
+Before a model becomes a service, dashboard, API, or decision tool, it must first be understood.
 
 ---
 
 ## How to Move Forward
 
-When transitioning to real-world practice:
+When transitioning from analysis to real-world practice, start with the same disciplined questions:
 
-Start by asking:
+- What problem am I solving?
+- What data is available?
+- What does the model actually predict?
+- What level of accuracy is sufficient?
+- What are the risks of being wrong?
+- Who will use the result?
+- What decision could the result influence?
+- What should the model never be used for?
 
-- What problem am I solving?  
-- What data is available?  
-- What level of accuracy is sufficient?  
-- What are the risks of being wrong?  
+Then extend into system questions:
 
-Then extend into:
+- How will predictions be generated?
+- Where will the model run?
+- How will results be delivered?
+- How will performance be monitored?
+- How will data drift be detected?
+- Who is responsible for updates?
+- How will limitations be communicated?
 
-- how predictions will be used  
-- how the system will be maintained  
-- how performance will be monitored  
+These questions connect data science to real-world accountability.
 
 ---
 
 ## Your Position Now
 
-You are now prepared to:
+You are now prepared to approach real-world datasets with structure.
 
-- approach real-world datasets with structure  
-- build models with discipline  
-- interpret results responsibly  
-- communicate findings clearly  
+You can move from a raw analytical question to a documented workflow.
 
-This is a strong foundation for:
+You can explain not only what a model produced, but also:
 
-- advanced modeling  
-- domain-specific applications  
-- production systems  
+- how the result was generated
+- how it was evaluated
+- what it means
+- what it does not mean
+- how it could support action
+- where caution is required
+
+That is the foundation for advanced modeling, domain-specific systems, and production workflows.
+
+---
+
+## CDI Pathway Connection
+
+This Applied Data Science System can serve as a parent layer for other CDI systems.
+
+For example:
+
+- an omics workflow may produce a tidy differential abundance table
+- a clinical workflow may produce a patient-level feature table
+- a monitoring workflow may produce time-indexed performance data
+- an AI workflow may produce model evaluation outputs
+
+Once the data are structured, the same applied data science questions return:
+
+- What is the outcome?
+- What features are available?
+- What model or analysis is appropriate?
+- How reliable is the result?
+- What claim is supported?
+- What decision could it inform?
+- What are the limits?
+
+This is why the foundation matters.
+
+It gives every later pathway a disciplined analytical core.
 
 ---
 
@@ -179,24 +378,36 @@ A result is not the end of reasoning.
 
 A prediction is not the end of decision-making.
 
-The goal is not just to produce outputs.
+The goal is not simply to produce outputs.
 
-The goal is to produce:
+The goal is to produce understanding that can be used responsibly.
 
-> **understanding that can be used responsibly**
+That requires technical skill, but it also requires judgment.
+
+It requires knowing when to trust a result, when to question it, and when to limit the claim.
 
 ---
 
 ## Where to Go Next
 
-→ **ML → Deployment → DevOps Track**
+The natural next CDI track is:
 
-In the next track, you will learn how to:
+> ML → Deployment → DevOps
 
-- turn models into working systems  
-- expose predictions through APIs  
-- deploy models to real environments  
-- monitor and improve systems over time  
+In that next layer, the workflow expands from analysis to operational systems.
+
+You will learn how to:
+
+- package trained models
+- build prediction APIs
+- create deployment-ready project structures
+- serve predictions to applications
+- monitor performance over time
+- detect data drift
+- update models as data evolves
+- document operational risks
+
+This is the transition from applied analysis to maintained analytical systems.
 
 ---
 
@@ -206,10 +417,16 @@ Data science is not only about building models.
 
 It is about connecting:
 
-data → understanding → action  
+```text
+data → understanding → action
+```
 
 And doing so in a way that is:
 
-- clear  
-- reproducible  
-- responsible  
+- clear
+- reproducible
+- responsible
+- useful
+- defensible
+
+That is the purpose of the Applied Data Science System.

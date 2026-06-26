@@ -1,0 +1,9 @@
+question,status,evidence
+Was the dataset source and scope described?,yes,Dataset loaded from data/diabetes.csv and described as a structured teaching dataset.
+Were model assumptions and limitations stated?,yes,Linear model assumptions and model simplification were discussed.
+Was performance evaluated beyond a single split?,yes,Cross-validation summaries were used to assess stability.
+Were feature interpretations framed as model behavior?,yes,"Coefficients were interpreted as model behavior, not biological truth."
+Were causal claims avoided?,yes,Association and causation were explicitly separated.
+Was uncertainty communicated?,yes,Prediction error and variability across folds were discussed.
+Was the intended use clearly bounded?,yes,"Use was framed as screening, prioritization, or monitoring support."
+Were inappropriate uses explicitly discouraged?,yes,Standalone clinical decision-making was discouraged.

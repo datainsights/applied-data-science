@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -230,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18-limitations-and-responsible-use.html</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -271,15 +306,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-you-have-built" id="toc-what-you-have-built" class="nav-link active" data-scroll-target="#what-you-have-built">What You Have Built</a></li>
+  <li><a href="#how-to-run-this-lesson" id="toc-how-to-run-this-lesson" class="nav-link active" data-scroll-target="#how-to-run-this-lesson">How to Run This Lesson</a></li>
+  <li><a href="#what-you-have-built" id="toc-what-you-have-built" class="nav-link" data-scroll-target="#what-you-have-built">What You Have Built</a></li>
+  <li><a href="#load-the-practice-roadmap" id="toc-load-the-practice-roadmap" class="nav-link" data-scroll-target="#load-the-practice-roadmap">Load the Practice Roadmap</a></li>
   <li><a href="#what-this-means" id="toc-what-this-means" class="nav-link" data-scroll-target="#what-this-means">What This Means</a></li>
+  <li><a href="#the-cdi-analytical-pattern" id="toc-the-cdi-analytical-pattern" class="nav-link" data-scroll-target="#the-cdi-analytical-pattern">The CDI Analytical Pattern</a></li>
   <li><a href="#beyond-analysis" id="toc-beyond-analysis" class="nav-link" data-scroll-target="#beyond-analysis">Beyond Analysis</a></li>
   <li><a href="#from-model-to-system" id="toc-from-model-to-system" class="nav-link" data-scroll-target="#from-model-to-system">From Model to System</a></li>
-  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What Comes Next</a></li>
   <li><a href="#important-distinction" id="toc-important-distinction" class="nav-link" data-scroll-target="#important-distinction">Important Distinction</a></li>
   <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
   <li><a href="#how-to-move-forward" id="toc-how-to-move-forward" class="nav-link" data-scroll-target="#how-to-move-forward">How to Move Forward</a></li>
   <li><a href="#your-position-now" id="toc-your-position-now" class="nav-link" data-scroll-target="#your-position-now">Your Position Now</a></li>
+  <li><a href="#cdi-pathway-connection" id="toc-cdi-pathway-connection" class="nav-link" data-scroll-target="#cdi-pathway-connection">CDI Pathway Connection</a></li>
   <li><a href="#final-reflection" id="toc-final-reflection" class="nav-link" data-scroll-target="#final-reflection">Final Reflection</a></li>
   <li><a href="#where-to-go-next" id="toc-where-to-go-next" class="nav-link" data-scroll-target="#where-to-go-next">Where to Go Next</a></li>
   <li><a href="#closing-thought" id="toc-closing-thought" class="nav-link" data-scroll-target="#closing-thought">Closing Thought</a></li>
@@ -302,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Mar 2026</p>
+      <p class="date">Jun 2026</p>
     </div>
   </div>
   
@@ -322,198 +360,304 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Transitioning from analytical thinking to real-world systems</li>
 </ul>
 </div>
-<p>You have now completed the full CDI workflow:</p>
+<p>You have now completed the full Applied Data Science System workflow:</p>
 <ul>
-<li>data<br>
-</li>
-<li>modeling<br>
-</li>
-<li>evaluation<br>
-</li>
-<li>interpretation<br>
-</li>
-<li>communication<br>
-</li>
-<li>decision context<br>
-</li>
+<li>data preparation</li>
+<li>feature engineering</li>
+<li>model building</li>
+<li>model evaluation</li>
+<li>model improvement</li>
+<li>pipelines and cross-validation</li>
+<li>interpretation</li>
+<li>communication</li>
+<li>decision context</li>
 <li>limitations and responsible use</li>
 </ul>
-<p>This is not just a sequence of steps.</p>
-<p>It is a <strong>way of thinking about data</strong>.</p>
+<p>This is not just a sequence of technical steps.</p>
+<p>It is a way of thinking about data.</p>
+<p>The goal of this guide has been to move from isolated analysis toward a reproducible analytical system.</p>
 <hr>
+<section id="how-to-run-this-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-run-this-lesson">How to Run This Lesson</h2>
+<p>Run the supporting script from the project root:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/19a_build_practice_transition_summary.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a final transition summary in the <code>reports/</code> directory.</p>
+<p>Then render the Quarto site:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Expected outputs:</p>
+<pre class="text"><code>reports/applied-data-science-practice-transition.md
+reports/applied-data-science-practice-roadmap.csv</code></pre>
+<p>You can also read this chapter directly as a final reflection.</p>
+<p>The script-based workflow is useful because it turns the closing ideas into reusable project artifacts that can be referenced in future CDI pathways.</p>
+<hr>
+</section>
 <section id="what-you-have-built" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-have-built">What You Have Built</h2>
-<p>You can now:</p>
+<p>You can now structure an applied data science workflow from start to finish.</p>
+<p>You have practiced how to:</p>
 <ul>
-<li>structure data analysis from start to finish<br>
-</li>
-<li>build reproducible workflows<br>
-</li>
-<li>evaluate models beyond a single result<br>
-</li>
-<li>interpret outputs carefully<br>
-</li>
-<li>communicate findings clearly<br>
-</li>
-<li>connect results to real-world decisions</li>
+<li>create a project structure</li>
+<li>save example data</li>
+<li>build feature tables</li>
+<li>train a baseline model</li>
+<li>save model artifacts</li>
+<li>evaluate performance</li>
+<li>compare model variants</li>
+<li>use pipelines</li>
+<li>apply cross-validation</li>
+<li>interpret model behavior</li>
+<li>communicate results carefully</li>
+<li>frame decisions responsibly</li>
+<li>document limitations</li>
 </ul>
 <p>This is already a complete analytical foundation.</p>
+<p>It is also a reusable parent layer for other CDI pathways.</p>
+<p>Once a project has a clean table of features and outcomes, the same reasoning applies across many domains:</p>
+<ul>
+<li>clinical and medical data</li>
+<li>omics analysis results</li>
+<li>business analytics</li>
+<li>monitoring systems</li>
+<li>decision support tools</li>
+<li>AI-assisted analytical workflows</li>
+</ul>
+<p>The domain may change.</p>
+<p>The reasoning discipline remains.</p>
+<hr>
+</section>
+<section id="load-the-practice-roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-practice-roadmap">Load the Practice Roadmap</h2>
+<p>This final lesson uses a small roadmap table to summarize the transition from foundation skills to real-world practice.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>roadmap <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stage"</span>: [</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Data structure"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Modeling"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Evaluation"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Interpretation"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Communication"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Decision context"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Responsible use"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"System transition"</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"core_question"</span>: [</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Is the data organized enough to support analysis?"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Can the data support useful prediction or explanation?"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"How stable and reliable is the model?"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"What is the model using to make predictions?"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Can the results be explained clearly?"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"How could the results inform action?"</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"What are the limits and risks?"</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"How would this become a maintained workflow?"</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"real_world_output"</span>: [</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Documented dataset and feature table"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Saved model and baseline results"</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Metrics, plots, and validation summaries"</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Feature influence tables and interpretation notes"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Clear written summary"</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Decision framing table"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Limitations and responsible use checklist"</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Deployment and monitoring roadmap"</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>roadmap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This table shows the main shift made throughout the guide.</p>
+<p>The workflow is no longer only about producing code.</p>
+<p>It is about producing traceable evidence.</p>
 <hr>
 </section>
 <section id="what-this-means" class="level2">
 <h2 class="anchored" data-anchor-id="what-this-means">What This Means</h2>
 <p>You are no longer just:</p>
 <ul>
-<li>running code<br>
-</li>
-<li>applying libraries<br>
-</li>
+<li>running code</li>
+<li>applying libraries</li>
 <li>fitting models</li>
+<li>checking metrics</li>
 </ul>
 <p>You are:</p>
 <ul>
-<li>reasoning about data<br>
-</li>
-<li>evaluating evidence<br>
-</li>
+<li>reasoning about data quality</li>
+<li>evaluating evidence</li>
+<li>comparing results fairly</li>
 <li>making disciplined claims</li>
+<li>connecting analysis to use</li>
+<li>documenting uncertainty</li>
 </ul>
-<p>This is the difference between:</p>
+<p>This is the difference between tool usage and analytical thinking.</p>
+<p>A tool can fit a model.</p>
+<p>A data scientist must decide whether the model is meaningful, stable, useful, and safe to communicate.</p>
+<hr>
+</section>
+<section id="the-cdi-analytical-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="the-cdi-analytical-pattern">The CDI Analytical Pattern</h2>
+<p>Across the guide, we used the same pattern repeatedly:</p>
+<pre class="text"><code>Input data
+    ↓
+Reproducible processing
+    ↓
+Model or analysis output
+    ↓
+Evaluation
+    ↓
+Interpretation
+    ↓
+Communication
+    ↓
+Decision context
+    ↓
+Responsible use</code></pre>
+<p>This pattern is intentionally general.</p>
+<p>It can be reused whenever analytical work needs to support a claim, report, decision, or system.</p>
+<p>The important point is that every stage leaves behind evidence.</p>
+<p>A real analytical workflow should make it possible to answer:</p>
 <ul>
-<li>tool usage<br>
-and<br>
-</li>
-<li>analytical thinking</li>
+<li>What data was used?</li>
+<li>What code produced the result?</li>
+<li>What assumptions were made?</li>
+<li>How was the result evaluated?</li>
+<li>What does the result mean?</li>
+<li>What does it not mean?</li>
+<li>How should it be used?</li>
 </ul>
+<p>That is what makes the work defensible.</p>
 <hr>
 </section>
 <section id="beyond-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="beyond-analysis">Beyond Analysis</h2>
-<p>In real-world environments, analysis is only one part of the system.</p>
+<p>In real-world environments, analysis is only one part of a larger system.</p>
 <p>Models are often expected to:</p>
 <ul>
-<li>run automatically<br>
-</li>
-<li>serve predictions to users<br>
-</li>
-<li>integrate with applications<br>
-</li>
-<li>operate in changing environments</li>
+<li>run automatically</li>
+<li>serve predictions to users</li>
+<li>integrate with applications</li>
+<li>operate under changing data conditions</li>
+<li>support reporting or decision workflows</li>
 </ul>
 <p>This introduces a new layer:</p>
 <blockquote class="blockquote">
-<p><strong>machine learning systems</strong></p>
+<p>machine learning systems.</p>
 </blockquote>
+<p>In this guide, the emphasis was on reasoning and reproducibility.</p>
+<p>In production settings, the emphasis expands to engineering, operations, and maintenance.</p>
 <hr>
 </section>
 <section id="from-model-to-system" class="level2">
 <h2 class="anchored" data-anchor-id="from-model-to-system">From Model to System</h2>
 <p>So far, you have worked with:</p>
 <ul>
-<li>datasets<br>
-</li>
-<li>notebooks / Quarto<br>
-</li>
-<li>local execution</li>
+<li>local datasets</li>
+<li>scripts</li>
+<li>reports</li>
+<li>saved model artifacts</li>
+<li>Quarto documentation</li>
 </ul>
-<p>In practice, models need to be:</p>
+<p>In practice, models may need to be:</p>
 <ul>
-<li>saved and versioned<br>
-</li>
-<li>exposed through interfaces<br>
-</li>
-<li>deployed to servers or cloud environments<br>
-</li>
+<li>packaged</li>
+<li>versioned</li>
+<li>exposed through an API</li>
+<li>deployed to a server or cloud environment</li>
 <li>monitored over time</li>
+<li>retrained when data changes</li>
+<li>governed by clear usage rules</li>
 </ul>
-<p>This is where data science becomes <strong>engineering</strong>.</p>
-<hr>
-</section>
-<section id="what-comes-next" class="level2">
-<h2 class="anchored" data-anchor-id="what-comes-next">What Comes Next</h2>
-<p>The next stage of CDI focuses on:</p>
-<ul>
-<li>packaging trained models<br>
-</li>
-<li>building APIs for predictions<br>
-</li>
-<li>deploying models into production environments<br>
-</li>
-<li>monitoring performance and data drift<br>
-</li>
-<li>updating models as data evolves</li>
-</ul>
-<p>This is often referred to as:</p>
-<blockquote class="blockquote">
-<p><strong>ML → Deployment → DevOps</strong></p>
-</blockquote>
+<p>This is where applied data science connects to deployment and DevOps.</p>
+<p>The model itself is only one piece.</p>
+<p>The system around the model determines whether it can be used reliably.</p>
 <hr>
 </section>
 <section id="important-distinction" class="level2">
 <h2 class="anchored" data-anchor-id="important-distinction">Important Distinction</h2>
 <p>This guide focused on:</p>
 <blockquote class="blockquote">
-<p>how to think, analyze, and interpret correctly</p>
+<p>how to think, analyze, evaluate, interpret, and communicate correctly.</p>
 </blockquote>
 <p>The next stage focuses on:</p>
 <blockquote class="blockquote">
-<p>how to build, deploy, and maintain systems</p>
+<p>how to build, deploy, monitor, and maintain analytical systems.</p>
 </blockquote>
 <p>Both are important.</p>
-<p>But they require different skills and different ways of thinking.</p>
+<p>But they require different skills.</p>
+<p>A strong deployment cannot rescue weak reasoning.</p>
+<p>A beautiful dashboard cannot fix unsupported claims.</p>
+<p>A production model is only as trustworthy as the analytical foundation beneath it.</p>
 <hr>
 </section>
 <section id="cdi-insight" class="level2">
 <h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
-<blockquote class="blockquote">
-<p>Strong systems built on weak reasoning fail quietly.<br>
-Strong reasoning is the foundation of reliable systems.</p>
-</blockquote>
+<p>Strong systems built on weak reasoning fail quietly.</p>
+<p>Strong reasoning is the foundation of reliable systems.</p>
+<p>Before a model becomes a service, dashboard, API, or decision tool, it must first be understood.</p>
 <hr>
 </section>
 <section id="how-to-move-forward" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-move-forward">How to Move Forward</h2>
-<p>When transitioning to real-world practice:</p>
-<p>Start by asking:</p>
+<p>When transitioning from analysis to real-world practice, start with the same disciplined questions:</p>
 <ul>
-<li>What problem am I solving?<br>
-</li>
-<li>What data is available?<br>
-</li>
-<li>What level of accuracy is sufficient?<br>
-</li>
+<li>What problem am I solving?</li>
+<li>What data is available?</li>
+<li>What does the model actually predict?</li>
+<li>What level of accuracy is sufficient?</li>
 <li>What are the risks of being wrong?</li>
+<li>Who will use the result?</li>
+<li>What decision could the result influence?</li>
+<li>What should the model never be used for?</li>
 </ul>
-<p>Then extend into:</p>
+<p>Then extend into system questions:</p>
 <ul>
-<li>how predictions will be used<br>
-</li>
-<li>how the system will be maintained<br>
-</li>
-<li>how performance will be monitored</li>
+<li>How will predictions be generated?</li>
+<li>Where will the model run?</li>
+<li>How will results be delivered?</li>
+<li>How will performance be monitored?</li>
+<li>How will data drift be detected?</li>
+<li>Who is responsible for updates?</li>
+<li>How will limitations be communicated?</li>
 </ul>
+<p>These questions connect data science to real-world accountability.</p>
 <hr>
 </section>
 <section id="your-position-now" class="level2">
 <h2 class="anchored" data-anchor-id="your-position-now">Your Position Now</h2>
-<p>You are now prepared to:</p>
+<p>You are now prepared to approach real-world datasets with structure.</p>
+<p>You can move from a raw analytical question to a documented workflow.</p>
+<p>You can explain not only what a model produced, but also:</p>
 <ul>
-<li>approach real-world datasets with structure<br>
-</li>
-<li>build models with discipline<br>
-</li>
-<li>interpret results responsibly<br>
-</li>
-<li>communicate findings clearly</li>
+<li>how the result was generated</li>
+<li>how it was evaluated</li>
+<li>what it means</li>
+<li>what it does not mean</li>
+<li>how it could support action</li>
+<li>where caution is required</li>
 </ul>
-<p>This is a strong foundation for:</p>
+<p>That is the foundation for advanced modeling, domain-specific systems, and production workflows.</p>
+<hr>
+</section>
+<section id="cdi-pathway-connection" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-pathway-connection">CDI Pathway Connection</h2>
+<p>This Applied Data Science System can serve as a parent layer for other CDI systems.</p>
+<p>For example:</p>
 <ul>
-<li>advanced modeling<br>
-</li>
-<li>domain-specific applications<br>
-</li>
-<li>production systems</li>
+<li>an omics workflow may produce a tidy differential abundance table</li>
+<li>a clinical workflow may produce a patient-level feature table</li>
+<li>a monitoring workflow may produce time-indexed performance data</li>
+<li>an AI workflow may produce model evaluation outputs</li>
 </ul>
+<p>Once the data are structured, the same applied data science questions return:</p>
+<ul>
+<li>What is the outcome?</li>
+<li>What features are available?</li>
+<li>What model or analysis is appropriate?</li>
+<li>How reliable is the result?</li>
+<li>What claim is supported?</li>
+<li>What decision could it inform?</li>
+<li>What are the limits?</li>
+</ul>
+<p>This is why the foundation matters.</p>
+<p>It gives every later pathway a disciplined analytical core.</p>
 <hr>
 </section>
 <section id="final-reflection" class="level2">
@@ -521,41 +665,47 @@ Strong reasoning is the foundation of reliable systems.</p>
 <p>A model is not the end of analysis.</p>
 <p>A result is not the end of reasoning.</p>
 <p>A prediction is not the end of decision-making.</p>
-<p>The goal is not just to produce outputs.</p>
-<p>The goal is to produce:</p>
-<blockquote class="blockquote">
-<p><strong>understanding that can be used responsibly</strong></p>
-</blockquote>
+<p>The goal is not simply to produce outputs.</p>
+<p>The goal is to produce understanding that can be used responsibly.</p>
+<p>That requires technical skill, but it also requires judgment.</p>
+<p>It requires knowing when to trust a result, when to question it, and when to limit the claim.</p>
 <hr>
 </section>
 <section id="where-to-go-next" class="level2">
 <h2 class="anchored" data-anchor-id="where-to-go-next">Where to Go Next</h2>
-<p>→ <strong>ML → Deployment → DevOps Track</strong></p>
-<p>In the next track, you will learn how to:</p>
+<p>The natural next CDI track is:</p>
+<blockquote class="blockquote">
+<p>ML → Deployment → DevOps</p>
+</blockquote>
+<p>In that next layer, the workflow expands from analysis to operational systems.</p>
+<p>You will learn how to:</p>
 <ul>
-<li>turn models into working systems<br>
-</li>
-<li>expose predictions through APIs<br>
-</li>
-<li>deploy models to real environments<br>
-</li>
-<li>monitor and improve systems over time</li>
+<li>package trained models</li>
+<li>build prediction APIs</li>
+<li>create deployment-ready project structures</li>
+<li>serve predictions to applications</li>
+<li>monitor performance over time</li>
+<li>detect data drift</li>
+<li>update models as data evolves</li>
+<li>document operational risks</li>
 </ul>
+<p>This is the transition from applied analysis to maintained analytical systems.</p>
 <hr>
 </section>
 <section id="closing-thought" class="level2">
 <h2 class="anchored" data-anchor-id="closing-thought">Closing Thought</h2>
 <p>Data science is not only about building models.</p>
 <p>It is about connecting:</p>
-<p>data → understanding → action</p>
+<pre class="text"><code>data → understanding → action</code></pre>
 <p>And doing so in a way that is:</p>
 <ul>
-<li>clear<br>
-</li>
-<li>reproducible<br>
-</li>
+<li>clear</li>
+<li>reproducible</li>
 <li>responsible</li>
+<li>useful</li>
+<li>defensible</li>
 </ul>
+<p>That is the purpose of the Applied Data Science System.</p>
 
 
 </section>
@@ -964,8 +1114,8 @@ Strong reasoning is the foundation of reliable systems.</p>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./18-limitations-and-responsible-use.html" class="pagination-link" aria-label="Limitations and Responsible Use">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Limitations and Responsible Use</span></span>
+      <a href="./18-limitations-and-responsible-use.html" class="pagination-link" aria-label="18-limitations-and-responsible-use.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">18-limitations-and-responsible-use.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

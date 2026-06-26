@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,9 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="assets/css/cdi.css">
@@ -268,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18-limitations-and-responsible-use.html</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -310,31 +307,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
-  <li><a href="#why-improvement-must-be-controlled" id="toc-why-improvement-must-be-controlled" class="nav-link" data-scroll-target="#why-improvement-must-be-controlled">Why Improvement Must Be Controlled</a></li>
-  <li><a href="#baseline-model-recap" id="toc-baseline-model-recap" class="nav-link" data-scroll-target="#baseline-model-recap">Baseline Model (Recap)</a></li>
-  <li><a href="#strategy-1-feature-scaling" id="toc-strategy-1-feature-scaling" class="nav-link" data-scroll-target="#strategy-1-feature-scaling">Strategy 1 — Feature Scaling</a></li>
-  <li><a href="#strategy-2-regularization" id="toc-strategy-2-regularization" class="nav-link" data-scroll-target="#strategy-2-regularization">Strategy 2 — Regularization</a>
+  <li><a href="#why-model-improvement-must-be-controlled" id="toc-why-model-improvement-must-be-controlled" class="nav-link" data-scroll-target="#why-model-improvement-must-be-controlled">Why Model Improvement Must Be Controlled</a></li>
+  <li><a href="#start-with-the-baseline" id="toc-start-with-the-baseline" class="nav-link" data-scroll-target="#start-with-the-baseline">Start With the Baseline</a></li>
+  <li><a href="#define-candidate-model-changes" id="toc-define-candidate-model-changes" class="nav-link" data-scroll-target="#define-candidate-model-changes">Define Candidate Model Changes</a></li>
+  <li><a href="#candidate-1-scaled-linear-regression" id="toc-candidate-1-scaled-linear-regression" class="nav-link" data-scroll-target="#candidate-1-scaled-linear-regression">Candidate 1: Scaled Linear Regression</a></li>
+  <li><a href="#candidate-2-ridge-regression" id="toc-candidate-2-ridge-regression" class="nav-link" data-scroll-target="#candidate-2-ridge-regression">Candidate 2: Ridge Regression</a></li>
+  <li><a href="#candidate-3-decision-tree" id="toc-candidate-3-decision-tree" class="nav-link" data-scroll-target="#candidate-3-decision-tree">Candidate 3: Decision Tree</a></li>
+  <li><a href="#compare-model-results" id="toc-compare-model-results" class="nav-link" data-scroll-target="#compare-model-results">Compare Model Results</a></li>
+  <li><a href="#save-the-model-comparison-output" id="toc-save-the-model-comparison-output" class="nav-link" data-scroll-target="#save-the-model-comparison-output">Save the Model Comparison Output</a></li>
+  <li><a href="#interpret-the-comparison" id="toc-interpret-the-comparison" class="nav-link" data-scroll-target="#interpret-the-comparison">Interpret the Comparison</a>
   <ul class="collapse">
-  <li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression">Ridge Regression</a></li>
+  <li><a href="#if-the-baseline-remains-best" id="toc-if-the-baseline-remains-best" class="nav-link" data-scroll-target="#if-the-baseline-remains-best">If the baseline remains best</a></li>
+  <li><a href="#if-ridge-performs-similarly" id="toc-if-ridge-performs-similarly" class="nav-link" data-scroll-target="#if-ridge-performs-similarly">If ridge performs similarly</a></li>
+  <li><a href="#if-the-decision-tree-performs-poorly" id="toc-if-the-decision-tree-performs-poorly" class="nav-link" data-scroll-target="#if-the-decision-tree-performs-poorly">If the decision tree performs poorly</a></li>
   </ul></li>
-  <li><a href="#strategy-3-tree-based-model" id="toc-strategy-3-tree-based-model" class="nav-link" data-scroll-target="#strategy-3-tree-based-model">Strategy 3 — Tree-Based Model</a></li>
-  <li><a href="#interpreting-model-comparison" id="toc-interpreting-model-comparison" class="nav-link" data-scroll-target="#interpreting-model-comparison">Interpreting Model Comparison</a>
+  <li><a href="#improvement-is-more-than-better-metrics" id="toc-improvement-is-more-than-better-metrics" class="nav-link" data-scroll-target="#improvement-is-more-than-better-metrics">Improvement Is More Than Better Metrics</a></li>
+  <li><a href="#what-can-go-wrong-during-model-improvement" id="toc-what-can-go-wrong-during-model-improvement" class="nav-link" data-scroll-target="#what-can-go-wrong-during-model-improvement">What Can Go Wrong During Model Improvement</a>
   <ul class="collapse">
-  <li><a href="#what-this-suggests" id="toc-what-this-suggests" class="nav-link" data-scroll-target="#what-this-suggests">What this suggests</a></li>
-  <li><a href="#why-ridge-did-not-improve-performance" id="toc-why-ridge-did-not-improve-performance" class="nav-link" data-scroll-target="#why-ridge-did-not-improve-performance">Why ridge did not improve performance</a></li>
-  <li><a href="#why-the-decision-tree-performs-poorly" id="toc-why-the-decision-tree-performs-poorly" class="nav-link" data-scroll-target="#why-the-decision-tree-performs-poorly">Why the decision tree performs poorly</a></li>
-  <li><a href="#important-caution" id="toc-important-caution" class="nav-link" data-scroll-target="#important-caution">Important caution</a></li>
+  <li><a href="#chasing-a-single-metric" id="toc-chasing-a-single-metric" class="nav-link" data-scroll-target="#chasing-a-single-metric">Chasing a Single Metric</a></li>
+  <li><a href="#overfitting-the-test-set" id="toc-overfitting-the-test-set" class="nav-link" data-scroll-target="#overfitting-the-test-set">Overfitting the Test Set</a></li>
+  <li><a href="#changing-too-many-things-at-once" id="toc-changing-too-many-things-at-once" class="nav-link" data-scroll-target="#changing-too-many-things-at-once">Changing Too Many Things at Once</a></li>
+  <li><a href="#confusing-complexity-with-progress" id="toc-confusing-complexity-with-progress" class="nav-link" data-scroll-target="#confusing-complexity-with-progress">Confusing Complexity With Progress</a></li>
+  </ul></li>
   <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
-  </ul></li>
-  <li><a href="#interpreting-improvements" id="toc-interpreting-improvements" class="nav-link" data-scroll-target="#interpreting-improvements">Interpreting Improvements</a></li>
-  <li><a href="#what-can-go-wrong" id="toc-what-can-go-wrong" class="nav-link" data-scroll-target="#what-can-go-wrong">What Can Go Wrong</a>
-  <ul class="collapse">
-  <li><a href="#chasing-metrics" id="toc-chasing-metrics" class="nav-link" data-scroll-target="#chasing-metrics">Chasing Metrics</a></li>
-  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting">Overfitting</a></li>
-  <li><a href="#changing-too-many-things" id="toc-changing-too-many-things" class="nav-link" data-scroll-target="#changing-too-many-things">Changing Too Many Things</a></li>
-  <li><a href="#ignoring-context" id="toc-ignoring-context" class="nav-link" data-scroll-target="#ignoring-context">Ignoring Context</a></li>
-  </ul></li>
-  <li><a href="#cdi-insight-1" id="toc-cdi-insight-1" class="nav-link" data-scroll-target="#cdi-insight-1">CDI Insight</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What Comes Next</a></li>
   </ul>
@@ -356,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Mar 2026</p>
+      <p class="date">Jun 2026</p>
     </div>
   </div>
   
@@ -373,573 +368,398 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>ID:</strong> DS-L11</li>
 <li><strong>Type:</strong> Premium</li>
 <li><strong>Audience:</strong> Intermediate to Advanced</li>
-<li><strong>Theme:</strong> Model improvement is a controlled and interpretable process</li>
+<li><strong>Theme:</strong> Model improvement is a controlled and interpretable process, not random model shopping</li>
 </ul>
 </div>
-<p>In the previous lesson, we learned that model performance is not fixed.</p>
-<p>It varies depending on:</p>
+<p>In the previous lesson, we evaluated model performance beyond a single result.</p>
+<p>We saw that performance can change depending on:</p>
 <ul>
-<li>how the data is split<br>
-</li>
-<li>how the model is evaluated<br>
-</li>
-<li>how stable the results are</li>
+<li>how the data is split</li>
+<li>how the model is evaluated</li>
+<li>whether the result is stable across repeated evaluations</li>
+<li>whether the model behaves consistently enough to support a real claim</li>
 </ul>
-<p>This leads to a natural next question:</p>
+<p>This leads to the next practical question:</p>
 <blockquote class="blockquote">
-<p>How do we improve a model in a way that is reliable and interpretable?</p>
+<p>How do we improve a model without fooling ourselves?</p>
 </blockquote>
+<p>Model improvement is not simply trying many algorithms until one number looks better.</p>
+<p>That approach can easily produce a model that appears better by chance.</p>
+<p>A defensible improvement process is different.</p>
+<p>It starts with a baseline.</p>
+<p>It changes one thing at a time.</p>
+<p>It compares models fairly.</p>
+<p>It asks whether the change improves usefulness, stability, interpretability, or deployment readiness.</p>
 <hr>
 <section id="load-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
-<p>We continue using the same diabetes dataset saved earlier in the project <code>data/</code> directory.</p>
-<p>Loading the same file keeps the workflow stable across lessons and avoids hidden dependencies between chapters.</p>
-<div id="cell-11-load-diabetes-file" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="load-diabetes-file" class="cell-output cell-output-display" data-execution_count="1">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<p>We continue using the diabetes dataset saved earlier in the project <code>data/</code> directory.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-load-diabetes-file</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The target remains:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-target-column</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The feature table remains:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-feature-table</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Using the same saved dataset keeps the workflow consistent across lessons.</p>
+<p>This matters because model improvement should not depend on hidden changes in the data.</p>
+<hr>
+</section>
+<section id="why-model-improvement-must-be-controlled" class="level2">
+<h2 class="anchored" data-anchor-id="why-model-improvement-must-be-controlled">Why Model Improvement Must Be Controlled</h2>
+<p>A common beginner mistake is to treat model improvement as a competition between algorithms.</p>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Try linear regression, random forest, gradient boosting, support vector machines, and neural networks. Then choose the one with the best score.</p>
+</blockquote>
+<p>That may sound practical, but it can be misleading.</p>
+<p>If we try many models and only report the best result, we may be selecting a model that performed well because of one favorable split rather than because it generalizes better.</p>
+<p>A controlled improvement process is more disciplined.</p>
+<p>It asks:</p>
+<ul>
+<li>What exactly are we changing?</li>
+<li>Why might this change help?</li>
+<li>How will we compare it against the baseline?</li>
+<li>Does the improvement persist under fair evaluation?</li>
+<li>Is the new model still interpretable enough for the use case?</li>
+</ul>
+<p>In applied data science, the goal is not to find the most impressive number.</p>
+<p>The goal is to produce a model whose behavior can be explained, reproduced, and defended.</p>
+<hr>
+</section>
+<section id="start-with-the-baseline" class="level2">
+<h2 class="anchored" data-anchor-id="start-with-the-baseline">Start With the Baseline</h2>
+<p>We begin by recreating the same baseline model used earlier.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-baseline-model</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, r2_score</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>baseline_model <span class="op">=</span> LinearRegression()</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>baseline_model.fit(X_train, y_train)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>baseline_predictions <span class="op">=</span> baseline_model.predict(X_test)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>baseline_mae <span class="op">=</span> mean_absolute_error(y_test, baseline_predictions)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>baseline_r2 <span class="op">=</span> r2_score(y_test, baseline_predictions)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>baseline_mae, baseline_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This model is our reference point.</p>
+<p>Every proposed improvement will be compared against it.</p>
+<hr>
+</section>
+<section id="define-candidate-model-changes" class="level2">
+<h2 class="anchored" data-anchor-id="define-candidate-model-changes">Define Candidate Model Changes</h2>
+<p>We will compare a small set of controlled alternatives.</p>
+<p>Each alternative changes one modeling idea:</p>
+<table class="caption-top table">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">sex</th>
-<th data-quarto-table-cell-role="th">bmi</th>
-<th data-quarto-table-cell-role="th">bp</th>
-<th data-quarto-table-cell-role="th">s1</th>
-<th data-quarto-table-cell-role="th">s2</th>
-<th data-quarto-table-cell-role="th">s3</th>
-<th data-quarto-table-cell-role="th">s4</th>
-<th data-quarto-table-cell-role="th">s5</th>
-<th data-quarto-table-cell-role="th">s6</th>
-<th data-quarto-table-cell-role="th">disease_progression</th>
+<th>Model</th>
+<th>Change introduced</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>0.038076</td>
-<td>0.050680</td>
-<td>0.061696</td>
-<td>0.021872</td>
-<td>-0.044223</td>
-<td>-0.034821</td>
-<td>-0.043401</td>
-<td>-0.002592</td>
-<td>0.019907</td>
-<td>-0.017646</td>
-<td>151.0</td>
+<td>Linear regression</td>
+<td>Baseline model</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-0.001882</td>
-<td>-0.044642</td>
-<td>-0.051474</td>
-<td>-0.026328</td>
-<td>-0.008449</td>
-<td>-0.019163</td>
-<td>0.074412</td>
-<td>-0.039493</td>
-<td>-0.068332</td>
-<td>-0.092204</td>
-<td>75.0</td>
+<td>Scaled linear regression</td>
+<td>Adds feature scaling</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.085299</td>
-<td>0.050680</td>
-<td>0.044451</td>
-<td>-0.005670</td>
-<td>-0.045599</td>
-<td>-0.034194</td>
-<td>-0.032356</td>
-<td>-0.002592</td>
-<td>0.002861</td>
-<td>-0.025930</td>
-<td>141.0</td>
+<td>Ridge regression</td>
+<td>Adds regularization</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-0.089063</td>
-<td>-0.044642</td>
-<td>-0.011595</td>
-<td>-0.036656</td>
-<td>0.012191</td>
-<td>0.024991</td>
-<td>-0.036038</td>
-<td>0.034309</td>
-<td>0.022688</td>
-<td>-0.009362</td>
-<td>206.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>0.005383</td>
-<td>-0.044642</td>
-<td>-0.036385</td>
-<td>0.021872</td>
-<td>0.003935</td>
-<td>0.015596</td>
-<td>0.008142</td>
-<td>-0.002592</td>
-<td>-0.031988</td>
-<td>-0.046641</td>
-<td>135.0</td>
+<td>Decision tree</td>
+<td>Changes model family</td>
 </tr>
 </tbody>
 </table>
-
-</div>
-</div>
-</div>
+<p>These are not the only possible models.</p>
+<p>They are enough to demonstrate the improvement workflow.</p>
+<p>The purpose of this lesson is not to declare a universal winner.</p>
+<p>The purpose is to show how to compare model changes carefully.</p>
 <hr>
 </section>
-<section id="why-improvement-must-be-controlled" class="level2">
-<h2 class="anchored" data-anchor-id="why-improvement-must-be-controlled">Why Improvement Must Be Controlled</h2>
-<p>Improving a model is not about trying many methods randomly.</p>
-<p>It is about making <strong>intentional changes</strong> and observing their effect.</p>
-<p>If multiple things change at once:</p>
+<section id="candidate-1-scaled-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="candidate-1-scaled-linear-regression">Candidate 1: Scaled Linear Regression</h2>
+<p>Feature scaling transforms features so they are on a comparable numerical scale.</p>
+<p>For ordinary linear regression, scaling does not usually change predictive performance in a meaningful way.</p>
+<p>However, scaling becomes important for many other models and for regularized models.</p>
+<p>Here we include it because it introduces a reproducible pipeline pattern.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-scaled-linear-model</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>scaled_linear_model <span class="op">=</span> Pipeline([</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LinearRegression())</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>scaled_linear_model.fit(X_train, y_train)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>scaled_linear_predictions <span class="op">=</span> scaled_linear_model.predict(X_test)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>scaled_linear_mae <span class="op">=</span> mean_absolute_error(y_test, scaled_linear_predictions)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>scaled_linear_r2 <span class="op">=</span> r2_score(y_test, scaled_linear_predictions)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>scaled_linear_mae, scaled_linear_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This model changes the preprocessing step while keeping the model family the same.</p>
+<p>That makes it a controlled comparison.</p>
+<hr>
+</section>
+<section id="candidate-2-ridge-regression" class="level2">
+<h2 class="anchored" data-anchor-id="candidate-2-ridge-regression">Candidate 2: Ridge Regression</h2>
+<p>Ridge regression is a regularized version of linear regression.</p>
+<p>Regularization discourages very large coefficient values.</p>
+<p>This can help when:</p>
 <ul>
-<li>we cannot tell what caused improvement<br>
-</li>
-<li>results become difficult to interpret<br>
-</li>
-<li>reproducibility is reduced</li>
+<li>predictors are correlated</li>
+<li>coefficients are unstable</li>
+<li>the model is sensitive to small data changes</li>
+<li>interpretability and stability matter</li>
 </ul>
-<p>A good workflow:</p>
-<ul>
-<li>start with a baseline<br>
-</li>
-<li>change one element<br>
-</li>
-<li>evaluate again<br>
-</li>
-<li>compare results</li>
-</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-ridge-model</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ridge_model <span class="op">=</span> Pipeline([</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ridge_model.fit(X_train, y_train)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ridge_predictions <span class="op">=</span> ridge_model.predict(X_test)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ridge_mae <span class="op">=</span> mean_absolute_error(y_test, ridge_predictions)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ridge_r2 <span class="op">=</span> r2_score(y_test, ridge_predictions)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ridge_mae, ridge_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ridge regression may not always reduce prediction error.</p>
+<p>Its value is often in producing a more stable model.</p>
+<p>That distinction is important.</p>
+<p>A model can be useful even when it does not produce the lowest error on one split.</p>
 <hr>
 </section>
-<section id="baseline-model-recap" class="level2">
-<h2 class="anchored" data-anchor-id="baseline-model-recap">Baseline Model (Recap)</h2>
-<p>We start from the same linear regression model.</p>
-<div id="cell-11-baseline-model" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, r2_score</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>baseline_model <span class="op">=</span> LinearRegression()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>baseline_model.fit(X_train, y_train)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>y_pred_baseline <span class="op">=</span> baseline_model.predict(X_test)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>baseline_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_baseline)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>baseline_r2 <span class="op">=</span> r2_score(y_test, y_pred_baseline)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>baseline_mae, baseline_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="baseline-model" class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>(42.79409467959996, 0.4526027629719189)</code></pre>
-</div>
-</div>
-<p>This is our reference point.</p>
-<hr>
-</section>
-<section id="strategy-1-feature-scaling" class="level2">
-<h2 class="anchored" data-anchor-id="strategy-1-feature-scaling">Strategy 1 — Feature Scaling</h2>
-<p>Some models benefit from consistent feature scale.</p>
-<div id="cell-11-scaling-model" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>scaling_model <span class="op">=</span> Pipeline([</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LinearRegression())</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>scaling_model.fit(X_train, y_train)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>y_pred_scaled <span class="op">=</span> scaling_model.predict(X_test)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>scaled_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_scaled)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>scaled_r2 <span class="op">=</span> r2_score(y_test, y_pred_scaled)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>scaled_mae, scaled_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="scaling-model" class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>(42.79409467959995, 0.45260276297191915)</code></pre>
-</div>
-</div>
-<p>Compare with baseline:</p>
-<div id="cell-11-compare-scaled" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: [<span class="st">"baseline"</span>, <span class="st">"scaled"</span>],</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MAE"</span>: [baseline_mae, scaled_mae],</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R2"</span>: [baseline_r2, scaled_r2]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="compare-scaled" class="cell-output cell-output-display" data-execution_count="4">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">model</th>
-<th data-quarto-table-cell-role="th">MAE</th>
-<th data-quarto-table-cell-role="th">R2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>baseline</td>
-<td>42.794</td>
-<td>0.453</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>scaled</td>
-<td>42.794</td>
-<td>0.453</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Scaling may or may not improve performance, but it ensures consistency.</p>
-<hr>
-</section>
-<section id="strategy-2-regularization" class="level2">
-<h2 class="anchored" data-anchor-id="strategy-2-regularization">Strategy 2 — Regularization</h2>
-<p>Linear regression can be extended with regularization to control model complexity.</p>
-<section id="ridge-regression" class="level3">
-<h3 class="anchored" data-anchor-id="ridge-regression">Ridge Regression</h3>
-<div id="cell-11-ridge-model" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ridge_model <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ridge_model.fit(X_train, y_train)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>y_pred_ridge <span class="op">=</span> ridge_model.predict(X_test)</span>
+<section id="candidate-3-decision-tree" class="level2">
+<h2 class="anchored" data-anchor-id="candidate-3-decision-tree">Candidate 3: Decision Tree</h2>
+<p>A decision tree changes the model family.</p>
+<p>Unlike linear models, decision trees can capture nonlinear relationships and feature interactions.</p>
+<p>However, trees can also overfit easily, especially when not constrained.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-decision-tree-model</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> DecisionTreeRegressor(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ridge_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_ridge)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ridge_r2 <span class="op">=</span> r2_score(y_test, y_pred_ridge)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ridge_mae, ridge_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="ridge-model" class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>(46.13885766697452, 0.41915292635986545)</code></pre>
-</div>
-</div>
-<p>Compare:</p>
-<div id="cell-11-compare-ridge" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: [<span class="st">"baseline"</span>, <span class="st">"ridge"</span>],</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MAE"</span>: [baseline_mae, ridge_mae],</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R2"</span>: [baseline_r2, ridge_r2]</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="compare-ridge" class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">model</th>
-<th data-quarto-table-cell-role="th">MAE</th>
-<th data-quarto-table-cell-role="th">R2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>baseline</td>
-<td>42.794</td>
-<td>0.453</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>ridge</td>
-<td>46.139</td>
-<td>0.419</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>Regularization helps when:</p>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>tree_model.fit(X_train, y_train)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>tree_predictions <span class="op">=</span> tree_model.predict(X_test)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>tree_mae <span class="op">=</span> mean_absolute_error(y_test, tree_predictions)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>tree_r2 <span class="op">=</span> r2_score(y_test, tree_predictions)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>tree_mae, tree_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This comparison asks whether a more flexible model family improves prediction on this dataset.</p>
+<hr>
+</section>
+<section id="compare-model-results" class="level2">
+<h2 class="anchored" data-anchor-id="compare-model-results">Compare Model Results</h2>
+<p>Now we combine the results into one comparison table.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-model-comparison-table</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>comparison_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: [</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"linear_regression_baseline"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"scaled_linear_regression"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ridge_regression"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"decision_tree"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mae"</span>: [</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        baseline_mae,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        scaled_linear_mae,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        ridge_mae,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        tree_mae</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"r2"</span>: [</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        baseline_r2,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        scaled_linear_r2,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        ridge_r2,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        tree_r2</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>comparison_df <span class="op">=</span> comparison_df.sort_values(<span class="st">"mae"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>comparison_df.<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Lower MAE is better.</p>
+<p>Higher R² is better.</p>
+<p>However, the table should not be interpreted mechanically.</p>
+<p>The best-looking model on one split is not automatically the best model overall.</p>
+<hr>
+</section>
+<section id="save-the-model-comparison-output" class="level2">
+<h2 class="anchored" data-anchor-id="save-the-model-comparison-output">Save the Model Comparison Output</h2>
+<p>In an applied workflow, model comparisons should be saved as project outputs.</p>
+<p>This allows the comparison to be inspected later, used in reports, and reproduced by others.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 11-save-model-comparison</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"reports"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>comparison_df.to_csv(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reports/diabetes-model-comparison.csv"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="va">False</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>comparison_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a reusable artifact:</p>
+<pre class="text"><code>reports/diabetes-model-comparison.csv</code></pre>
+<p>The result is no longer only visible inside the notebook or rendered chapter.</p>
+<p>It becomes part of the project record.</p>
+<hr>
+</section>
+<section id="interpret-the-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="interpret-the-comparison">Interpret the Comparison</h2>
+<p>The comparison table gives us a first view of how the candidate models behave.</p>
+<p>But model improvement requires interpretation.</p>
+<p>A model should not be selected only because it has the best number in one table.</p>
+<p>We need to ask what the result means.</p>
+<section id="if-the-baseline-remains-best" class="level3">
+<h3 class="anchored" data-anchor-id="if-the-baseline-remains-best">If the baseline remains best</h3>
+<p>If the baseline linear regression model performs as well as or better than the alternatives, that is not a failure.</p>
+<p>It suggests that the dataset may be reasonably well captured by a linear structure.</p>
+<p>In that case, the simplest model may be preferred because it is:</p>
 <ul>
-<li>features are correlated<br>
-</li>
-<li>the model is sensitive to small changes<br>
-</li>
-<li>we want more stable coefficients</li>
+<li>easier to explain</li>
+<li>easier to inspect</li>
+<li>easier to reproduce</li>
+<li>easier to communicate</li>
+<li>less likely to introduce unnecessary complexity</li>
 </ul>
+<p>A simple model that performs well is often stronger than a complex model that performs only slightly better.</p>
+</section>
+<section id="if-ridge-performs-similarly" class="level3">
+<h3 class="anchored" data-anchor-id="if-ridge-performs-similarly">If ridge performs similarly</h3>
+<p>If ridge regression performs similarly to linear regression, it may still be valuable.</p>
+<p>Ridge may improve coefficient stability even when predictive metrics are similar.</p>
+<p>This matters when the model is used for interpretation, reporting, or repeated deployment.</p>
+<p>In applied settings, stability can be as important as raw accuracy.</p>
+</section>
+<section id="if-the-decision-tree-performs-poorly" class="level3">
+<h3 class="anchored" data-anchor-id="if-the-decision-tree-performs-poorly">If the decision tree performs poorly</h3>
+<p>If the decision tree performs worse, that may indicate overfitting.</p>
+<p>A fully grown tree can learn patterns that are too specific to the training data.</p>
+<p>When that happens, it may perform well on training data but poorly on unseen data.</p>
+<p>Poor test performance is a warning that flexibility alone does not guarantee generalization.</p>
 <hr>
 </section>
 </section>
-<section id="strategy-3-tree-based-model" class="level2">
-<h2 class="anchored" data-anchor-id="strategy-3-tree-based-model">Strategy 3 — Tree-Based Model</h2>
-<p>Different models capture different structures.</p>
-<div id="cell-11-tree-model" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>tree_model.fit(X_train, y_train)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>y_pred_tree <span class="op">=</span> tree_model.predict(X_test)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>tree_mae <span class="op">=</span> mean_absolute_error(y_test, y_pred_tree)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>tree_r2 <span class="op">=</span> r2_score(y_test, y_pred_tree)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>tree_mae, tree_r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="tree-model" class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>(54.52808988764045, 0.060653981041140725)</code></pre>
-</div>
-</div>
-<p>Compare all models:</p>
-<div id="cell-11-compare-all" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>comparison_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model"</span>: [<span class="st">"baseline"</span>, <span class="st">"ridge"</span>, <span class="st">"tree"</span>],</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MAE"</span>: [baseline_mae, ridge_mae, tree_mae],</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R2"</span>: [baseline_r2, ridge_r2, tree_r2]</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">3</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>comparison_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="compare-all" class="cell-output cell-output-display" data-execution_count="8">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">model</th>
-<th data-quarto-table-cell-role="th">MAE</th>
-<th data-quarto-table-cell-role="th">R2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>baseline</td>
-<td>42.794</td>
-<td>0.453</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>ridge</td>
-<td>46.139</td>
-<td>0.419</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>tree</td>
-<td>54.528</td>
-<td>0.061</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<section id="improvement-is-more-than-better-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="improvement-is-more-than-better-metrics">Improvement Is More Than Better Metrics</h2>
+<p>A model is not improved just because one number moved in the desired direction.</p>
+<p>Useful improvement may involve:</p>
+<ul>
+<li>lower prediction error</li>
+<li>more stable performance</li>
+<li>simpler deployment</li>
+<li>better interpretability</li>
+<li>more reliable coefficients</li>
+<li>fewer fragile assumptions</li>
+<li>clearer communication to decision-makers</li>
+</ul>
+<p>A model that improves MAE slightly but becomes much harder to explain may not be better for the real-world use case.</p>
+<p>A model that is slightly less accurate but more stable and interpretable may be preferred.</p>
+<p>The meaning of improvement depends on the analytical goal.</p>
 <hr>
 </section>
-<section id="interpreting-model-comparison" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-model-comparison">Interpreting Model Comparison</h2>
-<p>We compared three models:</p>
-<ul>
-<li>baseline (linear regression)<br>
-</li>
-<li>ridge regression<br>
-</li>
-<li>decision tree</li>
-</ul>
-<p>The results are now visible in the comparison table above.</p>
-<section id="what-this-suggests" class="level3">
-<h3 class="anchored" data-anchor-id="what-this-suggests">What this suggests</h3>
-<p>The <strong>baseline linear model performs best</strong> among the three:</p>
-<ul>
-<li>lowest error (MAE)<br>
-</li>
-<li>highest explained variance (R²)</li>
-</ul>
-<p>This indicates that, for this dataset, the relationship between features and outcome is reasonably well captured by a <strong>linear structure</strong>.</p>
+<section id="what-can-go-wrong-during-model-improvement" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-go-wrong-during-model-improvement">What Can Go Wrong During Model Improvement</h2>
+<section id="chasing-a-single-metric" class="level3">
+<h3 class="anchored" data-anchor-id="chasing-a-single-metric">Chasing a Single Metric</h3>
+<p>A model can improve one metric while becoming worse in another way.</p>
+<p>For example, a model may reduce average error but produce worse errors for certain subgroups or ranges of the outcome.</p>
+<p>Metrics should guide judgment, not replace it.</p>
 </section>
-<section id="why-ridge-did-not-improve-performance" class="level3">
-<h3 class="anchored" data-anchor-id="why-ridge-did-not-improve-performance">Why ridge did not improve performance</h3>
-<p>Ridge regression introduces regularization to stabilize coefficients.</p>
-<p>However:</p>
-<ul>
-<li>the baseline model may not be overfitting strongly<br>
-</li>
-<li>regularization may slightly reduce flexibility<br>
-</li>
-<li>this can lead to slightly worse performance</li>
-</ul>
-<p>In this case, ridge provides <strong>stability</strong>, but not improvement in predictive accuracy.</p>
+<section id="overfitting-the-test-set" class="level3">
+<h3 class="anchored" data-anchor-id="overfitting-the-test-set">Overfitting the Test Set</h3>
+<p>If we repeatedly try models and choose the one that performs best on the same test set, the test set becomes part of the modeling process.</p>
+<p>That weakens its value as an honest estimate of future performance.</p>
+<p>This is why cross-validation and final holdout testing are important.</p>
 </section>
-<section id="why-the-decision-tree-performs-poorly" class="level3">
-<h3 class="anchored" data-anchor-id="why-the-decision-tree-performs-poorly">Why the decision tree performs poorly</h3>
-<p>The decision tree shows:</p>
-<ul>
-<li>much higher error<br>
-</li>
-<li>very low R²</li>
-</ul>
-<p>This suggests:</p>
-<ul>
-<li>the model may be <strong>overfitting the training data</strong><br>
-</li>
-<li>it may not generalize well to unseen data<br>
-</li>
-<li>the dataset may not contain strong nonlinear patterns that the tree can exploit</li>
-</ul>
+<section id="changing-too-many-things-at-once" class="level3">
+<h3 class="anchored" data-anchor-id="changing-too-many-things-at-once">Changing Too Many Things at Once</h3>
+<p>If we change the features, preprocessing, algorithm, and hyperparameters all at once, we cannot tell what caused the change in performance.</p>
+<p>Controlled changes make model improvement interpretable.</p>
 </section>
-<section id="important-caution" class="level3">
-<h3 class="anchored" data-anchor-id="important-caution">Important caution</h3>
-<p>These results are based on a <strong>single train/test split</strong>.</p>
-<p>They do not establish that one model is universally better.</p>
-<p>They show how these models behave <strong>under this specific data partition and configuration</strong>.</p>
-</section>
-<section id="cdi-insight" class="level3">
-<h3 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h3>
-<p>Better performance does not mean a model is “correct.”</p>
-<p>It means the model is <strong>more useful for prediction under the current setup</strong>.</p>
-<p>Understanding <em>why</em> a model performs better is more important than simply observing that it does.</p>
+<section id="confusing-complexity-with-progress" class="level3">
+<h3 class="anchored" data-anchor-id="confusing-complexity-with-progress">Confusing Complexity With Progress</h3>
+<p>A more complex model is not automatically better.</p>
+<p>Complexity should be justified by better performance, better stability, or better fit to the problem structure.</p>
+<p>Without that justification, complexity becomes a liability.</p>
 <hr>
 </section>
 </section>
-<section id="interpreting-improvements" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-improvements">Interpreting Improvements</h2>
-<p>Improvement is not just:</p>
-<ul>
-<li>lower MAE<br>
-</li>
-<li>higher R²</li>
-</ul>
-<p>We must also consider:</p>
-<ul>
-<li>stability across splits<br>
-</li>
-<li>interpretability<br>
-</li>
-<li>sensitivity to noise</li>
-</ul>
-<p>A more complex model may perform better on one split but worse in general.</p>
-<hr>
-</section>
-<section id="what-can-go-wrong" class="level2">
-<h2 class="anchored" data-anchor-id="what-can-go-wrong">What Can Go Wrong</h2>
-<section id="chasing-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="chasing-metrics">Chasing Metrics</h3>
-<p>Improving a number does not always improve usefulness.</p>
-</section>
-<section id="overfitting" class="level3">
-<h3 class="anchored" data-anchor-id="overfitting">Overfitting</h3>
-<p>A model may fit training data very well but fail on new data.</p>
-</section>
-<section id="changing-too-many-things" class="level3">
-<h3 class="anchored" data-anchor-id="changing-too-many-things">Changing Too Many Things</h3>
-<p>If scaling, features, and model type all change together:</p>
-<ul>
-<li>improvement cannot be explained</li>
-</ul>
-</section>
-<section id="ignoring-context" class="level3">
-<h3 class="anchored" data-anchor-id="ignoring-context">Ignoring Context</h3>
-<p>The “best” model depends on:</p>
-<ul>
-<li>the problem<br>
-</li>
-<li>the data<br>
-</li>
-<li>the intended use</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="cdi-insight-1" class="level2">
-<h2 class="anchored" data-anchor-id="cdi-insight-1">CDI Insight</h2>
-<p>Model improvement is not a search for the best number.</p>
-<p>It is a process of understanding how changes affect behavior.</p>
+<section id="cdi-insight" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
+<p>Model improvement is not model shopping.</p>
+<p>It is controlled experimentation.</p>
+<p>A defensible improvement process compares models fairly, explains why each change was made, and avoids treating one favorable result as proof.</p>
+<p>The best model is not always the most complex model.</p>
+<p>The best model is the one that is accurate enough, stable enough, interpretable enough, and appropriate for the decision context.</p>
 <hr>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this lesson, we moved from model evaluation to model improvement.</p>
+<p>We:</p>
 <ul>
-<li>We loaded the same project dataset from <code>data/diabetes.csv</code><br>
-</li>
-<li>We started from a baseline model<br>
-</li>
-<li>We applied controlled changes one at a time<br>
-</li>
-<li>We compared results systematically<br>
-</li>
-<li>We considered stability and interpretability alongside metrics<br>
-</li>
-<li>We avoided treating performance improvement as the only goal</li>
+<li>loaded the same saved diabetes dataset</li>
+<li>recreated the baseline model</li>
+<li>tested controlled model alternatives</li>
+<li>compared scaling, regularization, and a tree-based model</li>
+<li>saved the model comparison table as a project artifact</li>
+<li>interpreted improvement beyond MAE and R²</li>
+<li>discussed overfitting, metric chasing, and unnecessary complexity</li>
 </ul>
+<p>The key idea is simple:</p>
+<blockquote class="blockquote">
+<p>A model improves only when the change produces a more useful and defensible analytical system.</p>
+</blockquote>
 <hr>
 </section>
 <section id="what-comes-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-comes-next">What Comes Next</h2>
-<p>So far, we have compared models using a single train/test split.</p>
-<p>This provides a useful first view, but it is not the full picture.</p>
-<p>Model performance can vary depending on how the data is split.<br>
-A model that appears better in one split may not perform the same in another.</p>
-<p>A strong result from a single split is a useful signal, but not sufficient evidence. A model is better when its performance remains stable across multiple splits of the data.</p>
+<p>So far, we have compared model variants using a single train/test split.</p>
+<p>That is useful, but still incomplete.</p>
+<p>A model that looks better on one split may not remain better across many splits.</p>
 <p>In the next lesson, we will introduce:</p>
 <ul>
-<li><strong>pipelines</strong>, to ensure transformations are applied consistently<br>
-</li>
-<li><strong>cross-validation</strong>, to evaluate models across multiple data splits</li>
+<li>reusable modeling pipelines</li>
+<li>cross-validation</li>
+<li>fair model comparison across multiple folds</li>
+<li>more stable estimates of performance</li>
 </ul>
-<p>These tools allow us to move from a single estimate of performance to a more <strong>stable and reliable assessment</strong>.</p>
-<p>This leads to an important realization:</p>
-<blockquote class="blockquote">
-<p>conclusions based on a single split may change when evaluated more rigorously.</p>
-</blockquote>
-<p>This is a key step in moving from exploratory modeling to <strong>defensible inference</strong>.</p>
-<p>→ <strong>Building reproducible pipelines</strong></p>
+<p>This moves us from one comparison table to a more reliable evaluation system.</p>
+<p>→ <strong>Building reproducible pipelines and cross-validation</strong></p>
 
 
 </section>

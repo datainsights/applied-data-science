@@ -7,99 +7,284 @@
 - **Theme:** Translating correct interpretation into clear communication
 :::
 
-In the previous lesson, we learned how to **interpret models responsibly**.
+In the previous lesson, we learned how to translate model outputs into defensible real-world claims.
 
 Now we take the next step:
 
-> How do we communicate those interpretations clearly to others?
+> How do we communicate those claims clearly to others?
 
 This is where many analyses fail.
 
-Not because the model is wrong,  
-but because the **communication is misleading, vague, or overstated**.
+Not because the model is wrong.
+
+But because the communication is vague, overstated, too technical, or disconnected from the decision context.
+
+A useful data science result must be understandable to people who did not build the model.
+
+---
+
+## How to Run This Lesson
+
+Run the supporting script from the project root:
+
+```bash
+python scripts/python/15a_build_results_communication_summary.py
+```
+
+This creates communication-ready outputs in the `reports/` directory:
+
+```text
+reports/diabetes-communication-summary.md
+reports/diabetes-results-communication-table.csv
+```
+
+Then render the Quarto site:
+
+```bash
+quarto render
+```
+
+You can also run the code blocks in this chapter interactively.
+
+The script-based workflow is preferred because it leaves behind a reusable summary that can be reviewed, revised, committed, and shared.
 
 ---
 
 ## Why Communication Matters
 
-Model results are rarely consumed by the person who built them.
+Model results are rarely consumed only by the person who built the model.
 
-They are read by:
+They may be read by:
 
-- collaborators  
-- decision-makers  
-- clinicians or domain experts  
-- stakeholders without technical background  
+- collaborators
+- decision-makers
+- clinicians or domain experts
+- managers
+- students
+- clients
+- non-technical stakeholders
 
 This means:
 
-> clarity is not optional — it is part of the analysis.
+> clarity is not optional; it is part of the analysis.
+
+A model can be technically correct and still fail if the result is communicated poorly.
+
+Good communication helps others understand:
+
+- what was done
+- what the model found
+- how strong the result is
+- what the result does not prove
+- how the result should be used
 
 ---
 
 ## The Communication Gap
 
-A model produces outputs such as:
+A model produces technical outputs such as:
 
-- coefficients  
-- metrics (MAE, R²)  
-- predictions  
+- coefficients
+- metrics
+- predictions
+- residuals
+- feature importance values
+- cross-validation summaries
 
-But stakeholders need:
+Stakeholders usually need something different.
 
-- meaning  
-- context  
-- limitations  
+They need:
 
-Bridging this gap is the goal of this lesson.
+- meaning
+- context
+- evidence strength
+- limitations
+- implications
+- next steps
+
+The work of communication is to bridge this gap without distorting the result.
+
+Good communication is not about making the analysis sound impressive.
+
+It is about making the reasoning visible and trustworthy.
+
+---
+
+## Load Existing Model Outputs
+
+In an applied workflow, communication should be based on saved outputs, not memory.
+
+We start by loading the model metrics saved in earlier lessons.
+
+```python
+import pandas as pd
+from pathlib import Path
+
+metrics_path = Path("reports/diabetes-model-metrics.csv")
+coefficients_path = Path("reports/diabetes-model-coefficients.csv")
+
+metrics_df = pd.read_csv(metrics_path)
+coefficients_df = pd.read_csv(coefficients_path)
+
+metrics_df
+```
+
+Now inspect the coefficient table:
+
+```python
+coefficients_df.head()
+```
+
+These files provide the evidence base for communication.
+
+The goal is not to invent a story after seeing results.
+
+The goal is to translate project outputs into careful statements.
 
 ---
 
 ## From Technical Output to Clear Statement
 
-Consider this model result:
+Consider two common metrics:
 
-```python
-R² = 0.48
-MAE = 44.3
+```text
+R² = 0.45
+MAE = 42.8
 ```
 
-### Poor Communication
+A weak communication would be:
 
-- “The model performs reasonably well”
-- “The results are acceptable”
+> The model performs reasonably well.
 
-These are vague and uninformative.
+This is vague.
+
+It does not explain what the numbers mean.
+
+A clearer communication would be:
+
+> The model explains about 45% of the variation in disease progression. On average, predictions differ from observed values by about 43 units.
+
+This statement is better because it:
+
+- names the metric
+- explains what it represents
+- gives approximate values
+- avoids overclaiming
 
 ---
 
-### Better Communication
+## Build a Communication Table
 
-- “The model explains about 48% of the variation in disease progression”
-- “Predictions are off by about 44 units on average”
+We can create a small table that translates technical outputs into stakeholder-facing language.
 
-This translates metrics into **understandable meaning**.
+```python
+communication_rows = [
+    {
+        "technical_output": "R² score",
+        "plain_language": "How much outcome variation the model explains",
+        "careful_statement": "The model explains part of the variation in disease progression, but not all of it."
+    },
+    {
+        "technical_output": "Mean absolute error",
+        "plain_language": "Average size of prediction error",
+        "careful_statement": "Predictions differ from observed values by a measurable average amount."
+    },
+    {
+        "technical_output": "Model coefficient",
+        "plain_language": "How the model changes prediction when a feature changes",
+        "careful_statement": "A larger coefficient means the model relies more strongly on that feature, not that the feature causes the outcome."
+    },
+    {
+        "technical_output": "Cross-validation variability",
+        "plain_language": "How much performance changes across data splits",
+        "careful_statement": "Stable performance across folds increases confidence, but does not prove causation."
+    }
+]
+
+communication_df = pd.DataFrame(communication_rows)
+communication_df
+```
+
+This table is useful because it creates a direct bridge between technical output and responsible interpretation.
+
+---
+
+## Save the Communication Table
+
+Communication outputs should be saved like any other project artifact.
+
+```python
+Path("reports").mkdir(exist_ok=True)
+
+communication_df.to_csv(
+    "reports/diabetes-results-communication-table.csv",
+    index=False
+)
+
+communication_df
+```
+
+This creates:
+
+```text
+reports/diabetes-results-communication-table.csv
+```
+
+A saved communication table can be reused in reports, presentations, README files, and stakeholder summaries.
+
+---
+
+## Explaining Model Performance
+
+A model metric should not be reported without meaning.
+
+### Poor communication
+
+> The model has an R² of 0.48 and an MAE of 44.3.
+
+This is technically correct, but it assumes the reader knows what the metrics mean.
+
+### Better communication
+
+> The model explains about 48% of the variation in disease progression. Its predictions are off by about 44 units on average.
+
+This version is more useful because it connects the metric to interpretation.
+
+### Better still
+
+> The model shows moderate predictive ability. It captures some meaningful signal in the data, but prediction errors remain large enough that results should be interpreted cautiously.
+
+This version adds judgment and limitation.
+
+That is the level needed in applied data science.
 
 ---
 
 ## Explaining Model Behavior
 
-Instead of listing coefficients:
+Instead of simply reporting a coefficient:
 
-```python
-bmi coefficient = 529
+```text
+BMI coefficient = 529
 ```
 
-### Poor Communication
+we should translate what it means.
 
-- “BMI has a coefficient of 529”
+### Poor communication
 
----
+> BMI has a coefficient of 529.
 
-### Better Communication
+### Better communication
 
-- “Higher BMI values are associated with higher predicted disease progression”
-- “BMI is one of the strongest predictors used by the model”
+> Higher BMI values are associated with higher predicted disease progression in this model.
+
+### Stronger and safer communication
+
+> BMI is one of the stronger predictors used by the model. In this dataset and modeling setup, higher BMI values are associated with higher predicted disease progression. This should be interpreted as a predictive association, not as proof that BMI causes progression.
+
+This is longer, but it is safer and more useful.
+
+It tells the reader what the result means and what it does not mean.
 
 ---
 
@@ -107,131 +292,218 @@ bmi coefficient = 529
 
 All models have uncertainty.
 
-Ignoring it leads to overconfidence.
+Ignoring uncertainty creates false confidence.
 
-### Instead of saying:
+Instead of saying:
 
-- “The model is accurate”
+> The model is accurate.
 
-### Say:
+Say:
 
-- “The model shows moderate predictive ability”
-- “Performance is consistent across multiple data splits”
+> The model shows moderate predictive performance.
 
----
+Instead of saying:
 
-## Avoiding Common Mistakes
+> The model is reliable.
 
-### 1. Overgeneralization
+Say:
 
-❌ “This applies to all patients”  
-✔ “This applies to this dataset and similar conditions”
+> The model shows reasonably stable performance across the evaluations performed here.
 
----
+Instead of saying:
 
-### 2. Causal Language
+> BMI is the key driver.
 
-❌ “BMI causes progression”  
-✔ “BMI is associated with predicted progression”
+Say:
 
----
+> BMI is one of the strongest predictors used by the model in this dataset.
 
-### 3. Overconfidence
+These wording choices matter.
 
-❌ “The model is highly reliable”  
-✔ “The model is reasonably stable but has limitations”
+They protect the analysis from claims that are stronger than the evidence.
 
 ---
 
-## Structuring a Clear Report
+## Avoiding Common Communication Mistakes
 
-A good result summary should include:
+### Overgeneralization
 
-### 1. Objective
+Avoid:
 
-- What problem was addressed?
+> This applies to all patients.
 
-### 2. Data Context
+Prefer:
 
-- What dataset was used?
+> This result applies to this dataset and may be relevant under similar conditions.
 
-### 3. Model Summary
+### Causal language
 
-- What model was applied?
+Avoid:
 
-### 4. Key Results
+> BMI causes disease progression.
 
-- Metrics and main patterns
+Prefer:
 
-### 5. Interpretation
+> BMI is associated with predicted disease progression in this model.
 
-- What the results mean
+### Overconfidence
 
-### 6. Limitations
+Avoid:
 
-- What the model does not tell us
+> The model is highly reliable.
+
+Prefer:
+
+> The model shows reasonable stability, but prediction errors and dataset limitations remain.
+
+### Vague conclusions
+
+Avoid:
+
+> The model performed well.
+
+Prefer:
+
+> The model explains part of the variation in the outcome and has a measurable average prediction error.
 
 ---
 
-## Example: Clear Communication
+## Structuring a Clear Result Summary
 
-**Objective:**  
-Predict disease progression using clinical features.
+A clear result summary usually includes six parts.
 
-**Results:**  
-The model explains about 48% of the variation in progression (R² ≈ 0.48).  
-Predictions differ from actual values by about 44 units on average.
+| Section | Purpose |
+|---|---|
+| Objective | What problem was addressed? |
+| Data context | What data were used? |
+| Model summary | What model was applied? |
+| Key results | What metrics and patterns were observed? |
+| Interpretation | What do the results mean? |
+| Limitations | What should not be concluded? |
 
-**Interpretation:**  
-BMI and related features are strong predictors in this dataset.
+This structure keeps communication grounded.
 
-**Limitations:**  
-These results reflect associations within the dataset and do not establish causation.
+It prevents a report from becoming a list of metrics without interpretation.
+
+It also prevents a report from becoming a story without evidence.
+
+---
+
+## Create a Communication Summary
+
+Now we create a short communication-ready summary.
+
+```python
+summary_text = """# Diabetes Model Communication Summary
+
+## Objective
+Predict disease progression using the available clinical features in the diabetes dataset.
+
+## Model Summary
+A linear regression model was used as a baseline predictive model.
+
+## Key Result
+The model shows moderate predictive ability. It captures some signal in the data, but prediction errors remain large enough that results should be interpreted cautiously.
+
+## Interpretation
+Some features, including BMI-related information, are important predictors in this model. This means the model uses those features to estimate disease progression.
+
+## Limitation
+These results describe predictive associations in this dataset. They do not establish causation, clinical effectiveness, or general truth beyond the data and modeling setup.
+"""
+
+Path("reports/diabetes-communication-summary.md").write_text(summary_text)
+
+print(summary_text)
+```
+
+This creates:
+
+```text
+reports/diabetes-communication-summary.md
+```
+
+The summary can be edited further for a stakeholder report, README, presentation, or final case study.
+
+---
+
+## Example of Clear Communication
+
+A clear communication might look like this:
+
+> We used a linear regression model to predict disease progression from clinical features. The model showed moderate predictive ability, meaning it captured some useful signal but still made meaningful errors. BMI-related features were among the stronger predictors used by the model. These findings should be interpreted as predictive associations within this dataset, not as evidence that any feature causes disease progression.
+
+This statement is effective because it includes:
+
+- the model type
+- the purpose
+- the strength of performance
+- the main pattern
+- the limitation
+
+It is clear without being misleading.
 
 ---
 
 ## CDI Insight
 
-> Good analysis is not complete until it is clearly understood.
+Good analysis is not complete until it is clearly understood.
+
+A technically correct result can still fail if people misunderstand it.
+
+Clear communication makes the reasoning visible.
+
+Responsible communication keeps the claim aligned with the evidence.
 
 ---
 
 ## What This Means in Practice
 
-When communicating results:
+When communicating model results, focus on:
 
-Focus on:
-
-- clarity over complexity  
-- meaning over metrics  
-- honesty over confidence  
+- clarity over complexity
+- meaning over metrics
+- evidence over excitement
+- limitations over false certainty
+- decision relevance over technical display
 
 Avoid:
 
-- vague language  
-- unsupported claims  
-- unnecessary technical detail  
+- vague language
+- unsupported causal claims
+- exaggerated confidence
+- unnecessary technical detail
+- conclusions that go beyond the data
 
----
+Communication is not decoration added at the end.
 
-## Key Insight
-
-Clear communication does not simplify the analysis.
-
-It makes the reasoning **visible and trustworthy**.
+It is part of the analytical system.
 
 ---
 
 ## Summary
 
-- Models produce technical outputs  
-- Communication translates outputs into meaning  
-- Claims must remain aligned with evidence  
-- Clarity improves trust and usability  
-- Good communication is part of good analysis  
+In this lesson, we moved from interpretation to communication.
+
+We:
+
+- loaded saved model outputs
+- translated technical outputs into plain-language statements
+- created a communication table
+- saved a communication-ready summary
+- distinguished clear communication from overclaiming
+- connected metrics, model behavior, and limitations
+
+The key idea is:
+
+> clear communication turns model output into usable understanding without overstating what the model proves.
 
 ---
 
 ## Next Step
+
+In the next lesson, we move from communication to decision-making.
+
+A model result is useful only when it helps people decide what to do, what not to do, or what to investigate next.
 
 → **From analysis to real-world decision-making**

@@ -265,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18-limitations-and-responsible-use.html</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -306,34 +306,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
-  <li><a href="#fit-a-model" id="toc-fit-a-model" class="nav-link" data-scroll-target="#fit-a-model">Fit a Model</a></li>
-  <li><a href="#observed-vs-predicted" id="toc-observed-vs-predicted" class="nav-link" data-scroll-target="#observed-vs-predicted">Observed vs Predicted</a></li>
+  <li><a href="#how-to-run-this-lesson" id="toc-how-to-run-this-lesson" class="nav-link active" data-scroll-target="#how-to-run-this-lesson">How to Run This Lesson</a></li>
+  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
+  <li><a href="#fit-a-baseline-model" id="toc-fit-a-baseline-model" class="nav-link" data-scroll-target="#fit-a-baseline-model">Fit a Baseline Model</a></li>
+  <li><a href="#visualize-observed-vs-predicted-values" id="toc-visualize-observed-vs-predicted-values" class="nav-link" data-scroll-target="#visualize-observed-vs-predicted-values">Visualize Observed vs Predicted Values</a></li>
+  <li><a href="#save-the-plot-as-a-project-output" id="toc-save-the-plot-as-a-project-output" class="nav-link" data-scroll-target="#save-the-plot-as-a-project-output">Save the Plot as a Project Output</a></li>
   <li><a href="#what-the-model-actually-provides" id="toc-what-the-model-actually-provides" class="nav-link" data-scroll-target="#what-the-model-actually-provides">What the Model Actually Provides</a></li>
-  <li><a href="#from-output-to-claim" id="toc-from-output-to-claim" class="nav-link" data-scroll-target="#from-output-to-claim">From Output to Claim</a>
-  <ul class="collapse">
-  <li><a href="#a-simple-analogy" id="toc-a-simple-analogy" class="nav-link" data-scroll-target="#a-simple-analogy">A simple analogy</a></li>
-  <li><a href="#what-this-means" id="toc-what-this-means" class="nav-link" data-scroll-target="#what-this-means">What this means</a></li>
-  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
-  </ul></li>
+  <li><a href="#from-output-to-claim" id="toc-from-output-to-claim" class="nav-link" data-scroll-target="#from-output-to-claim">From Output to Claim</a></li>
+  <li><a href="#a-simple-analogy" id="toc-a-simple-analogy" class="nav-link" data-scroll-target="#a-simple-analogy">A Simple Analogy</a></li>
+  <li><a href="#build-a-claim-review-table" id="toc-build-a-claim-review-table" class="nav-link" data-scroll-target="#build-a-claim-review-table">Build a Claim Review Table</a></li>
+  <li><a href="#save-the-claim-review-table" id="toc-save-the-claim-review-table" class="nav-link" data-scroll-target="#save-the-claim-review-table">Save the Claim Review Table</a></li>
   <li><a href="#correct-interpretation" id="toc-correct-interpretation" class="nav-link" data-scroll-target="#correct-interpretation">Correct Interpretation</a></li>
-  <li><a href="#why-this-distinction-matters" id="toc-why-this-distinction-matters" class="nav-link" data-scroll-target="#why-this-distinction-matters">Why This Distinction Matters</a></li>
-  <li><a href="#strength-of-claims" id="toc-strength-of-claims" class="nav-link" data-scroll-target="#strength-of-claims">Strength of Claims</a>
+  <li><a href="#why-scope-matters" id="toc-why-scope-matters" class="nav-link" data-scroll-target="#why-scope-matters">Why Scope Matters</a></li>
+  <li><a href="#levels-of-claim-strength" id="toc-levels-of-claim-strength" class="nav-link" data-scroll-target="#levels-of-claim-strength">Levels of Claim Strength</a>
   <ul class="collapse">
-  <li><a href="#weak-descriptive" id="toc-weak-descriptive" class="nav-link" data-scroll-target="#weak-descriptive">Weak (Descriptive)</a></li>
-  <li><a href="#moderate-model-based" id="toc-moderate-model-based" class="nav-link" data-scroll-target="#moderate-model-based">Moderate (Model-Based)</a></li>
-  <li><a href="#strong-not-supported-here" id="toc-strong-not-supported-here" class="nav-link" data-scroll-target="#strong-not-supported-here">Strong (Not Supported Here)</a></li>
-  <li><a href="#cdi-insight-1" id="toc-cdi-insight-1" class="nav-link" data-scroll-target="#cdi-insight-1">CDI Insight</a></li>
+  <li><a href="#descriptive-claims" id="toc-descriptive-claims" class="nav-link" data-scroll-target="#descriptive-claims">Descriptive Claims</a></li>
+  <li><a href="#model-based-claims" id="toc-model-based-claims" class="nav-link" data-scroll-target="#model-based-claims">Model-Based Claims</a></li>
+  <li><a href="#generalized-claims" id="toc-generalized-claims" class="nav-link" data-scroll-target="#generalized-claims">Generalized Claims</a></li>
+  <li><a href="#causal-claims" id="toc-causal-claims" class="nav-link" data-scroll-target="#causal-claims">Causal Claims</a></li>
   </ul></li>
   <li><a href="#connecting-back-to-stability" id="toc-connecting-back-to-stability" class="nav-link" data-scroll-target="#connecting-back-to-stability">Connecting Back to Stability</a></li>
+  <li><a href="#write-a-short-model-claim-summary" id="toc-write-a-short-model-claim-summary" class="nav-link" data-scroll-target="#write-a-short-model-claim-summary">Write a Short Model Claim Summary</a></li>
   <li><a href="#what-this-means-in-practice" id="toc-what-this-means-in-practice" class="nav-link" data-scroll-target="#what-this-means-in-practice">What This Means in Practice</a></li>
-  <li><a href="#example-statements" id="toc-example-statements" class="nav-link" data-scroll-target="#example-statements">Example Statements</a>
+  <li><a href="#better-and-worse-example-statements" id="toc-better-and-worse-example-statements" class="nav-link" data-scroll-target="#better-and-worse-example-statements">Better and Worse Example Statements</a>
   <ul class="collapse">
   <li><a href="#appropriate" id="toc-appropriate" class="nav-link" data-scroll-target="#appropriate">Appropriate</a></li>
   <li><a href="#not-appropriate" id="toc-not-appropriate" class="nav-link" data-scroll-target="#not-appropriate">Not Appropriate</a></li>
   </ul></li>
+  <li><a href="#cdi-insight" id="toc-cdi-insight" class="nav-link" data-scroll-target="#cdi-insight">CDI Insight</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What Comes Next</a></li>
   </ul>
 </nav>
     </div>
@@ -353,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Mar 2026</p>
+      <p class="date">Jun 2026</p>
     </div>
   </div>
   
@@ -370,305 +372,457 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>ID:</strong> DS-L14</li>
 <li><strong>Type:</strong> Premium</li>
 <li><strong>Audience:</strong> Intermediate to Advanced</li>
-<li><strong>Theme:</strong> Translating model results into defensible claims</li>
+<li><strong>Theme:</strong> Translating model outputs into defensible real-world claims</li>
 </ul>
 </div>
 <p>So far, we have:</p>
 <ul>
-<li>built models<br>
-</li>
-<li>evaluated their performance<br>
-</li>
-<li>assessed stability<br>
-</li>
-<li>interpreted feature influence</li>
+<li>built baseline models</li>
+<li>evaluated model performance</li>
+<li>assessed stability using cross-validation</li>
+<li>interpreted how models use features</li>
 </ul>
 <p>Now we reach a critical step:</p>
 <blockquote class="blockquote">
-<p>How do we translate model outputs into real-world statements?</p>
+<p>How do we translate model outputs into real-world statements without overstating what the model proves?</p>
 </blockquote>
+<p>This lesson connects model evaluation and interpretation to one of the most important applied data science skills: making claims that match the evidence.</p>
+<p>A model can produce predictions.</p>
+<p>A model can show associations.</p>
+<p>A model can reveal patterns in a dataset.</p>
+<p>But a model does not automatically prove why those patterns exist.</p>
 <hr>
+<section id="how-to-run-this-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-run-this-lesson">How to Run This Lesson</h2>
+<p>Run the supporting script from the project root:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/14a_translate_model_outputs_to_claims.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates the expected outputs in the <code>reports/</code> directory:</p>
+<pre class="text"><code>reports/diabetes-claim-review-table.csv
+reports/diabetes-model-claim-summary.txt
+reports/figures/diabetes-observed-vs-predicted-error-highlighted.png</code></pre>
+<p>Then render the Quarto site:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also run the code blocks inside this chapter interactively.</p>
+<p>The script-based workflow is preferred for reproducibility because it leaves behind files that can be inspected, compared, committed, or reused in later chapters.</p>
+<hr>
+</section>
 <section id="load-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
-<div id="load-data" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<p>We continue using the saved diabetes dataset.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The dataset gives us features and an outcome.</p>
+<p>The model will learn predictive patterns from these data.</p>
+<p>The claims we make later must stay within that scope.</p>
 <hr>
 </section>
-<section id="fit-a-model" class="level2">
-<h2 class="anchored" data-anchor-id="fit-a-model">Fit a Model</h2>
-<div id="model" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<section id="fit-a-baseline-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-baseline-model">Fit a Baseline Model</h2>
+<p>We fit the same type of baseline model used in earlier lessons.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This model provides predicted disease progression values for the test set.</p>
+<p>Those predictions can be evaluated and interpreted.</p>
+<p>But they are not automatically clinical conclusions.</p>
 <hr>
 </section>
-<section id="observed-vs-predicted" class="level2">
-<h2 class="anchored" data-anchor-id="observed-vs-predicted">Observed vs Predicted</h2>
-<div id="cell-14-observed-vs-predicted" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> np.<span class="bu">abs</span>(y_test <span class="op">-</span> y_pred)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    y_pred,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>error,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="bu">min</span>(y_test.<span class="bu">min</span>(), y_pred.<span class="bu">min</span>())</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>max_val <span class="op">=</span> <span class="bu">max</span>(y_test.<span class="bu">max</span>(), y_pred.<span class="bu">max</span>())</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt.plot([min_val, max_val], [min_val, max_val], linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed"</span>)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted"</span>)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Observed vs Predicted (Error Highlighted)"</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter, label<span class="op">=</span><span class="st">"Absolute Error"</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="14-from-model-outputs-to-real-world-claims_files/figure-html/observed-vs-predicted-output-1.png" id="observed-vs-predicted" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Points close to the diagonal line represent accurate predictions.<br>
-Points farther away indicate larger errors, highlighted by brighter colors.</p>
+<section id="visualize-observed-vs-predicted-values" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-observed-vs-predicted-values">Visualize Observed vs Predicted Values</h2>
+<p>An observed-versus-predicted plot helps us see where the model performs well and where it makes larger errors.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> np.<span class="bu">abs</span>(y_test <span class="op">-</span> y_pred)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    y_pred,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>error,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="bu">min</span>(y_test.<span class="bu">min</span>(), y_pred.<span class="bu">min</span>())</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>max_val <span class="op">=</span> <span class="bu">max</span>(y_test.<span class="bu">max</span>(), y_pred.<span class="bu">max</span>())</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>plt.plot([min_val, max_val], [min_val, max_val], linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed disease progression"</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted disease progression"</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Observed vs Predicted Values"</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter, label<span class="op">=</span><span class="st">"Absolute error"</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Points close to the diagonal line represent more accurate predictions.</p>
+<p>Points farther from the diagonal indicate larger errors.</p>
+<p>This plot supports a statement about predictive performance.</p>
+<p>It does not support a causal statement.</p>
+<hr>
+</section>
+<section id="save-the-plot-as-a-project-output" class="level2">
+<h2 class="anchored" data-anchor-id="save-the-plot-as-a-project-output">Save the Plot as a Project Output</h2>
+<p>In an applied workflow, important figures should be saved as reusable artifacts.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"reports/figures"</span>).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    y_pred,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>error,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>plt.plot([min_val, max_val], [min_val, max_val], linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed disease progression"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted disease progression"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Observed vs Predicted Values"</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.colorbar(scatter, label<span class="op">=</span><span class="st">"Absolute error"</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.savefig(</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reports/figures/diabetes-observed-vs-predicted-error-highlighted.png"</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    dpi<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The figure is now part of the project record.</p>
 <hr>
 </section>
 <section id="what-the-model-actually-provides" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-model-actually-provides">What the Model Actually Provides</h2>
 <p>The model provides:</p>
 <ul>
-<li>predictions (estimated outcomes)<br>
-</li>
-<li>relationships between features and predictions<br>
-</li>
+<li>predicted outcomes</li>
+<li>estimated relationships between features and predictions</li>
 <li>patterns learned from the dataset</li>
+<li>evidence about model behavior under this setup</li>
 </ul>
-<p>It does <strong>not</strong> directly provide:</p>
+<p>It does not directly provide:</p>
 <ul>
-<li>causal relationships<br>
-</li>
-<li>clinical conclusions<br>
-</li>
-<li>general truths beyond the data</li>
+<li>causal proof</li>
+<li>clinical recommendations</li>
+<li>biological mechanisms</li>
+<li>universal truths beyond the data</li>
 </ul>
+<p>This distinction is central to responsible analysis.</p>
+<p>A model output is not the same as a real-world explanation.</p>
 <hr>
 </section>
 <section id="from-output-to-claim" class="level2">
 <h2 class="anchored" data-anchor-id="from-output-to-claim">From Output to Claim</h2>
 <p>A common mistake is to move too quickly from:</p>
-<p>model output → real-world conclusion</p>
-<p>For example:</p>
-<p>❌ “BMI causes disease progression”</p>
-<p>Even if BMI appears as one of the strongest features, this claim is still too strong.</p>
-<p>What the model shows is that BMI is an important predictor in this dataset.</p>
-<p>That means BMI helps the model estimate disease progression,<br>
-but it does not prove that BMI is the direct cause of progression.</p>
-<hr>
-<section id="a-simple-analogy" class="level3">
-<h3 class="anchored" data-anchor-id="a-simple-analogy">A simple analogy</h3>
-<blockquote class="blockquote">
-<p>Umbrella sales are a strong predictor of wet streets.<br>
-But umbrellas do not cause the streets to become wet.</p>
-</blockquote>
-<p>Both are related to an underlying factor — rain.</p>
+<pre class="text"><code>model output → real-world conclusion</code></pre>
+<p>For example, suppose BMI appears as an important predictor.</p>
+<p>A weak statement would be:</p>
+<pre class="text"><code>BMI is included in the model.</code></pre>
+<p>A stronger but still defensible statement would be:</p>
+<pre class="text"><code>BMI is an important predictor of disease progression in this fitted model.</code></pre>
+<p>An unsupported statement would be:</p>
+<pre class="text"><code>BMI causes disease progression.</code></pre>
+<p>The model may show that BMI helps predict disease progression in this dataset.</p>
+<p>It does not prove that BMI is the direct cause of disease progression.</p>
 <hr>
 </section>
-<section id="what-this-means" class="level3">
-<h3 class="anchored" data-anchor-id="what-this-means">What this means</h3>
+<section id="a-simple-analogy" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-analogy">A Simple Analogy</h2>
+<p>Umbrella sales may strongly predict wet streets.</p>
+<p>But umbrellas do not cause streets to become wet.</p>
+<p>Both are related to another factor: rain.</p>
 <p>In the same way, a feature can be strongly associated with an outcome because it reflects:</p>
 <ul>
-<li>underlying processes<br>
-</li>
-<li>correlated variables<br>
-</li>
-<li>or shared patterns in the data</li>
+<li>underlying processes</li>
+<li>correlated variables</li>
+<li>shared patterns in the data</li>
+<li>measurement structure</li>
+<li>unobserved factors</li>
 </ul>
-<p>A strong feature supports <strong>prediction</strong>.<br>
-It does not automatically establish <strong>causation</strong>.</p>
+<p>A strong feature can support prediction.</p>
+<p>It does not automatically establish causation.</p>
 <hr>
 </section>
-<section id="cdi-insight" class="level3">
-<h3 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h3>
-<p>Models can detect patterns,<br>
-but they do not explain why those patterns exist.</p>
+<section id="build-a-claim-review-table" class="level2">
+<h2 class="anchored" data-anchor-id="build-a-claim-review-table">Build a Claim Review Table</h2>
+<p>One useful applied practice is to explicitly classify claims by how strongly they are supported.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>claim_review_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"claim"</span>: [</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"BMI is included as a feature in the model."</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"BMI contributes to predictions in this fitted model."</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Higher BMI is associated with higher predicted disease progression in this model."</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"BMI causes disease progression."</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Reducing BMI will reduce disease progression for a patient."</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"claim_strength"</span>: [</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"descriptive"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model_based"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model_based_association"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"causal"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"intervention_effect"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"supported_by_this_workflow"</span>: [</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"yes"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"yes"</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"yes_with_scope_limits"</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"no"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"no"</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reason"</span>: [</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The feature table contains BMI."</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The fitted model uses BMI when forming predictions."</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The statement is limited to model behavior and association."</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The workflow is predictive, not causal."</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"The workflow does not estimate intervention effects."</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>claim_review_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This table turns interpretation into a reviewable artifact.</p>
+<p>Instead of relying on vague wording, it forces us to ask whether each claim is supported by the workflow.</p>
 <hr>
 </section>
+<section id="save-the-claim-review-table" class="level2">
+<h2 class="anchored" data-anchor-id="save-the-claim-review-table">Save the Claim Review Table</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"reports"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>claim_review_df.to_csv(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reports/diabetes-claim-review-table.csv"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="va">False</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The saved table can be reused in reports, presentations, or decision memos.</p>
+<hr>
 </section>
 <section id="correct-interpretation" class="level2">
 <h2 class="anchored" data-anchor-id="correct-interpretation">Correct Interpretation</h2>
-<p>What we can say is:</p>
-<p>Higher BMI is associated with higher predicted disease progression in this model.</p>
+<p>A defensible statement is:</p>
+<blockquote class="blockquote">
+<p>Higher BMI is associated with higher predicted disease progression in this fitted model, using this dataset and this modeling setup.</p>
+</blockquote>
 <p>This statement is:</p>
 <ul>
-<li>accurate<br>
-</li>
-<li>grounded in the model<br>
-</li>
-<li>appropriately limited to the dataset</li>
+<li>accurate</li>
+<li>grounded in the model</li>
+<li>limited to the analysis performed</li>
+<li>careful about causation</li>
+<li>clear about scope</li>
 </ul>
+<p>The phrase “in this fitted model” matters.</p>
+<p>It reminds the reader that we are describing model behavior, not proving a biological mechanism.</p>
 <hr>
 </section>
-<section id="why-this-distinction-matters" class="level2">
-<h2 class="anchored" data-anchor-id="why-this-distinction-matters">Why This Distinction Matters</h2>
+<section id="why-scope-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-scope-matters">Why Scope Matters</h2>
 <p>Model outputs depend on:</p>
 <ul>
-<li>the dataset<br>
-</li>
-<li>feature representation<br>
-</li>
-<li>modeling assumptions</li>
+<li>the dataset</li>
+<li>the features included</li>
+<li>preprocessing choices</li>
+<li>train/test split strategy</li>
+<li>model type</li>
+<li>evaluation method</li>
+<li>assumptions behind the analysis</li>
 </ul>
-<p>Changing any of these can lead to different conclusions.</p>
+<p>Changing any of these can change the result.</p>
+<p>This is why a claim should not sound broader than the workflow that produced it.</p>
+<p>A narrow, accurate claim is stronger than a broad, unsupported one.</p>
 <hr>
 </section>
-<section id="strength-of-claims" class="level2">
-<h2 class="anchored" data-anchor-id="strength-of-claims">Strength of Claims</h2>
-<p>We can think of claims at different levels:</p>
-<section id="weak-descriptive" class="level3">
-<h3 class="anchored" data-anchor-id="weak-descriptive">Weak (Descriptive)</h3>
+<section id="levels-of-claim-strength" class="level2">
+<h2 class="anchored" data-anchor-id="levels-of-claim-strength">Levels of Claim Strength</h2>
+<p>We can think of claims at different levels.</p>
+<section id="descriptive-claims" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-claims">Descriptive Claims</h3>
+<p>These describe what is present in the data or workflow.</p>
+<p>Examples:</p>
 <ul>
-<li>BMI is included in the model</li>
+<li>BMI is included as a feature.</li>
+<li>The model was trained on the diabetes dataset.</li>
+<li>The test set predictions were compared with observed values.</li>
 </ul>
+<p>These are usually easy to support.</p>
 </section>
-<section id="moderate-model-based" class="level3">
-<h3 class="anchored" data-anchor-id="moderate-model-based">Moderate (Model-Based)</h3>
+<section id="model-based-claims" class="level3">
+<h3 class="anchored" data-anchor-id="model-based-claims">Model-Based Claims</h3>
+<p>These describe how the fitted model behaves.</p>
+<p>Examples:</p>
 <ul>
-<li>BMI has a strong positive coefficient<br>
-</li>
-<li>BMI is important for prediction</li>
+<li>BMI contributes to the model predictions.</li>
+<li>The model assigns a positive coefficient to BMI.</li>
+<li>The model has moderate predictive performance under this evaluation setup.</li>
 </ul>
+<p>These are valid when tied to the model and dataset.</p>
 </section>
-<section id="strong-not-supported-here" class="level3">
-<h3 class="anchored" data-anchor-id="strong-not-supported-here">Strong (Not Supported Here)</h3>
+<section id="generalized-claims" class="level3">
+<h3 class="anchored" data-anchor-id="generalized-claims">Generalized Claims</h3>
+<p>These extend beyond the immediate dataset.</p>
+<p>Examples:</p>
 <ul>
-<li>BMI causes disease progression</li>
+<li>The model will perform similarly in another population.</li>
+<li>The same features will matter in another setting.</li>
 </ul>
-<hr>
+<p>These require stronger external validation.</p>
 </section>
-<section id="cdi-insight-1" class="level3">
-<h3 class="anchored" data-anchor-id="cdi-insight-1">CDI Insight</h3>
-<blockquote class="blockquote">
-<p>The strength of a claim must match the strength of the evidence.</p>
-</blockquote>
-<p>Models provide <strong>associations and patterns</strong>, not causation.</p>
+<section id="causal-claims" class="level3">
+<h3 class="anchored" data-anchor-id="causal-claims">Causal Claims</h3>
+<p>These describe cause-and-effect relationships.</p>
+<p>Examples:</p>
+<ul>
+<li>BMI causes disease progression.</li>
+<li>Changing BMI will change disease progression.</li>
+</ul>
+<p>These are not supported by a standard predictive modeling workflow.</p>
+<p>They require causal study design, assumptions, and evidence beyond what we have done here.</p>
 <hr>
 </section>
 </section>
 <section id="connecting-back-to-stability" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-back-to-stability">Connecting Back to Stability</h2>
-<p>Because we used:</p>
+<p>In previous lessons, we used repeated evaluation and cross-validation.</p>
+<p>That strengthens our confidence that the model behavior is not entirely driven by one lucky split.</p>
+<p>However, stability does not establish causation.</p>
+<p>A stable predictive pattern is still a predictive pattern.</p>
+<p>It should be reported as such.</p>
+<p>Cross-validation can support claims like:</p>
 <ul>
-<li>cross-validation<br>
-</li>
-<li>consistent pipelines</li>
+<li>the model shows reasonably stable predictive performance</li>
+<li>performance varies moderately across folds</li>
+<li>the model is not being judged from a single split alone</li>
 </ul>
-<p>we can say:</p>
+<p>It cannot support claims like:</p>
 <ul>
-<li>the model is reasonably stable<br>
-</li>
-<li>the observed patterns are not driven by a single split</li>
+<li>this feature causes the outcome</li>
+<li>changing this feature will change the outcome</li>
 </ul>
-<p>However:</p>
-<ul>
-<li>they remain <strong>model-based observations</strong>, not causal conclusions</li>
-</ul>
+<hr>
+</section>
+<section id="write-a-short-model-claim-summary" class="level2">
+<h2 class="anchored" data-anchor-id="write-a-short-model-claim-summary">Write a Short Model Claim Summary</h2>
+<p>We can write a short summary that respects the evidence.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>summary_text <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="st">The fitted linear regression model shows moderate predictive ability for disease progression</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="st">using the diabetes dataset. Observed-versus-predicted values indicate that some predictions</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">are close to the observed outcome, while others show meaningful error. Feature-level patterns</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="st">should be interpreted as model-based associations, not causal mechanisms. Claims from this</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="st">workflow should therefore focus on prediction, model behavior, and association within the</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="st">current dataset and modeling setup.</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.strip()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"reports/diabetes-model-claim-summary.txt"</span>).write_text(summary_text)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a reusable plain-language interpretation.</p>
 <hr>
 </section>
 <section id="what-this-means-in-practice" class="level2">
 <h2 class="anchored" data-anchor-id="what-this-means-in-practice">What This Means in Practice</h2>
-<p>When reporting results, focus on:</p>
+<p>When reporting model results, focus on:</p>
 <ul>
-<li>what the model learned<br>
-</li>
-<li>how consistent the results are<br>
-</li>
-<li>how strong the predictive relationship is</li>
+<li>what the model predicts</li>
+<li>how well it predicts</li>
+<li>how stable the performance is</li>
+<li>which features the model uses</li>
+<li>what the results do and do not support</li>
 </ul>
 <p>Avoid:</p>
 <ul>
-<li>causal language<br>
-</li>
-<li>overgeneralization<br>
-</li>
-<li>claims beyond the data</li>
+<li>causal language without causal evidence</li>
+<li>clinical or policy recommendations unsupported by the workflow</li>
+<li>claims beyond the dataset</li>
+<li>claims that ignore uncertainty or error</li>
+<li>presenting model interpretation as objective truth</li>
 </ul>
 <hr>
 </section>
-<section id="example-statements" class="level2">
-<h2 class="anchored" data-anchor-id="example-statements">Example Statements</h2>
+<section id="better-and-worse-example-statements" class="level2">
+<h2 class="anchored" data-anchor-id="better-and-worse-example-statements">Better and Worse Example Statements</h2>
 <section id="appropriate" class="level3">
 <h3 class="anchored" data-anchor-id="appropriate">Appropriate</h3>
 <ul>
-<li>The model consistently uses BMI as a strong predictor of progression<br>
-</li>
-<li>Predictions increase with higher BMI values in this dataset</li>
+<li>The model uses BMI as an important predictor of disease progression.</li>
+<li>Higher BMI is associated with higher predicted progression in this fitted model.</li>
+<li>The model shows moderate predictive performance under the current evaluation setup.</li>
+<li>These findings describe model behavior and should not be interpreted as causal evidence.</li>
 </ul>
 </section>
 <section id="not-appropriate" class="level3">
 <h3 class="anchored" data-anchor-id="not-appropriate">Not Appropriate</h3>
 <ul>
-<li>BMI is the main cause of disease progression<br>
-</li>
-<li>Reducing BMI will reduce disease progression</li>
+<li>BMI is the main cause of disease progression.</li>
+<li>Reducing BMI will reduce disease progression.</li>
+<li>The model explains the biological mechanism of disease progression.</li>
+<li>The same findings will apply to all future populations.</li>
 </ul>
+<p>The difference is not just wording.</p>
+<p>The difference is scientific and analytical honesty.</p>
 <hr>
 </section>
+</section>
+<section id="cdi-insight" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-insight">CDI Insight</h2>
+<p>The strength of a claim must match the strength of the evidence.</p>
+<p>Predictive models can support predictive claims.</p>
+<p>Interpretable models can support model-behavior claims.</p>
+<p>They do not automatically support causal claims.</p>
+<p>A defensible data science system protects this boundary.</p>
+<hr>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this lesson, we moved from model outputs to real-world claims.</p>
+<p>We:</p>
 <ul>
-<li>Models produce predictions and patterns<br>
-</li>
-<li>Interpretation must remain within the model’s scope<br>
-</li>
-<li>Stability strengthens confidence, but does not establish causation<br>
-</li>
-<li>Claims must match the level of evidence<br>
-</li>
-<li>Careful wording is essential in real-world analysis</li>
+<li>fitted a baseline model</li>
+<li>visualized observed versus predicted values</li>
+<li>distinguished predictions from explanations</li>
+<li>separated association from causation</li>
+<li>created a claim review table</li>
+<li>saved a plain-language claim summary</li>
+<li>practiced wording claims at the correct strength</li>
 </ul>
+<p>The key idea is:</p>
+<blockquote class="blockquote">
+<p>Good analysis is not only about producing outputs. It is about making claims that the outputs can actually support.</p>
+</blockquote>
 <hr>
 </section>
-<section id="next-step" class="level2">
-<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What Comes Next</h2>
+<p>Once claims are appropriately scoped, they still need to be communicated clearly.</p>
+<p>In the next lesson, we will focus on:</p>
+<ul>
+<li>communicating model results clearly</li>
+<li>writing responsible summaries</li>
+<li>explaining uncertainty</li>
+<li>presenting findings to decision-makers without overstating the evidence</li>
+</ul>
 <p>→ <strong>Communicating results clearly and responsibly</strong></p>
 
 

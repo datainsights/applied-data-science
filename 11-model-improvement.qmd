@@ -4,30 +4,43 @@
 - **ID:** DS-L11
 - **Type:** Premium
 - **Audience:** Intermediate to Advanced
-- **Theme:** Model improvement is a controlled and interpretable process
+- **Theme:** Model improvement is a controlled and interpretable process, not random model shopping
 :::
 
-In the previous lesson, we learned that model performance is not fixed.
+In the previous lesson, we evaluated model performance beyond a single result.
 
-It varies depending on:
+We saw that performance can change depending on:
 
-- how the data is split  
-- how the model is evaluated  
-- how stable the results are  
+- how the data is split
+- how the model is evaluated
+- whether the result is stable across repeated evaluations
+- whether the model behaves consistently enough to support a real claim
 
-This leads to a natural next question:
+This leads to the next practical question:
 
-> How do we improve a model in a way that is reliable and interpretable?
+> How do we improve a model without fooling ourselves?
+
+Model improvement is not simply trying many algorithms until one number looks better.
+
+That approach can easily produce a model that appears better by chance.
+
+A defensible improvement process is different.
+
+It starts with a baseline.
+
+It changes one thing at a time.
+
+It compares models fairly.
+
+It asks whether the change improves usefulness, stability, interpretability, or deployment readiness.
 
 ---
 
 ## Load the Dataset
 
-We continue using the same diabetes dataset saved earlier in the project `data/` directory.
+We continue using the diabetes dataset saved earlier in the project `data/` directory.
 
-Loading the same file keeps the workflow stable across lessons and avoids hidden dependencies between chapters.
-
-```{python}
+```python
 #| label: 11-load-diabetes-file
 import pandas as pd
 
@@ -39,317 +52,446 @@ y = df["disease_progression"]
 df.head()
 ```
 
----
+The target remains:
 
-## Why Improvement Must Be Controlled
+```python
+#| label: 11-target-column
+y.head()
+```
 
-Improving a model is not about trying many methods randomly.
+The feature table remains:
 
-It is about making **intentional changes** and observing their effect.
+```python
+#| label: 11-feature-table
+X.head()
+```
 
-If multiple things change at once:
+Using the same saved dataset keeps the workflow consistent across lessons.
 
-- we cannot tell what caused improvement  
-- results become difficult to interpret  
-- reproducibility is reduced  
-
-A good workflow:
-
-- start with a baseline  
-- change one element  
-- evaluate again  
-- compare results  
+This matters because model improvement should not depend on hidden changes in the data.
 
 ---
 
-## Baseline Model (Recap)
+## Why Model Improvement Must Be Controlled
 
-We start from the same linear regression model.
+A common beginner mistake is to treat model improvement as a competition between algorithms.
 
-```{python}
+For example:
+
+> Try linear regression, random forest, gradient boosting, support vector machines, and neural networks. Then choose the one with the best score.
+
+That may sound practical, but it can be misleading.
+
+If we try many models and only report the best result, we may be selecting a model that performed well because of one favorable split rather than because it generalizes better.
+
+A controlled improvement process is more disciplined.
+
+It asks:
+
+- What exactly are we changing?
+- Why might this change help?
+- How will we compare it against the baseline?
+- Does the improvement persist under fair evaluation?
+- Is the new model still interpretable enough for the use case?
+
+In applied data science, the goal is not to find the most impressive number.
+
+The goal is to produce a model whose behavior can be explained, reproduced, and defended.
+
+---
+
+## Start With the Baseline
+
+We begin by recreating the same baseline model used earlier.
+
+```python
 #| label: 11-baseline-model
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
 )
 
 baseline_model = LinearRegression()
 baseline_model.fit(X_train, y_train)
 
-y_pred_baseline = baseline_model.predict(X_test)
+baseline_predictions = baseline_model.predict(X_test)
 
-baseline_mae = mean_absolute_error(y_test, y_pred_baseline)
-baseline_r2 = r2_score(y_test, y_pred_baseline)
+baseline_mae = mean_absolute_error(y_test, baseline_predictions)
+baseline_r2 = r2_score(y_test, baseline_predictions)
 
 baseline_mae, baseline_r2
 ```
 
-This is our reference point.
+This model is our reference point.
+
+Every proposed improvement will be compared against it.
 
 ---
 
-## Strategy 1 — Feature Scaling
+## Define Candidate Model Changes
 
-Some models benefit from consistent feature scale.
+We will compare a small set of controlled alternatives.
 
-```{python}
-#| label: 11-scaling-model
-from sklearn.preprocessing import StandardScaler
+Each alternative changes one modeling idea:
+
+| Model | Change introduced |
+|---|---|
+| Linear regression | Baseline model |
+| Scaled linear regression | Adds feature scaling |
+| Ridge regression | Adds regularization |
+| Decision tree | Changes model family |
+
+These are not the only possible models.
+
+They are enough to demonstrate the improvement workflow.
+
+The purpose of this lesson is not to declare a universal winner.
+
+The purpose is to show how to compare model changes carefully.
+
+---
+
+## Candidate 1: Scaled Linear Regression
+
+Feature scaling transforms features so they are on a comparable numerical scale.
+
+For ordinary linear regression, scaling does not usually change predictive performance in a meaningful way.
+
+However, scaling becomes important for many other models and for regularized models.
+
+Here we include it because it introduces a reproducible pipeline pattern.
+
+```python
+#| label: 11-scaled-linear-model
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
-scaling_model = Pipeline([
+scaled_linear_model = Pipeline([
     ("scaler", StandardScaler()),
     ("model", LinearRegression())
 ])
 
-scaling_model.fit(X_train, y_train)
-y_pred_scaled = scaling_model.predict(X_test)
+scaled_linear_model.fit(X_train, y_train)
 
-scaled_mae = mean_absolute_error(y_test, y_pred_scaled)
-scaled_r2 = r2_score(y_test, y_pred_scaled)
+scaled_linear_predictions = scaled_linear_model.predict(X_test)
 
-scaled_mae, scaled_r2
+scaled_linear_mae = mean_absolute_error(y_test, scaled_linear_predictions)
+scaled_linear_r2 = r2_score(y_test, scaled_linear_predictions)
+
+scaled_linear_mae, scaled_linear_r2
 ```
 
-Compare with baseline:
+This model changes the preprocessing step while keeping the model family the same.
 
-```{python}
-#| label: 11-compare-scaled
-pd.DataFrame({
-    "model": ["baseline", "scaled"],
-    "MAE": [baseline_mae, scaled_mae],
-    "R2": [baseline_r2, scaled_r2]
-}).round(3)
-```
-
-Scaling may or may not improve performance, but it ensures consistency.
+That makes it a controlled comparison.
 
 ---
 
-## Strategy 2 — Regularization
+## Candidate 2: Ridge Regression
 
-Linear regression can be extended with regularization to control model complexity.
+Ridge regression is a regularized version of linear regression.
 
-### Ridge Regression
+Regularization discourages very large coefficient values.
 
-```{python}
+This can help when:
+
+- predictors are correlated
+- coefficients are unstable
+- the model is sensitive to small data changes
+- interpretability and stability matter
+
+```python
 #| label: 11-ridge-model
 from sklearn.linear_model import Ridge
 
-ridge_model = Ridge(alpha=1.0)
+ridge_model = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", Ridge(alpha=1.0))
+])
+
 ridge_model.fit(X_train, y_train)
 
-y_pred_ridge = ridge_model.predict(X_test)
+ridge_predictions = ridge_model.predict(X_test)
 
-ridge_mae = mean_absolute_error(y_test, y_pred_ridge)
-ridge_r2 = r2_score(y_test, y_pred_ridge)
+ridge_mae = mean_absolute_error(y_test, ridge_predictions)
+ridge_r2 = r2_score(y_test, ridge_predictions)
 
 ridge_mae, ridge_r2
 ```
 
-Compare:
+Ridge regression may not always reduce prediction error.
 
-```{python}
-#| label: 11-compare-ridge
-pd.DataFrame({
-    "model": ["baseline", "ridge"],
-    "MAE": [baseline_mae, ridge_mae],
-    "R2": [baseline_r2, ridge_r2]
-}).round(3)
-```
+Its value is often in producing a more stable model.
 
-Regularization helps when:
+That distinction is important.
 
-- features are correlated  
-- the model is sensitive to small changes  
-- we want more stable coefficients  
+A model can be useful even when it does not produce the lowest error on one split.
 
 ---
 
-## Strategy 3 — Tree-Based Model
+## Candidate 3: Decision Tree
 
-Different models capture different structures.
+A decision tree changes the model family.
 
-```{python}
-#| label: 11-tree-model
+Unlike linear models, decision trees can capture nonlinear relationships and feature interactions.
+
+However, trees can also overfit easily, especially when not constrained.
+
+```python
+#| label: 11-decision-tree-model
 from sklearn.tree import DecisionTreeRegressor
 
-tree_model = DecisionTreeRegressor(random_state=42)
+tree_model = DecisionTreeRegressor(
+    random_state=42
+)
+
 tree_model.fit(X_train, y_train)
 
-y_pred_tree = tree_model.predict(X_test)
+tree_predictions = tree_model.predict(X_test)
 
-tree_mae = mean_absolute_error(y_test, y_pred_tree)
-tree_r2 = r2_score(y_test, y_pred_tree)
+tree_mae = mean_absolute_error(y_test, tree_predictions)
+tree_r2 = r2_score(y_test, tree_predictions)
 
 tree_mae, tree_r2
 ```
 
-Compare all models:
+This comparison asks whether a more flexible model family improves prediction on this dataset.
 
-```{python}
-#| label: 11-compare-all
+---
+
+## Compare Model Results
+
+Now we combine the results into one comparison table.
+
+```python
+#| label: 11-model-comparison-table
 comparison_df = pd.DataFrame({
-    "model": ["baseline", "ridge", "tree"],
-    "MAE": [baseline_mae, ridge_mae, tree_mae],
-    "R2": [baseline_r2, ridge_r2, tree_r2]
-}).round(3)
+    "model": [
+        "linear_regression_baseline",
+        "scaled_linear_regression",
+        "ridge_regression",
+        "decision_tree"
+    ],
+    "mae": [
+        baseline_mae,
+        scaled_linear_mae,
+        ridge_mae,
+        tree_mae
+    ],
+    "r2": [
+        baseline_r2,
+        scaled_linear_r2,
+        ridge_r2,
+        tree_r2
+    ]
+})
+
+comparison_df = comparison_df.sort_values("mae").reset_index(drop=True)
+
+comparison_df.round(3)
+```
+
+Lower MAE is better.
+
+Higher R² is better.
+
+However, the table should not be interpreted mechanically.
+
+The best-looking model on one split is not automatically the best model overall.
+
+---
+
+## Save the Model Comparison Output
+
+In an applied workflow, model comparisons should be saved as project outputs.
+
+This allows the comparison to be inspected later, used in reports, and reproduced by others.
+
+```python
+#| label: 11-save-model-comparison
+from pathlib import Path
+
+Path("reports").mkdir(exist_ok=True)
+
+comparison_df.to_csv(
+    "reports/diabetes-model-comparison.csv",
+    index=False
+)
 
 comparison_df
 ```
 
----
+This creates a reusable artifact:
 
-## Interpreting Model Comparison
+```text
+reports/diabetes-model-comparison.csv
+```
 
-We compared three models:
+The result is no longer only visible inside the notebook or rendered chapter.
 
-- baseline (linear regression)  
-- ridge regression  
-- decision tree  
-
-The results are now visible in the comparison table above.
-
-### What this suggests
-
-The **baseline linear model performs best** among the three:
-
-- lowest error (MAE)  
-- highest explained variance (R²)  
-
-This indicates that, for this dataset, the relationship between features and outcome is reasonably well captured by a **linear structure**.
-
-### Why ridge did not improve performance
-
-Ridge regression introduces regularization to stabilize coefficients.
-
-However:
-
-- the baseline model may not be overfitting strongly  
-- regularization may slightly reduce flexibility  
-- this can lead to slightly worse performance  
-
-In this case, ridge provides **stability**, but not improvement in predictive accuracy.
-
-### Why the decision tree performs poorly
-
-The decision tree shows:
-
-- much higher error  
-- very low R²  
-
-This suggests:
-
-- the model may be **overfitting the training data**  
-- it may not generalize well to unseen data  
-- the dataset may not contain strong nonlinear patterns that the tree can exploit  
-
-### Important caution
-
-These results are based on a **single train/test split**.
-
-They do not establish that one model is universally better.
-
-They show how these models behave **under this specific data partition and configuration**.
-
-### CDI Insight
-
-Better performance does not mean a model is “correct.”
-
-It means the model is **more useful for prediction under the current setup**.
-
-Understanding *why* a model performs better is more important than simply observing that it does.
+It becomes part of the project record.
 
 ---
 
-## Interpreting Improvements
+## Interpret the Comparison
 
-Improvement is not just:
+The comparison table gives us a first view of how the candidate models behave.
 
-- lower MAE  
-- higher R²  
+But model improvement requires interpretation.
 
-We must also consider:
+A model should not be selected only because it has the best number in one table.
 
-- stability across splits  
-- interpretability  
-- sensitivity to noise  
+We need to ask what the result means.
 
-A more complex model may perform better on one split but worse in general.
+### If the baseline remains best
+
+If the baseline linear regression model performs as well as or better than the alternatives, that is not a failure.
+
+It suggests that the dataset may be reasonably well captured by a linear structure.
+
+In that case, the simplest model may be preferred because it is:
+
+- easier to explain
+- easier to inspect
+- easier to reproduce
+- easier to communicate
+- less likely to introduce unnecessary complexity
+
+A simple model that performs well is often stronger than a complex model that performs only slightly better.
+
+### If ridge performs similarly
+
+If ridge regression performs similarly to linear regression, it may still be valuable.
+
+Ridge may improve coefficient stability even when predictive metrics are similar.
+
+This matters when the model is used for interpretation, reporting, or repeated deployment.
+
+In applied settings, stability can be as important as raw accuracy.
+
+### If the decision tree performs poorly
+
+If the decision tree performs worse, that may indicate overfitting.
+
+A fully grown tree can learn patterns that are too specific to the training data.
+
+When that happens, it may perform well on training data but poorly on unseen data.
+
+Poor test performance is a warning that flexibility alone does not guarantee generalization.
 
 ---
 
-## What Can Go Wrong
+## Improvement Is More Than Better Metrics
 
-### Chasing Metrics
+A model is not improved just because one number moved in the desired direction.
 
-Improving a number does not always improve usefulness.
+Useful improvement may involve:
 
-### Overfitting
+- lower prediction error
+- more stable performance
+- simpler deployment
+- better interpretability
+- more reliable coefficients
+- fewer fragile assumptions
+- clearer communication to decision-makers
 
-A model may fit training data very well but fail on new data.
+A model that improves MAE slightly but becomes much harder to explain may not be better for the real-world use case.
 
-### Changing Too Many Things
+A model that is slightly less accurate but more stable and interpretable may be preferred.
 
-If scaling, features, and model type all change together:
+The meaning of improvement depends on the analytical goal.
 
-- improvement cannot be explained  
+---
 
-### Ignoring Context
+## What Can Go Wrong During Model Improvement
 
-The “best” model depends on:
+### Chasing a Single Metric
 
-- the problem  
-- the data  
-- the intended use  
+A model can improve one metric while becoming worse in another way.
+
+For example, a model may reduce average error but produce worse errors for certain subgroups or ranges of the outcome.
+
+Metrics should guide judgment, not replace it.
+
+### Overfitting the Test Set
+
+If we repeatedly try models and choose the one that performs best on the same test set, the test set becomes part of the modeling process.
+
+That weakens its value as an honest estimate of future performance.
+
+This is why cross-validation and final holdout testing are important.
+
+### Changing Too Many Things at Once
+
+If we change the features, preprocessing, algorithm, and hyperparameters all at once, we cannot tell what caused the change in performance.
+
+Controlled changes make model improvement interpretable.
+
+### Confusing Complexity With Progress
+
+A more complex model is not automatically better.
+
+Complexity should be justified by better performance, better stability, or better fit to the problem structure.
+
+Without that justification, complexity becomes a liability.
 
 ---
 
 ## CDI Insight
 
-Model improvement is not a search for the best number.
+Model improvement is not model shopping.
 
-It is a process of understanding how changes affect behavior.
+It is controlled experimentation.
+
+A defensible improvement process compares models fairly, explains why each change was made, and avoids treating one favorable result as proof.
+
+The best model is not always the most complex model.
+
+The best model is the one that is accurate enough, stable enough, interpretable enough, and appropriate for the decision context.
 
 ---
 
 ## Summary
 
-- We loaded the same project dataset from `data/diabetes.csv`  
-- We started from a baseline model  
-- We applied controlled changes one at a time  
-- We compared results systematically  
-- We considered stability and interpretability alongside metrics  
-- We avoided treating performance improvement as the only goal  
+In this lesson, we moved from model evaluation to model improvement.
+
+We:
+
+- loaded the same saved diabetes dataset
+- recreated the baseline model
+- tested controlled model alternatives
+- compared scaling, regularization, and a tree-based model
+- saved the model comparison table as a project artifact
+- interpreted improvement beyond MAE and R²
+- discussed overfitting, metric chasing, and unnecessary complexity
+
+The key idea is simple:
+
+> A model improves only when the change produces a more useful and defensible analytical system.
 
 ---
 
 ## What Comes Next
 
-So far, we have compared models using a single train/test split.
+So far, we have compared model variants using a single train/test split.
 
-This provides a useful first view, but it is not the full picture.
+That is useful, but still incomplete.
 
-Model performance can vary depending on how the data is split.  
-A model that appears better in one split may not perform the same in another.
-
-A strong result from a single split is a useful signal, but not sufficient evidence.
-A model is better when its performance remains stable across multiple splits of the data.
+A model that looks better on one split may not remain better across many splits.
 
 In the next lesson, we will introduce:
 
-- **pipelines**, to ensure transformations are applied consistently  
-- **cross-validation**, to evaluate models across multiple data splits  
+- reusable modeling pipelines
+- cross-validation
+- fair model comparison across multiple folds
+- more stable estimates of performance
 
-These tools allow us to move from a single estimate of performance to a more **stable and reliable assessment**.
+This moves us from one comparison table to a more reliable evaluation system.
 
-This leads to an important realization:
-
-> conclusions based on a single split may change when evaluated more rigorously.
-
-This is a key step in moving from exploratory modeling to **defensible inference**.
-
-→ **Building reproducible pipelines**
+→ **Building reproducible pipelines and cross-validation**

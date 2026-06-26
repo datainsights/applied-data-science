@@ -9,24 +9,66 @@
 
 In previous lessons, we evaluated models using a single train/test split.
 
-This provided a useful starting point.
+That gave us a useful starting point.
 
-However, a single split gives only one estimate of performance.
+But a single split gives only one estimate of performance.
 
-To move toward reliable conclusions, we need:
+A model may look stronger or weaker depending on which observations happen to fall into the training set and which observations happen to fall into the test set.
 
-- consistent preprocessing  
-- repeated evaluation across different splits  
+To move toward reliable model evaluation, we need two things:
+
+- consistent preprocessing
+- repeated evaluation across multiple splits
 
 This is where **pipelines** and **cross-validation** become essential.
+
+A pipeline helps us keep the modeling workflow reproducible.
+
+Cross-validation helps us understand whether performance is stable.
+
+Together, they move us from a single result toward a more defensible evaluation system.
+
+---
+
+## How to Run This Lesson
+
+This lesson can be run in two ways.
+
+First, run the supporting script from the project root to generate the reusable outputs:
+
+```bash
+python scripts/python/12a_cross_validate_pipeline.py
+```
+
+This creates the expected cross-validation outputs in the `reports/` directory:
+
+```text
+reports/diabetes-pipeline-cross-validation-folds.csv
+reports/diabetes-pipeline-cross-validation-summary.csv
+reports/figures/diabetes-cross-validation-mae.png
+reports/figures/diabetes-cross-validation-r2.png
+```
+
+Then render the Quarto site:
+
+```bash
+quarto render
+```
+
+You can also run the code blocks inside this chapter interactively.
+
+The script-based workflow is preferred for reproducibility because it leaves behind files that can be inspected, compared, committed, or reused in later chapters.
 
 ---
 
 ## Load the Dataset
 
-```{python}
+We continue with the same diabetes dataset used in the previous lessons.
+
+```python
 #| label: 12-load-data
 import pandas as pd
+
 
 df = pd.read_csv("data/diabetes.csv")
 
@@ -36,27 +78,59 @@ y = df["disease_progression"]
 df.head()
 ```
 
+The feature table contains the predictors.
+
+```python
+#| label: 12-feature-table
+X.head()
+```
+
+The target contains the outcome we want to predict.
+
+```python
+#| label: 12-target-column
+y.head()
+```
+
+Using the same saved dataset keeps the workflow stable across chapters.
+
+This is important because cross-validation should evaluate model behavior, not hidden changes in the data.
+
 ---
 
 ## Why Pipelines Matter
 
-So far, preprocessing and modeling were done in separate steps.
+So far, we have often shown preprocessing and modeling as separate steps.
 
-This creates risks:
+That is useful for learning.
 
-- forgetting transformations  
-- inconsistent application  
-- data leakage  
+But in real workflows, separating preprocessing from modeling can create risk.
 
-A pipeline solves this by:
+Common problems include:
 
-> combining preprocessing and modeling into a single, reproducible workflow.
+- applying transformations to training data but forgetting them on test data
+- applying transformations inconsistently across scripts
+- leaking information from the full dataset into preprocessing
+- making the workflow harder to reproduce
 
-```{python}
+A pipeline solves this by combining preprocessing and modeling into one object.
+
+The pipeline defines the full sequence of steps needed to move from input features to predictions.
+
+That makes the workflow more reliable.
+
+---
+
+## Build a Modeling Pipeline
+
+Here we create a pipeline that first scales the features and then fits a linear regression model.
+
+```python
 #| label: 12-build-pipeline
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
+
 
 pipeline = Pipeline([
     ("scaler", StandardScaler()),
@@ -66,26 +140,59 @@ pipeline = Pipeline([
 pipeline
 ```
 
+The pipeline has two steps:
+
+| Step | Purpose |
+|---|---|
+| `scaler` | Standardizes the feature values |
+| `model` | Fits the linear regression model |
+
+This means scaling is not handled as a separate manual step.
+
+It becomes part of the model workflow.
+
+That matters because the same transformation is applied consistently during evaluation.
+
 ---
 
 ## Why Cross-Validation Matters
 
-A single train/test split gives one estimate.
+A single train/test split gives one estimate of performance.
 
 But performance depends on how the data is split.
 
-Cross-validation addresses this by:
+Cross-validation addresses this problem by evaluating the model across multiple train/test partitions.
 
-> evaluating the model across multiple splits of the data.
+In **k-fold cross-validation**, the data is divided into `k` folds.
+
+The model is trained and evaluated multiple times.
+
+Each fold gets a turn as the validation set.
+
+The result is not one score.
+
+The result is a set of scores.
+
+This lets us ask better questions:
+
+- What is the average performance?
+- How much does performance vary across folds?
+- Are there folds where the model performs unusually poorly?
+- Is the model stable enough to support a real-world claim?
+
+This is much more informative than relying on a single split.
 
 ---
 
 ## Apply Cross-Validation
 
-```{python}
+We now evaluate the pipeline using 5-fold cross-validation.
+
+```python
 #| label: 12-cross-validation
 from sklearn.model_selection import cross_val_score
 import numpy as np
+
 
 mae_scores = -cross_val_score(
     pipeline,
@@ -106,45 +213,116 @@ r2_scores = cross_val_score(
 mae_scores, r2_scores
 ```
 
+Scikit-learn returns negative values for MAE when using `neg_mean_absolute_error` because its scoring system assumes that higher scores are better.
+
+We multiply by `-1` so that the values are easier to interpret as ordinary MAE.
+
+For MAE, lower values are better.
+
+For R², higher values are better.
+
 ---
 
-## Summarize Results
+## Create a Cross-Validation Results Table
 
-```{python}
+We now place the fold-level results into a table.
+
+```python
 #| label: 12-results-table
 results_df = pd.DataFrame({
-    "MAE": mae_scores,
-    "R2": r2_scores
-}).round(3)
+    "fold": range(1, len(mae_scores) + 1),
+    "mae": mae_scores,
+    "r2": r2_scores
+})
 
-results_df
+results_df.round(3)
 ```
 
-```{python}
-#| label: 12-summary
-summary_df = pd.DataFrame({
-    "metric": ["MAE", "R2"],
-    "mean": [np.mean(mae_scores), np.mean(r2_scores)],
-    "std": [np.std(mae_scores), np.std(r2_scores)]
-}).round(3)
+Each row represents one fold.
 
-summary_df
-```
+This table makes the evaluation more transparent.
 
-Cross-validation replaces a single result with a **distribution of outcomes**.
+Instead of reporting only one number, we can see how performance changes across folds.
 
 ---
 
-## Visualizing Performance Across Folds
+## Summarize Cross-Validation Performance
 
-```{python}
+Next, we summarize the average and variability of the scores.
+
+```python
+#| label: 12-summary
+summary_df = pd.DataFrame({
+    "metric": ["mae", "r2"],
+    "mean": [np.mean(mae_scores), np.mean(r2_scores)],
+    "std": [np.std(mae_scores), np.std(r2_scores)]
+})
+
+summary_df.round(3)
+```
+
+The mean tells us the average performance.
+
+The standard deviation tells us how much performance varies across folds.
+
+A model with good average performance but high variability may be less reliable than it first appears.
+
+A model with moderate performance and low variability may be more dependable.
+
+---
+
+## Save Cross-Validation Outputs
+
+In an applied data science workflow, evaluation results should be saved as project artifacts.
+
+This allows the results to be reused in reports, reviewed later, or compared with future model versions.
+
+```python
+#| label: 12-save-cross-validation-results
+from pathlib import Path
+
+
+Path("reports").mkdir(exist_ok=True)
+
+results_df.to_csv(
+    "reports/diabetes-pipeline-cross-validation-folds.csv",
+    index=False
+)
+
+summary_df.to_csv(
+    "reports/diabetes-pipeline-cross-validation-summary.csv",
+    index=False
+)
+
+results_df.round(3)
+```
+
+This creates two project outputs:
+
+```text
+reports/diabetes-pipeline-cross-validation-folds.csv
+reports/diabetes-pipeline-cross-validation-summary.csv
+```
+
+These files make the evaluation reproducible beyond the rendered chapter.
+
+---
+
+## Visualize Performance Across Folds
+
+Tables are useful, but plots make variability easier to see.
+
+First, we visualize MAE across folds.
+
+```python
 #| label: 12-plot-mae
 import matplotlib.pyplot as plt
 
-folds = range(1, len(mae_scores) + 1)
+
+folds = results_df["fold"]
 
 plt.figure(figsize=(7, 5))
-plt.plot(folds, mae_scores, marker="o")
+plt.plot(folds, results_df["mae"], marker="o")
 plt.xlabel("Fold")
 plt.ylabel("MAE")
 plt.title("MAE Across Cross-Validation Folds")
@@ -152,10 +330,12 @@ plt.grid(alpha=0.2)
 plt.show()
 ```
 
-```{python}
+Next, we visualize R² across folds.
+
+```python
 #| label: 12-plot-r2
 plt.figure(figsize=(7, 5))
-plt.plot(folds, r2_scores, marker="o")
+plt.plot(folds, results_df["r2"], marker="o")
 plt.xlabel("Fold")
 plt.ylabel("R²")
 plt.title("R² Across Cross-Validation Folds")
@@ -163,81 +343,171 @@ plt.grid(alpha=0.2)
 plt.show()
 ```
 
-These plots show how model performance varies across the five folds.
+These plots show whether performance is relatively stable or highly dependent on the fold.
 
-For MAE:
+The goal is not identical performance across all folds.
 
-- most values fall within a relatively narrow range (~42–48)  
-- one fold shows slightly higher error, but not dramatically so  
+Some variation is expected.
 
-For R²:
-
-- values fluctuate between ~0.43 and ~0.55  
-- performance improves in some folds and decreases in others  
-
-### What this reveals
-
-The model does not perform identically across all splits, which is expected.
-
-However, the variation is **moderate rather than extreme**:
-
-- there are no folds with very poor performance  
-- there are no folds with unusually high performance  
-
-This suggests that the model is **reasonably stable**, though not perfectly consistent.
+The goal is limited variability around a consistent average.
 
 ---
 
-### Key Insight
+## Save Cross-Validation Figures
 
-Each fold exposes the model to a slightly different subset of the data.
+We can also save the plots as report figures.
+
+```python
+#| label: 12-save-cross-validation-figures
+Path("reports/figures").mkdir(parents=True, exist_ok=True)
+
+plt.figure(figsize=(7, 5))
+plt.plot(folds, results_df["mae"], marker="o")
+plt.xlabel("Fold")
+plt.ylabel("MAE")
+plt.title("MAE Across Cross-Validation Folds")
+plt.grid(alpha=0.2)
+plt.savefig("reports/figures/diabetes-cross-validation-mae.png", dpi=300, bbox_inches="tight")
+plt.close()
+
+plt.figure(figsize=(7, 5))
+plt.plot(folds, results_df["r2"], marker="o")
+plt.xlabel("Fold")
+plt.ylabel("R²")
+plt.title("R² Across Cross-Validation Folds")
+plt.grid(alpha=0.2)
+plt.savefig("reports/figures/diabetes-cross-validation-r2.png", dpi=300, bbox_inches="tight")
+plt.close()
+```
+
+This creates two reusable visual outputs:
+
+```text
+reports/figures/diabetes-cross-validation-mae.png
+reports/figures/diabetes-cross-validation-r2.png
+```
+
+These figures can be included in reports, presentations, or later case studies.
+
+---
+
+## Interpret the Results
+
+Cross-validation replaces a single result with a distribution of outcomes.
+
+That distribution is more informative than one train/test score.
+
+For MAE, we ask:
+
+- Are the errors consistently low?
+- Are there folds with much higher error?
+- Is the average error acceptable for the problem?
+
+For R², we ask:
+
+- Does the model explain a meaningful amount of variation?
+- Is explained variance stable across folds?
+- Are some folds much weaker than others?
+
+This gives us a more complete view of model behavior.
+
+---
+
+## What Cross-Validation Reveals
+
+Each fold exposes the model to a different training subset and validation subset.
 
 This affects:
 
-- which patterns are learned  
-- how well those patterns generalize  
+- which patterns are learned
+- which observations are used for evaluation
+- how sensitive the model is to data partitioning
+- whether the model generalizes consistently
 
-The goal is not identical performance across folds,  
-but **limited variability around a consistent average**.
+If performance changes dramatically across folds, that is a warning sign.
 
----
+It may suggest that the model is sensitive to the split, the dataset is small, important subgroups are unevenly distributed, or the model is not stable.
 
-### CDI Interpretation
-
-These plots reinforce an important principle:
-
-> model evaluation should focus on patterns of performance, not single outcomes.
-
-Here, the pattern indicates:
-
-- moderate predictive ability  
-- acceptable stability  
-- no strong evidence of instability or overfitting  
+If performance varies moderately around a consistent average, the model is more defensible as a baseline.
 
 ---
 
-### What This Means
+## Pipelines Reduce Leakage Risk
 
-- The model is **reliable enough for baseline use**  
-- There is still room for improvement  
-- Improvements should aim to:
-  - reduce variability across folds  
-  - increase average performance  
+Cross-validation is most useful when preprocessing is handled correctly.
 
-This is more informative than relying on a single train/test result.
+This is why we used a pipeline.
+
+When preprocessing is included inside the pipeline, each training fold learns its own preprocessing parameters.
+
+For example, the scaler is fitted only on the training portion of each fold.
+
+Then that fitted transformation is applied to the validation portion.
+
+This avoids using information from the validation fold during preprocessing.
+
+That is important because using validation information too early can make performance look better than it really is.
+
+This problem is called **data leakage**.
+
+Pipelines help prevent it.
+
+---
+
+## CDI Interpretation
+
+Pipelines and cross-validation are not just technical conveniences.
+
+They are part of defensible analytical practice.
+
+A pipeline answers:
+
+> Was the modeling workflow applied consistently?
+
+Cross-validation answers:
+
+> Is performance stable across different data splits?
+
+Together, they help us move from a single model result to a reproducible evaluation system.
+
+This matters because real-world decisions should not depend on one lucky split.
 
 ---
 
 ## Summary
 
-- Pipelines ensure consistent preprocessing  
-- Cross-validation evaluates performance across multiple splits  
-- Tables summarize performance  
-- Plots reveal variability across folds  
-- Stability is more informative than a single result  
+In this lesson, we moved from single-split evaluation to pipeline-based cross-validation.
+
+We:
+
+- loaded the saved diabetes dataset
+- built a preprocessing and modeling pipeline
+- evaluated the model using 5-fold cross-validation
+- summarized MAE and R² across folds
+- saved fold-level and summary results
+- visualized performance variability
+- saved cross-validation figures
+- explained how pipelines reduce leakage risk
+
+The key lesson is:
+
+> Stable model evaluation requires both consistent workflows and repeated testing across data splits.
 
 ---
 
-## Next Step
+## What Comes Next
+
+Cross-validation helps us understand whether model performance is stable.
+
+But performance alone does not explain how the model works.
+
+In the next lesson, we will examine:
+
+- feature importance
+- model interpretation
+- coefficient inspection
+- what we can and cannot infer from model structure
+
+This moves us from evaluating predictions to understanding model behavior.
 
 → **Feature importance and model interpretation**

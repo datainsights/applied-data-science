@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,9 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="assets/css/cdi.css">
@@ -268,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18-limitations-and-responsible-use.html</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -309,24 +306,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
+  <li><a href="#how-to-run-this-lesson" id="toc-how-to-run-this-lesson" class="nav-link active" data-scroll-target="#how-to-run-this-lesson">How to Run This Lesson</a></li>
+  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link" data-scroll-target="#load-the-dataset">Load the Dataset</a></li>
+  <li><a href="#why-interpretation-matters" id="toc-why-interpretation-matters" class="nav-link" data-scroll-target="#why-interpretation-matters">Why Interpretation Matters</a></li>
   <li><a href="#fit-a-linear-model" id="toc-fit-a-linear-model" class="nav-link" data-scroll-target="#fit-a-linear-model">Fit a Linear Model</a></li>
   <li><a href="#understanding-coefficients" id="toc-understanding-coefficients" class="nav-link" data-scroll-target="#understanding-coefficients">Understanding Coefficients</a></li>
-  <li><a href="#important-caution" id="toc-important-caution" class="nav-link" data-scroll-target="#important-caution">Important Caution</a></li>
-  <li><a href="#visualizing-coefficients" id="toc-visualizing-coefficients" class="nav-link" data-scroll-target="#visualizing-coefficients">Visualizing Coefficients</a></li>
-  <li><a href="#tree-based-feature-importance" id="toc-tree-based-feature-importance" class="nav-link" data-scroll-target="#tree-based-feature-importance">Tree-Based Feature Importance</a></li>
-  <li><a href="#visualizing-feature-importance" id="toc-visualizing-feature-importance" class="nav-link" data-scroll-target="#visualizing-feature-importance">Visualizing Feature Importance</a></li>
-  <li><a href="#interpreting-feature-influence" id="toc-interpreting-feature-influence" class="nav-link" data-scroll-target="#interpreting-feature-influence">Interpreting Feature Influence</a>
+  <li><a href="#save-linear-model-coefficients" id="toc-save-linear-model-coefficients" class="nav-link" data-scroll-target="#save-linear-model-coefficients">Save Linear Model Coefficients</a></li>
+  <li><a href="#visualize-linear-model-coefficients" id="toc-visualize-linear-model-coefficients" class="nav-link" data-scroll-target="#visualize-linear-model-coefficients">Visualize Linear Model Coefficients</a></li>
+  <li><a href="#fit-a-tree-based-model" id="toc-fit-a-tree-based-model" class="nav-link" data-scroll-target="#fit-a-tree-based-model">Fit a Tree-Based Model</a></li>
+  <li><a href="#save-tree-feature-importance" id="toc-save-tree-feature-importance" class="nav-link" data-scroll-target="#save-tree-feature-importance">Save Tree Feature Importance</a></li>
+  <li><a href="#visualize-tree-feature-importance" id="toc-visualize-tree-feature-importance" class="nav-link" data-scroll-target="#visualize-tree-feature-importance">Visualize Tree Feature Importance</a></li>
+  <li><a href="#compare-the-two-interpretation-views" id="toc-compare-the-two-interpretation-views" class="nav-link" data-scroll-target="#compare-the-two-interpretation-views">Compare the Two Interpretation Views</a>
   <ul class="collapse">
-  <li><a href="#linear-model-coefficients" id="toc-linear-model-coefficients" class="nav-link" data-scroll-target="#linear-model-coefficients">Linear Model (Coefficients)</a></li>
-  <li><a href="#decision-tree-feature-importance" id="toc-decision-tree-feature-importance" class="nav-link" data-scroll-target="#decision-tree-feature-importance">Decision Tree (Feature Importance)</a></li>
-  <li><a href="#comparing-the-two-views" id="toc-comparing-the-two-views" class="nav-link" data-scroll-target="#comparing-the-two-views">Comparing the Two Views</a></li>
-  <li><a href="#cdi-interpretation" id="toc-cdi-interpretation" class="nav-link" data-scroll-target="#cdi-interpretation">CDI Interpretation</a></li>
-  <li><a href="#what-this-means" id="toc-what-this-means" class="nav-link" data-scroll-target="#what-this-means">What This Means</a></li>
-  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#linear-model-coefficients" id="toc-linear-model-coefficients" class="nav-link" data-scroll-target="#linear-model-coefficients">Linear model coefficients</a></li>
+  <li><a href="#decision-tree-feature-importance" id="toc-decision-tree-feature-importance" class="nav-link" data-scroll-target="#decision-tree-feature-importance">Decision tree feature importance</a></li>
   </ul></li>
+  <li><a href="#interpretation-is-model-specific" id="toc-interpretation-is-model-specific" class="nav-link" data-scroll-target="#interpretation-is-model-specific">Interpretation Is Model-Specific</a></li>
+  <li><a href="#what-can-go-wrong-during-interpretation" id="toc-what-can-go-wrong-during-interpretation" class="nav-link" data-scroll-target="#what-can-go-wrong-during-interpretation">What Can Go Wrong During Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#confusing-prediction-with-causation" id="toc-confusing-prediction-with-causation" class="nav-link" data-scroll-target="#confusing-prediction-with-causation">Confusing Prediction With Causation</a></li>
+  <li><a href="#ignoring-feature-scale" id="toc-ignoring-feature-scale" class="nav-link" data-scroll-target="#ignoring-feature-scale">Ignoring Feature Scale</a></li>
+  <li><a href="#overinterpreting-one-model" id="toc-overinterpreting-one-model" class="nav-link" data-scroll-target="#overinterpreting-one-model">Overinterpreting One Model</a></li>
+  <li><a href="#treating-feature-importance-as-explanation" id="toc-treating-feature-importance-as-explanation" class="nav-link" data-scroll-target="#treating-feature-importance-as-explanation">Treating Feature Importance as Explanation</a></li>
+  </ul></li>
+  <li><a href="#cdi-interpretation" id="toc-cdi-interpretation" class="nav-link" data-scroll-target="#cdi-interpretation">CDI Interpretation</a></li>
+  <li><a href="#from-interpretation-to-claims" id="toc-from-interpretation-to-claims" class="nav-link" data-scroll-target="#from-interpretation-to-claims">From Interpretation to Claims</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next Step</a></li>
+  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What Comes Next</a></li>
   </ul>
 </nav>
     </div>
@@ -346,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Mar 2026</p>
+      <p class="date">Jun 2026</p>
     </div>
   </div>
   
@@ -366,11 +372,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Theme:</strong> From stable models to interpretable models</li>
 </ul>
 </div>
-<p>In the previous lesson, we focused on <strong>stability</strong>:</p>
+<p>In the previous lesson, we focused on <strong>stability</strong>.</p>
+<p>We used:</p>
 <ul>
-<li>pipelines ensured consistent processing<br>
-</li>
-<li>cross-validation provided reliable evaluation</li>
+<li>pipelines to keep preprocessing and modeling connected</li>
+<li>cross-validation to evaluate performance across multiple folds</li>
+<li>saved outputs to make model evaluation reproducible</li>
 </ul>
 <p>Now we move to the next question:</p>
 <blockquote class="blockquote">
@@ -378,352 +385,355 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>This is the transition from:</p>
 <p><strong>stable models → interpretable models</strong></p>
+<p>A model may produce reasonable predictions, but that is not enough.</p>
+<p>In applied data science, we also need to understand how the model behaves, what features it relies on, and what kinds of claims are safe to make from its outputs.</p>
 <hr>
+<section id="how-to-run-this-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-run-this-lesson">How to Run This Lesson</h2>
+<p>Run the supporting script from the project root:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/13a_interpret_model_features.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates feature interpretation outputs in the <code>reports/</code> directory:</p>
+<pre class="text"><code>reports/diabetes-linear-model-coefficients.csv
+reports/diabetes-tree-feature-importance.csv
+reports/figures/diabetes-linear-model-coefficients.png
+reports/figures/diabetes-tree-feature-importance.png</code></pre>
+<p>Then render the Quarto site:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also run the code blocks inside this chapter interactively.</p>
+<p>The script-based workflow is preferred because it creates reusable project artifacts that can be inspected, compared, committed, and reused in later chapters.</p>
+<hr>
+</section>
 <section id="load-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
-<div id="cell-13-load-data" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="load-data" class="cell-output cell-output-display" data-execution_count="1">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">sex</th>
-<th data-quarto-table-cell-role="th">bmi</th>
-<th data-quarto-table-cell-role="th">bp</th>
-<th data-quarto-table-cell-role="th">s1</th>
-<th data-quarto-table-cell-role="th">s2</th>
-<th data-quarto-table-cell-role="th">s3</th>
-<th data-quarto-table-cell-role="th">s4</th>
-<th data-quarto-table-cell-role="th">s5</th>
-<th data-quarto-table-cell-role="th">s6</th>
-<th data-quarto-table-cell-role="th">disease_progression</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>0.038076</td>
-<td>0.050680</td>
-<td>0.061696</td>
-<td>0.021872</td>
-<td>-0.044223</td>
-<td>-0.034821</td>
-<td>-0.043401</td>
-<td>-0.002592</td>
-<td>0.019907</td>
-<td>-0.017646</td>
-<td>151.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-0.001882</td>
-<td>-0.044642</td>
-<td>-0.051474</td>
-<td>-0.026328</td>
-<td>-0.008449</td>
-<td>-0.019163</td>
-<td>0.074412</td>
-<td>-0.039493</td>
-<td>-0.068332</td>
-<td>-0.092204</td>
-<td>75.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.085299</td>
-<td>0.050680</td>
-<td>0.044451</td>
-<td>-0.005670</td>
-<td>-0.045599</td>
-<td>-0.034194</td>
-<td>-0.032356</td>
-<td>-0.002592</td>
-<td>0.002861</td>
-<td>-0.025930</td>
-<td>141.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-0.089063</td>
-<td>-0.044642</td>
-<td>-0.011595</td>
-<td>-0.036656</td>
-<td>0.012191</td>
-<td>0.024991</td>
-<td>-0.036038</td>
-<td>0.034309</td>
-<td>0.022688</td>
-<td>-0.009362</td>
-<td>206.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>0.005383</td>
-<td>-0.044642</td>
-<td>-0.036385</td>
-<td>0.021872</td>
-<td>0.003935</td>
-<td>0.015596</td>
-<td>0.008142</td>
-<td>-0.002592</td>
-<td>-0.031988</td>
-<td>-0.046641</td>
-<td>135.0</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<p>We continue using the same diabetes dataset saved earlier in the project <code>data/</code> directory.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The feature table contains the predictors used by the model.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The target column contains the outcome we are trying to predict.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Using the same saved dataset keeps the modeling workflow stable across lessons.</p>
+<hr>
+</section>
+<section id="why-interpretation-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-interpretation-matters">Why Interpretation Matters</h2>
+<p>Model evaluation tells us how well a model predicts.</p>
+<p>Model interpretation helps us understand how the model predicts.</p>
+<p>These are different questions.</p>
+<p>A model can have acceptable performance but still be difficult to explain. A model can also be easy to explain but not accurate enough to use.</p>
+<p>Applied data science requires both views:</p>
+<ul>
+<li>performance: is the model useful?</li>
+<li>stability: is the result reliable?</li>
+<li>interpretation: what is the model relying on?</li>
+<li>caution: what claims are safe to make?</li>
+</ul>
+<p>Interpretation is especially important when model outputs may influence decisions, reports, recommendations, or real-world actions.</p>
 <hr>
 </section>
 <section id="fit-a-linear-model" class="level2">
 <h2 class="anchored" data-anchor-id="fit-a-linear-model">Fit a Linear Model</h2>
-<div id="cell-13-linear-model" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>coefficients <span class="op">=</span> pd.Series(model.coef_, index<span class="op">=</span>X.columns)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>coefficients.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="linear-model" class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>s5     736.198859
-bmi    542.428759
-s2     518.062277
-bp     347.703844
-s4     275.317902
-s3     163.419983
-s6      48.670657
-age     37.904021
-sex   -241.964362
-s1    -931.488846
-dtype: float64</code></pre>
-</div>
-</div>
+<p>We start with a linear regression model because its coefficients are directly inspectable.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>linear_model <span class="op">=</span> LinearRegression()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>linear_model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we extract the coefficients.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>coefficients_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"feature"</span>: X.columns,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coefficient"</span>: linear_model.coef_</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>coefficients_df[<span class="st">"absolute_coefficient"</span>] <span class="op">=</span> coefficients_df[<span class="st">"coefficient"</span>].<span class="bu">abs</span>()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>coefficients_df <span class="op">=</span> coefficients_df.sort_values(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"absolute_coefficient"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>coefficients_df.<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>coefficient</code> column shows the direction and size of each feature’s contribution in the fitted linear model.</p>
+<p>The <code>absolute_coefficient</code> column is useful for ranking features by magnitude.</p>
 <hr>
 </section>
 <section id="understanding-coefficients" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-coefficients">Understanding Coefficients</h2>
-<p>A coefficient reflects how much the model’s prediction changes when a feature changes,<br>
-<strong>holding other features constant</strong>.</p>
-<p>Larger coefficients indicate stronger influence on the prediction.</p>
-<hr>
-</section>
-<section id="important-caution" class="level2">
-<h2 class="anchored" data-anchor-id="important-caution">Important Caution</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>These coefficients are useful, but they must be interpreted carefully.</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>A coefficient reflects how much the model’s prediction changes when a feature changes, **holding other features constant**.  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>In this sense, larger coefficients indicate that the model relies more heavily on that feature when forming predictions.</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>However, a coefficient does **not** automatically imply:</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>causation  </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>clinical importance  </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>independent biological truth  </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Instead, it describes how the fitted model uses that feature **within this dataset, under this specific modeling setup, and given the presence of other variables**.</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>This distinction is critical.</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>Coefficients represent **model behavior**, not real-world mechanisms.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-</section>
-<section id="visualizing-coefficients" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-coefficients">Visualizing Coefficients</h2>
-<div id="cell-13-plot-coefficients" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>coefficients.sort_values().plot(kind<span class="op">=</span><span class="st">"barh"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Feature Coefficients (Linear Model)"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Coefficient Value"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="13-feature-importance-and-interpretation_files/figure-html/plot-coefficients-output-1.png" id="plot-coefficients" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<hr>
-</section>
-<section id="tree-based-feature-importance" class="level2">
-<h2 class="anchored" data-anchor-id="tree-based-feature-importance">Tree-Based Feature Importance</h2>
-<p>Linear models use coefficients.</p>
-<p>Tree-based models use <strong>feature importance</strong>.</p>
-<div id="cell-13-tree-model" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tree.fit(X_train, y_train)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>importance <span class="op">=</span> pd.Series(tree.feature_importances_, index<span class="op">=</span>X.columns)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>importance.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="tree-model" class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>bmi    0.418232
-s5     0.155795
-s1     0.083177
-age    0.064586
-s3     0.063936
-bp     0.062494
-s6     0.061930
-s2     0.053389
-s4     0.029788
-sex    0.006673
-dtype: float64</code></pre>
-</div>
-</div>
-<hr>
-</section>
-<section id="visualizing-feature-importance" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-feature-importance">Visualizing Feature Importance</h2>
-<div id="cell-13-plot-importance" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>importance.sort_values().plot(kind<span class="op">=</span><span class="st">"barh"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Feature Importance (Decision Tree)"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Importance"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="13-feature-importance-and-interpretation_files/figure-html/plot-importance-output-1.png" id="plot-importance" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="interpreting-feature-influence" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-feature-influence">Interpreting Feature Influence</h2>
-<p>These plots show how different models use features to make predictions.</p>
-<section id="linear-model-coefficients" class="level3">
-<h3 class="anchored" data-anchor-id="linear-model-coefficients">Linear Model (Coefficients)</h3>
-<p>The linear model provides both <strong>direction and magnitude</strong>:</p>
+<p>A coefficient reflects how much the model prediction changes when a feature changes, <strong>holding other features constant</strong>.</p>
+<p>In a linear regression model:</p>
 <ul>
-<li><p>features such as <strong>s5, bmi, and s2</strong> have large positive coefficients<br>
-→ higher values of these features are associated with higher predicted progression</p></li>
-<li><p><strong>s1</strong> shows a strong negative coefficient<br>
-→ higher values are associated with lower predicted progression</p></li>
-<li><p>some features (e.g., age, sex) have relatively small coefficients<br>
-→ they contribute less to the prediction in this model</p></li>
+<li>a positive coefficient increases the predicted outcome</li>
+<li>a negative coefficient decreases the predicted outcome</li>
+<li>a larger absolute coefficient means stronger model influence</li>
 </ul>
-<p>This reflects how the model distributes influence across features when forming predictions.</p>
+<p>However, coefficients must be interpreted carefully.</p>
+<p>A coefficient does <strong>not</strong> automatically imply:</p>
+<ul>
+<li>causation</li>
+<li>clinical importance</li>
+<li>biological mechanism</li>
+<li>independent real-world truth</li>
+</ul>
+<p>Instead, a coefficient describes how the fitted model uses that feature <strong>within this dataset, under this modeling setup, and given the presence of the other features</strong>.</p>
+<p>This distinction is critical.</p>
+<p>Coefficients represent <strong>model behavior</strong>, not proof of real-world mechanisms.</p>
 <hr>
+</section>
+<section id="save-linear-model-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="save-linear-model-coefficients">Save Linear Model Coefficients</h2>
+<p>In an applied workflow, interpretation outputs should be saved just like evaluation outputs.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"reports"</span>).mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>coefficients_df.to_csv(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reports/diabetes-linear-model-coefficients.csv"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="va">False</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>coefficients_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a reusable artifact:</p>
+<pre class="text"><code>reports/diabetes-linear-model-coefficients.csv</code></pre>
+<hr>
+</section>
+<section id="visualize-linear-model-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-linear-model-coefficients">Visualize Linear Model Coefficients</h2>
+<p>A coefficient plot makes it easier to see which features the linear model uses most strongly.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plot_df <span class="op">=</span> coefficients_df.sort_values(<span class="st">"coefficient"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.barh(plot_df[<span class="st">"feature"</span>], plot_df[<span class="st">"coefficient"</span>])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="dv">0</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Coefficient value"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Linear Model Coefficients"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The plot shows both direction and magnitude.</p>
+<p>Features on the positive side increase the prediction in the fitted model. Features on the negative side decrease the prediction in the fitted model.</p>
+<hr>
+</section>
+<section id="fit-a-tree-based-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-tree-based-model">Fit a Tree-Based Model</h2>
+<p>Linear models use coefficients.</p>
+<p>Tree-based models use feature importance.</p>
+<p>A decision tree does not estimate a single coefficient for each feature. Instead, it measures how much each feature contributes to splitting the data and reducing prediction error inside the tree.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>tree_model.fit(X_train, y_train)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"feature"</span>: X.columns,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"importance"</span>: tree_model.feature_importances_</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> importance_df.sort_values(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"importance"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    ascending<span class="op">=</span><span class="va">False</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>importance_df.<span class="bu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Feature importance is useful, but it is not the same as a coefficient.</p>
+<p>It gives relative contribution, not direction.</p>
+<hr>
+</section>
+<section id="save-tree-feature-importance" class="level2">
+<h2 class="anchored" data-anchor-id="save-tree-feature-importance">Save Tree Feature Importance</h2>
+<p>We also save the tree-based interpretation output.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>importance_df.to_csv(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reports/diabetes-tree-feature-importance.csv"</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="va">False</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>importance_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates another reusable artifact:</p>
+<pre class="text"><code>reports/diabetes-tree-feature-importance.csv</code></pre>
+<hr>
+</section>
+<section id="visualize-tree-feature-importance" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-tree-feature-importance">Visualize Tree Feature Importance</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plot_importance_df <span class="op">=</span> importance_df.sort_values(<span class="st">"importance"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>plt.barh(plot_importance_df[<span class="st">"feature"</span>], plot_importance_df[<span class="st">"importance"</span>])</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Feature importance"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Feature"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Decision Tree Feature Importance"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This plot shows which features the decision tree relies on most.</p>
+<p>Unlike the coefficient plot, it does not show whether a feature increases or decreases the prediction.</p>
+<p>It only shows relative contribution inside the fitted tree.</p>
+<hr>
+</section>
+<section id="compare-the-two-interpretation-views" class="level2">
+<h2 class="anchored" data-anchor-id="compare-the-two-interpretation-views">Compare the Two Interpretation Views</h2>
+<p>The linear model and the decision tree provide different views of feature influence.</p>
+<section id="linear-model-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="linear-model-coefficients">Linear model coefficients</h3>
+<p>The linear model provides:</p>
+<ul>
+<li>direction of influence</li>
+<li>magnitude of influence</li>
+<li>a relatively simple interpretation</li>
+<li>dependence on linear assumptions</li>
+</ul>
+<p>A positive coefficient means higher feature values are associated with higher predictions in the fitted model.</p>
+<p>A negative coefficient means higher feature values are associated with lower predictions in the fitted model.</p>
 </section>
 <section id="decision-tree-feature-importance" class="level3">
-<h3 class="anchored" data-anchor-id="decision-tree-feature-importance">Decision Tree (Feature Importance)</h3>
-<p>The decision tree provides <strong>relative importance</strong>, not direction:</p>
+<h3 class="anchored" data-anchor-id="decision-tree-feature-importance">Decision tree feature importance</h3>
+<p>The tree model provides:</p>
 <ul>
-<li><p><strong>bmi</strong> dominates the model<br>
-→ it is the most frequently used feature for splitting</p></li>
-<li><p><strong>s5 and s1</strong> also contribute meaningfully<br>
-</p></li>
-<li><p>other features play smaller roles</p></li>
+<li>relative contribution</li>
+<li>no direction of effect</li>
+<li>possible nonlinear splitting behavior</li>
+<li>sensitivity to tree structure</li>
 </ul>
-<p>This indicates that the tree relies more heavily on a small subset of features.</p>
+<p>A feature with high importance is one the tree used heavily for prediction.</p>
+<p>But the importance value does not say whether the feature increases or decreases the predicted outcome.</p>
 <hr>
 </section>
-<section id="comparing-the-two-views" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-the-two-views">Comparing the Two Views</h3>
-<p>The two models highlight different aspects of feature influence:</p>
-<ul>
-<li>the linear model distributes influence across multiple features<br>
-</li>
-<li>the tree model concentrates importance on a smaller subset</li>
-</ul>
-<p>This difference reflects <strong>model structure</strong>, not disagreement about truth.</p>
-<hr>
 </section>
-<section id="cdi-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="cdi-interpretation">CDI Interpretation</h3>
-<p>These results show how models use features differently to represent the same data.</p>
-<p>Importantly:</p>
+<section id="interpretation-is-model-specific" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-is-model-specific">Interpretation Is Model-Specific</h2>
+<p>Different models may highlight different features.</p>
+<p>That does not necessarily mean one model is telling the truth and the other is wrong.</p>
+<p>It means the models represent the data differently.</p>
+<p>A linear model distributes influence through coefficients.</p>
+<p>A tree model uses threshold-based splits.</p>
+<p>Because the models learn in different ways, they can produce different interpretations.</p>
+<p>This is why interpretation should always be tied to the model being interpreted.</p>
+<p>We should say:</p>
 <blockquote class="blockquote">
-<p>feature influence describes how the model behaves, not how the real world works.</p>
+<p>This model relies strongly on these features.</p>
 </blockquote>
-<p>A feature appearing important means:</p>
-<ul>
-<li>the model depends on it for prediction<br>
-</li>
-<li>not that it causes the outcome</li>
-</ul>
+<p>Not:</p>
+<blockquote class="blockquote">
+<p>These features are universally important.</p>
+</blockquote>
+<p>That difference matters.</p>
 <hr>
 </section>
-<section id="what-this-means" class="level3">
-<h3 class="anchored" data-anchor-id="what-this-means">What This Means</h3>
+<section id="what-can-go-wrong-during-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-go-wrong-during-interpretation">What Can Go Wrong During Interpretation</h2>
+<section id="confusing-prediction-with-causation" class="level3">
+<h3 class="anchored" data-anchor-id="confusing-prediction-with-causation">Confusing Prediction With Causation</h3>
+<p>A feature can be useful for prediction without causing the outcome.</p>
+<p>For example, a variable may be correlated with the target because it is a proxy for another factor.</p>
+<p>A predictive model can use that proxy even when the proxy itself is not causal.</p>
+</section>
+<section id="ignoring-feature-scale" class="level3">
+<h3 class="anchored" data-anchor-id="ignoring-feature-scale">Ignoring Feature Scale</h3>
+<p>For linear models, coefficient size depends on feature scale.</p>
+<p>If features are measured on very different scales, raw coefficients can be misleading.</p>
+<p>In this dataset, the features are already standardized, which makes coefficient comparison more meaningful.</p>
+<p>In other datasets, scaling should be considered before comparing coefficient magnitudes.</p>
+</section>
+<section id="overinterpreting-one-model" class="level3">
+<h3 class="anchored" data-anchor-id="overinterpreting-one-model">Overinterpreting One Model</h3>
+<p>One fitted model gives one interpretation under one modeling setup.</p>
+<p>Interpretation becomes stronger when similar patterns appear across:</p>
 <ul>
-<li>interpretation should focus on <strong>model behavior</strong><br>
-</li>
-<li>different models may highlight different features<br>
-</li>
-<li>consistent importance across models may strengthen confidence<br>
-</li>
-<li>but no single model provides definitive explanation</li>
+<li>repeated splits</li>
+<li>different model specifications</li>
+<li>domain knowledge</li>
+<li>external validation</li>
 </ul>
+</section>
+<section id="treating-feature-importance-as-explanation" class="level3">
+<h3 class="anchored" data-anchor-id="treating-feature-importance-as-explanation">Treating Feature Importance as Explanation</h3>
+<p>Feature importance can show what a model used.</p>
+<p>It does not fully explain why the real-world process behaves the way it does.</p>
+<p>That distinction becomes especially important in medical, biological, financial, and policy settings.</p>
 <hr>
 </section>
-<section id="key-insight" class="level3">
-<h3 class="anchored" data-anchor-id="key-insight">Key Insight</h3>
-<p>Interpretation is not about identifying a “true” feature.</p>
-<p>It is about understanding:</p>
-<ul>
-<li>how the model uses available information<br>
-</li>
-<li>how that usage changes across modeling approaches</li>
-</ul>
+</section>
+<section id="cdi-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="cdi-interpretation">CDI Interpretation</h2>
+<p>These results show how models use features differently to represent the same data.</p>
+<p>The linear model describes feature influence through directional coefficients.</p>
+<p>The decision tree describes feature influence through relative importance.</p>
+<p>Both are useful.</p>
+<p>Neither should be treated as automatic proof of mechanism.</p>
+<p>The safest interpretation is:</p>
+<blockquote class="blockquote">
+<p>Feature influence describes how the model behaves, not how the real world works.</p>
+</blockquote>
+<p>A feature appearing important means the model depends on it for prediction.</p>
+<p>It does not prove that the feature causes the outcome.</p>
 <hr>
 </section>
+<section id="from-interpretation-to-claims" class="level2">
+<h2 class="anchored" data-anchor-id="from-interpretation-to-claims">From Interpretation to Claims</h2>
+<p>At this point, we can make model-level statements such as:</p>
+<blockquote class="blockquote">
+<p>In this fitted linear model, certain features have larger coefficients than others.</p>
+</blockquote>
+<p>Or:</p>
+<blockquote class="blockquote">
+<p>In this decision tree, prediction depends heavily on a smaller subset of features.</p>
+</blockquote>
+<p>But we should avoid stronger real-world claims such as:</p>
+<blockquote class="blockquote">
+<p>This feature causes disease progression.</p>
+</blockquote>
+<p>Or:</p>
+<blockquote class="blockquote">
+<p>This feature is clinically important.</p>
+</blockquote>
+<p>Those claims require additional evidence beyond model output.</p>
+<p>This is the bridge to the next lesson.</p>
+<p>Model interpretation is useful, but real-world claims require stricter reasoning.</p>
+<hr>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this lesson, we moved from stable models to interpretable models.</p>
+<p>We:</p>
 <ul>
-<li>Stable models can now be interpreted<br>
-</li>
-<li>Coefficients show directional influence<br>
-</li>
-<li>Feature importance shows relative contribution<br>
-</li>
-<li>Interpretation must be cautious<br>
-</li>
-<li>Models describe patterns, not mechanisms</li>
+<li>loaded the saved diabetes dataset</li>
+<li>fitted a linear regression model</li>
+<li>extracted and saved model coefficients</li>
+<li>visualized coefficient direction and magnitude</li>
+<li>fitted a decision tree model</li>
+<li>extracted and saved tree feature importance</li>
+<li>compared coefficient-based and tree-based interpretation</li>
+<li>separated model behavior from real-world causation</li>
 </ul>
+<p>The key idea is:</p>
+<blockquote class="blockquote">
+<p>Interpretation tells us how a model uses features. It does not automatically tell us why the real world behaves that way.</p>
+</blockquote>
 <hr>
 </section>
-<section id="next-step" class="level2">
-<h2 class="anchored" data-anchor-id="next-step">Next Step</h2>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What Comes Next</h2>
+<p>Now that we can inspect model outputs, we need to learn how to translate them responsibly.</p>
+<p>The next lesson focuses on the boundary between:</p>
+<ul>
+<li>model results</li>
+<li>analytical conclusions</li>
+<li>real-world claims</li>
+</ul>
+<p>This is where many analyses become misleading.</p>
+<p>A model can support a claim, but it does not automatically prove one.</p>
 <p>→ <strong>From model outputs to real-world claims</strong></p>
 
 
