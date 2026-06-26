@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix – Applied Data Science System</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./999-references.html" rel="next">
+<link href="./19-from-foundations-to-real-world-practice.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-231ef2f9d4ce3268f31ef752336c15d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Appendix and References</a></li><li class="breadcrumb-item"><a href="./999-appendix.html"><span class="chapter-title">Appendix</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Applied Data Science System</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">System Orientation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-setting-up-environment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Setting Up a Reproducible Analytical System</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Feature Engineering and Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-feature-engineering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Engineering and Data Representation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-model-building.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Building Your First Model with Real-World Health Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-model-evaluation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Evaluating Models Beyond a Single Result</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-model-improvement.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Improving Models Through Controlled Changes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pipelines and Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-feature-importance-and-interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Importance and Model Interpretation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-from-model-outputs-to-real-world-claims.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Model Outputs to Real-World Claims</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communication and Decision-Making</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communicating Results Clearly</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Analysis to Decision-Making</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">End-to-End Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-end-to-end-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Case Study: From Data to Decision</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">18-limitations-and-responsible-use.html</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-from-foundations-to-real-world-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Foundations to Real-World Practice</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix and References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-appendix.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Appendix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#how-to-use-this-appendix" id="toc-how-to-use-this-appendix" class="nav-link active" data-scroll-target="#how-to-use-this-appendix">How to Use This Appendix</a></li>
+  <li><a href="#project-structure-overview" id="toc-project-structure-overview" class="nav-link" data-scroll-target="#project-structure-overview">Project Structure Overview</a></li>
+  <li><a href="#key-directories" id="toc-key-directories" class="nav-link" data-scroll-target="#key-directories">Key Directories</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><code>data/</code></a></li>
+  <li><a href="#scriptspython" id="toc-scriptspython" class="nav-link" data-scroll-target="#scriptspython"><code>scripts/python/</code></a></li>
+  <li><a href="#scriptsbash" id="toc-scriptsbash" class="nav-link" data-scroll-target="#scriptsbash"><code>scripts/bash/</code></a></li>
+  <li><a href="#reports" id="toc-reports" class="nav-link" data-scroll-target="#reports"><code>reports/</code></a></li>
+  <li><a href="#reportsfigures" id="toc-reportsfigures" class="nav-link" data-scroll-target="#reportsfigures"><code>reports/figures/</code></a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><code>models/</code></a></li>
+  <li><a href="#docs" id="toc-docs" class="nav-link" data-scroll-target="#docs"><code>docs/</code></a></li>
+  </ul></li>
+  <li><a href="#environment-setup-reference" id="toc-environment-setup-reference" class="nav-link" data-scroll-target="#environment-setup-reference">Environment Setup Reference</a></li>
+  <li><a href="#reproducibility-lock-file" id="toc-reproducibility-lock-file" class="nav-link" data-scroll-target="#reproducibility-lock-file">Reproducibility Lock File</a></li>
+  <li><a href="#running-a-lesson-script" id="toc-running-a-lesson-script" class="nav-link" data-scroll-target="#running-a-lesson-script">Running a Lesson Script</a></li>
+  <li><a href="#rendering-the-quarto-site" id="toc-rendering-the-quarto-site" class="nav-link" data-scroll-target="#rendering-the-quarto-site">Rendering the Quarto Site</a></li>
+  <li><a href="#standard-lesson-workflow" id="toc-standard-lesson-workflow" class="nav-link" data-scroll-target="#standard-lesson-workflow">Standard Lesson Workflow</a></li>
+  <li><a href="#github-pages-workflow" id="toc-github-pages-workflow" class="nav-link" data-scroll-target="#github-pages-workflow">GitHub Pages Workflow</a></li>
+  <li><a href="#reusable-pandas-patterns" id="toc-reusable-pandas-patterns" class="nav-link" data-scroll-target="#reusable-pandas-patterns">Reusable Pandas Patterns</a>
+  <ul class="collapse">
+  <li><a href="#read-a-csv-file" id="toc-read-a-csv-file" class="nav-link" data-scroll-target="#read-a-csv-file">Read a CSV file</a></li>
+  <li><a href="#select-columns" id="toc-select-columns" class="nav-link" data-scroll-target="#select-columns">Select columns</a></li>
+  <li><a href="#drop-columns" id="toc-drop-columns" class="nav-link" data-scroll-target="#drop-columns">Drop columns</a></li>
+  <li><a href="#select-a-target-column" id="toc-select-a-target-column" class="nav-link" data-scroll-target="#select-a-target-column">Select a target column</a></li>
+  <li><a href="#filter-rows" id="toc-filter-rows" class="nav-link" data-scroll-target="#filter-rows">Filter rows</a></li>
+  <li><a href="#create-a-new-column" id="toc-create-a-new-column" class="nav-link" data-scroll-target="#create-a-new-column">Create a new column</a></li>
+  <li><a href="#group-and-aggregate" id="toc-group-and-aggregate" class="nav-link" data-scroll-target="#group-and-aggregate">Group and aggregate</a></li>
+  <li><a href="#handle-missing-values" id="toc-handle-missing-values" class="nav-link" data-scroll-target="#handle-missing-values">Handle missing values</a></li>
+  <li><a href="#convert-data-type" id="toc-convert-data-type" class="nav-link" data-scroll-target="#convert-data-type">Convert data type</a></li>
+  <li><a href="#save-a-result" id="toc-save-a-result" class="nav-link" data-scroll-target="#save-a-result">Save a result</a></li>
+  </ul></li>
+  <li><a href="#reusable-scikit-learn-patterns" id="toc-reusable-scikit-learn-patterns" class="nav-link" data-scroll-target="#reusable-scikit-learn-patterns">Reusable Scikit-Learn Patterns</a>
+  <ul class="collapse">
+  <li><a href="#define-features-and-target" id="toc-define-features-and-target" class="nav-link" data-scroll-target="#define-features-and-target">Define features and target</a></li>
+  <li><a href="#split-data" id="toc-split-data" class="nav-link" data-scroll-target="#split-data">Split data</a></li>
+  <li><a href="#fit-a-baseline-model" id="toc-fit-a-baseline-model" class="nav-link" data-scroll-target="#fit-a-baseline-model">Fit a baseline model</a></li>
+  <li><a href="#generate-predictions" id="toc-generate-predictions" class="nav-link" data-scroll-target="#generate-predictions">Generate predictions</a></li>
+  <li><a href="#evaluate-predictions" id="toc-evaluate-predictions" class="nav-link" data-scroll-target="#evaluate-predictions">Evaluate predictions</a></li>
+  <li><a href="#build-a-pipeline" id="toc-build-a-pipeline" class="nav-link" data-scroll-target="#build-a-pipeline">Build a pipeline</a></li>
+  <li><a href="#run-cross-validation" id="toc-run-cross-validation" class="nav-link" data-scroll-target="#run-cross-validation">Run cross-validation</a></li>
+  <li><a href="#save-a-trained-model" id="toc-save-a-trained-model" class="nav-link" data-scroll-target="#save-a-trained-model">Save a trained model</a></li>
+  <li><a href="#load-a-trained-model" id="toc-load-a-trained-model" class="nav-link" data-scroll-target="#load-a-trained-model">Load a trained model</a></li>
+  </ul></li>
+  <li><a href="#reusable-matplotlib-patterns" id="toc-reusable-matplotlib-patterns" class="nav-link" data-scroll-target="#reusable-matplotlib-patterns">Reusable Matplotlib Patterns</a>
+  <ul class="collapse">
+  <li><a href="#basic-scatter-plot" id="toc-basic-scatter-plot" class="nav-link" data-scroll-target="#basic-scatter-plot">Basic scatter plot</a></li>
+  <li><a href="#save-a-figure" id="toc-save-a-figure" class="nav-link" data-scroll-target="#save-a-figure">Save a figure</a></li>
+  <li><a href="#observed-vs-predicted-plot" id="toc-observed-vs-predicted-plot" class="nav-link" data-scroll-target="#observed-vs-predicted-plot">Observed vs predicted plot</a></li>
+  </ul></li>
+  <li><a href="#reproducibility-checklist" id="toc-reproducibility-checklist" class="nav-link" data-scroll-target="#reproducibility-checklist">Reproducibility Checklist</a></li>
+  <li><a href="#public-repository-safety-checklist" id="toc-public-repository-safety-checklist" class="nav-link" data-scroll-target="#public-repository-safety-checklist">Public Repository Safety Checklist</a></li>
+  <li><a href="#running-the-full-system" id="toc-running-the-full-system" class="nav-link" data-scroll-target="#running-the-full-system">Running the Full System</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources</a></li>
+  <li><a href="#software-and-tools" id="toc-software-and-tools" class="nav-link" data-scroll-target="#software-and-tools">Software and Tools</a></li>
+  <li><a href="#closing-note" id="toc-closing-note" class="nav-link" data-scroll-target="#closing-note">Closing Note</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./999-appendix.html">Appendix and References</a></li><li class="breadcrumb-item"><a href="./999-appendix.html"><span class="chapter-title">Appendix</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="appendix" class="quarto-section-identifier"><span class="chapter-title">Appendix</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Jun 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> DS-APP</li>
+<li><strong>Type:</strong> Reference</li>
+<li><strong>Audience:</strong> Public</li>
+<li><strong>Theme:</strong> Environment, project structure, reproducibility, and reusable workflow patterns</li>
+</ul>
+</div>
+<p>This appendix collects technical reference material that supports the <strong>Applied Data Science System</strong>.</p>
+<p>It documents the project structure, environment setup, rendering workflow, script-based execution pattern, and reusable Python patterns used throughout the guide.</p>
+<p>The purpose of the appendix is simple:</p>
+<blockquote class="blockquote">
+<p>make the workflow easier to rerun, inspect, adapt, and extend.</p>
+</blockquote>
+<hr>
+<section id="how-to-use-this-appendix" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-appendix">How to Use This Appendix</h2>
+<p>Use this appendix as a reference when you need to:</p>
+<ul>
+<li>recreate the project environment</li>
+<li>understand the folder structure</li>
+<li>rerun lesson scripts</li>
+<li>regenerate reports and figures</li>
+<li>render the Quarto site</li>
+<li>prepare changes for GitHub Pages</li>
+</ul>
+<p>Most chapters in this guide can be run in two ways:</p>
+<ol type="1">
+<li>interactively, by reading and running the code blocks in the chapter</li>
+<li>reproducibly, by running the supporting Python script from the project root</li>
+</ol>
+<p>The script-based workflow is preferred when preparing a public or production-facing version of the guide.</p>
+<hr>
+</section>
+<section id="project-structure-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure-overview">Project Structure Overview</h2>
+<p>A standard CDI applied data science project uses a Quarto-first structure with supporting scripts and saved outputs.</p>
+<pre class="text"><code>applied-data-science/
+├── index.qmd
+├── 00-preface.qmd
+├── 01-setting-up-environment.qmd
+├── 08-feature-engineering.qmd
+├── 09-model-building.qmd
+├── 10-model-evaluation.qmd
+├── 11-model-improvement.qmd
+├── 12-pipelines-and-cross-validation.qmd
+├── 13-feature-importance-and-interpretation.qmd
+├── 14-from-model-outputs-to-real-world-claims.qmd
+├── 15-communicating-results-clearly.qmd
+├── 16-from-analysis-to-decision-making.qmd
+├── 17-end-to-end-case-study.qmd
+├── 18-limitations-and-responsible-use.qmd
+├── 19-from-foundations-to-real-world-practice.qmd
+├── 999-appendix.qmd
+├── 999-references.qmd
+├── data/
+│   ├── README.md
+│   ├── diabetes.csv
+│   ├── raw/
+│   │   └── people-example.csv
+│   └── processed/
+│       └── model-ready-example.csv
+├── models/
+│   └── diabetes-linear-regression.joblib
+├── reports/
+│   ├── *.csv
+│   ├── *.md
+│   └── figures/
+│       └── *.png
+├── scripts/
+│   ├── bash/
+│   └── python/
+├── docs/
+├── _quarto.yml
+├── requirements.txt
+├── requirements-lock.txt
+└── .gitignore</code></pre>
+<p>This layout separates source files, data, scripts, generated reports, model artifacts, and rendered documentation.</p>
+<hr>
+</section>
+<section id="key-directories" class="level2">
+<h2 class="anchored" data-anchor-id="key-directories">Key Directories</h2>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data"><code>data/</code></h3>
+<p>The <code>data/</code> directory stores project datasets.</p>
+<p>In this guide, it includes:</p>
+<pre class="text"><code>data/diabetes.csv
+data/raw/people-example.csv
+data/processed/model-ready-example.csv</code></pre>
+<p>The diabetes dataset supports the modeling lessons.</p>
+<p>The people example supports feature engineering and model-ready table construction.</p>
+<hr>
+</section>
+<section id="scriptspython" class="level3">
+<h3 class="anchored" data-anchor-id="scriptspython"><code>scripts/python/</code></h3>
+<p>The <code>scripts/python/</code> directory contains executable lesson scripts.</p>
+<p>These scripts turn chapter logic into reusable project workflows.</p>
+<p>Examples include:</p>
+<pre class="text"><code>scripts/python/09b_train_baseline_linear_model.py
+scripts/python/10a_evaluate_repeated_splits.py
+scripts/python/12a_cross_validate_pipeline.py
+scripts/python/17a_run_end_to_end_case_study.py</code></pre>
+<p>Each script should be runnable from the project root.</p>
+<hr>
+</section>
+<section id="scriptsbash" class="level3">
+<h3 class="anchored" data-anchor-id="scriptsbash"><code>scripts/bash/</code></h3>
+<p>The <code>scripts/bash/</code> directory contains helper scripts for project setup and build operations.</p>
+<p>Examples include:</p>
+<pre class="text"><code>scripts/bash/01a-create-project-structure.sh
+scripts/bash/01c-build-project.sh
+scripts/bash/01d-freeze-dependencies.sh</code></pre>
+<p>These scripts support repeatable project management.</p>
+<hr>
+</section>
+<section id="reports" class="level3">
+<h3 class="anchored" data-anchor-id="reports"><code>reports/</code></h3>
+<p>The <code>reports/</code> directory stores reusable outputs created by the scripts.</p>
+<p>These may include:</p>
+<ul>
+<li>model metrics</li>
+<li>cross-validation summaries</li>
+<li>coefficient tables</li>
+<li>communication summaries</li>
+<li>responsible-use checklists</li>
+<li>decision framing tables</li>
+</ul>
+<p>Saved reports make the workflow auditable.</p>
+<p>They also allow later chapters to refer to previous outputs without hiding the work that created them.</p>
+<hr>
+</section>
+<section id="reportsfigures" class="level3">
+<h3 class="anchored" data-anchor-id="reportsfigures"><code>reports/figures/</code></h3>
+<p>The <code>reports/figures/</code> directory stores saved plots.</p>
+<p>Examples include:</p>
+<pre class="text"><code>reports/figures/diabetes-observed-vs-predicted.png
+reports/figures/diabetes-residual-plot.png
+reports/figures/diabetes-cross-validation-mae.png</code></pre>
+<p>Saving figures as files makes them easier to reuse in reports, slides, websites, and README pages.</p>
+<hr>
+</section>
+<section id="models" class="level3">
+<h3 class="anchored" data-anchor-id="models"><code>models/</code></h3>
+<p>The <code>models/</code> directory stores trained teaching models.</p>
+<p>For example:</p>
+<pre class="text"><code>models/diabetes-linear-regression.joblib</code></pre>
+<p>In this guide, the model artifact is small and intentional.</p>
+<p>In larger projects, model artifacts should be tracked carefully because they can become large or sensitive.</p>
+<hr>
+</section>
+<section id="docs" class="level3">
+<h3 class="anchored" data-anchor-id="docs"><code>docs/</code></h3>
+<p>The <code>docs/</code> directory contains the rendered Quarto website.</p>
+<p>For GitHub Pages using a <code>docs/</code> deployment workflow, this is the public site output directory.</p>
+<p>Do not edit files inside <code>docs/</code> manually unless there is a specific reason.</p>
+<p>Instead, edit the <code>.qmd</code> source files and rerender the site.</p>
+<hr>
+</section>
+</section>
+<section id="environment-setup-reference" class="level2">
+<h2 class="anchored" data-anchor-id="environment-setup-reference">Environment Setup Reference</h2>
+<p>This project uses a local Python virtual environment.</p>
+<p>Create and activate the environment from the project root:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Install the required packages:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>requirements.txt</code> file defines the main dependencies needed to run the project.</p>
+<hr>
+</section>
+<section id="reproducibility-lock-file" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-lock-file">Reproducibility Lock File</h2>
+<p>The project may also include:</p>
+<pre class="text"><code>requirements-lock.txt</code></pre>
+<p>This file records an exact package snapshot.</p>
+<p>A useful distinction is:</p>
+<pre class="text"><code>requirements.txt       = minimal dependency list
+requirements-lock.txt  = frozen reproducibility snapshot</code></pre>
+<p>To refresh the lock file after installing packages:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements-lock.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The lock file helps preserve the environment used when the guide was built.</p>
+<hr>
+</section>
+<section id="running-a-lesson-script" class="level2">
+<h2 class="anchored" data-anchor-id="running-a-lesson-script">Running a Lesson Script</h2>
+<p>Most applied lessons include a supporting Python script.</p>
+<p>Run scripts from the project root.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/12a_cross_validate_pipeline.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A script should usually create outputs in:</p>
+<pre class="text"><code>reports/
+reports/figures/
+models/
+data/processed/</code></pre>
+<p>depending on the lesson.</p>
+<hr>
+</section>
+<section id="rendering-the-quarto-site" class="level2">
+<h2 class="anchored" data-anchor-id="rendering-the-quarto-site">Rendering the Quarto Site</h2>
+<p>After running scripts, render the site:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The rendered output is written to:</p>
+<pre class="text"><code>docs/</code></pre>
+<p>Open the site locally:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> docs/index.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>On non-macOS systems, open <code>docs/index.html</code> using your file browser or web browser.</p>
+<hr>
+</section>
+<section id="standard-lesson-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="standard-lesson-workflow">Standard Lesson Workflow</h2>
+<p>A typical lesson workflow is:</p>
+<pre class="text"><code>source data
+    ↓
+Python script
+    ↓
+reports and figures
+    ↓
+Quarto chapter
+    ↓
+quarto render
+    ↓
+docs site</code></pre>
+<p>The preferred pattern is:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/<span class="op">&lt;</span>lesson-script<span class="op">&gt;</span>.py</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This ensures that outputs are regenerated before the site is rebuilt.</p>
+<hr>
+</section>
+<section id="github-pages-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="github-pages-workflow">GitHub Pages Workflow</h2>
+<p>For a public Quarto site using GitHub Pages, the usual workflow is:</p>
+<pre class="text"><code>edit .qmd files and scripts
+    ↓
+run scripts
+    ↓
+quarto render
+    ↓
+commit source and docs
+    ↓
+push to GitHub
+    ↓
+GitHub Pages publishes docs/</code></pre>
+<p>If a custom domain is used, the rendered site should include a <code>CNAME</code> file containing the domain.</p>
+<p>For this project, the custom domain is:</p>
+<pre class="text"><code>applied-datascience.complexdatainsights.com</code></pre>
+<p>If the workflow creates the <code>CNAME</code> file automatically, confirm that the deployed <code>docs/</code> output preserves it.</p>
+<hr>
+</section>
+<section id="reusable-pandas-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="reusable-pandas-patterns">Reusable Pandas Patterns</h2>
+<section id="read-a-csv-file" class="level3">
+<h3 class="anchored" data-anchor-id="read-a-csv-file">Read a CSV file</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="select-columns" class="level3">
+<h3 class="anchored" data-anchor-id="select-columns">Select columns</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"col1"</span>, <span class="st">"col2"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="drop-columns" class="level3">
+<h3 class="anchored" data-anchor-id="drop-columns">Drop columns</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"target"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="select-a-target-column" class="level3">
+<h3 class="anchored" data-anchor-id="select-a-target-column">Select a target column</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"target"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="filter-rows" class="level3">
+<h3 class="anchored" data-anchor-id="filter-rows">Filter rows</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="op">=</span> df[df[<span class="st">"value"</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="create-a-new-column" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-new-column">Create a new column</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"new_column"</span>] <span class="op">=</span> df[<span class="st">"col1"</span>] <span class="op">+</span> df[<span class="st">"col2"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="group-and-aggregate" class="level3">
+<h3 class="anchored" data-anchor-id="group-and-aggregate">Group and aggregate</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>summary_df <span class="op">=</span> df.groupby(<span class="st">"group_col"</span>).agg(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    mean_value<span class="op">=</span>(<span class="st">"value_col"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span>(<span class="st">"value_col"</span>, <span class="st">"count"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="handle-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="handle-missing-values">Handle missing values</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"col"</span>] <span class="op">=</span> df[<span class="st">"col"</span>].fillna(df[<span class="st">"col"</span>].median())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="convert-data-type" class="level3">
+<h3 class="anchored" data-anchor-id="convert-data-type">Convert data type</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"category_col"</span>] <span class="op">=</span> df[<span class="st">"category_col"</span>].astype(<span class="st">"category"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="save-a-result" class="level3">
+<h3 class="anchored" data-anchor-id="save-a-result">Save a result</h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"reports/output-table.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="reusable-scikit-learn-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="reusable-scikit-learn-patterns">Reusable Scikit-Learn Patterns</h2>
+<section id="define-features-and-target" class="level3">
+<h3 class="anchored" data-anchor-id="define-features-and-target">Define features and target</h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="split-data" class="level3">
+<h3 class="anchored" data-anchor-id="split-data">Split data</h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="fit-a-baseline-model" class="level3">
+<h3 class="anchored" data-anchor-id="fit-a-baseline-model">Fit a baseline model</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="generate-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="generate-predictions">Generate predictions</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="evaluate-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="evaluate-predictions">Evaluate predictions</h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, r2_score</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> mean_absolute_error(y_test, predictions)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="build-a-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="build-a-pipeline">Build a pipeline</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LinearRegression())</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-cross-validation" class="level3">
+<h3 class="anchored" data-anchor-id="run-cross-validation">Run cross-validation</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>mae_scores <span class="op">=</span> <span class="op">-</span>cross_val_score(</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    pipeline,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"neg_mean_absolute_error"</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="save-a-trained-model" class="level3">
+<h3 class="anchored" data-anchor-id="save-a-trained-model">Save a trained model</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>joblib.dump(model, <span class="st">"models/diabetes-linear-regression.joblib"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="load-a-trained-model" class="level3">
+<h3 class="anchored" data-anchor-id="load-a-trained-model">Load a trained model</h3>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> joblib.load(<span class="st">"models/diabetes-linear-regression.joblib"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="reusable-matplotlib-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="reusable-matplotlib-patterns">Reusable Matplotlib Patterns</h2>
+<section id="basic-scatter-plot" class="level3">
+<h3 class="anchored" data-anchor-id="basic-scatter-plot">Basic scatter plot</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"X"</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Y"</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Scatter Plot"</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="save-a-figure" class="level3">
+<h3 class="anchored" data-anchor-id="save-a-figure">Save a figure</h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"reports/figures/example-figure.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="observed-vs-predicted-plot" class="level3">
+<h3 class="anchored" data-anchor-id="observed-vs-predicted-plot">Observed vs predicted plot</h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(observed, predicted)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>min_value <span class="op">=</span> <span class="bu">min</span>(observed.<span class="bu">min</span>(), predicted.<span class="bu">min</span>())</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>max_value <span class="op">=</span> <span class="bu">max</span>(observed.<span class="bu">max</span>(), predicted.<span class="bu">max</span>())</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>plt.plot([min_value, max_value], [min_value, max_value], linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed"</span>)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted"</span>)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Observed vs Predicted"</span>)</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="reproducibility-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-checklist">Reproducibility Checklist</h2>
+<p>Before finalizing any chapter, confirm that:</p>
+<ul>
+<li>the lesson script runs from the project root</li>
+<li>expected outputs are created</li>
+<li>paths are relative, not machine-specific</li>
+<li>no private files or credentials are included</li>
+<li>code blocks use the same workflow described in the chapter</li>
+<li>figures render correctly</li>
+<li>saved report files are updated</li>
+<li>the Quarto site builds successfully</li>
+<li><code>docs/index.html</code> opens locally</li>
+<li><code>git status</code> shows only expected changes</li>
+</ul>
+<p>A useful final check is:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="public-repository-safety-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="public-repository-safety-checklist">Public Repository Safety Checklist</h2>
+<p>Before making a project public, check for sensitive files or accidental local paths.</p>
+<p>Search for common sensitive terms:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-R</span> <span class="st">"password\|token\|secret\|api_key\|apikey\|Users/"</span> . <span class="dt">\</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--exclude-dir</span><span class="op">=</span>.git <span class="dt">\</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--exclude-dir</span><span class="op">=</span>.venv <span class="dt">\</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--exclude-dir</span><span class="op">=</span>docs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check for large files:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-size</span> +10M <span class="dt">\</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-not</span> <span class="at">-path</span> <span class="st">"./.git/*"</span> <span class="dt">\</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-not</span> <span class="at">-path</span> <span class="st">"./.venv/*"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Review tracked files:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--cached</span> <span class="at">--name-status</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These checks help keep public CDI repositories clean and safe.</p>
+<hr>
+</section>
+<section id="running-the-full-system" class="level2">
+<h2 class="anchored" data-anchor-id="running-the-full-system">Running the Full System</h2>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/end-to-end-workflow.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources">Data Sources</h2>
+<p>This guide uses the diabetes dataset distributed through scikit-learn and saved locally as:</p>
+<pre class="text"><code>data/diabetes.csv</code></pre>
+<p>The dataset is used for educational modeling examples throughout the applied lessons.</p>
+<hr>
+</section>
+<section id="software-and-tools" class="level2">
+<h2 class="anchored" data-anchor-id="software-and-tools">Software and Tools</h2>
+<p>This guide uses a small set of widely adopted tools for reproducible applied data science:</p>
+<ul>
+<li><strong>Python</strong> <span class="citation" data-cites="python">(<a href="999-references.html#ref-python" role="doc-biblioref">Python Software Foundation 2024</a>)</span></li>
+<li><strong>pandas</strong> <span class="citation" data-cites="pandas">(<a href="999-references.html#ref-pandas" role="doc-biblioref">McKinney et al. 2010</a>)</span></li>
+<li><strong>NumPy</strong> <span class="citation" data-cites="numpy">(<a href="999-references.html#ref-numpy" role="doc-biblioref">Harris et al. 2020</a>)</span></li>
+<li><strong>matplotlib</strong> <span class="citation" data-cites="matplotlib">(<a href="999-references.html#ref-matplotlib" role="doc-biblioref">Hunter 2007</a>)</span></li>
+<li><strong>scikit-learn</strong> <span class="citation" data-cites="scikit-learn">(<a href="999-references.html#ref-scikit-learn" role="doc-biblioref">Pedregosa et al. 2011</a>)</span></li>
+<li><strong>joblib</strong> <span class="citation" data-cites="joblib">(<a href="999-references.html#ref-joblib" role="doc-biblioref">Team, n.d.</a>)</span></li>
+<li><strong>Quarto</strong> <span class="citation" data-cites="quarto">(<a href="999-references.html#ref-quarto" role="doc-biblioref">Posit Software, PBC, n.d.</a>)</span></li>
+</ul>
+<p>Together, these tools support tabular data handling, modeling, evaluation, visualization, reproducible reporting, and static site publishing.</p>
+<hr>
+</section>
+<section id="closing-note" class="level2">
+<h2 class="anchored" data-anchor-id="closing-note">Closing Note</h2>
+<p>The goal of the <strong>Applied Data Science System</strong> is not only to teach syntax.</p>
+<p>It is to teach a disciplined workflow:</p>
+<pre class="text"><code>data
+    ↓
+analysis
+    ↓
+modeling
+    ↓
+evaluation
+    ↓
+interpretation
+    ↓
+communication
+    ↓
+decision context
+    ↓
+responsible use</code></pre>
+<p>The same structure can be reused across:</p>
+<ul>
+<li>new datasets</li>
+<li>client projects</li>
+<li>public guides</li>
+<li>domain-specific CDI pathways</li>
+<li>future analytical systems</li>
+</ul>
+<p>A strong data science workflow does more than produce outputs.</p>
+<p>It produces evidence that can be inspected, explained, reproduced, and used responsibly.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-numpy" class="csl-entry" role="listitem">
+Harris, Charles R. et al. 2020. <span>“Array Programming with <span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
+</div>
+<div id="ref-matplotlib" class="csl-entry" role="listitem">
+Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
+</div>
+<div id="ref-pandas" class="csl-entry" role="listitem">
+McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span> <em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
+</div>
+<div id="ref-scikit-learn" class="csl-entry" role="listitem">
+Pedregosa, F., G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, et al. 2011. <em>Scikit-Learn: Machine Learning in Python</em>. <em>Journal of Machine Learning Research</em>. Vol. 12. <a href="https://scikit-learn.org/">https://scikit-learn.org/</a>.
+</div>
+<div id="ref-quarto" class="csl-entry" role="listitem">
+Posit Software, PBC. n.d. <span>“Quarto.”</span> <a href="https://quarto.org/">https://quarto.org/</a>.
+</div>
+<div id="ref-python" class="csl-entry" role="listitem">
+Python Software Foundation. 2024. <span>“Python Language Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
+</div>
+<div id="ref-joblib" class="csl-entry" role="listitem">
+Team, Joblib Development. n.d. <span>“Joblib: Running Python Functions as Pipeline Jobs.”</span> <a href="https://joblib.readthedocs.io/">https://joblib.readthedocs.io/</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./19-from-foundations-to-real-world-practice.html" class="pagination-link" aria-label="From Foundations to Real-World Practice">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">From Foundations to Real-World Practice</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./999-references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text"><span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
