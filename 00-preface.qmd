@@ -1,294 +1,188 @@
 # Preface {-}
 
 :::cdi-message
-- **ID:** DS-000
+- **ID:** ADS-000
 - **Type:** Preface
-- **Audience:** Intermediate to Advanced
-- **Theme:** From analytical reasoning to system-level thinking
+- **Audience:** Intermediate
+- **Theme:** From foundational analysis to advanced analytical practice
 :::
 
-## Why This Track Exists
+## Why this guide exists
 
-You have already learned how to:
+**Data Science Foundations** introduced the essential practices of loading, exploring, cleaning, transforming, visualizing, summarizing, and interpreting data.
 
-- explore datasets  
-- clean and prepare data  
-- visualize patterns  
-- summarize findings  
-- communicate basic results  
+Those skills make reliable analysis possible. They also create the starting point for a deeper set of questions:
 
-These are essential foundations.
+- How can sample evidence support a broader conclusion?
+- How do we distinguish a meaningful pattern from random variation?
+- Which variables are useful for explanation or prediction?
+- How well will a model perform on data it has not seen?
+- What can a model tell us, and what would go beyond the evidence?
+- Can another person reproduce the workflow and understand the decisions behind it?
 
-But in practice, analysis alone is not enough.
+**Advanced Data Science** addresses these questions.
 
-Real-world data work requires moving from:
+The guide moves beyond describing observed data and toward drawing careful inferences, building and validating models, discovering structure, and producing results that can support defensible conclusions.
 
-- structured insight  
-to  
-- reliable analytical systems  
-
-The **Applied Data Science System** focuses on that transition.
-
-It extends data science from a **process of reasoning** into a **process of building systems that produce reliable, reusable, and interpretable results**.
-
-This guide is not only about building models.
-
-It is about understanding how data, features, models, evaluation, interpretation, reporting, and decision-making connect inside a working analytical system.
+This does not mean leaving the foundations behind. Advanced work depends on them. A sophisticated model cannot repair poorly understood data, an inappropriate analytical design, or an unsupported interpretation.
 
 ---
 
-## What You Will Learn
+## What you will learn
 
-This track focuses on extending analytical workflows into real-world practice.
+By working through this guide, you will learn how to:
 
-You will learn how to:
+- prepare more complex datasets for analysis;
+- design and evaluate useful features;
+- explore relationships across multiple variables;
+- use sampling concepts and uncertainty to support statistical inference;
+- formulate and evaluate hypotheses responsibly;
+- build and interpret regression models;
+- develop predictive models with appropriate baselines;
+- separate training, validation, and test data correctly;
+- use cross-validation and pipelines to reduce leakage and improve reproducibility;
+- evaluate models with metrics suited to the analytical problem;
+- improve models without losing sight of generalization;
+- use unsupervised methods to investigate structure in unlabeled data;
+- interpret model behaviour, limitations, and uncertainty;
+- communicate results as evidence rather than certainty; and
+- connect the complete workflow in an end-to-end case study.
 
-- transform cleaned data into model-ready representations  
-- engineer useful features  
-- build and evaluate machine learning models  
-- structure pipelines for reproducibility  
-- interpret model behavior carefully  
-- communicate model results responsibly  
-- package analytical workflows for reuse  
-- expose models through simple APIs  
-- understand deployment concepts  
-- recognize model failure, drift, and limitations  
-
-The goal is not simply to introduce more tools.
-
-The goal is to understand how analytical components work together as a system.
-
----
-
-## How This Guide Is Structured
-
-Each chapter follows a consistent pattern:
-
-1. **Explanation**  
-   What concept we are learning and why it matters  
-
-2. **Code**  
-   Practical implementation  
-
-3. **Interpretation**  
-   What the results mean  
-
-4. **Summary**  
-   The key ideas to retain  
-
-5. **Exercise**  
-   A task to reinforce understanding  
-
-This structure remains intentional.
-
-As workflows become more complex, clarity becomes more important.
+The objective is not to collect isolated techniques. It is to understand how analytical choices connect and how each choice affects the reliability of the final conclusion.
 
 ---
 
-## How to Approach This Guide
+## From foundations to advanced practice
 
-This track assumes you are already comfortable with:
+In foundational analysis, a common workflow is:
 
-- basic data exploration  
-- data cleaning and transformation  
-- visualization  
-- interpretation of analytical results  
+> data → preparation → exploration → visualization → summary → insight
 
-Here, the focus shifts to:
-
-- connecting steps across a workflow  
-- understanding how decisions affect outcomes  
-- recognizing where errors can occur  
-- building systems that can be reused and extended  
-- moving from analysis to decision-ready outputs  
-
-Do not rush through implementation.
-
-Take time to understand how each step fits into the larger system.
-
-The most important question is not only:
-
-> Does the code run?
-
-but also:
-
-> Can this workflow produce reliable results again, with new data, new users, or new decisions?
-
----
-
-## The CDI Extended Workflow
-
-In the foundations track, the focus was:
-
-> data → exploration → insight  
-
-In applied data science, the workflow extends beyond insight.
+Advanced data science extends that workflow by introducing formal inference, modelling, validation, and critical interpretation.
 
 ```{mermaid}
 flowchart TB
-
-  A[Question or Problem] --> B[Load & Understand Data]
-
-  B --> C[Clean & Prepare Data]
-  C --> D[Explore & Visualize Patterns]
-  D --> E[Summarize & Interpret]
-
-  E --> F[Feature Engineering]
-  F --> G[Model Building]
-  G --> H[Model Evaluation]
-  H --> I[Model Interpretation]
-
-  I --> J[Decision-Ready Output]
-  J --> K[Reusable Analytical System]
-
-  K --> L[Deployment or Operational Use]
-  L --> M[Monitoring & Feedback]
-  M --> B
+  A[Question and context] --> B[Prepare and explore data]
+  B --> C[Engineer and select features]
+  C --> D[Choose an analytical approach]
+  D --> E[Fit and validate the model]
+  E --> F[Interpret results and uncertainty]
+  F --> G[Communicate defensible conclusions]
+  G --> H[Review assumptions and refine]
+  H --> B
 
   classDef stage fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
-  class A,B,C,D,E,F,G,H,I,J,K,L,M stage;
+  class A,B,C,D,E,F,G,H stage;
 ```
 
-This extended workflow reflects how real analytical systems operate.
-
-Each stage introduces new considerations, including:
-
-- validity  
-- reproducibility  
-- interpretability  
-- reliability  
-- communication  
-- maintenance  
-
-A result is not complete simply because a model was trained.
-
-A result becomes useful when it can support a clear decision, be explained, and be reused responsibly.
+The feedback loop is intentional. Real analysis is rarely completed correctly in one pass. Unexpected distributions may require different transformations. Validation may reveal overfitting. Model interpretation may expose a weak feature or an unsupported assumption. Responsible practice means returning to the relevant stage, revising the workflow, and documenting why.
 
 ---
 
-## From Analysis to System
+## What this guide assumes
 
-Applied data science is not a straight line.
+This guide assumes familiarity with the core skills covered in **Data Science Foundations**, including:
 
-A model may fail evaluation.
+- working in a Python analytical environment;
+- loading tabular data with pandas;
+- inspecting variables, data types, and missing values;
+- cleaning and transforming data;
+- filtering, grouping, joining, and reshaping tables;
+- creating and interpreting common statistical graphics; and
+- calculating and explaining descriptive summary statistics.
 
-A useful pattern may not support a real-world claim.
+You do not need to know advanced mathematics or machine learning before starting. Statistical and modelling ideas are introduced through explanation, code, interpretation, and practice. However, you should be comfortable reading Python code and reasoning about tables, variables, distributions, and relationships.
 
-A technically strong result may not be suitable for deployment.
-
-A deployed system may drift as new data arrives.
-
-For this reason, applied data science requires feedback loops.
-
-```{mermaid}
-flowchart LR
-
-  A[Model Output] --> B[Interpret]
-  B --> C[Communicate]
-  C --> D[Decision Review]
-  D --> E[System Use]
-
-  E --> F[Feedback]
-
-  F --> G[Decision Gate]
-
-  G -->|Validated| H[Update System]
-  G -->|Rejected or Hold| I[Monitor or Revise]
-
-  H --> A
-  I --> B
-
-  classDef stage fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
-  classDef decision fill:#fff7ed,stroke:#f59e0b,stroke-width:2px,color:#7c2d12;
-
-  class A,B,C,D,E,F,H,I stage;
-  class G decision;
-```
-
-The purpose of this guide is to help you understand these connections.
-
-You are not only learning how to build models.
-
-You are learning how to build analytical systems that can be checked, interpreted, communicated, and improved.
+If any of these skills feel unfamiliar, revisit the relevant section of **Data Science Foundations** before continuing. The purpose is not to memorize every command, but to begin this guide with a reliable analytical base.
 
 ---
 
-## The Role of This System in CDI Pathways
+## How this guide is structured
 
-The **Applied Data Science System** acts as a parent analytical layer for other CDI systems.
+The chapters progress from advanced data preparation to statistical reasoning, modelling, validation, interpretation, communication, and end-to-end practice.
 
-Many specialized pathways eventually produce structured analytical tables.
+1. **Orientation** prepares the working environment and establishes the analytical approach used throughout the guide.
+2. **Advanced data preparation and exploration** develops more deliberate ways to represent, examine, and engineer data.
+3. **Statistical inference and modelling** connects samples to populations through uncertainty, hypothesis testing, and regression.
+4. **Predictive and unsupervised learning** introduces prediction, rigorous evaluation, model improvement, and pattern discovery without known labels.
+5. **Reproducibility and interpretation** connects preprocessing and modelling in reliable pipelines and examines how model outputs support defensible claims.
+6. **Communication and responsible practice** focuses on presenting evidence clearly, supporting decisions carefully, and recognizing limitations.
+7. **End-to-end practice** combines the full workflow in a realistic case study.
 
-For example:
-
-- a bioinformatics workflow may produce a feature table or differential results table  
-- a clinical data workflow may produce a cleaned patient-level analysis table  
-- a business analytics workflow may produce a decision or performance dataset  
-- an omics workflow may produce ranked genes, proteins, taxa, or pathways  
-
-Once a pathway reaches a structured, analysis-ready table, the ideas in this guide become reusable.
-
-```{mermaid}
-flowchart TD
-
-  A[CDI Open Guides<br/>Foundational Learning] --> B[Applied Data Science System]
-
-  B --> C[Analysis-Ready Table]
-  C --> D[Feature Engineering]
-  D --> E[Model Building]
-  E --> F[Model Evaluation]
-  F --> G[Interpretation]
-  G --> H[Decision-Ready Output]
-
-  H --> I[Portfolio Proof<br/>Reproducible Repository + Quarto Report]
-  I --> J[Mentorship Review<br/>Feedback + Refinement]
-  J --> K[Deployment / DevOps Track<br/>APIs, Apps, Monitoring]
-
-  B --> L[Reusable System Template]
-
-  L --> M[Bioinformatics Systems]
-  L --> N[Clinical & Medical Data Systems]
-  L --> O[Business Analytics Systems]
-  L --> P[AI, Thinking & Decision Systems]
-
-  classDef core fill:#f4f8ff,stroke:#036281,stroke-width:2px,color:#0f172a;
-  classDef output fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#064e3b;
-  classDef pathway fill:#fff7ed,stroke:#f59e0b,stroke-width:2px,color:#7c2d12;
-
-  class A,B,C,D,E,F,G,H,I,J,K,L core;
-  class H,I output;
-  class M,N,O,P pathway;
-```
-
-This is why applied data science sits near the top of the CDI learning architecture.
-
-It provides the shared analytical logic that many domain-specific systems can reuse.
+The order matters. Later chapters build on decisions and concepts introduced earlier, so working through the guide sequentially is recommended.
 
 ---
 
-## What This Guide Is Not
+## The learning pattern
 
-This guide is not a complete software engineering course.
+Each chapter uses a consistent learning pattern:
 
-It is also not a full machine learning theory textbook.
+1. **Explanation** — what the concept means and why it matters;
+2. **Code** — how to implement it in Python;
+3. **Interpretation** — how to reason about the output;
+4. **Checks and limitations** — what could weaken or invalidate the result;
+5. **Summary** — the main ideas to retain; and
+6. **Exercise** — an opportunity to apply the concept independently.
 
-Instead, it is a practical bridge between:
+Code is important, but code alone is not the goal. When working through an example, ask:
 
-- exploratory data analysis  
-- machine learning  
-- reproducible workflows  
-- interpretation  
-- decision support  
-- deployment awareness  
+> What analytical question does this step answer?
 
-The focus is on building enough system-level understanding to make analytical work more reliable in real-world settings.
+> Which assumptions or decisions influence the result?
+
+> Would the conclusion remain credible with new data?
+
+These questions help turn a sequence of commands into an analytical workflow.
 
 ---
 
-## Looking Ahead
+## Reproducibility and responsible interpretation
 
-The next chapter begins by setting up the working environment.
+An advanced analysis should be more than technically impressive. It should be understandable, reproducible, and appropriately cautious.
 
-From there, we move step by step from prepared data into feature engineering, model building, evaluation, interpretation, reporting, and system-level thinking.
+Throughout the guide, you will be encouraged to:
 
-By the end of this guide, you should be able to move beyond isolated analysis and begin building reusable analytical systems.
+- preserve raw data and make transformations explicit;
+- use pipelines to apply preprocessing consistently;
+- separate model development from final evaluation;
+- compare results with meaningful baselines;
+- report uncertainty and limitations;
+- distinguish association, prediction, and causation;
+- avoid claims that the design or evidence cannot support; and
+- document enough context for another person to review the work.
+
+A model that performs well can still be unsuitable for the question. A statistically significant result can still have little practical importance. A clear visual pattern can still be affected by bias, confounding, or data leakage.
+
+Advanced practice means learning to recognize these distinctions.
+
+---
+
+## What this guide does not cover
+
+This guide is not a complete mathematical statistics textbook, a comprehensive machine learning reference, or a software engineering course.
+
+Its scope ends with a well-validated, interpretable, reproducible analysis. Building APIs, deploying models, monitoring production systems, and managing model drift belong in the separate **Model Deployment** guide.
+
+Similarly, the dedicated **Machine Learning with Python** guide provides broader practice with machine learning algorithms and workflows. Here, predictive modelling is included as part of a wider analytical process that also covers statistical inference, explanation, uncertainty, interpretation, and communication.
+
+The CDI progression is therefore:
+
+> **Data Science Foundations → Advanced Data Science → Machine Learning with Python → Model Deployment**
+
+Each guide has a distinct role while building on the previous one.
+
+---
+
+## Moving forward
+
+The next chapter prepares the environment used throughout this guide. From there, you will move step by step from familiar data preparation skills into more advanced statistical and modelling practice.
+
+The central question throughout will not be only:
+
+> Does the code run?
+
+It will be:
+
+> Does the workflow produce a result that is valid, reproducible, interpretable, and supported by the evidence?
+
+That is the transition from foundational analysis to advanced data science.

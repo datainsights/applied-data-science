@@ -6,10 +6,14 @@ format:
     body-classes: front-page
 ---
 
-<div style="text-align: center; margin-top: 1.5em;">
-  <img src="assets/images/cover/applied-data-science-system-cover.png" width="75%" />
-</div>
+<figure style="text-align: center; margin: 1.5em 0 0;">
+  <img
+    src="assets/images/cover/applied-data-science-system-cover.png"
+    alt="Applied Data Science System: From Analysis to Real-World Analytical Systems"
+    width="75%"
+  />
+</figure>
 
-<div style="text-align: center; font-style: normal; margin-top: 1em;">
-Applied DS Guide: Updated {{< meta date >}}
+<div style="text-align: center; margin-top: 1em;">
+Free Guide · Updated {{< meta date >}}
 </div>
