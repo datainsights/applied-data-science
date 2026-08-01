@@ -1,0 +1,10 @@
+# Statistical Inference {#lesson05}
+
+:::cdi-message
+- **ID:** ADS-L05
+- **Type:** Statistical inference
+- **Audience:** Intermediate
+- **Theme:** Samples support claims only when uncertainty is quantified
+:::
+
+> This chapter is scaffolded for development.

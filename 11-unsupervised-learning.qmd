@@ -1,0 +1,10 @@
+# Unsupervised Learning {#lesson11}
+
+:::cdi-message
+- **ID:** ADS-L11
+- **Type:** Unsupervised learning
+- **Audience:** Intermediate
+- **Theme:** Unlabelled data can reveal structure without proving meaning
+:::
+
+> This chapter is scaffolded for development.

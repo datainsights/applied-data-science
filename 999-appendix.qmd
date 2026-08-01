@@ -1,7 +1,7 @@
 # Appendix {#appendix}
 
 :::cdi-message
-- **ID:** DS-APP
+- **ID:** ADS-APP
 - **Type:** Reference
 - **Audience:** Public
 - **Theme:** Environment, project structure, reproducibility, and reusable workflow patterns

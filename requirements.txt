@@ -1,11 +1,17 @@
-pandas
+# Core data analysis
 numpy
+pandas
+scipy
+
+# Statistical and predictive modelling
+scikit-learn
+statsmodels
+joblib
+
+# Visualization
 matplotlib
 seaborn
-scikit-learn
-jupyter
+
+# Interactive development
+jupyterlab
 ipykernel
-joblib
-fastapi
-uvicorn
-requests

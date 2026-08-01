@@ -1,0 +1,10 @@
+# Limitations and Responsible Use {#lesson17}
+
+:::cdi-message
+- **ID:** ADS-L17
+- **Type:** Responsible practice
+- **Audience:** Intermediate
+- **Theme:** Responsible use begins with explicit limitations and appropriate oversight
+:::
+
+> This chapter is scaffolded for development.

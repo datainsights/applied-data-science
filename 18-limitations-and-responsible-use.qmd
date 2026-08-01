@@ -1,1 +1,0 @@
-python scripts/python/18a_build_responsible_use_review.py

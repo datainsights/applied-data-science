@@ -7,16 +7,16 @@ _site/
 _cache/
 _freeze/
 
-# Ignore HTML everywhere except rendered site in docs/
+# Ignore HTML everywhere except the rendered site in docs/
 *.html
 !docs/**/*.html
 
-# Ignore Quarto figure folders everywhere except docs/
+# Ignore Quarto figure folders except those in docs/
 *_files/
 !docs/**/*_files/
 !docs/**/*_files/**
 
-# Ignore exported documents
+# Ignore locally exported documents
 *.pdf
 *.docx
 
@@ -26,12 +26,32 @@ _freeze/
 # =====================================================
 
 .venv/
+venv/
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 *.egg-info/
 .ipynb_checkpoints/
+
+# Testing and coverage artifacts
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Type-checking and linting caches
+.mypy_cache/
+.ruff_cache/
+
+
+# =====================================================
+# Environment variables and local configuration
+# =====================================================
+
+.env
+.env.*
+!.env.example
 
 
 # =====================================================
@@ -44,7 +64,7 @@ __pycache__/
 
 
 # =====================================================
-# OS / editor files
+# OS and editor files
 # =====================================================
 
 .DS_Store
@@ -62,7 +82,7 @@ Thumbs.db
 
 # =====================================================
 # Project outputs
-# Keep small teaching/demo artifacts, ignore larger replacements
+# Keep small teaching/demo artifacts; ignore replacements
 # =====================================================
 
 data/raw/*
@@ -78,4 +98,6 @@ reports/*
 !reports/*.csv
 !reports/figures/
 !reports/figures/*.png
+
+REFER/
 /.quarto/

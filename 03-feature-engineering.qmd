@@ -1,0 +1,10 @@
+# Feature Engineering {#lesson03}
+
+:::cdi-message
+- **ID:** ADS-L03
+- **Type:** Feature engineering
+- **Audience:** Intermediate
+- **Theme:** Useful features connect domain knowledge with modelling goals
+:::
+
+> This chapter is scaffolded for development.

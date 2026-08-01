@@ -1,0 +1,10 @@
+# Model Improvement {#lesson10}
+
+:::cdi-message
+- **ID:** ADS-L10
+- **Type:** Model improvement
+- **Audience:** Intermediate
+- **Theme:** Better models result from disciplined iteration, not complexity alone
+:::
+
+> This chapter is scaffolded for development.

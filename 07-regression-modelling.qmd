@@ -1,0 +1,10 @@
+# Regression Modelling {#lesson07}
+
+:::cdi-message
+- **ID:** ADS-L07
+- **Type:** Statistical modelling
+- **Audience:** Intermediate
+- **Theme:** Regression connects relationships, assumptions, and interpretable estimates
+:::
+
+> This chapter is scaffolded for development.

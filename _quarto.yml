@@ -20,40 +20,40 @@ book:
         - 00-preface.qmd
         - 01-setting-up-environment.qmd
 
-    # - part: "Advanced Data Preparation and Exploration"
-    #   chapters:
-    #     - 02-advanced-data-preparation.qmd
-    #     - 03-feature-engineering.qmd
-    #     - 04-exploratory-analysis-for-complex-data.qmd
+    - part: "Advanced Data Preparation and Exploration"
+      chapters:
+        - 02-advanced-data-preparation.qmd
+        - 03-feature-engineering.qmd
+        - 04-exploratory-analysis-for-complex-data.qmd
 
-    # - part: "Statistical Inference and Modelling"
-    #   chapters:
-    #     - 05-statistical-inference.qmd
-    #     - 06-hypothesis-testing.qmd
-    #     - 07-regression-modelling.qmd
+    - part: "Statistical Inference and Modelling"
+      chapters:
+        - 05-statistical-inference.qmd
+        - 06-hypothesis-testing.qmd
+        - 07-regression-modelling.qmd
 
-    # - part: "Predictive and Unsupervised Learning"
-    #   chapters:
-    #     - 08-predictive-model-building.qmd
-    #     - 09-model-evaluation-and-validation.qmd
-    #     - 10-model-improvement.qmd
-    #     - 11-unsupervised-learning.qmd
+    - part: "Predictive and Unsupervised Learning"
+      chapters:
+        - 08-predictive-model-building.qmd
+        - 09-model-evaluation-and-validation.qmd
+        - 10-model-improvement.qmd
+        - 11-unsupervised-learning.qmd
 
-    # - part: "Reproducibility and Interpretation"
-    #   chapters:
-    #     - 12-pipelines-and-cross-validation.qmd
-    #     - 13-feature-importance-and-interpretation.qmd
-    #     - 14-from-results-to-defensible-claims.qmd
+    - part: "Reproducibility and Interpretation"
+      chapters:
+        - 12-pipelines-and-cross-validation.qmd
+        - 13-feature-importance-and-interpretation.qmd
+        - 14-from-results-to-defensible-claims.qmd
 
-    # - part: "Communication and Responsible Practice"
-    #   chapters:
-    #     - 15-communicating-results-clearly.qmd
-    #     - 16-from-analysis-to-decision-making.qmd
-    #     - 17-limitations-and-responsible-use.qmd
+    - part: "Communication and Responsible Practice"
+      chapters:
+        - 15-communicating-results-clearly.qmd
+        - 16-from-analysis-to-decision-making.qmd
+        - 17-limitations-and-responsible-use.qmd
 
-    # - part: "End-to-End Practice"
-    #   chapters:
-    #     - 18-end-to-end-case-study.qmd
+    - part: "End-to-End Practice"
+      chapters:
+        - 18-end-to-end-case-study.qmd
 
     - part: "Appendix and References"
       chapters:

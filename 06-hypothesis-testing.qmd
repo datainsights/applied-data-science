@@ -1,0 +1,10 @@
+# Hypothesis Testing {#lesson06}
+
+:::cdi-message
+- **ID:** ADS-L06
+- **Type:** Hypothesis testing
+- **Audience:** Intermediate
+- **Theme:** Statistical evidence requires assumptions, context, and careful interpretation
+:::
+
+> This chapter is scaffolded for development.

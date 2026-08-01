@@ -1,0 +1,10 @@
+# Predictive Model Building {#lesson08}
+
+:::cdi-message
+- **ID:** ADS-L08
+- **Type:** Predictive modelling
+- **Audience:** Intermediate
+- **Theme:** Prediction begins with a clearly defined target and evaluation plan
+:::
+
+> This chapter is scaffolded for development.

@@ -1,0 +1,10 @@
+# Model Evaluation and Validation {#lesson09}
+
+:::cdi-message
+- **ID:** ADS-L09
+- **Type:** Model evaluation
+- **Audience:** Intermediate
+- **Theme:** Performance estimates must reflect how a model will be used
+:::
+
+> This chapter is scaffolded for development.

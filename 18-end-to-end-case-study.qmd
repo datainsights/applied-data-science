@@ -1,0 +1,10 @@
+# End-to-End Case Study {#lesson18}
+
+:::cdi-message
+- **ID:** ADS-L18
+- **Type:** Integrated practice
+- **Audience:** Intermediate
+- **Theme:** A complete workflow connects preparation, modelling, validation, and communication
+:::
+
+> This chapter is scaffolded for development.

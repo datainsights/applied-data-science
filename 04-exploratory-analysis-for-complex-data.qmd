@@ -1,0 +1,10 @@
+# Exploratory Analysis for Complex Data {#lesson04}
+
+:::cdi-message
+- **ID:** ADS-L04
+- **Type:** Exploratory analysis
+- **Audience:** Intermediate
+- **Theme:** Exploration reveals structure, uncertainty, and analytical risk
+:::
+
+> This chapter is scaffolded for development.

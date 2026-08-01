@@ -1,0 +1,10 @@
+# Advanced Data Preparation {#lesson02}
+
+:::cdi-message
+- **ID:** ADS-L02
+- **Type:** Data preparation
+- **Audience:** Intermediate
+- **Theme:** Reliable modelling begins with defensible data preparation
+:::
+
+> This chapter is scaffolded for development.

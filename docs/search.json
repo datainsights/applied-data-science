@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Advanced Data Science",
     "section": "",
-    "text": "Free Guide · Updated Jul 2026",
+    "text": "Free Guide · Updated Aug 2026",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>index.html</span>"
     ]
@@ -274,6 +274,193 @@
     ]
   },
   {
+    "objectID": "02-advanced-data-preparation.html",
+    "href": "02-advanced-data-preparation.html",
+    "title": "Advanced Data Preparation",
+    "section": "",
+    "text": "ID: ADS-L02\nType: Data preparation\nAudience: Intermediate\nTheme: Reliable modelling begins with defensible data preparation\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Advanced Data Preparation and Exploration",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Advanced Data Preparation</span>"
+    ]
+  },
+  {
+    "objectID": "03-feature-engineering.html",
+    "href": "03-feature-engineering.html",
+    "title": "Feature Engineering",
+    "section": "",
+    "text": "ID: ADS-L03\nType: Feature engineering\nAudience: Intermediate\nTheme: Useful features connect domain knowledge with modelling goals\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Advanced Data Preparation and Exploration",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Feature Engineering</span>"
+    ]
+  },
+  {
+    "objectID": "04-exploratory-analysis-for-complex-data.html",
+    "href": "04-exploratory-analysis-for-complex-data.html",
+    "title": "Exploratory Analysis for Complex Data",
+    "section": "",
+    "text": "ID: ADS-L04\nType: Exploratory analysis\nAudience: Intermediate\nTheme: Exploration reveals structure, uncertainty, and analytical risk\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Advanced Data Preparation and Exploration",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exploratory Analysis for Complex Data</span>"
+    ]
+  },
+  {
+    "objectID": "05-statistical-inference.html",
+    "href": "05-statistical-inference.html",
+    "title": "Statistical Inference",
+    "section": "",
+    "text": "ID: ADS-L05\nType: Statistical inference\nAudience: Intermediate\nTheme: Samples support claims only when uncertainty is quantified\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Statistical Inference and Modelling",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "06-hypothesis-testing.html",
+    "href": "06-hypothesis-testing.html",
+    "title": "Hypothesis Testing",
+    "section": "",
+    "text": "ID: ADS-L06\nType: Hypothesis testing\nAudience: Intermediate\nTheme: Statistical evidence requires assumptions, context, and careful interpretation\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Statistical Inference and Modelling",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "07-regression-modelling.html",
+    "href": "07-regression-modelling.html",
+    "title": "Regression Modelling",
+    "section": "",
+    "text": "ID: ADS-L07\nType: Statistical modelling\nAudience: Intermediate\nTheme: Regression connects relationships, assumptions, and interpretable estimates\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Statistical Inference and Modelling",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Regression Modelling</span>"
+    ]
+  },
+  {
+    "objectID": "08-predictive-model-building.html",
+    "href": "08-predictive-model-building.html",
+    "title": "Predictive Model Building",
+    "section": "",
+    "text": "ID: ADS-L08\nType: Predictive modelling\nAudience: Intermediate\nTheme: Prediction begins with a clearly defined target and evaluation plan\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Predictive and Unsupervised Learning",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Predictive Model Building</span>"
+    ]
+  },
+  {
+    "objectID": "09-model-evaluation-and-validation.html",
+    "href": "09-model-evaluation-and-validation.html",
+    "title": "Model Evaluation and Validation",
+    "section": "",
+    "text": "ID: ADS-L09\nType: Model evaluation\nAudience: Intermediate\nTheme: Performance estimates must reflect how a model will be used\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Predictive and Unsupervised Learning",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Model Evaluation and Validation</span>"
+    ]
+  },
+  {
+    "objectID": "10-model-improvement.html",
+    "href": "10-model-improvement.html",
+    "title": "Model Improvement",
+    "section": "",
+    "text": "ID: ADS-L10\nType: Model improvement\nAudience: Intermediate\nTheme: Better models result from disciplined iteration, not complexity alone\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Predictive and Unsupervised Learning",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Model Improvement</span>"
+    ]
+  },
+  {
+    "objectID": "11-unsupervised-learning.html",
+    "href": "11-unsupervised-learning.html",
+    "title": "Unsupervised Learning",
+    "section": "",
+    "text": "ID: ADS-L11\nType: Unsupervised learning\nAudience: Intermediate\nTheme: Unlabelled data can reveal structure without proving meaning\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Predictive and Unsupervised Learning",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Unsupervised Learning</span>"
+    ]
+  },
+  {
+    "objectID": "12-pipelines-and-cross-validation.html",
+    "href": "12-pipelines-and-cross-validation.html",
+    "title": "Pipelines and Cross-Validation",
+    "section": "",
+    "text": "ID: ADS-L12\nType: Reproducible modelling\nAudience: Intermediate\nTheme: Pipelines keep preprocessing and validation aligned\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Reproducibility and Interpretation",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Pipelines and Cross-Validation</span>"
+    ]
+  },
+  {
+    "objectID": "13-feature-importance-and-interpretation.html",
+    "href": "13-feature-importance-and-interpretation.html",
+    "title": "Feature Importance and Interpretation",
+    "section": "",
+    "text": "ID: ADS-L13\nType: Model interpretation\nAudience: Intermediate\nTheme: Model explanations are useful only within their assumptions and scope\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Reproducibility and Interpretation",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "14-from-results-to-defensible-claims.html",
+    "href": "14-from-results-to-defensible-claims.html",
+    "title": "From Results to Defensible Claims",
+    "section": "",
+    "text": "ID: ADS-L14\nType: Analytical interpretation\nAudience: Intermediate\nTheme: Defensible claims remain proportional to the evidence\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Reproducibility and Interpretation",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>From Results to Defensible Claims</span>"
+    ]
+  },
+  {
+    "objectID": "15-communicating-results-clearly.html",
+    "href": "15-communicating-results-clearly.html",
+    "title": "Communicating Results Clearly",
+    "section": "",
+    "text": "ID: ADS-L15\nType: Analytical communication\nAudience: Intermediate\nTheme: Clear communication makes evidence understandable without overstating it\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Communication and Responsible Practice",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Communicating Results Clearly</span>"
+    ]
+  },
+  {
+    "objectID": "16-from-analysis-to-decision-making.html",
+    "href": "16-from-analysis-to-decision-making.html",
+    "title": "From Analysis to Decision-Making",
+    "section": "",
+    "text": "ID: ADS-L16\nType: Decision support\nAudience: Intermediate\nTheme: Analysis informs decisions but does not replace judgment\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Communication and Responsible Practice",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>From Analysis to Decision-Making</span>"
+    ]
+  },
+  {
+    "objectID": "17-limitations-and-responsible-use.html",
+    "href": "17-limitations-and-responsible-use.html",
+    "title": "Limitations and Responsible Use",
+    "section": "",
+    "text": "ID: ADS-L17\nType: Responsible practice\nAudience: Intermediate\nTheme: Responsible use begins with explicit limitations and appropriate oversight\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "Communication and Responsible Practice",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Limitations and Responsible Use</span>"
+    ]
+  },
+  {
+    "objectID": "18-end-to-end-case-study.html",
+    "href": "18-end-to-end-case-study.html",
+    "title": "End-to-End Case Study",
+    "section": "",
+    "text": "ID: ADS-L18\nType: Integrated practice\nAudience: Intermediate\nTheme: A complete workflow connects preparation, modelling, validation, and communication\n\n\n\nThis chapter is scaffolded for development.",
+    "crumbs": [
+      "End-to-End Practice",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>End-to-End Case Study</span>"
+    ]
+  },
+  {
     "objectID": "999-appendix.html",
     "href": "999-appendix.html",
     "title": "Appendix",
@@ -281,7 +468,7 @@
     "text": "How to Use This Appendix\nThis appendix collects technical reference material that supports the Applied Data Science System.\nIt documents the project structure, environment setup, rendering workflow, script-based execution pattern, and reusable Python patterns used throughout the guide.\nThe purpose of the appendix is simple:\nUse this appendix as a reference when you need to:\nMost chapters in this guide can be run in two ways:\nThe script-based workflow is preferred when preparing a public or production-facing version of the guide.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -292,7 +479,7 @@
     "text": "recreate the project environment\nunderstand the folder structure\nrerun lesson scripts\nregenerate reports and figures\nrender the Quarto site\nprepare changes for GitHub Pages\n\n\n\ninteractively, by reading and running the code blocks in the chapter\nreproducibly, by running the supporting Python script from the project root",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -303,7 +490,7 @@
     "text": "Project Structure Overview\nA standard CDI applied data science project uses a Quarto-first structure with supporting scripts and saved outputs.\napplied-data-science/\n├── index.qmd\n├── 00-preface.qmd\n├── 01-setting-up-environment.qmd\n├── 08-feature-engineering.qmd\n├── 09-model-building.qmd\n├── 10-model-evaluation.qmd\n├── 11-model-improvement.qmd\n├── 12-pipelines-and-cross-validation.qmd\n├── 13-feature-importance-and-interpretation.qmd\n├── 14-from-model-outputs-to-real-world-claims.qmd\n├── 15-communicating-results-clearly.qmd\n├── 16-from-analysis-to-decision-making.qmd\n├── 17-end-to-end-case-study.qmd\n├── 18-limitations-and-responsible-use.qmd\n├── 19-from-foundations-to-real-world-practice.qmd\n├── 999-appendix.qmd\n├── 999-references.qmd\n├── data/\n│   ├── README.md\n│   ├── diabetes.csv\n│   ├── raw/\n│   │   └── people-example.csv\n│   └── processed/\n│       └── model-ready-example.csv\n├── models/\n│   └── diabetes-linear-regression.joblib\n├── reports/\n│   ├── *.csv\n│   ├── *.md\n│   └── figures/\n│       └── *.png\n├── scripts/\n│   ├── bash/\n│   └── python/\n├── docs/\n├── _quarto.yml\n├── requirements.txt\n├── requirements-lock.txt\n└── .gitignore\nThis layout separates source files, data, scripts, generated reports, model artifacts, and rendered documentation.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -314,7 +501,7 @@
     "text": "Key Directories\n\ndata/\nThe data/ directory stores project datasets.\nIn this guide, it includes:\ndata/diabetes.csv\ndata/raw/people-example.csv\ndata/processed/model-ready-example.csv\nThe diabetes dataset supports the modeling lessons.\nThe people example supports feature engineering and model-ready table construction.\n\n\n\nscripts/python/\nThe scripts/python/ directory contains executable lesson scripts.\nThese scripts turn chapter logic into reusable project workflows.\nExamples include:\nscripts/python/09b_train_baseline_linear_model.py\nscripts/python/10a_evaluate_repeated_splits.py\nscripts/python/12a_cross_validate_pipeline.py\nscripts/python/17a_run_end_to_end_case_study.py\nEach script should be runnable from the project root.\n\n\n\nscripts/bash/\nThe scripts/bash/ directory contains helper scripts for project setup and build operations.\nExamples include:\nscripts/bash/01a-create-project-structure.sh\nscripts/bash/01c-build-project.sh\nscripts/bash/01d-freeze-dependencies.sh\nThese scripts support repeatable project management.\n\n\n\nreports/\nThe reports/ directory stores reusable outputs created by the scripts.\nThese may include:\n\nmodel metrics\ncross-validation summaries\ncoefficient tables\ncommunication summaries\nresponsible-use checklists\ndecision framing tables\n\nSaved reports make the workflow auditable.\nThey also allow later chapters to refer to previous outputs without hiding the work that created them.\n\n\n\nreports/figures/\nThe reports/figures/ directory stores saved plots.\nExamples include:\nreports/figures/diabetes-observed-vs-predicted.png\nreports/figures/diabetes-residual-plot.png\nreports/figures/diabetes-cross-validation-mae.png\nSaving figures as files makes them easier to reuse in reports, slides, websites, and README pages.\n\n\n\nmodels/\nThe models/ directory stores trained teaching models.\nFor example:\nmodels/diabetes-linear-regression.joblib\nIn this guide, the model artifact is small and intentional.\nIn larger projects, model artifacts should be tracked carefully because they can become large or sensitive.\n\n\n\ndocs/\nThe docs/ directory contains the rendered Quarto website.\nFor GitHub Pages using a docs/ deployment workflow, this is the public site output directory.\nDo not edit files inside docs/ manually unless there is a specific reason.\nInstead, edit the .qmd source files and rerender the site.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -325,7 +512,7 @@
     "text": "Environment Setup Reference\nThis project uses a local Python virtual environment.\nCreate and activate the environment from the project root:\npython3 -m venv .venv\nsource .venv/bin/activate\nInstall the required packages:\npip install -r requirements.txt\nThe requirements.txt file defines the main dependencies needed to run the project.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -336,7 +523,7 @@
     "text": "Reproducibility Lock File\nThe project may also include:\nrequirements-lock.txt\nThis file records an exact package snapshot.\nA useful distinction is:\nrequirements.txt       = minimal dependency list\nrequirements-lock.txt  = frozen reproducibility snapshot\nTo refresh the lock file after installing packages:\npip freeze &gt; requirements-lock.txt\nThe lock file helps preserve the environment used when the guide was built.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -347,7 +534,7 @@
     "text": "Running a Lesson Script\nMost applied lessons include a supporting Python script.\nRun scripts from the project root.\nFor example:\npython scripts/python/12a_cross_validate_pipeline.py\nA script should usually create outputs in:\nreports/\nreports/figures/\nmodels/\ndata/processed/\ndepending on the lesson.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -358,7 +545,7 @@
     "text": "Rendering the Quarto Site\nAfter running scripts, render the site:\nquarto render\nThe rendered output is written to:\ndocs/\nOpen the site locally:\nopen docs/index.html\nOn non-macOS systems, open docs/index.html using your file browser or web browser.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -369,7 +556,7 @@
     "text": "Standard Lesson Workflow\nA typical lesson workflow is:\nsource data\n    ↓\nPython script\n    ↓\nreports and figures\n    ↓\nQuarto chapter\n    ↓\nquarto render\n    ↓\ndocs site\nThe preferred pattern is:\npython scripts/python/&lt;lesson-script&gt;.py\nquarto render\nThis ensures that outputs are regenerated before the site is rebuilt.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -380,7 +567,7 @@
     "text": "GitHub Pages Workflow\nFor a public Quarto site using GitHub Pages, the usual workflow is:\nedit .qmd files and scripts\n    ↓\nrun scripts\n    ↓\nquarto render\n    ↓\ncommit source and docs\n    ↓\npush to GitHub\n    ↓\nGitHub Pages publishes docs/\nIf a custom domain is used, the rendered site should include a CNAME file containing the domain.\nFor this project, the custom domain is:\napplied-datascience.complexdatainsights.com\nIf the workflow creates the CNAME file automatically, confirm that the deployed docs/ output preserves it.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -391,7 +578,7 @@
     "text": "Reusable Pandas Patterns\n\nRead a CSV file\nimport pandas as pd\n\ndf = pd.read_csv(\"data/diabetes.csv\")\n\n\nSelect columns\ndf[[\"col1\", \"col2\"]]\n\n\nDrop columns\nX = df.drop(columns=[\"target\"])\n\n\nSelect a target column\ny = df[\"target\"]\n\n\nFilter rows\nfiltered_df = df[df[\"value\"] &gt; 0]\n\n\nCreate a new column\ndf[\"new_column\"] = df[\"col1\"] + df[\"col2\"]\n\n\nGroup and aggregate\nsummary_df = df.groupby(\"group_col\").agg(\n    mean_value=(\"value_col\", \"mean\"),\n    count=(\"value_col\", \"count\")\n).reset_index()\n\n\nHandle missing values\ndf[\"col\"] = df[\"col\"].fillna(df[\"col\"].median())\n\n\nConvert data type\ndf[\"category_col\"] = df[\"category_col\"].astype(\"category\")\n\n\nSave a result\ndf.to_csv(\"reports/output-table.csv\", index=False)",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -402,7 +589,7 @@
     "text": "Reusable Scikit-Learn Patterns\n\nDefine features and target\nX = df.drop(columns=[\"disease_progression\"])\ny = df[\"disease_progression\"]\n\n\nSplit data\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42\n)\n\n\nFit a baseline model\nfrom sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n\nGenerate predictions\npredictions = model.predict(X_test)\n\n\nEvaluate predictions\nfrom sklearn.metrics import mean_absolute_error, r2_score\n\nmae = mean_absolute_error(y_test, predictions)\nr2 = r2_score(y_test, predictions)\n\n\nBuild a pipeline\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LinearRegression\n\npipeline = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"model\", LinearRegression())\n])\n\n\nRun cross-validation\nfrom sklearn.model_selection import cross_val_score\n\nmae_scores = -cross_val_score(\n    pipeline,\n    X,\n    y,\n    cv=5,\n    scoring=\"neg_mean_absolute_error\"\n)\n\n\nSave a trained model\nimport joblib\n\njoblib.dump(model, \"models/diabetes-linear-regression.joblib\")\n\n\nLoad a trained model\nimport joblib\n\nmodel = joblib.load(\"models/diabetes-linear-regression.joblib\")",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -413,7 +600,7 @@
     "text": "Reusable Matplotlib Patterns\n\nBasic scatter plot\nimport matplotlib.pyplot as plt\n\nplt.figure(figsize=(7, 5))\nplt.scatter(x, y)\nplt.xlabel(\"X\")\nplt.ylabel(\"Y\")\nplt.title(\"Scatter Plot\")\nplt.tight_layout()\nplt.show()\n\n\nSave a figure\nplt.savefig(\"reports/figures/example-figure.png\", dpi=300, bbox_inches=\"tight\")\n\n\nObserved vs predicted plot\nplt.figure(figsize=(7, 5))\nplt.scatter(observed, predicted)\n\nmin_value = min(observed.min(), predicted.min())\nmax_value = max(observed.max(), predicted.max())\n\nplt.plot([min_value, max_value], [min_value, max_value], linestyle=\"--\")\nplt.xlabel(\"Observed\")\nplt.ylabel(\"Predicted\")\nplt.title(\"Observed vs Predicted\")\nplt.tight_layout()\nplt.show()",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -424,7 +611,7 @@
     "text": "Reproducibility Checklist\nBefore finalizing any chapter, confirm that:\n\nthe lesson script runs from the project root\nexpected outputs are created\npaths are relative, not machine-specific\nno private files or credentials are included\ncode blocks use the same workflow described in the chapter\nfigures render correctly\nsaved report files are updated\nthe Quarto site builds successfully\ndocs/index.html opens locally\ngit status shows only expected changes\n\nA useful final check is:\nquarto render\ngit status",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -435,7 +622,7 @@
     "text": "Public Repository Safety Checklist\nBefore making a project public, check for sensitive files or accidental local paths.\nSearch for common sensitive terms:\ngrep -R \"password\\|token\\|secret\\|api_key\\|apikey\\|Users/\" . \\\n  --exclude-dir=.git \\\n  --exclude-dir=.venv \\\n  --exclude-dir=docs\nCheck for large files:\nfind . -type f -size +10M \\\n  -not -path \"./.git/*\" \\\n  -not -path \"./.venv/*\"\nReview tracked files:\ngit status\ngit diff --cached --name-status\nThese checks help keep public CDI repositories clean and safe.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -446,7 +633,7 @@
     "text": "Running the Full System\nbash scripts/bash/end-to-end-workflow.sh",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -457,7 +644,7 @@
     "text": "Data Sources\nThis guide uses the diabetes dataset distributed through scikit-learn and saved locally as:\ndata/diabetes.csv\nThe dataset is used for educational modeling examples throughout the applied lessons.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -468,7 +655,7 @@
     "text": "Software and Tools\nThis guide uses a small set of widely adopted tools for reproducible applied data science:\n\nPython (Python Software Foundation 2024)\npandas (McKinney et al. 2010)\nNumPy (Harris et al. 2020)\nmatplotlib (Hunter 2007)\nscikit-learn (Pedregosa et al. 2011)\njoblib (Team, n.d.)\nQuarto (Posit Software, PBC, n.d.)\n\nTogether, these tools support tabular data handling, modeling, evaluation, visualization, reproducible reporting, and static site publishing.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -479,7 +666,7 @@
     "text": "Closing Note\nThe goal of the Applied Data Science System is not only to teach syntax.\nIt is to teach a disciplined workflow:\ndata\n    ↓\nanalysis\n    ↓\nmodeling\n    ↓\nevaluation\n    ↓\ninterpretation\n    ↓\ncommunication\n    ↓\ndecision context\n    ↓\nresponsible use\nThe same structure can be reused across:\n\nnew datasets\nclient projects\npublic guides\ndomain-specific CDI pathways\nfuture analytical systems\n\nA strong data science workflow does more than produce outputs.\nIt produces evidence that can be inspected, explained, reproduced, and used responsibly.\n\n\n\n\nHarris, Charles R. et al. 2020. “Array Programming with NumPy.” Nature. https://doi.org/10.1038/s41586-020-2649-2.\n\n\nHunter, J. D. 2007. “Matplotlib: A 2D Graphics Environment.” Computing in Science & Engineering. https://doi.org/10.1109/MCSE.2007.55.\n\n\nMcKinney, Wes et al. 2010. “Pandas-Dev/Pandas: Pandas.” Zenodo. https://doi.org/10.5281/zenodo.3509134.\n\n\nPedregosa, F., G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, et al. 2011. Scikit-Learn: Machine Learning in Python. Journal of Machine Learning Research. Vol. 12. https://scikit-learn.org/.\n\n\nPosit Software, PBC. n.d. “Quarto.” https://quarto.org/.\n\n\nPython Software Foundation. 2024. “Python Language Reference.” https://www.python.org/.\n\n\nTeam, Joblib Development. n.d. “Joblib: Running Python Functions as Pipeline Jobs.” https://joblib.readthedocs.io/.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Appendix</span>"
     ]
   },
   {
@@ -490,7 +677,7 @@
     "text": "Harris, Charles R. et al. 2020. “Array Programming with\nNumPy.” Nature. https://doi.org/10.1038/s41586-020-2649-2.\n\n\nHunter, J. D. 2007. “Matplotlib: A 2D Graphics\nEnvironment.” Computing in Science & Engineering. https://doi.org/10.1109/MCSE.2007.55.\n\n\nMcKinney, Wes et al. 2010. “Pandas-Dev/Pandas: Pandas.”\nZenodo. https://doi.org/10.5281/zenodo.3509134.\n\n\nPedregosa, F., G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O.\nGrisel, M. Blondel, et al. 2011. Scikit-Learn: Machine Learning in\nPython. Journal of Machine Learning Research. Vol. 12. https://scikit-learn.org/.\n\n\nPosit Software, PBC. n.d. “Quarto.” https://quarto.org/.\n\n\nPython Software Foundation. 2024. “Python Language\nReference.” https://www.python.org/.\n\n\nTeam, Joblib Development. n.d. “Joblib: Running Python Functions\nas Pipeline Jobs.” https://joblib.readthedocs.io/.",
     "crumbs": [
       "Appendix and References",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>References</span>"
+      "References"
     ]
   }
 ]
