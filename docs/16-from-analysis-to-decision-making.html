@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="assets/css/cdi.css">
 </head>
@@ -314,15 +378,68 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#the-final-analytical-step-is-not-the-final-decision" id="toc-the-final-analytical-step-is-not-the-final-decision" class="nav-link" data-scroll-target="#the-final-analytical-step-is-not-the-final-decision">The final analytical step is not the final decision</a></li>
+  <li><a href="#begin-with-the-decision-not-the-dataset" id="toc-begin-with-the-decision-not-the-dataset" class="nav-link" data-scroll-target="#begin-with-the-decision-not-the-dataset">Begin with the decision, not the dataset</a>
+  <ul class="collapse">
+  <li><a href="#a-decision-framing-table" id="toc-a-decision-framing-table" class="nav-link" data-scroll-target="#a-decision-framing-table">A decision-framing table</a></li>
+  </ul></li>
+  <li><a href="#match-the-analytical-target-to-the-decision" id="toc-match-the-analytical-target-to-the-decision" class="nav-link" data-scroll-target="#match-the-analytical-target-to-the-decision">Match the analytical target to the decision</a></li>
+  <li><a href="#from-predictions-to-actions" id="toc-from-predictions-to-actions" class="nav-link" data-scroll-target="#from-predictions-to-actions">From predictions to actions</a>
+  <ul class="collapse">
+  <li><a href="#use-consequences-to-select-a-threshold" id="toc-use-consequences-to-select-a-threshold" class="nav-link" data-scroll-target="#use-consequences-to-select-a-threshold">Use consequences to select a threshold</a></li>
+  </ul></li>
+  <li><a href="#capacity-can-determine-the-rule" id="toc-capacity-can-determine-the-rule" class="nav-link" data-scroll-target="#capacity-can-determine-the-rule">Capacity can determine the rule</a></li>
+  <li><a href="#compare-policies-not-only-models" id="toc-compare-policies-not-only-models" class="nav-link" data-scroll-target="#compare-policies-not-only-models">Compare policies, not only models</a></li>
+  <li><a href="#a-worked-decision-analysis" id="toc-a-worked-decision-analysis" class="nav-link" data-scroll-target="#a-worked-decision-analysis">A worked decision analysis</a></li>
+  <li><a href="#make-uncertainty-decision-relevant" id="toc-make-uncertainty-decision-relevant" class="nav-link" data-scroll-target="#make-uncertainty-decision-relevant">Make uncertainty decision-relevant</a>
+  <ul class="collapse">
+  <li><a href="#sensitivity-analysis" id="toc-sensitivity-analysis" class="nav-link" data-scroll-target="#sensitivity-analysis">Sensitivity analysis</a></li>
+  <li><a href="#value-of-additional-information" id="toc-value-of-additional-information" class="nav-link" data-scroll-target="#value-of-additional-information">Value of additional information</a></li>
+  </ul></li>
+  <li><a href="#examine-who-benefits-and-who-bears-the-errors" id="toc-examine-who-benefits-and-who-bears-the-errors" class="nav-link" data-scroll-target="#examine-who-benefits-and-who-bears-the-errors">Examine who benefits and who bears the errors</a></li>
+  <li><a href="#preserve-meaningful-human-judgment" id="toc-preserve-meaningful-human-judgment" class="nav-link" data-scroll-target="#preserve-meaningful-human-judgment">Preserve meaningful human judgment</a></li>
+  <li><a href="#write-a-decision-memo" id="toc-write-a-decision-memo" class="nav-link" data-scroll-target="#write-a-decision-memo">Write a decision memo</a>
+  <ul class="collapse">
+  <li><a href="#decision" id="toc-decision" class="nav-link" data-scroll-target="#decision">Decision</a></li>
+  <li><a href="#recommendation" id="toc-recommendation" class="nav-link" data-scroll-target="#recommendation">Recommendation</a></li>
+  <li><a href="#evidence" id="toc-evidence" class="nav-link" data-scroll-target="#evidence">Evidence</a></li>
+  <li><a href="#assumptions-and-value-judgments" id="toc-assumptions-and-value-judgments" class="nav-link" data-scroll-target="#assumptions-and-value-judgments">Assumptions and value judgments</a></li>
+  <li><a href="#alternatives-considered" id="toc-alternatives-considered" class="nav-link" data-scroll-target="#alternatives-considered">Alternatives considered</a></li>
+  <li><a href="#risks-and-distributional-effects" id="toc-risks-and-distributional-effects" class="nav-link" data-scroll-target="#risks-and-distributional-effects">Risks and distributional effects</a></li>
+  <li><a href="#implementation-and-monitoring" id="toc-implementation-and-monitoring" class="nav-link" data-scroll-target="#implementation-and-monitoring">Implementation and monitoring</a></li>
+  </ul></li>
+  <li><a href="#monitor-the-decision-system-not-only-the-model" id="toc-monitor-the-decision-system-not-only-the-model" class="nav-link" data-scroll-target="#monitor-the-decision-system-not-only-the-model">Monitor the decision system, not only the model</a>
+  <ul class="collapse">
+  <li><a href="#pre-specify-review-and-stopping-rules" id="toc-pre-specify-review-and-stopping-rules" class="nav-link" data-scroll-target="#pre-specify-review-and-stopping-rules">Pre-specify review and stopping rules</a></li>
+  </ul></li>
+  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes">Common failure modes</a>
+  <ul class="collapse">
+  <li><a href="#letting-the-metric-choose-the-action" id="toc-letting-the-metric-choose-the-action" class="nav-link" data-scroll-target="#letting-the-metric-choose-the-action">Letting the metric choose the action</a></li>
+  <li><a href="#treating-0.50-as-a-neutral-threshold" id="toc-treating-0.50-as-a-neutral-threshold" class="nav-link" data-scroll-target="#treating-0.50-as-a-neutral-threshold">Treating 0.50 as a neutral threshold</a></li>
+  <li><a href="#confusing-risk-with-intervention-benefit" id="toc-confusing-risk-with-intervention-benefit" class="nav-link" data-scroll-target="#confusing-risk-with-intervention-benefit">Confusing risk with intervention benefit</a></li>
+  <li><a href="#ignoring-the-current-process" id="toc-ignoring-the-current-process" class="nav-link" data-scroll-target="#ignoring-the-current-process">Ignoring the current process</a></li>
+  <li><a href="#hiding-value-judgments-inside-technical-language" id="toc-hiding-value-judgments-inside-technical-language" class="nav-link" data-scroll-target="#hiding-value-judgments-inside-technical-language">Hiding value judgments inside technical language</a></li>
+  <li><a href="#automating-before-validating-the-action-pathway" id="toc-automating-before-validating-the-action-pathway" class="nav-link" data-scroll-target="#automating-before-validating-the-action-pathway">Automating before validating the action pathway</a></li>
+  <li><a href="#monitoring-only-model-drift" id="toc-monitoring-only-model-drift" class="nav-link" data-scroll-target="#monitoring-only-model-drift">Monitoring only model drift</a></li>
+  </ul></li>
+  <li><a href="#decision-readiness-checklist" id="toc-decision-readiness-checklist" class="nav-link" data-scroll-target="#decision-readiness-checklist">Decision-readiness checklist</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#closing-perspective" id="toc-closing-perspective" class="nav-link" data-scroll-target="#closing-perspective">Closing perspective</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html">Communication and Responsible Practice</a></li><li class="breadcrumb-item"><a href="./16-from-analysis-to-decision-making.html"><span class="chapter-title">From Analysis to Decision-Making</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="lesson16" class="quarto-section-identifier"><span class="chapter-title">From Analysis to Decision-Making</span></span></h1>
+<h1 class="title"><span id="sec-lesson16" class="quarto-section-identifier"><span class="chapter-title">From Analysis to Decision-Making</span></span></h1>
 </div>
 
 
@@ -353,11 +470,465 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Analysis informs decisions but does not replace judgment</li>
 </ul>
 </div>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>distinguish an analytical result from a decision;</li>
+<li>define the action, decision-maker, constraints, and consequences before selecting a model;</li>
+<li>translate predictions or estimates into decision rules;</li>
+<li>incorporate asymmetric costs, capacity limits, uncertainty, and distributional effects;</li>
+<li>document where evidence ends and judgment begins; and</li>
+<li>design monitoring that tests whether a decision remains useful after deployment.</li>
+</ul>
+</section>
+<section id="the-final-analytical-step-is-not-the-final-decision" class="level2">
+<h2 class="anchored" data-anchor-id="the-final-analytical-step-is-not-the-final-decision">The final analytical step is not the final decision</h2>
+<p>Chapter <a href="14-from-results-to-defensible-claims.html" class="quarto-xref"><span>From Results to Defensible Claims</span></a> established how results become defensible claims, and Chapter <a href="15-communicating-results-clearly.html" class="quarto-xref"><span>Communicating Results Clearly</span></a> showed how those claims should be communicated clearly. A claim, however, does not determine what should be done.</p>
+<p>Analysis describes evidence under stated assumptions. A decision combines that evidence with objectives, values, constraints, opportunity costs, and accountability. Two decision-makers can reasonably choose different actions from the same result because they face different consequences or have different tolerances for risk.</p>
+<p>The distinction is fundamental:</p>
 <blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
+<p><strong>Analytical conclusion:</strong> what the evidence supports.<br>
+<strong>Decision:</strong> what an accountable person or organisation chooses to do with that evidence.</p>
 </blockquote>
+<p>A model can estimate that an event is likely. It cannot decide whether intervention is affordable, proportionate, ethical, or operationally feasible.</p>
+</section>
+<section id="begin-with-the-decision-not-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="begin-with-the-decision-not-the-dataset">Begin with the decision, not the dataset</h2>
+<p>Before analysing data, write a decision statement:</p>
+<blockquote class="blockquote">
+<p><strong>Who</strong> will decide <strong>what action</strong>, for <strong>which population</strong>, <strong>when</strong>, using <strong>what evidence</strong>, under <strong>which constraints</strong>?</p>
+</blockquote>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>The programme manager will decide which currently enrolled participants should receive additional follow-up next month, using predicted disengagement risk, subject to a capacity of 120 follow-up calls.</p>
+</blockquote>
+<p>This statement is more useful than “build a churn model.” It identifies the accountable decision-maker, available action, target population, time horizon, evidence, and binding constraint.</p>
+<section id="a-decision-framing-table" class="level3">
+<h3 class="anchored" data-anchor-id="a-decision-framing-table">A decision-framing table</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Question to answer</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Decision-maker</td>
+<td>Who has authority and accountability?</td>
+<td>Programme manager</td>
+</tr>
+<tr class="even">
+<td>Population</td>
+<td>Who is eligible for the decision?</td>
+<td>Currently enrolled participants</td>
+</tr>
+<tr class="odd">
+<td>Action</td>
+<td>What can actually be done?</td>
+<td>Offer an additional follow-up call</td>
+</tr>
+<tr class="even">
+<td>Alternative</td>
+<td>What happens otherwise?</td>
+<td>Continue standard support</td>
+</tr>
+<tr class="odd">
+<td>Timing</td>
+<td>When must the choice be made?</td>
+<td>Before next month’s call schedule</td>
+</tr>
+<tr class="even">
+<td>Objective</td>
+<td>What outcome should improve?</td>
+<td>Continued programme participation</td>
+</tr>
+<tr class="odd">
+<td>Evidence</td>
+<td>What information is available at decision time?</td>
+<td>Baseline and prior engagement data</td>
+</tr>
+<tr class="even">
+<td>Constraints</td>
+<td>What limits the available action?</td>
+<td>120 calls and staff availability</td>
+</tr>
+<tr class="odd">
+<td>Harms</td>
+<td>Who may be burdened or excluded?</td>
+<td>Participants incorrectly labelled high-risk</td>
+</tr>
+<tr class="even">
+<td>Review</td>
+<td>When will the rule be reconsidered?</td>
+<td>After each quarterly cohort</td>
+</tr>
+</tbody>
+</table>
+<p>If any of these elements remains vague, a technically strong analysis may still be unusable.</p>
+</section>
+</section>
+<section id="match-the-analytical-target-to-the-decision" class="level2">
+<h2 class="anchored" data-anchor-id="match-the-analytical-target-to-the-decision">Match the analytical target to the decision</h2>
+<p>Different decisions require different analytical quantities.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decision need</th>
+<th>Useful analytical target</th>
+<th>Common mistake</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Describe the current situation</td>
+<td>Prevalence, rate, distribution, or subgroup summary</td>
+<td>Treating description as causal explanation</td>
+</tr>
+<tr class="even">
+<td>Estimate the effect of an intervention</td>
+<td>Causal contrast or treatment effect</td>
+<td>Using predictive importance as evidence of causation</td>
+</tr>
+<tr class="odd">
+<td>Prioritise limited services</td>
+<td>Calibrated individual risk or expected benefit</td>
+<td>Ranking people without specifying capacity</td>
+</tr>
+<tr class="even">
+<td>Forecast resource demand</td>
+<td>Future counts, probabilities, or intervals</td>
+<td>Reporting point forecasts without uncertainty</td>
+</tr>
+<tr class="odd">
+<td>Select among policies</td>
+<td>Expected utility, cost, benefit, and distributional effects</td>
+<td>Choosing the policy with the best average metric only</td>
+</tr>
+</tbody>
+</table>
+<p>A prediction of risk is not necessarily a prediction of benefit. A person with the highest event risk may not be the person most likely to benefit from the available intervention. When the decision concerns treatment or service allocation, the ideal target may be the expected outcome under each available action rather than risk under current practice.</p>
+</section>
+<section id="from-predictions-to-actions" class="level2">
+<h2 class="anchored" data-anchor-id="from-predictions-to-actions">From predictions to actions</h2>
+<p>A predictive model produces scores or probabilities. An operational system needs a decision rule.</p>
+<p>For a binary action, a simple threshold rule is:</p>
+[ a_i =
+<span class="math display">\[\begin{cases}
+1, &amp; \hat{p}_i \ge t \\
+0, &amp; \hat{p}_i &lt; t,
+\end{cases}\]</span>
+<p>]</p>
+<p>where (_i) is the estimated probability for case (i), (t) is the chosen threshold, and (a_i) indicates whether action is taken.</p>
+<p>The threshold is a policy choice, not a property discovered by the model. The default value of 0.50 is rarely justified merely because software uses it.</p>
+<section id="use-consequences-to-select-a-threshold" class="level3">
+<h3 class="anchored" data-anchor-id="use-consequences-to-select-a-threshold">Use consequences to select a threshold</h3>
+<p>Suppose action is taken to prevent an adverse event. Let:</p>
+<ul>
+<li>(C_{FP}) be the cost of acting when the event would not occur; and</li>
+<li>(C_{FN}) be the cost of failing to act when the event would occur.</li>
+</ul>
+<p>When probabilities are calibrated and these are the only relevant consequences, the expected-cost threshold is:</p>
+<p>[ t^* = . ]</p>
+<p>If a missed event costs four times as much as an unnecessary action, then (C_{FP}=1), (C_{FN}=4), and (t^*=0.20). This calculation makes the value judgment explicit; it does not make the judgment objective.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>false_positive_cost <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>false_negative_cost <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>decision_threshold <span class="op">=</span> false_positive_cost <span class="op">/</span> (</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    false_positive_cost <span class="op">+</span> false_negative_cost</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Decision threshold: </span><span class="sc">{</span>decision_threshold<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Real decisions can also involve intervention effectiveness, direct financial costs, participant burden, downstream harms, and uncertain consequences. These should be represented when they materially affect the choice.</p>
+</section>
+</section>
+<section id="capacity-can-determine-the-rule" class="level2">
+<h2 class="anchored" data-anchor-id="capacity-can-determine-the-rule">Capacity can determine the rule</h2>
+<p>Many organisations cannot act on every case above a theoretically optimal threshold. If only (K) cases can receive an intervention, a ranking rule may be more appropriate:</p>
+<ol type="1">
+<li>estimate the relevant score for each eligible case;</li>
+<li>exclude cases for whom the action is inappropriate or unavailable;</li>
+<li>rank the remaining cases using the pre-specified score;</li>
+<li>act on at most the top (K); and</li>
+<li>define how ties and exceptions will be handled.</li>
+</ol>
+<p>Capacity-constrained selection changes the evaluation question. Accuracy at a 0.50 threshold becomes less informative than measures such as precision among the top (K), recall at capacity, expected benefit per action, total expected utility, and subgroup selection rates.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>capacity <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>priority_list <span class="op">=</span> (</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    eligible_participants</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"predicted_risk"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    .head(capacity)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    .assign(recommended_action<span class="op">=</span><span class="st">"additional_follow_up"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This example is intentionally non-executable because <code>eligible_participants</code> represents data supplied by the local decision context.</p>
+</section>
+<section id="compare-policies-not-only-models" class="level2">
+<h2 class="anchored" data-anchor-id="compare-policies-not-only-models">Compare policies, not only models</h2>
+<p>The model with the highest area under the ROC curve is not automatically the best decision system. Candidate policies should be compared with realistic baselines:</p>
+<ul>
+<li>take no additional action;</li>
+<li>act on everyone;</li>
+<li>continue the current human or rule-based process;</li>
+<li>use a model-based threshold;</li>
+<li>rank cases until capacity is filled; or</li>
+<li>combine a model recommendation with structured human review.</li>
+</ul>
+<p>For a policy (d), expected utility can be written as:</p>
+<p>[ EU(d) = _{i=1}^{n} U(d(x_i), y_i), ]</p>
+<p>where (d(x_i)) is the action selected for case (i), (y_i) is the observed outcome, and (U) assigns a value or cost to each action–outcome combination.</p>
+<p>The utility table must be discussed with domain experts and affected stakeholders. It embeds priorities that a data scientist should not silently invent.</p>
+</section>
+<section id="a-worked-decision-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="a-worked-decision-analysis">A worked decision analysis</h2>
+<p>Consider a service that can contact participants who are at risk of disengagement. Historical validation data contain calibrated probabilities and observed outcomes. The team wants to compare thresholds under the following illustrative costs:</p>
+<ul>
+<li>unnecessary contact: 1 cost unit;</li>
+<li>missed disengagement: 5 cost units; and</li>
+<li>available follow-up capacity: 20% of participants.</li>
+</ul>
+<p>The companion script evaluates candidate thresholds and produces a decision-focused figure:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/16-generate-decision-making-figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-16-decision-threshold-trade-offs" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-panel chart showing expected cost and share selected across probability thresholds, with cost-based and capacity-based operating points marked.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-16-decision-threshold-trade-offs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/16-decision-threshold-trade-offs.png" class="img-fluid figure-img" alt="Two-panel chart showing expected cost and share selected across probability thresholds, with cost-based and capacity-based operating points marked.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-16-decision-threshold-trade-offs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.1: Decision consequences across candidate thresholds. The preferred operating point depends on explicit costs and available capacity, not on a universal probability cutoff.
+</figcaption>
+</figure>
+</div>
+<p>Figure <a href="#fig-16-decision-threshold-trade-offs" class="quarto-xref">Figure&nbsp;<span>17.1</span></a> illustrates two distinct rules. A cost-based threshold minimises the specified validation cost. A capacity-based threshold selects only the number of cases the service can contact. Neither rule should be adopted until its assumptions, uncertainty, and subgroup consequences have been reviewed.</p>
+</section>
+<section id="make-uncertainty-decision-relevant" class="level2">
+<h2 class="anchored" data-anchor-id="make-uncertainty-decision-relevant">Make uncertainty decision-relevant</h2>
+<p>Confidence intervals and predictive intervals are useful only when connected to the choice being considered. Ask:</p>
+<ul>
+<li>Would the action change across plausible values of the estimate?</li>
+<li>Which uncertain assumption has the greatest influence on the decision?</li>
+<li>Is more information worth the delay or cost of collecting it?</li>
+<li>Can a reversible pilot reduce uncertainty before full implementation?</li>
+</ul>
+<section id="sensitivity-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="sensitivity-analysis">Sensitivity analysis</h3>
+<p>Do not report one decision under one assumed cost structure. Recalculate the preferred policy across plausible values for:</p>
+<ul>
+<li>false-positive and false-negative costs;</li>
+<li>intervention effectiveness;</li>
+<li>operational capacity;</li>
+<li>outcome prevalence;</li>
+<li>probability calibration; and</li>
+<li>missing-data or transportability assumptions.</li>
+</ul>
+<p>A decision is robust when the preferred action remains reasonable across credible assumptions. If small changes reverse the choice, communicate that instability directly.</p>
+</section>
+<section id="value-of-additional-information" class="level3">
+<h3 class="anchored" data-anchor-id="value-of-additional-information">Value of additional information</h3>
+<p>More analysis is valuable when it has a realistic chance of changing the decision enough to justify its cost and delay. Otherwise, a limited pilot with monitoring may be preferable to indefinite analysis.</p>
+</section>
+</section>
+<section id="examine-who-benefits-and-who-bears-the-errors" class="level2">
+<h2 class="anchored" data-anchor-id="examine-who-benefits-and-who-bears-the-errors">Examine who benefits and who bears the errors</h2>
+<p>Average utility can hide unequal effects. Before recommending a policy, examine:</p>
+<ul>
+<li>eligibility and data availability across groups;</li>
+<li>calibration and error rates in substantively relevant subgroups;</li>
+<li>selection rates under the proposed rule;</li>
+<li>access to the intervention after selection;</li>
+<li>burdens created by false positives and harms created by false negatives; and</li>
+<li>whether historically produced labels encode unequal prior treatment.</li>
+</ul>
+<p>Equalising one metric does not guarantee an equitable policy. Metrics can conflict, and the appropriate standard depends on the decision context. Distributional results should therefore be presented alongside overall performance and considered with people who understand the affected setting.</p>
+<p>Sensitive attributes may be necessary for auditing even when they are not used as predictors. Their collection and use must follow appropriate legal, ethical, privacy, and governance requirements.</p>
+</section>
+<section id="preserve-meaningful-human-judgment" class="level2">
+<h2 class="anchored" data-anchor-id="preserve-meaningful-human-judgment">Preserve meaningful human judgment</h2>
+<p>“Human in the loop” is useful only if the human role is specified. Document:</p>
+<ul>
+<li>what information the reviewer receives;</li>
+<li>which decisions may be overridden;</li>
+<li>acceptable reasons for an override;</li>
+<li>how overrides are recorded;</li>
+<li>who can appeal or request reconsideration; and</li>
+<li>how reviewer consistency and outcomes will be audited.</li>
+</ul>
+<p>Unstructured overrides can reproduce bias while obscuring accountability. Conversely, preventing any override can make a system brittle when data are incomplete or exceptional circumstances arise.</p>
+<p>The goal is not to place a person somewhere in the workflow. It is to allocate responsibility clearly.</p>
+</section>
+<section id="write-a-decision-memo" class="level2">
+<h2 class="anchored" data-anchor-id="write-a-decision-memo">Write a decision memo</h2>
+<p>A concise decision memo separates evidence, assumptions, and judgment. A useful structure is:</p>
+<section id="decision" class="level3">
+<h3 class="anchored" data-anchor-id="decision">Decision</h3>
+<p>State the decision required, the decision-maker, and the deadline.</p>
+</section>
+<section id="recommendation" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation">Recommendation</h3>
+<p>State the preferred action and any limits on its use.</p>
+</section>
+<section id="evidence" class="level3">
+<h3 class="anchored" data-anchor-id="evidence">Evidence</h3>
+<p>Summarise the most relevant estimates, validation results, comparisons, and uncertainty. Link to the complete analysis rather than reproducing every output.</p>
+</section>
+<section id="assumptions-and-value-judgments" class="level3">
+<h3 class="anchored" data-anchor-id="assumptions-and-value-judgments">Assumptions and value judgments</h3>
+<p>List the assumed costs, benefits, capacity, time horizon, and ethical or policy priorities.</p>
+</section>
+<section id="alternatives-considered" class="level3">
+<h3 class="anchored" data-anchor-id="alternatives-considered">Alternatives considered</h3>
+<p>Describe credible alternatives, including the current process and no-action option, and explain why they were not preferred.</p>
+</section>
+<section id="risks-and-distributional-effects" class="level3">
+<h3 class="anchored" data-anchor-id="risks-and-distributional-effects">Risks and distributional effects</h3>
+<p>Identify failure modes, affected groups, privacy concerns, operational risks, and possible unintended consequences.</p>
+</section>
+<section id="implementation-and-monitoring" class="level3">
+<h3 class="anchored" data-anchor-id="implementation-and-monitoring">Implementation and monitoring</h3>
+<p>Specify ownership, review points, outcome measures, override rules, stopping conditions, and the next decision date.</p>
+</section>
+</section>
+<section id="monitor-the-decision-system-not-only-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="monitor-the-decision-system-not-only-the-model">Monitor the decision system, not only the model</h2>
+<p>After implementation, model metrics are only part of the evidence. Monitoring should connect the entire pathway:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Example question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data</td>
+<td>Has the eligible population or measurement process changed?</td>
+</tr>
+<tr class="even">
+<td>Model</td>
+<td>Are discrimination and calibration stable?</td>
+</tr>
+<tr class="odd">
+<td>Decision rule</td>
+<td>How many cases are selected, deferred, or overridden?</td>
+</tr>
+<tr class="even">
+<td>Operations</td>
+<td>Are recommended actions delivered on time and as intended?</td>
+</tr>
+<tr class="odd">
+<td>Outcomes</td>
+<td>Do selected cases experience better outcomes?</td>
+</tr>
+<tr class="even">
+<td>Distribution</td>
+<td>Are benefits, errors, and burdens concentrated in particular groups?</td>
+</tr>
+<tr class="odd">
+<td>Governance</td>
+<td>Are incidents, appeals, and exceptions reviewed?</td>
+</tr>
+</tbody>
+</table>
+<p>A model may remain statistically accurate while the programme fails because staff cannot deliver the intervention. Alternatively, the model may drift while experienced reviewers temporarily prevent harm. Monitoring must detect both situations.</p>
+<section id="pre-specify-review-and-stopping-rules" class="level3">
+<h3 class="anchored" data-anchor-id="pre-specify-review-and-stopping-rules">Pre-specify review and stopping rules</h3>
+<p>Define conditions that trigger investigation, recalibration, retraining, policy revision, or suspension. Examples include:</p>
+<ul>
+<li>missingness exceeding an agreed limit;</li>
+<li>calibration error becoming operationally material;</li>
+<li>intervention capacity being repeatedly exceeded;</li>
+<li>a harmful subgroup disparity emerging;</li>
+<li>implementation fidelity falling below an acceptable level; or</li>
+<li>evidence that the intervention no longer improves outcomes.</li>
+</ul>
+<p>Thresholds for these triggers should reflect practical importance, not statistical significance alone.</p>
+</section>
+</section>
+<section id="common-failure-modes" class="level2">
+<h2 class="anchored" data-anchor-id="common-failure-modes">Common failure modes</h2>
+<section id="letting-the-metric-choose-the-action" class="level3">
+<h3 class="anchored" data-anchor-id="letting-the-metric-choose-the-action">Letting the metric choose the action</h3>
+<p>Optimising accuracy, (R^2), or AUC does not define the relevant costs, benefits, or constraints.</p>
+</section>
+<section id="treating-0.50-as-a-neutral-threshold" class="level3">
+<h3 class="anchored" data-anchor-id="treating-0.50-as-a-neutral-threshold">Treating 0.50 as a neutral threshold</h3>
+<p>Every threshold creates a pattern of actions and errors. The default is still a policy choice.</p>
+</section>
+<section id="confusing-risk-with-intervention-benefit" class="level3">
+<h3 class="anchored" data-anchor-id="confusing-risk-with-intervention-benefit">Confusing risk with intervention benefit</h3>
+<p>High-risk cases may be difficult to help, while moderate-risk cases may respond strongly to the available action.</p>
+</section>
+<section id="ignoring-the-current-process" class="level3">
+<h3 class="anchored" data-anchor-id="ignoring-the-current-process">Ignoring the current process</h3>
+<p>A new policy should be compared with what decision-makers actually do now, including its costs and strengths.</p>
+</section>
+<section id="hiding-value-judgments-inside-technical-language" class="level3">
+<h3 class="anchored" data-anchor-id="hiding-value-judgments-inside-technical-language">Hiding value judgments inside technical language</h3>
+<p>Weights, thresholds, utility values, and fairness criteria express priorities. Name who selected them and why.</p>
+</section>
+<section id="automating-before-validating-the-action-pathway" class="level3">
+<h3 class="anchored" data-anchor-id="automating-before-validating-the-action-pathway">Automating before validating the action pathway</h3>
+<p>Prediction has little value when the recommended action is unavailable, ineffective, or not delivered.</p>
+</section>
+<section id="monitoring-only-model-drift" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-only-model-drift">Monitoring only model drift</h3>
+<p>Stable inputs do not guarantee useful implementation or improved outcomes.</p>
+</section>
+</section>
+<section id="decision-readiness-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="decision-readiness-checklist">Decision-readiness checklist</h2>
+<p>Before recommending action, confirm that:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">the decision-maker, population, action, timing, and alternative are explicit;</label></li>
+<li><label><input type="checkbox">the analytical target matches the decision need;</label></li>
+<li><label><input type="checkbox">only information available at decision time is used;</label></li>
+<li><label><input type="checkbox">relevant costs, benefits, constraints, and capacity are documented;</label></li>
+<li><label><input type="checkbox">candidate policies are compared with current practice and simple baselines;</label></li>
+<li><label><input type="checkbox">uncertainty and sensitivity analyses could meaningfully change the recommendation;</label></li>
+<li><label><input type="checkbox">subgroup performance, access, burdens, and benefits have been examined;</label></li>
+<li><label><input type="checkbox">human review, overrides, appeals, and accountability are defined;</label></li>
+<li><label><input type="checkbox">implementation ownership and intervention fidelity can be measured;</label></li>
+<li><label><input type="checkbox">monitoring, review dates, and stopping rules are pre-specified; and</label></li>
+<li><label><input type="checkbox">the final communication separates evidence from judgment.</label></li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ol type="1">
+<li>Start with an actionable decision statement, not a preferred method.</li>
+<li>Match the analytical target to the decision: description, causal effect, risk, benefit, demand, and utility answer different questions.</li>
+<li>Translate estimates into explicit policies using consequences and operational constraints.</li>
+<li>Compare complete decision policies with realistic alternatives, not models in isolation.</li>
+<li>Test whether the recommendation survives plausible uncertainty and whether its benefits and burdens are acceptably distributed.</li>
+<li>Preserve accountability by documenting value judgments, human roles, and governance.</li>
+<li>Monitor data, models, actions, implementation, outcomes, and distributional effects together.</li>
+</ol>
+</section>
+<section id="closing-perspective" class="level2">
+<h2 class="anchored" data-anchor-id="closing-perspective">Closing perspective</h2>
+<p>Advanced data science is not complete when a model converges, a hypothesis test is significant, or a dashboard is published. It is complete only when the evidence is connected to a clearly framed choice, its limitations are visible, responsibility is assigned, and outcomes can be examined after action.</p>
+<p>The most credible analyst does not claim that data make the decision. The analyst makes the evidence useful, distinguishes calculation from judgment, and helps decision-makers act with greater clarity and accountability.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

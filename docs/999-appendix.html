@@ -374,61 +374,22 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-to-use-this-appendix" id="toc-how-to-use-this-appendix" class="nav-link active" data-scroll-target="#how-to-use-this-appendix">How to Use This Appendix</a></li>
-  <li><a href="#project-structure-overview" id="toc-project-structure-overview" class="nav-link" data-scroll-target="#project-structure-overview">Project Structure Overview</a></li>
-  <li><a href="#key-directories" id="toc-key-directories" class="nav-link" data-scroll-target="#key-directories">Key Directories</a>
+  <li><a href="#reproducible-project-structure" id="toc-reproducible-project-structure" class="nav-link active" data-scroll-target="#reproducible-project-structure">Reproducible Project Structure</a></li>
+  <li><a href="#essential-commands" id="toc-essential-commands" class="nav-link" data-scroll-target="#essential-commands">Essential Commands</a>
   <ul class="collapse">
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><code>data/</code></a></li>
-  <li><a href="#scriptspython" id="toc-scriptspython" class="nav-link" data-scroll-target="#scriptspython"><code>scripts/python/</code></a></li>
-  <li><a href="#scriptsbash" id="toc-scriptsbash" class="nav-link" data-scroll-target="#scriptsbash"><code>scripts/bash/</code></a></li>
-  <li><a href="#reports" id="toc-reports" class="nav-link" data-scroll-target="#reports"><code>reports/</code></a></li>
-  <li><a href="#reportsfigures" id="toc-reportsfigures" class="nav-link" data-scroll-target="#reportsfigures"><code>reports/figures/</code></a></li>
-  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><code>models/</code></a></li>
-  <li><a href="#docs" id="toc-docs" class="nav-link" data-scroll-target="#docs"><code>docs/</code></a></li>
+  <li><a href="#activate-the-project-environment" id="toc-activate-the-project-environment" class="nav-link" data-scroll-target="#activate-the-project-environment">Activate the project environment</a></li>
+  <li><a href="#install-or-reproduce-dependencies" id="toc-install-or-reproduce-dependencies" class="nav-link" data-scroll-target="#install-or-reproduce-dependencies">Install or reproduce dependencies</a></li>
+  <li><a href="#run-a-chapter-script" id="toc-run-a-chapter-script" class="nav-link" data-scroll-target="#run-a-chapter-script">Run a chapter script</a></li>
+  <li><a href="#render-the-complete-guide" id="toc-render-the-complete-guide" class="nav-link" data-scroll-target="#render-the-complete-guide">Render the complete guide</a></li>
+  <li><a href="#leave-the-environment" id="toc-leave-the-environment" class="nav-link" data-scroll-target="#leave-the-environment">Leave the environment</a></li>
   </ul></li>
-  <li><a href="#environment-setup-reference" id="toc-environment-setup-reference" class="nav-link" data-scroll-target="#environment-setup-reference">Environment Setup Reference</a></li>
-  <li><a href="#reproducibility-lock-file" id="toc-reproducibility-lock-file" class="nav-link" data-scroll-target="#reproducibility-lock-file">Reproducibility Lock File</a></li>
-  <li><a href="#running-a-lesson-script" id="toc-running-a-lesson-script" class="nav-link" data-scroll-target="#running-a-lesson-script">Running a Lesson Script</a></li>
-  <li><a href="#rendering-the-quarto-site" id="toc-rendering-the-quarto-site" class="nav-link" data-scroll-target="#rendering-the-quarto-site">Rendering the Quarto Site</a></li>
-  <li><a href="#standard-lesson-workflow" id="toc-standard-lesson-workflow" class="nav-link" data-scroll-target="#standard-lesson-workflow">Standard Lesson Workflow</a></li>
-  <li><a href="#github-pages-workflow" id="toc-github-pages-workflow" class="nav-link" data-scroll-target="#github-pages-workflow">GitHub Pages Workflow</a></li>
-  <li><a href="#reusable-pandas-patterns" id="toc-reusable-pandas-patterns" class="nav-link" data-scroll-target="#reusable-pandas-patterns">Reusable Pandas Patterns</a>
-  <ul class="collapse">
-  <li><a href="#read-a-csv-file" id="toc-read-a-csv-file" class="nav-link" data-scroll-target="#read-a-csv-file">Read a CSV file</a></li>
-  <li><a href="#select-columns" id="toc-select-columns" class="nav-link" data-scroll-target="#select-columns">Select columns</a></li>
-  <li><a href="#drop-columns" id="toc-drop-columns" class="nav-link" data-scroll-target="#drop-columns">Drop columns</a></li>
-  <li><a href="#select-a-target-column" id="toc-select-a-target-column" class="nav-link" data-scroll-target="#select-a-target-column">Select a target column</a></li>
-  <li><a href="#filter-rows" id="toc-filter-rows" class="nav-link" data-scroll-target="#filter-rows">Filter rows</a></li>
-  <li><a href="#create-a-new-column" id="toc-create-a-new-column" class="nav-link" data-scroll-target="#create-a-new-column">Create a new column</a></li>
-  <li><a href="#group-and-aggregate" id="toc-group-and-aggregate" class="nav-link" data-scroll-target="#group-and-aggregate">Group and aggregate</a></li>
-  <li><a href="#handle-missing-values" id="toc-handle-missing-values" class="nav-link" data-scroll-target="#handle-missing-values">Handle missing values</a></li>
-  <li><a href="#convert-data-type" id="toc-convert-data-type" class="nav-link" data-scroll-target="#convert-data-type">Convert data type</a></li>
-  <li><a href="#save-a-result" id="toc-save-a-result" class="nav-link" data-scroll-target="#save-a-result">Save a result</a></li>
-  </ul></li>
-  <li><a href="#reusable-scikit-learn-patterns" id="toc-reusable-scikit-learn-patterns" class="nav-link" data-scroll-target="#reusable-scikit-learn-patterns">Reusable Scikit-Learn Patterns</a>
-  <ul class="collapse">
-  <li><a href="#define-features-and-target" id="toc-define-features-and-target" class="nav-link" data-scroll-target="#define-features-and-target">Define features and target</a></li>
-  <li><a href="#split-data" id="toc-split-data" class="nav-link" data-scroll-target="#split-data">Split data</a></li>
-  <li><a href="#fit-a-baseline-model" id="toc-fit-a-baseline-model" class="nav-link" data-scroll-target="#fit-a-baseline-model">Fit a baseline model</a></li>
-  <li><a href="#generate-predictions" id="toc-generate-predictions" class="nav-link" data-scroll-target="#generate-predictions">Generate predictions</a></li>
-  <li><a href="#evaluate-predictions" id="toc-evaluate-predictions" class="nav-link" data-scroll-target="#evaluate-predictions">Evaluate predictions</a></li>
-  <li><a href="#build-a-pipeline" id="toc-build-a-pipeline" class="nav-link" data-scroll-target="#build-a-pipeline">Build a pipeline</a></li>
-  <li><a href="#run-cross-validation" id="toc-run-cross-validation" class="nav-link" data-scroll-target="#run-cross-validation">Run cross-validation</a></li>
-  <li><a href="#save-a-trained-model" id="toc-save-a-trained-model" class="nav-link" data-scroll-target="#save-a-trained-model">Save a trained model</a></li>
-  <li><a href="#load-a-trained-model" id="toc-load-a-trained-model" class="nav-link" data-scroll-target="#load-a-trained-model">Load a trained model</a></li>
-  </ul></li>
-  <li><a href="#reusable-matplotlib-patterns" id="toc-reusable-matplotlib-patterns" class="nav-link" data-scroll-target="#reusable-matplotlib-patterns">Reusable Matplotlib Patterns</a>
-  <ul class="collapse">
-  <li><a href="#basic-scatter-plot" id="toc-basic-scatter-plot" class="nav-link" data-scroll-target="#basic-scatter-plot">Basic scatter plot</a></li>
-  <li><a href="#save-a-figure" id="toc-save-a-figure" class="nav-link" data-scroll-target="#save-a-figure">Save a figure</a></li>
-  <li><a href="#observed-vs-predicted-plot" id="toc-observed-vs-predicted-plot" class="nav-link" data-scroll-target="#observed-vs-predicted-plot">Observed vs predicted plot</a></li>
-  </ul></li>
-  <li><a href="#reproducibility-checklist" id="toc-reproducibility-checklist" class="nav-link" data-scroll-target="#reproducibility-checklist">Reproducibility Checklist</a></li>
-  <li><a href="#public-repository-safety-checklist" id="toc-public-repository-safety-checklist" class="nav-link" data-scroll-target="#public-repository-safety-checklist">Public Repository Safety Checklist</a></li>
-  <li><a href="#running-the-full-system" id="toc-running-the-full-system" class="nav-link" data-scroll-target="#running-the-full-system">Running the Full System</a></li>
-  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources</a></li>
-  <li><a href="#software-and-tools" id="toc-software-and-tools" class="nav-link" data-scroll-target="#software-and-tools">Software and Tools</a></li>
-  <li><a href="#closing-note" id="toc-closing-note" class="nav-link" data-scroll-target="#closing-note">Closing Note</a></li>
+  <li><a href="#end-to-end-analytical-workflow" id="toc-end-to-end-analytical-workflow" class="nav-link" data-scroll-target="#end-to-end-analytical-workflow">End-to-End Analytical Workflow</a></li>
+  <li><a href="#leakage-safe-modelling-pattern" id="toc-leakage-safe-modelling-pattern" class="nav-link" data-scroll-target="#leakage-safe-modelling-pattern">Leakage-Safe Modelling Pattern</a></li>
+  <li><a href="#evaluation-quick-reference" id="toc-evaluation-quick-reference" class="nav-link" data-scroll-target="#evaluation-quick-reference">Evaluation Quick Reference</a></li>
+  <li><a href="#interpretation-guardrails" id="toc-interpretation-guardrails" class="nav-link" data-scroll-target="#interpretation-guardrails">Interpretation Guardrails</a></li>
+  <li><a href="#decision-and-responsible-use-checklist" id="toc-decision-and-responsible-use-checklist" class="nav-link" data-scroll-target="#decision-and-responsible-use-checklist">Decision and Responsible-Use Checklist</a></li>
+  <li><a href="#final-reproducibility-audit" id="toc-final-reproducibility-audit" class="nav-link" data-scroll-target="#final-reproducibility-audit">Final Reproducibility Audit</a></li>
+  <li><a href="#core-software" id="toc-core-software" class="nav-link" data-scroll-target="#core-software">Core Software</a></li>
   </ul>
 </nav>
     </div>
@@ -464,514 +425,272 @@ div.csl-indent {
 <ul>
 <li><strong>ID:</strong> ADS-APP</li>
 <li><strong>Type:</strong> Reference</li>
-<li><strong>Audience:</strong> Public</li>
-<li><strong>Theme:</strong> Environment, project structure, reproducibility, and reusable workflow patterns</li>
+<li><strong>Audience:</strong> Intermediate to Advanced</li>
+<li><strong>Theme:</strong> A defensible analysis is reproducible from question to decision</li>
 </ul>
 </div>
-<p>This appendix collects technical reference material that supports the <strong>Applied Data Science System</strong>.</p>
-<p>It documents the project structure, environment setup, rendering workflow, script-based execution pattern, and reusable Python patterns used throughout the guide.</p>
-<p>The purpose of the appendix is simple:</p>
-<blockquote class="blockquote">
-<p>make the workflow easier to rerun, inspect, adapt, and extend.</p>
-</blockquote>
+<p>This appendix consolidates the reusable structures, commands, modelling patterns, and review checks developed throughout <strong>Advanced Data Science</strong>. Use it as an operational reference—not as a substitute for the reasoning in the main chapters.</p>
 <hr>
-<section id="how-to-use-this-appendix" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use-this-appendix">How to Use This Appendix</h2>
-<p>Use this appendix as a reference when you need to:</p>
-<ul>
-<li>recreate the project environment</li>
-<li>understand the folder structure</li>
-<li>rerun lesson scripts</li>
-<li>regenerate reports and figures</li>
-<li>render the Quarto site</li>
-<li>prepare changes for GitHub Pages</li>
-</ul>
-<p>Most chapters in this guide can be run in two ways:</p>
-<ol type="1">
-<li>interactively, by reading and running the code blocks in the chapter</li>
-<li>reproducibly, by running the supporting Python script from the project root</li>
-</ol>
-<p>The script-based workflow is preferred when preparing a public or production-facing version of the guide.</p>
-<hr>
-</section>
-<section id="project-structure-overview" class="level2">
-<h2 class="anchored" data-anchor-id="project-structure-overview">Project Structure Overview</h2>
-<p>A standard CDI applied data science project uses a Quarto-first structure with supporting scripts and saved outputs.</p>
+<section id="reproducible-project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-project-structure">Reproducible Project Structure</h2>
 <pre class="text"><code>applied-data-science/
-├── index.qmd
-├── 00-preface.qmd
-├── 01-setting-up-environment.qmd
-├── 08-feature-engineering.qmd
-├── 09-model-building.qmd
-├── 10-model-evaluation.qmd
-├── 11-model-improvement.qmd
-├── 12-pipelines-and-cross-validation.qmd
-├── 13-feature-importance-and-interpretation.qmd
-├── 14-from-model-outputs-to-real-world-claims.qmd
-├── 15-communicating-results-clearly.qmd
-├── 16-from-analysis-to-decision-making.qmd
-├── 17-end-to-end-case-study.qmd
-├── 18-limitations-and-responsible-use.qmd
-├── 19-from-foundations-to-real-world-practice.qmd
-├── 999-appendix.qmd
-├── 999-references.qmd
 ├── data/
-│   ├── README.md
-│   ├── diabetes.csv
 │   ├── raw/
-│   │   └── people-example.csv
-│   └── processed/
-│       └── model-ready-example.csv
+│   ├── processed/
+│   └── reference/
 ├── models/
-│   └── diabetes-linear-regression.joblib
+├── notebooks/
 ├── reports/
-│   ├── *.csv
-│   ├── *.md
-│   └── figures/
-│       └── *.png
+├── results/
+│   ├── figures/
+│   └── tables/
 ├── scripts/
 │   ├── bash/
 │   └── python/
-├── docs/
+├── .gitignore
 ├── _quarto.yml
 ├── requirements.txt
-├── requirements-lock.txt
-└── .gitignore</code></pre>
-<p>This layout separates source files, data, scripts, generated reports, model artifacts, and rendered documentation.</p>
-<hr>
-</section>
-<section id="key-directories" class="level2">
-<h2 class="anchored" data-anchor-id="key-directories">Key Directories</h2>
-<section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data"><code>data/</code></h3>
-<p>The <code>data/</code> directory stores project datasets.</p>
-<p>In this guide, it includes:</p>
-<pre class="text"><code>data/diabetes.csv
-data/raw/people-example.csv
-data/processed/model-ready-example.csv</code></pre>
-<p>The diabetes dataset supports the modeling lessons.</p>
-<p>The people example supports feature engineering and model-ready table construction.</p>
-<hr>
-</section>
-<section id="scriptspython" class="level3">
-<h3 class="anchored" data-anchor-id="scriptspython"><code>scripts/python/</code></h3>
-<p>The <code>scripts/python/</code> directory contains executable lesson scripts.</p>
-<p>These scripts turn chapter logic into reusable project workflows.</p>
-<p>Examples include:</p>
-<pre class="text"><code>scripts/python/09b_train_baseline_linear_model.py
-scripts/python/10a_evaluate_repeated_splits.py
-scripts/python/12a_cross_validate_pipeline.py
-scripts/python/17a_run_end_to_end_case_study.py</code></pre>
-<p>Each script should be runnable from the project root.</p>
-<hr>
-</section>
-<section id="scriptsbash" class="level3">
-<h3 class="anchored" data-anchor-id="scriptsbash"><code>scripts/bash/</code></h3>
-<p>The <code>scripts/bash/</code> directory contains helper scripts for project setup and build operations.</p>
-<p>Examples include:</p>
-<pre class="text"><code>scripts/bash/01a-create-project-structure.sh
-scripts/bash/01c-build-project.sh
-scripts/bash/01d-freeze-dependencies.sh</code></pre>
-<p>These scripts support repeatable project management.</p>
-<hr>
-</section>
-<section id="reports" class="level3">
-<h3 class="anchored" data-anchor-id="reports"><code>reports/</code></h3>
-<p>The <code>reports/</code> directory stores reusable outputs created by the scripts.</p>
-<p>These may include:</p>
+└── requirements-lock.txt</code></pre>
 <ul>
-<li>model metrics</li>
-<li>cross-validation summaries</li>
-<li>coefficient tables</li>
-<li>communication summaries</li>
-<li>responsible-use checklists</li>
-<li>decision framing tables</li>
+<li>Preserve <code>data/raw/</code> as the unchanged source layer.</li>
+<li>Write derived datasets only to <code>data/processed/</code>.</li>
+<li>Keep reusable analysis and figure generation in chapter-prefixed scripts.</li>
+<li>Separate models, figures, tables, and narrative reports.</li>
+<li>Record direct dependencies in <code>requirements.txt</code> and, when needed, freeze the complete working environment in <code>requirements-lock.txt</code>.</li>
 </ul>
-<p>Saved reports make the workflow auditable.</p>
-<p>They also allow later chapters to refer to previous outputs without hiding the work that created them.</p>
+<p>This separation makes computational steps easier to inspect, rerun, and revise. Reproducibility requires more than sharing code: the data, software environment, execution order, and analytical decisions must also be sufficiently documented <span class="citation" data-cites="peng2011reproducible">(<a href="999-references.html#ref-peng2011reproducible" role="doc-biblioref">Peng 2011</a>)</span>. Data and metadata intended for reuse should additionally follow the FAIR principles of findability, accessibility, interoperability, and reusability <span class="citation" data-cites="wilkinson2016fair">(<a href="999-references.html#ref-wilkinson2016fair" role="doc-biblioref">Wilkinson et al. 2016</a>)</span>.</p>
 <hr>
 </section>
-<section id="reportsfigures" class="level3">
-<h3 class="anchored" data-anchor-id="reportsfigures"><code>reports/figures/</code></h3>
-<p>The <code>reports/figures/</code> directory stores saved plots.</p>
-<p>Examples include:</p>
-<pre class="text"><code>reports/figures/diabetes-observed-vs-predicted.png
-reports/figures/diabetes-residual-plot.png
-reports/figures/diabetes-cross-validation-mae.png</code></pre>
-<p>Saving figures as files makes them easier to reuse in reports, slides, websites, and README pages.</p>
-<hr>
+<section id="essential-commands" class="level2">
+<h2 class="anchored" data-anchor-id="essential-commands">Essential Commands</h2>
+<section id="activate-the-project-environment" class="level3">
+<h3 class="anchored" data-anchor-id="activate-the-project-environment">Activate the project environment</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="models" class="level3">
-<h3 class="anchored" data-anchor-id="models"><code>models/</code></h3>
-<p>The <code>models/</code> directory stores trained teaching models.</p>
-<p>For example:</p>
-<pre class="text"><code>models/diabetes-linear-regression.joblib</code></pre>
-<p>In this guide, the model artifact is small and intentional.</p>
-<p>In larger projects, model artifacts should be tracked carefully because they can become large or sensitive.</p>
-<hr>
+<section id="install-or-reproduce-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="install-or-reproduce-dependencies">Install or reproduce dependencies</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements-lock.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="docs" class="level3">
-<h3 class="anchored" data-anchor-id="docs"><code>docs/</code></h3>
-<p>The <code>docs/</code> directory contains the rendered Quarto website.</p>
-<p>For GitHub Pages using a <code>docs/</code> deployment workflow, this is the public site output directory.</p>
-<p>Do not edit files inside <code>docs/</code> manually unless there is a specific reason.</p>
-<p>Instead, edit the <code>.qmd</code> source files and rerender the site.</p>
-<hr>
+<section id="run-a-chapter-script" class="level3">
+<h3 class="anchored" data-anchor-id="run-a-chapter-script">Run a chapter script</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/09-generate-model-evaluation-figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="render-the-complete-guide" class="level3">
+<h3 class="anchored" data-anchor-id="render-the-complete-guide">Render the complete guide</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="environment-setup-reference" class="level2">
-<h2 class="anchored" data-anchor-id="environment-setup-reference">Environment Setup Reference</h2>
-<p>This project uses a local Python virtual environment.</p>
-<p>Create and activate the environment from the project root:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Install the required packages:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>requirements.txt</code> file defines the main dependencies needed to run the project.</p>
-<hr>
-</section>
-<section id="reproducibility-lock-file" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility-lock-file">Reproducibility Lock File</h2>
-<p>The project may also include:</p>
-<pre class="text"><code>requirements-lock.txt</code></pre>
-<p>This file records an exact package snapshot.</p>
-<p>A useful distinction is:</p>
-<pre class="text"><code>requirements.txt       = minimal dependency list
-requirements-lock.txt  = frozen reproducibility snapshot</code></pre>
-<p>To refresh the lock file after installing packages:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements-lock.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The lock file helps preserve the environment used when the guide was built.</p>
-<hr>
-</section>
-<section id="running-a-lesson-script" class="level2">
-<h2 class="anchored" data-anchor-id="running-a-lesson-script">Running a Lesson Script</h2>
-<p>Most applied lessons include a supporting Python script.</p>
-<p>Run scripts from the project root.</p>
-<p>For example:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/12a_cross_validate_pipeline.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A script should usually create outputs in:</p>
-<pre class="text"><code>reports/
-reports/figures/
-models/
-data/processed/</code></pre>
-<p>depending on the lesson.</p>
-<hr>
-</section>
-<section id="rendering-the-quarto-site" class="level2">
-<h2 class="anchored" data-anchor-id="rendering-the-quarto-site">Rendering the Quarto Site</h2>
-<p>After running scripts, render the site:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The rendered output is written to:</p>
-<pre class="text"><code>docs/</code></pre>
-<p>Open the site locally:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> docs/index.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>On non-macOS systems, open <code>docs/index.html</code> using your file browser or web browser.</p>
-<hr>
-</section>
-<section id="standard-lesson-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="standard-lesson-workflow">Standard Lesson Workflow</h2>
-<p>A typical lesson workflow is:</p>
-<pre class="text"><code>source data
-    ↓
-Python script
-    ↓
-reports and figures
-    ↓
-Quarto chapter
-    ↓
-quarto render
-    ↓
-docs site</code></pre>
-<p>The preferred pattern is:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/<span class="op">&lt;</span>lesson-script<span class="op">&gt;</span>.py</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This ensures that outputs are regenerated before the site is rebuilt.</p>
-<hr>
-</section>
-<section id="github-pages-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="github-pages-workflow">GitHub Pages Workflow</h2>
-<p>For a public Quarto site using GitHub Pages, the usual workflow is:</p>
-<pre class="text"><code>edit .qmd files and scripts
-    ↓
-run scripts
-    ↓
-quarto render
-    ↓
-commit source and docs
-    ↓
-push to GitHub
-    ↓
-GitHub Pages publishes docs/</code></pre>
-<p>If a custom domain is used, the rendered site should include a <code>CNAME</code> file containing the domain.</p>
-<p>For this project, the custom domain is:</p>
-<pre class="text"><code>applied-datascience.complexdatainsights.com</code></pre>
-<p>If the workflow creates the <code>CNAME</code> file automatically, confirm that the deployed <code>docs/</code> output preserves it.</p>
-<hr>
-</section>
-<section id="reusable-pandas-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="reusable-pandas-patterns">Reusable Pandas Patterns</h2>
-<section id="read-a-csv-file" class="level3">
-<h3 class="anchored" data-anchor-id="read-a-csv-file">Read a CSV file</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data/diabetes.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="select-columns" class="level3">
-<h3 class="anchored" data-anchor-id="select-columns">Select columns</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"col1"</span>, <span class="st">"col2"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="drop-columns" class="level3">
-<h3 class="anchored" data-anchor-id="drop-columns">Drop columns</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"target"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="select-a-target-column" class="level3">
-<h3 class="anchored" data-anchor-id="select-a-target-column">Select a target column</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"target"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="filter-rows" class="level3">
-<h3 class="anchored" data-anchor-id="filter-rows">Filter rows</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="op">=</span> df[df[<span class="st">"value"</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="create-a-new-column" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-new-column">Create a new column</h3>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"new_column"</span>] <span class="op">=</span> df[<span class="st">"col1"</span>] <span class="op">+</span> df[<span class="st">"col2"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="group-and-aggregate" class="level3">
-<h3 class="anchored" data-anchor-id="group-and-aggregate">Group and aggregate</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>summary_df <span class="op">=</span> df.groupby(<span class="st">"group_col"</span>).agg(</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    mean_value<span class="op">=</span>(<span class="st">"value_col"</span>, <span class="st">"mean"</span>),</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    count<span class="op">=</span>(<span class="st">"value_col"</span>, <span class="st">"count"</span>)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="handle-missing-values" class="level3">
-<h3 class="anchored" data-anchor-id="handle-missing-values">Handle missing values</h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"col"</span>] <span class="op">=</span> df[<span class="st">"col"</span>].fillna(df[<span class="st">"col"</span>].median())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="convert-data-type" class="level3">
-<h3 class="anchored" data-anchor-id="convert-data-type">Convert data type</h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"category_col"</span>] <span class="op">=</span> df[<span class="st">"category_col"</span>].astype(<span class="st">"category"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="save-a-result" class="level3">
-<h3 class="anchored" data-anchor-id="save-a-result">Save a result</h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"reports/output-table.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="leave-the-environment" class="level3">
+<h3 class="anchored" data-anchor-id="leave-the-environment">Leave the environment</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Always run project scripts from the repository root unless a script explicitly states otherwise.</p>
 <hr>
 </section>
 </section>
-<section id="reusable-scikit-learn-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="reusable-scikit-learn-patterns">Reusable Scikit-Learn Patterns</h2>
-<section id="define-features-and-target" class="level3">
-<h3 class="anchored" data-anchor-id="define-features-and-target">Define features and target</h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"disease_progression"</span>])</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"disease_progression"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="split-data" class="level3">
-<h3 class="anchored" data-anchor-id="split-data">Split data</h3>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    X,</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    y,</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="fit-a-baseline-model" class="level3">
-<h3 class="anchored" data-anchor-id="fit-a-baseline-model">Fit a baseline model</h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="generate-predictions" class="level3">
-<h3 class="anchored" data-anchor-id="generate-predictions">Generate predictions</h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="evaluate-predictions" class="level3">
-<h3 class="anchored" data-anchor-id="evaluate-predictions">Evaluate predictions</h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, r2_score</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> mean_absolute_error(y_test, predictions)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="build-a-pipeline" class="level3">
-<h3 class="anchored" data-anchor-id="build-a-pipeline">Build a pipeline</h3>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> Pipeline([</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"model"</span>, LinearRegression())</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="run-cross-validation" class="level3">
-<h3 class="anchored" data-anchor-id="run-cross-validation">Run cross-validation</h3>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>mae_scores <span class="op">=</span> <span class="op">-</span>cross_val_score(</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    pipeline,</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    X,</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    y,</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"neg_mean_absolute_error"</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="save-a-trained-model" class="level3">
-<h3 class="anchored" data-anchor-id="save-a-trained-model">Save a trained model</h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>joblib.dump(model, <span class="st">"models/diabetes-linear-regression.joblib"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="load-a-trained-model" class="level3">
-<h3 class="anchored" data-anchor-id="load-a-trained-model">Load a trained model</h3>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> joblib.load(<span class="st">"models/diabetes-linear-regression.joblib"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="end-to-end-analytical-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="end-to-end-analytical-workflow">End-to-End Analytical Workflow</h2>
+<ol type="1">
+<li><strong>Frame the question.</strong> Define the population, outcome, unit of analysis, time horizon, and intended decision.</li>
+<li><strong>Audit the data-generating process.</strong> Identify selection, measurement, missingness, timing, and access constraints.</li>
+<li><strong>Define the evaluation design.</strong> Choose the split strategy, baselines, metrics, and acceptance criteria before model comparison.</li>
+<li><strong>Prepare data within the design.</strong> Fit imputation, scaling, encoding, feature selection, and resampling using training data only.</li>
+<li><strong>Establish a baseline.</strong> Compare sophisticated candidates with a simple, reproducible reference.</li>
+<li><strong>Develop candidates.</strong> Change one justified component at a time and evaluate it consistently.</li>
+<li><strong>Validate performance.</strong> Examine discrimination or error, calibration where relevant, uncertainty, stability, and subgroup results.</li>
+<li><strong>Interpret cautiously.</strong> Distinguish model behaviour from causal explanation and test whether conclusions survive plausible alternatives.</li>
+<li><strong>Connect evidence to action.</strong> Evaluate thresholds, costs, benefits, capacity, and consequences of errors.</li>
+<li><strong>Communicate and document.</strong> Report methods, results, limitations, and decision conditions clearly enough for review.</li>
+</ol>
 <hr>
 </section>
-</section>
-<section id="reusable-matplotlib-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="reusable-matplotlib-patterns">Reusable Matplotlib Patterns</h2>
-<section id="basic-scatter-plot" class="level3">
-<h3 class="anchored" data-anchor-id="basic-scatter-plot">Basic scatter plot</h3>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"X"</span>)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Y"</span>)</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Scatter Plot"</span>)</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="save-a-figure" class="level3">
-<h3 class="anchored" data-anchor-id="save-a-figure">Save a figure</h3>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"reports/figures/example-figure.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="observed-vs-predicted-plot" class="level3">
-<h3 class="anchored" data-anchor-id="observed-vs-predicted-plot">Observed vs predicted plot</h3>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(observed, predicted)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>min_value <span class="op">=</span> <span class="bu">min</span>(observed.<span class="bu">min</span>(), predicted.<span class="bu">min</span>())</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>max_value <span class="op">=</span> <span class="bu">max</span>(observed.<span class="bu">max</span>(), predicted.<span class="bu">max</span>())</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>plt.plot([min_value, max_value], [min_value, max_value], linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Observed"</span>)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Predicted"</span>)</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Observed vs Predicted"</span>)</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="leakage-safe-modelling-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="leakage-safe-modelling-pattern">Leakage-Safe Modelling Pattern</h2>
+<p>Scikit-learn provides a consistent interface for preprocessing, modelling, validation, and pipelines <span class="citation" data-cites="pedregosa2011scikit">(<a href="999-references.html#ref-pedregosa2011scikit" role="doc-biblioref">Pedregosa et al. 2011</a>)</span>. The following pattern keeps learned preprocessing inside cross-validation.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_validate</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>numeric_pipeline <span class="op">=</span> make_pipeline(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>categorical_pipeline <span class="op">=</span> make_pipeline(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"most_frequent"</span>),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"numeric"</span>, numeric_pipeline, numeric_features),</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"categorical"</span>, categorical_pipeline, categorical_features),</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> make_pipeline(</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    preprocessor,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    LogisticRegression(max_iter<span class="op">=</span><span class="dv">2_000</span>),</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>{</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"roc_auc"</span>: <span class="st">"roc_auc"</span>,</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"average_precision"</span>: <span class="st">"average_precision"</span>,</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"neg_log_loss"</span>: <span class="st">"neg_log_loss"</span>,</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    return_train_score<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The pipeline must include every operation that learns from data. If the observations are grouped, spatial, or time ordered, replace ordinary random folds with a split strategy that respects that dependence.</p>
 <hr>
 </section>
+<section id="evaluation-quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-quick-reference">Evaluation Quick Reference</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Useful evidence</th>
+<th>Common mistake</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Regression</td>
+<td>MAE or RMSE, residual patterns, uncertainty, subgroup error</td>
+<td>Reporting one average error without scale or context</td>
+</tr>
+<tr class="even">
+<td>Balanced classification</td>
+<td>Confusion matrix, sensitivity, specificity, ROC AUC, calibration</td>
+<td>Treating accuracy as sufficient</td>
+</tr>
+<tr class="odd">
+<td>Imbalanced classification</td>
+<td>Precision, recall, average precision, calibration, threshold consequences</td>
+<td>Relying on ROC AUC alone</td>
+</tr>
+<tr class="even">
+<td>Probability estimation</td>
+<td>Log loss, Brier score, calibration curve</td>
+<td>Assuming good ranking means reliable probabilities</td>
+</tr>
+<tr class="odd">
+<td>Unsupervised learning</td>
+<td>Compactness, separation, stability, sensitivity to preprocessing</td>
+<td>Treating clusters as discovered truth</td>
+</tr>
+<tr class="even">
+<td>Decision support</td>
+<td>Expected benefit or cost, capacity, threshold sensitivity</td>
+<td>Selecting a threshold from statistical convenience</td>
+</tr>
+</tbody>
+</table>
+<p>Compare validation results with a meaningful baseline, report variation across folds or repeated samples, and reserve the test set for the final selected procedure. Transparent prediction-model reporting should describe the data, participants or observations, predictors, outcomes, missing-data handling, validation design, performance measures, and limitations <span class="citation" data-cites="collins2015tripod">(<a href="999-references.html#ref-collins2015tripod" role="doc-biblioref">Collins et al. 2015</a>)</span>.</p>
+<hr>
 </section>
-<section id="reproducibility-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility-checklist">Reproducibility Checklist</h2>
-<p>Before finalizing any chapter, confirm that:</p>
+<section id="interpretation-guardrails" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-guardrails">Interpretation Guardrails</h2>
 <ul>
-<li>the lesson script runs from the project root</li>
-<li>expected outputs are created</li>
-<li>paths are relative, not machine-specific</li>
-<li>no private files or credentials are included</li>
-<li>code blocks use the same workflow described in the chapter</li>
-<li>figures render correctly</li>
-<li>saved report files are updated</li>
-<li>the Quarto site builds successfully</li>
-<li><code>docs/index.html</code> opens locally</li>
-<li><code>git status</code> shows only expected changes</li>
+<li><strong>Association is not causation.</strong> Predictive importance can arise from correlation, proxies, confounding, measurement practices, or leakage.</li>
+<li><strong>Global and local explanations answer different questions.</strong> A global summary describes average model behaviour; a local explanation concerns one prediction.</li>
+<li><strong>Importance is conditional on the fitted model and available features.</strong> Correlated variables can share, mask, or redistribute apparent importance.</li>
+<li><strong>Explanations do not validate a model.</strong> Performance, calibration, robustness, and fitness for the intended use require separate evidence.</li>
+<li><strong>Subgroup results need adequate sample sizes and uncertainty.</strong> Small differences may be unstable, while aggregate performance can conceal important failures.</li>
 </ul>
-<p>A useful final check is:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>SHAP is one principled framework for assigning feature contributions to individual predictions, but its outputs remain explanations of a fitted model rather than causal effects <span class="citation" data-cites="lundberg2017unified">(<a href="999-references.html#ref-lundberg2017unified" role="doc-biblioref">Lundberg and Lee 2017</a>)</span>.</p>
 <hr>
 </section>
-<section id="public-repository-safety-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="public-repository-safety-checklist">Public Repository Safety Checklist</h2>
-<p>Before making a project public, check for sensitive files or accidental local paths.</p>
-<p>Search for common sensitive terms:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-R</span> <span class="st">"password\|token\|secret\|api_key\|apikey\|Users/"</span> . <span class="dt">\</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--exclude-dir</span><span class="op">=</span>.git <span class="dt">\</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--exclude-dir</span><span class="op">=</span>.venv <span class="dt">\</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--exclude-dir</span><span class="op">=</span>docs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Check for large files:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-size</span> +10M <span class="dt">\</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-not</span> <span class="at">-path</span> <span class="st">"./.git/*"</span> <span class="dt">\</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-not</span> <span class="at">-path</span> <span class="st">"./.venv/*"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Review tracked files:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--cached</span> <span class="at">--name-status</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>These checks help keep public CDI repositories clean and safe.</p>
-<hr>
-</section>
-<section id="running-the-full-system" class="level2">
-<h2 class="anchored" data-anchor-id="running-the-full-system">Running the Full System</h2>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/end-to-end-workflow.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="data-sources" class="level2">
-<h2 class="anchored" data-anchor-id="data-sources">Data Sources</h2>
-<p>This guide uses the diabetes dataset distributed through scikit-learn and saved locally as:</p>
-<pre class="text"><code>data/diabetes.csv</code></pre>
-<p>The dataset is used for educational modeling examples throughout the applied lessons.</p>
-<hr>
-</section>
-<section id="software-and-tools" class="level2">
-<h2 class="anchored" data-anchor-id="software-and-tools">Software and Tools</h2>
-<p>This guide uses a small set of widely adopted tools for reproducible applied data science:</p>
+<section id="decision-and-responsible-use-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="decision-and-responsible-use-checklist">Decision and Responsible-Use Checklist</h2>
+<p>Before recommending or using an analytical result, ask:</p>
 <ul>
-<li><strong>Python</strong> <span class="citation" data-cites="python">(<a href="999-references.html#ref-python" role="doc-biblioref">Python Software Foundation 2024</a>)</span></li>
-<li><strong>pandas</strong> <span class="citation" data-cites="pandas">(<a href="999-references.html#ref-pandas" role="doc-biblioref">McKinney et al. 2010</a>)</span></li>
-<li><strong>NumPy</strong> <span class="citation" data-cites="numpy">(<a href="999-references.html#ref-numpy" role="doc-biblioref">Harris et al. 2020</a>)</span></li>
-<li><strong>matplotlib</strong> <span class="citation" data-cites="matplotlib">(<a href="999-references.html#ref-matplotlib" role="doc-biblioref">Hunter 2007</a>)</span></li>
-<li><strong>scikit-learn</strong> <span class="citation" data-cites="scikit-learn">(<a href="999-references.html#ref-scikit-learn" role="doc-biblioref">Pedregosa et al. 2011</a>)</span></li>
-<li><strong>joblib</strong> <span class="citation" data-cites="joblib">(<a href="999-references.html#ref-joblib" role="doc-biblioref">Team, n.d.</a>)</span></li>
-<li><strong>Quarto</strong> <span class="citation" data-cites="quarto">(<a href="999-references.html#ref-quarto" role="doc-biblioref">Posit Software, PBC, n.d.</a>)</span></li>
+<li>What decision will this result inform, and who is affected?</li>
+<li>Are the development data representative of the intended setting?</li>
+<li>Which errors are most harmful, and to whom?</li>
+<li>Is the chosen threshold consistent with costs, benefits, and operational capacity?</li>
+<li>Are probability estimates sufficiently calibrated for the decision?</li>
+<li>Does performance remain acceptable across relevant groups and conditions?</li>
+<li>What happens when data quality deteriorates or the population changes?</li>
+<li>Can a person question, override, or appeal a consequential output?</li>
+<li>Who monitors the system, and what triggers review, retraining, or withdrawal?</li>
+<li>Are privacy, security, legal, and domain-specific requirements satisfied?</li>
 </ul>
-<p>Together, these tools support tabular data handling, modeling, evaluation, visualization, reproducible reporting, and static site publishing.</p>
+<p>Responsible analytical practice is a lifecycle activity. The NIST AI Risk Management Framework organizes this work around governance, context mapping, measurement, and risk management rather than treating responsibility as a final compliance check <span class="citation" data-cites="nist2023airmf">(<a href="999-references.html#ref-nist2023airmf" role="doc-biblioref">National Institute of Standards and Technology 2023</a>)</span>.</p>
 <hr>
 </section>
-<section id="closing-note" class="level2">
-<h2 class="anchored" data-anchor-id="closing-note">Closing Note</h2>
-<p>The goal of the <strong>Applied Data Science System</strong> is not only to teach syntax.</p>
-<p>It is to teach a disciplined workflow:</p>
-<pre class="text"><code>data
-    ↓
-analysis
-    ↓
-modeling
-    ↓
-evaluation
-    ↓
-interpretation
-    ↓
-communication
-    ↓
-decision context
-    ↓
-responsible use</code></pre>
-<p>The same structure can be reused across:</p>
+<section id="final-reproducibility-audit" class="level2">
+<h2 class="anchored" data-anchor-id="final-reproducibility-audit">Final Reproducibility Audit</h2>
+<p>Before publishing or handing off the work, confirm that:</p>
 <ul>
-<li>new datasets</li>
-<li>client projects</li>
-<li>public guides</li>
-<li>domain-specific CDI pathways</li>
-<li>future analytical systems</li>
+<li>the raw data remain unchanged and provenance is recorded;</li>
+<li>all paths are project-relative;</li>
+<li>random seeds are fixed where stochastic behaviour should be reproducible;</li>
+<li>transformations and feature definitions are explicit;</li>
+<li>preprocessing is learned only from training data;</li>
+<li>the split strategy matches the structure and intended use of the data;</li>
+<li>baselines, metrics, thresholds, and selection rules are documented;</li>
+<li>tables and figures can be regenerated from scripts;</li>
+<li>package requirements are recorded;</li>
+<li>results have been rerun from a clean session or environment;</li>
+<li>limitations and unresolved risks are visible; and</li>
+<li>another analyst could trace the final claim back to data and code.</li>
 </ul>
-<p>A strong data science workflow does more than produce outputs.</p>
-<p>It produces evidence that can be inspected, explained, reproduced, and used responsibly.</p>
+<hr>
+</section>
+<section id="core-software" class="level2">
+<h2 class="anchored" data-anchor-id="core-software">Core Software</h2>
+<ul>
+<li><strong>Python</strong> <span class="citation" data-cites="python">(<a href="999-references.html#ref-python" role="doc-biblioref">Python Software Foundation 2024</a>)</span> — general-purpose language used throughout the workflow.</li>
+<li><strong>pandas</strong> <span class="citation" data-cites="pandas">(<a href="999-references.html#ref-pandas" role="doc-biblioref">McKinney et al. 2010</a>)</span> — tabular data preparation and analysis.</li>
+<li><strong>NumPy</strong> <span class="citation" data-cites="numpy">(<a href="999-references.html#ref-numpy" role="doc-biblioref">Harris et al. 2020</a>)</span> — numerical arrays and computation.</li>
+<li><strong>matplotlib</strong> <span class="citation" data-cites="matplotlib">(<a href="999-references.html#ref-matplotlib" role="doc-biblioref">Hunter 2007</a>)</span> and <strong>seaborn</strong> <span class="citation" data-cites="seaborn">(<a href="999-references.html#ref-seaborn" role="doc-biblioref">Waskom 2021</a>)</span> — static statistical visualization.</li>
+<li><strong>scikit-learn</strong> <span class="citation" data-cites="pedregosa2011scikit">(<a href="999-references.html#ref-pedregosa2011scikit" role="doc-biblioref">Pedregosa et al. 2011</a>)</span> — preprocessing, modelling, pipelines, and validation.</li>
+<li><strong>Quarto</strong> <span class="citation" data-cites="quarto">(<a href="999-references.html#ref-quarto" role="doc-biblioref">Posit Software, PBC, n.d.</a>)</span> — reproducible technical publishing.</li>
+</ul>
+<p>The software implements the workflow; the credibility of the result still depends on the question, data, design, validation, interpretation, and decision context.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-collins2015tripod" class="csl-entry" role="listitem">
+Collins, Gary S., Johannes B. Reitsma, Douglas G. Altman, and Karel G. M. Moons. 2015. <span>“Transparent Reporting of a Multivariable Prediction Model for Individual Prognosis or Diagnosis (<span>TRIPOD</span>): The <span>TRIPOD</span> Statement.”</span> <em>Annals of Internal Medicine</em> 162 (1): 55–63. <a href="https://doi.org/10.7326/M14-0697">https://doi.org/10.7326/M14-0697</a>.
+</div>
 <div id="ref-numpy" class="csl-entry" role="listitem">
 Harris, Charles R. et al. 2020. <span>“Array Programming with <span>NumPy</span>.”</span> <em>Nature</em>. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
 </div>
 <div id="ref-matplotlib" class="csl-entry" role="listitem">
 Hunter, J. D. 2007. <span>“Matplotlib: A 2D Graphics Environment.”</span> <em>Computing in Science &amp; Engineering</em>. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
 </div>
+<div id="ref-lundberg2017unified" class="csl-entry" role="listitem">
+Lundberg, Scott M., and Su-In Lee. 2017. <span>“A Unified Approach to Interpreting Model Predictions.”</span> In <em>Advances in Neural Information Processing Systems 30</em>, 4765–74. <a href="https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html">https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html</a>.
+</div>
 <div id="ref-pandas" class="csl-entry" role="listitem">
 McKinney, Wes et al. 2010. <span>“Pandas-Dev/Pandas: Pandas.”</span> <em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
 </div>
-<div id="ref-scikit-learn" class="csl-entry" role="listitem">
-Pedregosa, F., G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, et al. 2011. <em>Scikit-Learn: Machine Learning in Python</em>. <em>Journal of Machine Learning Research</em>. Vol. 12. <a href="https://scikit-learn.org/">https://scikit-learn.org/</a>.
+<div id="ref-nist2023airmf" class="csl-entry" role="listitem">
+National Institute of Standards and Technology. 2023. <span>“Artificial Intelligence Risk Management Framework (<span>AI RMF 1.0</span>).”</span> NIST AI 100-1. National Institute of Standards; Technology. <a href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a>.
+</div>
+<div id="ref-pedregosa2011scikit" class="csl-entry" role="listitem">
+Pedregosa, Fabian, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, et al. 2011. <span>“Scikit-Learn: Machine Learning in Python.”</span> <em>Journal of Machine Learning Research</em> 12: 2825–30. <a href="https://www.jmlr.org/papers/v12/pedregosa11a.html">https://www.jmlr.org/papers/v12/pedregosa11a.html</a>.
+</div>
+<div id="ref-peng2011reproducible" class="csl-entry" role="listitem">
+Peng, Roger D. 2011. <span>“Reproducible Research in Computational Science.”</span> <em>Science</em> 334 (6060): 1226–27. <a href="https://doi.org/10.1126/science.1213847">https://doi.org/10.1126/science.1213847</a>.
 </div>
 <div id="ref-quarto" class="csl-entry" role="listitem">
 Posit Software, PBC. n.d. <span>“Quarto.”</span> <a href="https://quarto.org/">https://quarto.org/</a>.
@@ -979,8 +698,11 @@ Posit Software, PBC. n.d. <span>“Quarto.”</span> <a href="https://quarto.org
 <div id="ref-python" class="csl-entry" role="listitem">
 Python Software Foundation. 2024. <span>“Python Language Reference.”</span> <a href="https://www.python.org/">https://www.python.org/</a>.
 </div>
-<div id="ref-joblib" class="csl-entry" role="listitem">
-Team, Joblib Development. n.d. <span>“Joblib: Running Python Functions as Pipeline Jobs.”</span> <a href="https://joblib.readthedocs.io/">https://joblib.readthedocs.io/</a>.
+<div id="ref-seaborn" class="csl-entry" role="listitem">
+Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data Visualization.”</span> <em>Journal of Open Source Software</em>. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
+</div>
+<div id="ref-wilkinson2016fair" class="csl-entry" role="listitem">
+Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, et al. 2016. <span>“The <span>FAIR</span> Guiding Principles for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3: 160018. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
 </div>
 </div>
 </section>

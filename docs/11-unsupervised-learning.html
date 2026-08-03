@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="assets/css/cdi.css">
 </head>
@@ -314,8 +378,39 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#why-unsupervised-learning-matters" id="toc-why-unsupervised-learning-matters" class="nav-link" data-scroll-target="#why-unsupervised-learning-matters">Why unsupervised learning matters</a></li>
+  <li><a href="#a-reproducible-workflow" id="toc-a-reproducible-workflow" class="nav-link" data-scroll-target="#a-reproducible-workflow">A reproducible workflow</a></li>
+  <li><a href="#preparing-data-for-distance-based-methods" id="toc-preparing-data-for-distance-based-methods" class="nav-link" data-scroll-target="#preparing-data-for-distance-based-methods">Preparing data for distance-based methods</a></li>
+  <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis">Principal component analysis</a>
+  <ul class="collapse">
+  <li><a href="#scores-loadings-and-explained-variance" id="toc-scores-loadings-and-explained-variance" class="nav-link" data-scroll-target="#scores-loadings-and-explained-variance">Scores, loadings, and explained variance</a></li>
+  </ul></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-means clustering</a>
+  <ul class="collapse">
+  <li><a href="#choosing-the-number-of-clusters" id="toc-choosing-the-number-of-clusters" class="nav-link" data-scroll-target="#choosing-the-number-of-clusters">Choosing the number of clusters</a></li>
+  </ul></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering">Hierarchical clustering</a></li>
+  <li><a href="#density-based-clustering-with-dbscan" id="toc-density-based-clustering-with-dbscan" class="nav-link" data-scroll-target="#density-based-clustering-with-dbscan">Density-based clustering with DBSCAN</a></li>
+  <li><a href="#evaluating-clusters-responsibly" id="toc-evaluating-clusters-responsibly" class="nav-link" data-scroll-target="#evaluating-clusters-responsibly">Evaluating clusters responsibly</a>
+  <ul class="collapse">
+  <li><a href="#internal-validation" id="toc-internal-validation" class="nav-link" data-scroll-target="#internal-validation">Internal validation</a></li>
+  <li><a href="#stability-analysis" id="toc-stability-analysis" class="nav-link" data-scroll-target="#stability-analysis">Stability analysis</a></li>
+  <li><a href="#external-validation" id="toc-external-validation" class="nav-link" data-scroll-target="#external-validation">External validation</a></li>
+  </ul></li>
+  <li><a href="#interpreting-a-fitted-solution" id="toc-interpreting-a-fitted-solution" class="nav-link" data-scroll-target="#interpreting-a-fitted-solution">Interpreting a fitted solution</a></li>
+  <li><a href="#common-pitfalls" id="toc-common-pitfalls" class="nav-link" data-scroll-target="#common-pitfalls">Common pitfalls</a></li>
+  <li><a href="#generate-the-chapter-figures" id="toc-generate-the-chapter-figures" class="nav-link" data-scroll-target="#generate-the-chapter-figures">Generate the chapter figures</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary">Chapter summary</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check">Knowledge check</a></li>
+  <li><a href="#practical-exercise" id="toc-practical-exercise" class="nav-link" data-scroll-target="#practical-exercise">Practical exercise</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -353,11 +448,383 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Unlabelled data can reveal structure without proving meaning</li>
 </ul>
 </div>
-<blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
-</blockquote>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you will be able to:</p>
+<ul>
+<li>explain what unsupervised learning can—and cannot—establish;</li>
+<li>prepare numeric data for distance-based methods;</li>
+<li>use principal component analysis (PCA) to summarize multivariate variation;</li>
+<li>compare K-means, hierarchical clustering, and DBSCAN;</li>
+<li>evaluate cluster compactness, separation, and stability; and</li>
+<li>translate exploratory structure into testable follow-up questions.</li>
+</ul>
+</section>
+<section id="why-unsupervised-learning-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-unsupervised-learning-matters">Why unsupervised learning matters</h2>
+<p>Supervised learning predicts a known outcome. Unsupervised learning starts without a target variable and searches for recurring structure in the predictors. Typical goals include:</p>
+<ul>
+<li><strong>dimension reduction:</strong> representing many correlated variables with fewer components;</li>
+<li><strong>clustering:</strong> grouping observations that are similar under a chosen definition of similarity;</li>
+<li><strong>anomaly detection:</strong> identifying observations that do not resemble the dominant patterns; and</li>
+<li><strong>representation learning:</strong> creating informative features for later modelling or visualization.</li>
+</ul>
+<p>These methods are exploratory. A cluster is an algorithmic result determined by the variables, transformations, distance measure, and tuning choices. It is not automatically a biological subtype, customer segment, or causal mechanism.</p>
+<div class="cdi-note">
+<p><strong>Core principle:</strong> Treat discovered structure as evidence for investigation—not proof of meaning. Validate it with domain knowledge, external variables, sensitivity analysis, and, where possible, independent data.</p>
+</div>
+</section>
+<section id="a-reproducible-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="a-reproducible-workflow">A reproducible workflow</h2>
+<p>An effective unsupervised analysis separates data preparation, structure discovery, validation, and interpretation.</p>
+<ol type="1">
+<li>Define the scientific or operational question.</li>
+<li>Select variables that represent the intended concept.</li>
+<li>Inspect missingness, distributions, outliers, and redundancy.</li>
+<li>Transform skewed variables when scientifically appropriate.</li>
+<li>Scale features if their units or variances differ.</li>
+<li>Fit more than one plausible method or parameter setting.</li>
+<li>Evaluate separation, compactness, and stability.</li>
+<li>Interpret the result using variables not used to create it.</li>
+<li>Document sensitivity to preprocessing and modelling choices.</li>
+</ol>
+<p>The order matters: distance-based algorithms will faithfully discover patterns created by measurement scale, duplicated variables, or batch effects.</p>
+</section>
+<section id="preparing-data-for-distance-based-methods" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-data-for-distance-based-methods">Preparing data for distance-based methods</h2>
+<p>Suppose <code>features</code> contains numeric measurements and <code>metadata</code> contains identifiers or variables reserved for interpretation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> make_pipeline(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> preprocessor.fit_transform(features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Standardization gives each feature mean 0 and standard deviation 1. This is often appropriate for Euclidean distance, PCA, and K-means, but it is not a universal default. For heavy-tailed data, <code>RobustScaler</code> may be preferable. For counts or compositional data, domain-specific transformations may be required before scaling.</p>
+<p>Do not include identifiers, arbitrary numeric codes, future information, or a target-like variable merely because they are numeric.</p>
+</section>
+<section id="principal-component-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="principal-component-analysis">Principal component analysis</h2>
+<p>PCA constructs orthogonal linear combinations of the original variables. The first component captures the greatest possible variance, the second captures the greatest remaining variance, and so on.</p>
+<p>For centred data matrix <span class="math inline">\(X\)</span>, PCA can be expressed through the eigendecomposition of its covariance matrix:</p>
+<p><span class="math display">\[
+\Sigma = \frac{1}{n-1}X^\top X.
+\]</span></p>
+<p>The eigenvectors define component directions, and the eigenvalues quantify variance along those directions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="fl">0.90</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> pca.fit_transform(X_scaled)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>score_table <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    scores,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="ss">f"PC</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, scores.shape[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span>)],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pca.explained_variance_ratio_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Setting <code>n_components=0.90</code> retains the smallest number of components explaining at least 90% of the sample variance. That threshold is a modelling choice, not a guarantee that the retained components contain all domain-relevant information.</p>
+<section id="scores-loadings-and-explained-variance" class="level3">
+<h3 class="anchored" data-anchor-id="scores-loadings-and-explained-variance">Scores, loadings, and explained variance</h3>
+<ul>
+<li><strong>Scores</strong> locate observations in component space.</li>
+<li><strong>Loadings</strong> describe how strongly original variables contribute to each component.</li>
+<li><strong>Explained variance ratios</strong> describe how much sample variance each component captures.</li>
+</ul>
+<p>A two-dimensional score plot is useful for exploration, but overlap in two components does not prove that groups overlap in the full feature space. Likewise, visible separation can reflect confounding, batch effects, or a dominant outlier.</p>
+<div id="fig-11-pca-overview" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-panel figure with PCA scores coloured by known simulation group and cumulative explained variance by component.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-11-pca-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/11-pca-overview.png" class="img-fluid figure-img" alt="Two-panel figure with PCA scores coloured by known simulation group and cumulative explained variance by component.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-11-pca-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1: PCA scores and cumulative explained variance for the demonstration data.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="k-means-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="k-means-clustering">K-means clustering</h2>
+<p>K-means partitions observations into <span class="math inline">\(K\)</span> clusters by minimizing the within-cluster sum of squared Euclidean distances:</p>
+<p><span class="math display">\[
+\underset{C_1,\ldots,C_K}{\operatorname{minimize}}
+\sum_{k=1}^{K}\sum_{x_i \in C_k}\lVert x_i-\mu_k\rVert_2^2,
+\]</span></p>
+<p>where <span class="math inline">\(\mu_k\)</span> is the centroid of cluster <span class="math inline">\(k\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    init<span class="op">=</span><span class="st">"k-means++"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>cluster_labels <span class="op">=</span> kmeans.fit_predict(X_scaled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>K-means works best when clusters are reasonably compact, approximately spherical in the selected feature space, and of broadly comparable spread. It can perform poorly with curved clusters, strong outliers, unequal densities, or an inappropriate value of <span class="math inline">\(K\)</span>.</p>
+<section id="choosing-the-number-of-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-number-of-clusters">Choosing the number of clusters</h3>
+<p>No diagnostic identifies the universally correct number of clusters. Use several kinds of evidence:</p>
+<ul>
+<li><strong>inertia:</strong> decreases as <span class="math inline">\(K\)</span> increases; look for diminishing improvement rather than simply choosing the minimum;</li>
+<li><strong>silhouette coefficient:</strong> compares cohesion within a cluster with separation from neighbouring clusters;</li>
+<li><strong>stability:</strong> checks whether similar groups reappear under resampling or modest perturbation; and</li>
+<li><strong>interpretability:</strong> asks whether the result is useful, coherent, and externally supported.</li>
+</ul>
+<p>For observation <span class="math inline">\(i\)</span>, the silhouette coefficient is</p>
+<p><span class="math display">\[
+s(i)=\frac{b(i)-a(i)}{\max\{a(i),b(i)\}},
+\]</span></p>
+<p>where <span class="math inline">\(a(i)\)</span> is its mean distance to its own cluster and <span class="math inline">\(b(i)\)</span> is its smallest mean distance to another cluster. Values near 1 indicate good separation, values near 0 indicate overlap, and negative values suggest possible misassignment.</p>
+<div id="fig-11-kmeans-diagnostics" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-panel line plot showing inertia decreasing and silhouette scores varying as the number of clusters increases.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-11-kmeans-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/11-kmeans-diagnostics.png" class="img-fluid figure-img" alt="Two-panel line plot showing inertia decreasing and silhouette scores varying as the number of clusters increases.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-11-kmeans-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2: K-means inertia and mean silhouette coefficient across candidate values of K.
+</figcaption>
+</figure>
+</div>
+<p>These diagnostics should be interpreted together. A high silhouette score can still describe a scientifically unhelpful partition, and an elbow can be ambiguous.</p>
+</section>
+</section>
+<section id="hierarchical-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical clustering</h2>
+<p>Agglomerative hierarchical clustering begins with each observation as its own cluster and repeatedly merges the closest clusters. Its output can be represented by a dendrogram.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> linkage</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>linkage_matrix <span class="op">=</span> linkage(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    X_scaled,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"ward"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    metric<span class="op">=</span><span class="st">"euclidean"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ward linkage selects merges that produce the smallest increase in within-cluster variance and therefore requires Euclidean distance. Other linkage rules answer different questions:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Linkage</th>
+<th>Cluster distance</th>
+<th>Typical behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single</td>
+<td>Closest pair</td>
+<td>Can recover irregular shapes but may chain observations</td>
+</tr>
+<tr class="even">
+<td>Complete</td>
+<td>Farthest pair</td>
+<td>Encourages compact, well-separated groups</td>
+</tr>
+<tr class="odd">
+<td>Average</td>
+<td>Average pairwise distance</td>
+<td>Compromise between single and complete linkage</td>
+</tr>
+<tr class="even">
+<td>Ward</td>
+<td>Increase in within-cluster variance</td>
+<td>Often produces compact clusters</td>
+</tr>
+</tbody>
+</table>
+<p>The dendrogram is not proof of a natural hierarchy. Its appearance depends on scaling, distance, linkage, and leaf ordering.</p>
+<div id="fig-11-hierarchical-dendrogram" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Dendrogram showing successive merges among standardized observations, with a horizontal guide for a possible three-cluster cut.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-11-hierarchical-dendrogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/11-hierarchical-dendrogram.png" class="img-fluid figure-img" alt="Dendrogram showing successive merges among standardized observations, with a horizontal guide for a possible three-cluster cut.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-11-hierarchical-dendrogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.3: Hierarchical clustering dendrogram for the standardized demonstration data.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="density-based-clustering-with-dbscan" class="level2">
+<h2 class="anchored" data-anchor-id="density-based-clustering-with-dbscan">Density-based clustering with DBSCAN</h2>
+<p>DBSCAN groups observations that occur in sufficiently dense neighbourhoods and labels isolated observations as noise. It does not require the number of clusters in advance and can recover non-spherical groups.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dbscan <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.35</span>, min_samples<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> dbscan.fit_predict(X_scaled)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>number_of_clusters <span class="op">=</span> <span class="bu">len</span>(<span class="bu">set</span>(labels) <span class="op">-</span> {<span class="op">-</span><span class="dv">1</span>})</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>number_of_noise_points <span class="op">=</span> (labels <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Its main parameters are:</p>
+<ul>
+<li><code>eps</code>: the neighbourhood radius; and</li>
+<li><code>min_samples</code>: the number of nearby observations required for a dense region.</li>
+</ul>
+<p>DBSCAN is sensitive to scale and to these parameters. A single global density threshold may be unsuitable when clusters have very different densities.</p>
+<div id="fig-11-method-comparison" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Side-by-side scatter plots comparing K-means partitions with DBSCAN clusters and noise points on crescent-shaped data.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-11-method-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/11-method-comparison.png" class="img-fluid figure-img" alt="Side-by-side scatter plots comparing K-means partitions with DBSCAN clusters and noise points on crescent-shaped data.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-11-method-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.4: Comparison of K-means and DBSCAN on non-spherical data.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="evaluating-clusters-responsibly" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-clusters-responsibly">Evaluating clusters responsibly</h2>
+<p>Evaluation is difficult because there may be no known correct labels. Combine complementary checks rather than relying on one score.</p>
+<section id="internal-validation" class="level3">
+<h3 class="anchored" data-anchor-id="internal-validation">Internal validation</h3>
+<p>Internal measures use the same features that formed the clusters.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    calinski_harabasz_score,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    davies_bouldin_score,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    silhouette_score,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Silhouette:"</span>, silhouette_score(X_scaled, cluster_labels))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Calinski-Harabasz:"</span>, calinski_harabasz_score(X_scaled, cluster_labels))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Davies-Bouldin:"</span>, davies_bouldin_score(X_scaled, cluster_labels))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Higher silhouette and Calinski–Harabasz values usually indicate stronger separation; lower Davies–Bouldin values are preferred. These measures often favour particular cluster geometries and should not be compared across unrelated datasets as if they had universal thresholds.</p>
+</section>
+<section id="stability-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="stability-analysis">Stability analysis</h3>
+<p>A useful partition should not disappear after a small change in the sample or random initialization. Stability can be examined by:</p>
+<ol type="1">
+<li>repeatedly resampling observations;</li>
+<li>refitting the complete preprocessing and clustering workflow;</li>
+<li>assigning or matching cluster labels carefully; and</li>
+<li>comparing partitions with a label-invariant measure such as the adjusted Rand index.</li>
+</ol>
+<p>Stability is necessary evidence, but it is not sufficient: a stable batch effect is still a batch effect.</p>
+</section>
+<section id="external-validation" class="level3">
+<h3 class="anchored" data-anchor-id="external-validation">External validation</h3>
+<p>After clusters are created, compare them with variables withheld from clustering—for example, later outcomes, experimental conditions, or expert annotations. This can establish association and practical relevance, but not causality.</p>
+<p>Avoid selecting a clustering solution solely because it produces the most favourable association with a desired outcome. That turns exploratory evaluation into implicit outcome-driven optimization.</p>
+</section>
+</section>
+<section id="interpreting-a-fitted-solution" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-a-fitted-solution">Interpreting a fitted solution</h2>
+<p>Cluster numbers are arbitrary labels. Interpret clusters using standardized feature summaries and uncertainty-aware comparisons.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>profile_table <span class="op">=</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    features.assign(cluster<span class="op">=</span>cluster_labels)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"cluster"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    .median()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profile_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Report:</p>
+<ul>
+<li>the variables and transformations used;</li>
+<li>the distance measure and algorithm;</li>
+<li>all consequential parameter choices;</li>
+<li>cluster sizes, profiles, and noise counts;</li>
+<li>internal validation and stability results;</li>
+<li>sensitivity to preprocessing and alternative methods; and</li>
+<li>the evidence used to attach substantive meaning.</li>
+</ul>
+</section>
+<section id="common-pitfalls" class="level2">
+<h2 class="anchored" data-anchor-id="common-pitfalls">Common pitfalls</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pitfall</th>
+<th>Why it matters</th>
+<th>Better practice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clustering unscaled measurements</td>
+<td>Large-unit variables dominate distances</td>
+<td>Transform and scale deliberately</td>
+</tr>
+<tr class="even">
+<td>Treating a PCA plot as the complete space</td>
+<td>Two components may omit important variation</td>
+<td>Report explained variance and inspect more components</td>
+</tr>
+<tr class="odd">
+<td>Choosing <span class="math inline">\(K\)</span> from one diagnostic</td>
+<td>A single score embeds geometric preferences</td>
+<td>Combine diagnostics, stability, and domain usefulness</td>
+</tr>
+<tr class="even">
+<td>Interpreting labels as ordered categories</td>
+<td>Cluster numbers have no intrinsic ranking</td>
+<td>Use descriptive names only after validation</td>
+</tr>
+<tr class="odd">
+<td>Ignoring batch or site effects</td>
+<td>Technical structure can masquerade as discovery</td>
+<td>Inspect metadata and conduct sensitivity analyses</td>
+</tr>
+<tr class="even">
+<td>Profiling clusters with the same means that created them</td>
+<td>Apparent differences are partly guaranteed</td>
+<td>Use held-out or external variables for stronger validation</td>
+</tr>
+<tr class="odd">
+<td>Removing all outliers before analysis</td>
+<td>Rare but meaningful cases may be lost</td>
+<td>Investigate influence and report exclusion rules</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="generate-the-chapter-figures" class="level2">
+<h2 class="anchored" data-anchor-id="generate-the-chapter-figures">Generate the chapter figures</h2>
+<p>From the repository root, run the Python script:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/11-generate-unsupervised-learning-figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Or use the Bash wrapper:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/11-generate-unsupervised-learning-figures.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Both commands generate the same files in <code>results/figures/</code>. The figures use simulated data with known structure for teaching; the hidden simulation labels are used only to colour one explanatory PCA panel, not to fit the unsupervised models.</p>
+</section>
+<section id="chapter-summary" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-summary">Chapter summary</h2>
+<p>Unsupervised learning helps reveal multivariate structure when no target variable is available. PCA summarizes variation, while K-means, hierarchical clustering, and DBSCAN encode different definitions of a cluster. Their results depend on preprocessing, geometry, distance, and tuning choices. A credible analysis therefore combines diagnostics, stability checks, external evidence, domain reasoning, and transparent reporting.</p>
+</section>
+<section id="knowledge-check" class="level2">
+<h2 class="anchored" data-anchor-id="knowledge-check">Knowledge check</h2>
+<ol type="1">
+<li>Why can standardization substantially change a clustering result?</li>
+<li>What information do PCA scores and loadings provide?</li>
+<li>Why does the smallest K-means inertia not identify the best value of <span class="math inline">\(K\)</span>?</li>
+<li>When might DBSCAN be more appropriate than K-means?</li>
+<li>Why does cluster stability not prove that clusters are scientifically meaningful?</li>
+</ol>
+</section>
+<section id="practical-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="practical-exercise">Practical exercise</h2>
+<p>Use a numeric dataset with at least five features.</p>
+<ol type="1">
+<li>Document variable selection, missing-data handling, transformation, and scaling.</li>
+<li>Fit PCA and report the variance explained by the retained components.</li>
+<li>Compare K-means solutions across several values of <span class="math inline">\(K\)</span>.</li>
+<li>Fit one alternative method, such as hierarchical clustering or DBSCAN.</li>
+<li>Evaluate internal quality and at least one form of stability.</li>
+<li>Profile the candidate groups and assess them using one variable excluded from clustering.</li>
+<li>Write a short conclusion that distinguishes observed structure from substantive claims.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

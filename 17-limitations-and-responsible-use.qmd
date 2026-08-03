@@ -1,4 +1,4 @@
-# Limitations and Responsible Use {#lesson17}
+# Limitations and Responsible Use {#sec-lesson17}
 
 :::cdi-message
 - **ID:** ADS-L17
@@ -7,4 +7,288 @@
 - **Theme:** Responsible use begins with explicit limitations and appropriate oversight
 :::
 
-> This chapter is scaffolded for development.
+## Learning objectives
+
+By the end of this chapter, you should be able to:
+
+- distinguish statistical, data, operational, and ethical limitations;
+- explain why strong predictive performance does not guarantee appropriate use;
+- identify risks related to subgroup performance, distribution shift, and automation;
+- define meaningful human oversight and escalation procedures;
+- document intended use, excluded use, uncertainty, and residual risk; and
+- propose monitoring and review arrangements for an analytical system after deployment.
+
+## From defensible decisions to responsible use
+
+Chapter @sec-lesson16 connected analytical evidence to decisions. That connection does not end the analyst's responsibility. A technically valid result can still be used in the wrong setting, applied to an excluded population, interpreted too confidently, or embedded in a process without adequate oversight.
+
+Responsible use therefore asks a broader question:
+
+> Under what conditions should this analysis influence action, and what safeguards are required when it does?
+
+The answer must account for more than model performance. It must consider the data-generating process, the decision context, the people affected, the cost of error, and the system that will operate around the analysis.
+
+## Limitations are part of the result
+
+A limitation is not an apology added at the end of a report. It is information that defines how far a conclusion can travel.
+
+Useful limitation statements specify:
+
+1. **what is uncertain or constrained;**
+2. **why the constraint exists;**
+3. **which conclusion or use it affects;** and
+4. **what mitigation, validation, or caution is required.**
+
+Compare the following statements:
+
+> The dataset may be biased.
+
+and:
+
+> Rural participants were under-represented in the development data. Performance estimates may therefore be optimistic for rural settings, and the model should not be used there without external validation and subgroup-specific review.
+
+The second statement is actionable because it connects evidence, consequence, and response.
+
+## A practical limitation taxonomy
+
+Limitations often overlap, but classifying them helps ensure that important risks are not hidden inside a single general disclaimer.
+
+| Limitation area | Questions to ask | Possible consequence |
+|---|---|---|
+| Data provenance | Who collected the data, for what purpose, and under what conditions? | The data may not support the new analytical purpose. |
+| Representation | Which populations, locations, periods, or conditions are missing or sparse? | Performance may vary across groups or settings. |
+| Measurement | Are variables reliable proxies for the concepts of interest? | The analysis may reproduce measurement error or structural bias. |
+| Missingness | Why are values absent, and is missingness informative? | Complete-case or imputed results may be systematically distorted. |
+| Design | Is the study observational, experimental, cross-sectional, or longitudinal? | Associations may be mistaken for causal effects. |
+| Modelling | Which assumptions, tuning choices, and evaluation procedures shape the result? | Reported performance may be unstable or optimistic. |
+| Generalisability | Does the deployment setting resemble the development and evaluation settings? | Validity may not transfer to new populations or future periods. |
+| Decision context | What happens after a prediction or estimate is produced? | A statistically accurate output may still lead to harmful action. |
+| Operations | Who reviews outputs, handles exceptions, and monitors change? | Errors may persist without detection or accountability. |
+
+This taxonomy should be adapted to the application. High-stakes work requires deeper review than a low-impact exploratory analysis.
+
+## Performance is not the same as fitness for use
+
+A model can achieve a strong aggregate score and still be unsuitable for a decision.
+
+### Aggregate metrics can conceal variation
+
+Overall performance combines observations that may represent different populations, environments, or operational conditions. Always ask whether errors are concentrated in particular subgroups.
+
+```python
+from sklearn.metrics import precision_score, recall_score
+
+group_results = (
+    predictions.groupby("group", observed=True)
+    .apply(
+        lambda frame: pd.Series(
+            {
+                "n": len(frame),
+                "precision": precision_score(
+                    frame["observed"],
+                    frame["predicted"],
+                    zero_division=0,
+                ),
+                "recall": recall_score(
+                    frame["observed"],
+                    frame["predicted"],
+                    zero_division=0,
+                ),
+            }
+        ),
+        include_groups=False,
+    )
+    .reset_index()
+)
+```
+
+The code is straightforward; interpretation is not. Small subgroup samples can produce unstable estimates, and group definitions may themselves be incomplete or sensitive. Report sample sizes and uncertainty alongside subgroup metrics, and avoid treating noisy differences as definitive evidence.
+
+### Thresholds encode consequences
+
+The same predicted probabilities can support different decisions depending on the threshold. Lowering a classification threshold may detect more true cases while also increasing false alerts. Whether that trade-off is acceptable depends on the relative consequences of missed cases, unnecessary interventions, and unequal error burdens.
+
+Threshold selection should therefore be documented as a decision rule, not presented as a purely technical optimisation.
+
+### Calibration matters when probabilities guide action
+
+When a system reports a probability, users may interpret it as an expected frequency. A model that ranks cases well but is poorly calibrated can still mislead resource allocation or risk communication. Calibration should be assessed in the relevant population and, where sample size permits, across operationally meaningful subgroups.
+
+## Distribution shift and changing conditions
+
+Analytical validity is conditional on the relationship between the observed data and the setting in which the result is used. That relationship can change.
+
+Common forms of change include:
+
+- **population shift:** the characteristics of the people or units change;
+- **measurement shift:** instruments, coding practices, or data pipelines change;
+- **prevalence shift:** the frequency of the outcome changes;
+- **concept shift:** the relationship between predictors and outcomes changes; and
+- **policy feedback:** use of the model changes behaviour and therefore future data.
+
+A one-time test result cannot guarantee future performance. Monitoring should be designed before routine use begins.
+
+Useful monitoring signals may include:
+
+- input ranges, missingness, and category frequencies;
+- outcome prevalence and delayed ground-truth labels;
+- discrimination, calibration, and decision-specific error rates;
+- subgroup performance and alert volumes;
+- override, appeal, and escalation rates; and
+- operational incidents or unexpected downstream effects.
+
+Not every change requires automatic retraining. Some changes indicate a data-quality failure, policy change, or measurement problem that retraining would merely absorb. Investigation should precede remediation.
+
+## Fairness requires context
+
+Fairness is not a single metric. Different definitions can conflict, especially when outcome prevalence differs between groups. Selecting one metric without reference to the decision can hide the actual source of harm.
+
+A responsible assessment asks:
+
+- Who may benefit from the system?
+- Who may bear false-positive, false-negative, or exclusion costs?
+- Are the target and predictor variables valid for all relevant groups?
+- Does historical data encode unequal access or treatment?
+- Can affected people understand, question, or appeal a decision?
+- Are observed disparities statistically stable and practically important?
+- What intervention is possible if a disparity is detected?
+
+Protected or sensitive attributes should not be removed automatically from evaluation. Even when they are excluded from model inputs, they may be necessary for identifying unequal performance. Their collection and use must follow applicable consent, privacy, governance, and legal requirements.
+
+## Privacy, security, and data minimisation
+
+Responsible analysis uses only the data required for a justified purpose and protects those data throughout their lifecycle.
+
+At minimum, review:
+
+- the lawful or authorised basis for collection and use;
+- whether the proposed analysis is compatible with the original purpose;
+- access controls and separation of duties;
+- risks from direct identifiers and combinations of indirect identifiers;
+- retention, deletion, and versioning rules;
+- secure transfer, storage, logging, and backup arrangements; and
+- the possibility that outputs expose sensitive information.
+
+De-identification reduces some risks but does not make a dataset risk-free. Linkage with other sources may permit re-identification, and trained models or released summaries may disclose information in ways that require separate assessment.
+
+## Human oversight must be operational
+
+Saying that a person remains “in the loop” is insufficient. Oversight is meaningful only when the reviewer has the information, authority, time, and competence to intervene.
+
+A workable oversight design identifies:
+
+| Oversight element | Required definition |
+|---|---|
+| Reviewer | The role responsible for checking or acting on the output |
+| Evidence | The model output, uncertainty, relevant context, and supporting information shown |
+| Authority | The actions the reviewer may approve, reject, defer, or override |
+| Trigger | The conditions that require manual review or escalation |
+| Record | What decision, rationale, and override information is retained |
+| Appeal | How an affected person can question or correct a decision |
+| Accountability | Who owns incidents, monitoring, and final consequences |
+
+Human review can also fail through automation bias, alert fatigue, unclear interfaces, or pressure to approve recommendations quickly. Oversight itself must therefore be evaluated.
+
+## Define intended and excluded uses
+
+Every consequential analytical product should state what it is—and is not—designed to do.
+
+An intended-use statement should identify:
+
+- the purpose of the analysis;
+- the target population and setting;
+- the intended user;
+- the input data requirements;
+- the supported decision or workflow;
+- the expected level of human review; and
+- the evidence used to establish fitness for that use.
+
+An excluded-use statement should name foreseeable applications that are unsupported or unsafe. Examples include use in a different population, substitution for professional judgement, causal interpretation of predictive associations, or fully automated action when manual review was assumed during evaluation.
+
+Clear exclusions are especially important when an analysis may be copied, repurposed, or distributed beyond its original team.
+
+## Maintain a limitations and safeguards register
+
+A limitations register turns reflection into a reviewable project artifact.
+
+| Limitation or risk | Evidence | Affected use or group | Mitigation or safeguard | Residual risk | Owner | Review trigger |
+|---|---|---|---|---|---|---|
+| Rural observations are sparse | 4% of evaluation sample | Rural deployment | External validation before use | Performance remains uncertain | Model owner | New rural dataset |
+| Outcomes arrive after 90 days | Delayed labels | Performance monitoring | Track proxy signals; backfill confirmed outcomes | Drift detection is delayed | Operations lead | Monthly review |
+| Threshold increases false alerts | Decision-curve review | Review team and flagged cases | Capacity limit and manual review | Unnecessary reviews remain possible | Programme lead | Alert rate exceeds limit |
+
+The register should evolve as evidence, deployment conditions, or consequences change. Residual risk is the risk that remains after safeguards are applied; recording it prevents mitigation from being mistaken for elimination.
+
+## A responsible-use workflow
+
+Responsible practice should be integrated throughout the analytical lifecycle.
+
+1. **Frame the purpose and decision.** Define the problem, affected parties, intended users, and consequences of error.
+2. **Examine the data-generating process.** Assess provenance, consent, representation, measurement, missingness, and likely biases.
+3. **Design evaluation around use.** Select metrics, subgroups, thresholds, baselines, and validation settings that reflect the decision.
+4. **Document limitations and exclusions.** Connect each limitation to affected claims or uses.
+5. **Define safeguards and oversight.** Assign owners, escalation paths, appeal mechanisms, and stopping conditions.
+6. **Review before release.** Include relevant technical, domain, operational, ethical, privacy, or legal expertise.
+7. **Monitor after release.** Track data quality, performance, disparities, incidents, and changes in context.
+8. **Reassess or retire.** Pause, revise, retrain, or withdraw the system when its assumptions no longer hold.
+
+The workflow is proportional: the depth of review should increase with uncertainty, scale, irreversibility, and potential harm.
+
+## Pre-use review checklist
+
+Before an analysis informs action, confirm that:
+
+- [ ] the intended decision and user are explicit;
+- [ ] the development and evaluation populations are documented;
+- [ ] data provenance, consent, privacy, and access conditions have been reviewed;
+- [ ] relevant baselines, uncertainty, and subgroup results are reported;
+- [ ] threshold choices reflect operational consequences;
+- [ ] causal claims are supported by the study design;
+- [ ] intended and excluded uses are stated;
+- [ ] limitations are connected to their practical consequences;
+- [ ] safeguards, reviewers, escalation routes, and stopping rules are assigned;
+- [ ] affected people have an appropriate correction or appeal route;
+- [ ] monitoring signals and review frequency are defined; and
+- [ ] ownership for incidents, updates, and retirement is clear.
+
+A checked box is not evidence by itself. Each item should point to a documented analysis, decision, or responsible owner.
+
+## Communicating limitations clearly
+
+Limitations should appear near the claims they qualify, not only in a final paragraph that decision-makers may skip.
+
+Use direct language:
+
+- **Evidence:** “External validation was conducted in two urban hospitals.”
+- **Boundary:** “Performance in rural clinics is unknown.”
+- **Consequence:** “The model should not determine rural referrals.”
+- **Next step:** “Conduct prospective rural validation before considering use.”
+
+Avoid vague phrases such as “results should be interpreted with caution” unless the source of caution and its consequence are explained.
+
+## Chapter summary
+
+Responsible data science extends beyond correct code and strong evaluation metrics. It requires explicit boundaries, proportionate safeguards, accountable oversight, and continuing review.
+
+The central lessons are:
+
+- limitations define the scope of a result and should be treated as part of the evidence;
+- aggregate performance does not establish subgroup reliability or fitness for a particular decision;
+- thresholds, uncertainty, fairness, privacy, and operational context affect whether a use is appropriate;
+- human oversight must specify authority, information, escalation, and accountability;
+- intended uses, excluded uses, safeguards, and residual risks should be documented; and
+- monitoring and retirement are part of the analytical lifecycle, not optional activities after deployment.
+
+Across this guide, the workflow has moved from advanced data preparation and statistical reasoning to modelling, interpretation, communication, and decision-making. The final responsibility is to ensure that analytical capability remains connected to evidence, context, and human judgement.
+
+## Reflection questions
+
+1. Which limitation in your current or most recent analysis most strongly constrains its use?
+2. Could an aggregate performance metric hide a practically important subgroup failure?
+3. What decision threshold is being used, and who bears the cost of each type of error?
+4. What would meaningful human oversight look like in the real workflow?
+5. Which monitoring signal would tell you that the analysis should be reviewed, paused, or retired?
+
+## Next steps
+
+Apply the limitations and safeguards register to one completed analysis. Link each limitation to a claim, decision, affected group, safeguard, owner, and review trigger. This converts responsible use from a general principle into a reproducible analytical practice.

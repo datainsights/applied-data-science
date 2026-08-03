@@ -1,0 +1,51 @@
+{
+  "source_file": "data/processed/advanced_modeling_data.csv",
+  "source_rows": 1500,
+  "random_state": 42,
+  "test_size": 0.2,
+  "target": "churned",
+  "excluded_identifier": "customer_id",
+  "numeric_features": [
+    "age",
+    "tenure_months",
+    "monthly_spend",
+    "support_tickets",
+    "usage_hours"
+  ],
+  "categorical_features": [
+    "region",
+    "plan_type",
+    "contract_type",
+    "payment_method"
+  ],
+  "training_rows": 1200,
+  "test_rows": 300,
+  "prepared_feature_count": 23,
+  "prepared_features": [
+    "age",
+    "tenure_months",
+    "monthly_spend",
+    "support_tickets",
+    "usage_hours",
+    "missingindicator_age",
+    "missingindicator_monthly_spend",
+    "missingindicator_support_tickets",
+    "missingindicator_usage_hours",
+    "region_central",
+    "region_coastal",
+    "region_north",
+    "region_southern",
+    "plan_type_basic",
+    "plan_type_premium",
+    "plan_type_standard",
+    "contract_type_annual",
+    "contract_type_monthly",
+    "contract_type_two_year",
+    "payment_method_bank_transfer",
+    "payment_method_card",
+    "payment_method_invoice",
+    "payment_method_mobile_money"
+  ],
+  "training_target_rate": 0.22166666666666668,
+  "test_target_rate": 0.22
+}

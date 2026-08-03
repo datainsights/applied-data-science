@@ -1,4 +1,4 @@
-# From Results to Defensible Claims {#lesson14}
+# From Results to Defensible Claims {#sec-lesson14}
 
 :::cdi-message
 - **ID:** ADS-L14
@@ -7,4 +7,350 @@
 - **Theme:** Defensible claims remain proportional to the evidence
 :::
 
-> This chapter is scaffolded for development.
+## Why this chapter matters
+
+An analysis is not complete when a model produces a coefficient, a confidence interval, or a performance score. The final analytical task is to decide what the evidence permits us to say.
+
+That step is difficult because results and claims are not the same thing. A result is an output of an analytical procedure. A claim is a statement about the data, a population, a future observation, or a causal process. Moving from one to the other requires judgment about the study design, data quality, assumptions, uncertainty, and intended scope.
+
+A defensible claim is therefore not the strongest statement that sounds plausible. It is the strongest statement that remains supported after the full evidence chain has been examined.
+
+## Learning objectives
+
+By the end of this chapter, you should be able to:
+
+1. distinguish statistical results from substantive claims;
+2. match claim strength to the study design and analytical objective;
+3. interpret effect estimates together with uncertainty and practical importance;
+4. separate descriptive, associational, predictive, and causal language;
+5. identify when subgroup, multiple-testing, or robustness issues weaken a conclusion;
+6. write concise claims that state the estimate, scope, uncertainty, and limitations; and
+7. audit an analytical claim before it is communicated.
+
+## Results do not speak for themselves
+
+Consider the statement:
+
+> The fitted coefficient for the intervention variable was -4.2, with a 95% confidence interval from -6.8 to -1.6.
+
+This is a statistical result. Its interpretation depends on questions that are not contained in the coefficient alone:
+
+- What outcome was measured, and in what units?
+- Was the intervention assigned or merely observed?
+- Which variables were included in the model?
+- Is the model form appropriate?
+- How representative is the analytical sample?
+- Were missing data, repeated measurements, or clustering handled appropriately?
+- Was this analysis planned before the results were inspected?
+
+Without that context, changing “the coefficient was -4.2” into “the intervention reduces the outcome by 4.2 units” may overstate what the analysis establishes.
+
+## The evidence-to-claim chain
+
+A claim is only as reliable as the weakest important link connecting the research question to the reported conclusion.
+
+| Link | Guiding question | Common threat |
+|---|---|---|
+| Question | Is the target question clearly defined? | Vague population, outcome, or estimand |
+| Design | Can the design support the intended claim? | Causal language from observational data |
+| Measurement | Do variables represent the intended concepts? | Misclassification or measurement error |
+| Data | Is the analytical sample suitable? | Selection bias, missingness, or leakage |
+| Method | Does the method match the data structure? | Violated assumptions or ignored dependence |
+| Result | Are effect size and uncertainty reported? | Reliance on a p-value alone |
+| Robustness | Does the conclusion survive reasonable alternatives? | Dependence on one fragile specification |
+| Scope | Is the claim limited to the supported population and setting? | Unwarranted generalisation |
+
+This chain discourages a narrow focus on the final model output. A technically correct estimate can still support a weak claim if the design, measurement, or scope is poorly aligned with the question.
+
+## Four kinds of analytical claims
+
+The language used in a conclusion should reveal the kind of evidence being presented.
+
+### Descriptive claims
+
+Descriptive claims summarise what was observed in the analysed data.
+
+> In the analytical sample, the median waiting time was 38 minutes.
+
+The claim does not automatically extend to people, locations, or periods outside the sample. Generalisation requires a sampling or transportability argument.
+
+### Associational claims
+
+Associational claims describe how variables vary together after any stated adjustments.
+
+> Higher baseline risk was associated with longer hospital stay after adjustment for age and recorded comorbidities.
+
+The phrase “was associated with” is deliberate. Statistical adjustment does not by itself remove unmeasured confounding, selection bias, reverse causation, or measurement error.
+
+### Predictive claims
+
+Predictive claims concern a model's ability to estimate outcomes for new observations drawn from a relevant target setting.
+
+> On the held-out test data, the model discriminated between the two outcome classes with a ROC AUC of 0.84.
+
+This statement describes test-set performance. It does not establish causality, guarantee deployment performance, or show that the model is clinically or operationally useful. Those conclusions require additional evidence, including calibration, threshold consequences, external validation, and workflow evaluation.
+
+### Causal claims
+
+Causal claims describe how an outcome would change under an intervention or exposure contrast.
+
+> Under the study assumptions, assignment to the intervention reduced the mean outcome by an estimated 4.2 units compared with control.
+
+Randomisation can strengthen this interpretation, but implementation failures, non-adherence, attrition, interference, and outcome measurement still matter. In observational studies, causal language requires a clearly defined estimand, a credible identification strategy, and explicit assumptions—not merely the inclusion of covariates in a regression model.
+
+## Match the wording to the evidence
+
+Small wording changes can substantially alter the strength of a claim.
+
+| Evidence supports | Prefer | Avoid unless justified |
+|---|---|---|
+| Sample description | “In this sample, 31%…” | “In the population, 31%…” |
+| Observed relationship | “X was associated with Y” | “X caused Y” |
+| Adjusted relationship | “After adjustment for the measured covariates…” | “After controlling for all other factors…” |
+| Test-set prediction | “The model achieved…” | “The model will perform…” |
+| Uncertain estimate | “The estimate was compatible with…” | “There was no effect” |
+| Subgroup result | “Exploratory evidence suggested…” | “The treatment works only for…” |
+| Robust result | “The conclusion was similar across…” | “The result was proven” |
+
+Phrases such as “all other factors,” “proved,” and “no effect” often imply more certainty than an analysis provides. Precise language is not timid language; it is evidence-calibrated language.
+
+## Interpret estimates, not isolated p-values
+
+A p-value addresses a limited question about the compatibility of the data with a statistical model under a null hypothesis. It does not measure:
+
+- the size of an effect;
+- the probability that the null hypothesis is true;
+- the probability that a result will replicate;
+- the practical importance of an estimate; or
+- the absence of bias.
+
+Interpretation should begin with the effect estimate and its scale. Uncertainty should then be used to describe which values remain reasonably compatible with the data and model.
+
+Suppose a mean difference is estimated as -4.2 units with a 95% confidence interval from -6.8 to -1.6. A defensible interpretation is:
+
+> The intervention group had an estimated mean outcome 4.2 units lower than the comparison group. Under the fitted model, values from 1.6 to 6.8 units lower were reasonably compatible with the data.
+
+This reports direction, magnitude, units, comparison, and uncertainty. Whether the result is important depends on substantive context. If a difference smaller than 5 units has little practical value, the interval includes both modest and practically important effects.
+
+### Statistical and practical importance
+
+Statistical evidence and practical importance answer different questions.
+
+| Statistical evidence | Practical importance |
+|---|---|
+| How precisely was the effect estimated? | Is the effect large enough to matter? |
+| How compatible are the data with a reference hypothesis? | Would the effect change a decision or outcome? |
+| Influenced by sample size and variability | Influenced by domain thresholds, costs, and consequences |
+
+A very small effect can be estimated precisely in a large sample. A consequential effect can remain uncertain in a small sample. Both dimensions should be reported.
+
+## Absence of evidence is not evidence of absence
+
+A non-significant result does not establish that an effect is zero. It may reflect limited information, high variability, weak measurement, an insensitive design, or a genuinely small effect.
+
+Compare these conclusions:
+
+> There was no difference between groups because p > 0.05.
+
+> The estimated difference was 1.1 units, with a 95% confidence interval from -3.4 to 5.6. The data were compatible with effects in both directions, so the study did not estimate the difference precisely enough to support a clear conclusion.
+
+The second statement distinguishes uncertainty from equivalence. If the scientific objective is to demonstrate that differences are small enough to be unimportant, an equivalence or non-inferiority design with prespecified margins may be required.
+
+## Claims from predictive models
+
+Predictive modelling introduces its own interpretation risks. Feature importance, model coefficients, and explanation values describe aspects of a fitted model; they do not automatically describe causal mechanisms or stable real-world relationships.
+
+For example:
+
+> Age was the most important predictor, so increasing age causes the outcome.
+
+This conclusion is invalid. Importance may reflect association, scale, correlation among predictors, missingness patterns, or the model's structure. A more defensible statement is:
+
+> Within the fitted model and evaluated data, age contributed strongly to prediction according to permutation importance. This does not establish that age or a correlated feature caused the outcome.
+
+Predictive claims should specify:
+
+- the evaluation data and whether they were held out;
+- the metric and its uncertainty when available;
+- the target population and prediction horizon;
+- whether calibration and decision thresholds were assessed;
+- whether validation was internal, temporal, or external; and
+- known differences between development and deployment settings.
+
+## Multiplicity and selective reporting
+
+When many outcomes, predictors, subgroups, model specifications, or thresholds are examined, some apparently strong results can occur by chance. The problem becomes more serious when only the most favourable findings are reported.
+
+Defensible reporting distinguishes among:
+
+- **confirmatory analyses**, which test prespecified questions using a planned procedure;
+- **sensitivity analyses**, which examine whether conclusions depend on reasonable choices; and
+- **exploratory analyses**, which generate patterns or hypotheses for further study.
+
+Multiple-testing adjustments may be appropriate, but transparency is essential even when no formal adjustment is used. Report the size of the search space, not only the selected result.
+
+## Subgroup claims require special care
+
+Subgroup analyses are often appealing because they suggest that an effect differs across people or settings. They are also frequently underpowered and vulnerable to chance findings.
+
+Evidence that one subgroup has a significant result while another does not is not, by itself, evidence that the subgroup effects differ. The relevant question is whether the contrast between subgroup effects is supported, commonly through an interaction analysis.
+
+A careful subgroup conclusion might read:
+
+> The estimated association was stronger in the younger subgroup, but the interaction interval was wide and included no subgroup difference. This exploratory pattern requires confirmation in data designed to assess effect modification.
+
+## Robustness strengthens—but does not prove—a claim
+
+Robustness analysis asks whether the main conclusion changes under reasonable alternative decisions. Depending on the study, useful checks may include:
+
+- alternative outcome or exposure definitions;
+- different but defensible covariate sets;
+- transformations or nonlinear functional forms;
+- robust or cluster-aware uncertainty estimates;
+- alternative missing-data assumptions;
+- influential-observation diagnostics;
+- negative controls or falsification checks;
+- temporal or external validation; and
+- analyses that quantify sensitivity to unmeasured bias.
+
+Consistency across reasonable analyses increases confidence that the conclusion is not an artefact of one arbitrary choice. It does not eliminate shared biases in the data or design.
+
+## A worked interpretation
+
+Imagine an observational study examining whether weekly training hours are related to employee productivity. The adjusted regression estimate is 1.8 additional productivity points per training hour, with a 95% confidence interval from 0.6 to 3.0.
+
+### Overstated claim
+
+> Each extra hour of training increases employee productivity by 1.8 points.
+
+This uses causal language despite an observational design and treats the estimate as exact.
+
+### Defensible claim
+
+> Among employees included in the analysis, each additional weekly training hour was associated with an estimated 1.8-point higher productivity score after adjustment for measured role, experience, and department characteristics (95% CI: 0.6 to 3.0). Because training was not randomly assigned, residual confounding and reverse causation remain possible; the estimate should not be interpreted as the causal effect of increasing training time.
+
+The revised claim contains five useful elements:
+
+1. **scope** — employees included in the analysis;
+2. **contrast** — each additional weekly training hour;
+3. **estimate and units** — 1.8 productivity points;
+4. **uncertainty** — the confidence interval; and
+5. **limitation** — the observational design does not identify a causal effect by itself.
+
+## A reusable claim template
+
+The following structure works for many analytical conclusions:
+
+> In **[population or dataset]**, **[comparison or predictor]** was **[associated with / predictive of / estimated to cause]** **[outcome]** by **[effect estimate and units]** under **[design and model conditions]**. The uncertainty interval was **[interval]**. The interpretation is limited by **[most important design, data, or modelling limitation]**.
+
+Not every sentence needs every component. The goal is to make the claim auditable, not mechanically long.
+
+## A programmatic claim audit
+
+Interpretation cannot be automated completely, but a structured record can prevent important elements from being omitted.
+
+```python
+claim_audit = {
+    "claim_type": "associational",
+    "population": "employees included in the analytical sample",
+    "contrast": "one additional weekly training hour",
+    "outcome": "productivity score",
+    "estimate": 1.8,
+    "interval_95": (0.6, 3.0),
+    "adjustment_set": ["role", "experience", "department"],
+    "design": "observational cohort",
+    "primary_limitation": "possible residual confounding",
+    "causal_language_supported": False,
+}
+
+required_fields = [
+    "claim_type",
+    "population",
+    "contrast",
+    "outcome",
+    "estimate",
+    "design",
+    "primary_limitation",
+]
+
+missing = [field for field in required_fields if not claim_audit.get(field)]
+
+if missing:
+    raise ValueError(f"Incomplete claim audit: {missing}")
+```
+
+This record does not decide whether the analysis is valid. It makes the intended claim and its evidential basis explicit enough for review.
+
+## Claim-audit checklist
+
+Before reporting a conclusion, ask:
+
+### Question and design
+
+- What exact claim am I trying to make?
+- Is it descriptive, associational, predictive, or causal?
+- Can the study design support that type of claim?
+
+### Estimate and uncertainty
+
+- Have I reported the estimate, comparison, and units?
+- Have I described uncertainty rather than relying only on significance?
+- Does the interval include substantively different conclusions?
+
+### Data and method
+
+- Are the population, sample, and exclusions clear?
+- Could missingness, selection, leakage, confounding, or measurement error alter the conclusion?
+- Were dependence, clustering, repeated observations, and model assumptions addressed?
+
+### Robustness and multiplicity
+
+- Was the analysis prespecified, exploratory, or selected after inspection?
+- How many outcomes, subgroups, models, or thresholds were examined?
+- Does the conclusion persist under reasonable alternative analyses?
+
+### Communication
+
+- Is the wording proportional to the evidence?
+- Have I separated statistical evidence from practical importance?
+- Is the claim limited to the supported population, setting, and time period?
+- Have I stated the most decision-relevant limitation?
+
+If a claim fails the audit, revise either the analysis or the language. Do not repair a weak evidence chain with stronger prose.
+
+## Common interpretation failures
+
+| Failure | Why it is misleading | Better practice |
+|---|---|---|
+| Treating significance as importance | A small effect can be precisely estimated | Report effect size, uncertainty, and a practical threshold |
+| Treating non-significance as no effect | Imprecision can hide meaningful effects | Interpret the estimate and interval |
+| Using causal verbs for associations | Adjustment may not remove bias | Use associational language or justify identification assumptions |
+| Generalising beyond the sample | External validity is not automatic | State the supported population and setting |
+| Interpreting feature importance causally | Importance describes model behaviour | Separate prediction, explanation, and intervention |
+| Selecting favourable analyses | Selection exaggerates evidence | Distinguish planned, sensitivity, and exploratory analyses |
+| Hiding model dependence | One specification may drive the result | Report robustness across reasonable alternatives |
+| Listing every limitation equally | Readers cannot identify the main threat | Prioritise limitations that could change the decision |
+
+## Chapter summary
+
+A defensible claim preserves the distinction between what an analysis calculated and what the evidence establishes. Strong interpretation requires alignment among the question, design, measurement, data, method, uncertainty, robustness, and scope.
+
+The core principles are:
+
+- classify the claim before choosing its language;
+- report effect size and uncertainty together;
+- separate statistical evidence from practical importance;
+- avoid turning association or model importance into causation;
+- treat non-significant, subgroup, and multiple-testing results cautiously;
+- use robustness checks to expose dependence on analytical choices; and
+- state the population, conditions, and most important limitation.
+
+The aim is not to weaken every conclusion. It is to make each conclusion exactly as strong as the evidence allows.
+
+## Reflection questions
+
+1. What is the strongest claim your current study design can support?
+2. Which single assumption would most weaken your conclusion if it were false?
+3. Does your uncertainty interval include effects that would lead to different practical decisions?
+4. Which parts of your analysis were confirmatory, exploratory, or selected after viewing the data?
+5. How would you rewrite your main result for a reader who might otherwise interpret association as causation?

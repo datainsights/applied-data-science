@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -70,6 +105,10 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="mermaid-theme" content="forest">
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="assets/css/cdi.css">
@@ -314,15 +353,40 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#improvement-is-a-controlled-experiment" id="toc-improvement-is-a-controlled-experiment" class="nav-link" data-scroll-target="#improvement-is-a-controlled-experiment">Improvement is a controlled experiment</a></li>
+  <li><a href="#start-from-a-reproducible-baseline" id="toc-start-from-a-reproducible-baseline" class="nav-link" data-scroll-target="#start-from-a-reproducible-baseline">Start from a reproducible baseline</a></li>
+  <li><a href="#diagnose-before-changing-the-model" id="toc-diagnose-before-changing-the-model" class="nav-link" data-scroll-target="#diagnose-before-changing-the-model">Diagnose before changing the model</a>
+  <ul class="collapse">
+  <li><a href="#learning-curves" id="toc-learning-curves" class="nav-link" data-scroll-target="#learning-curves">Learning curves</a></li>
+  </ul></li>
+  <li><a href="#improve-the-full-pipeline" id="toc-improve-the-full-pipeline" class="nav-link" data-scroll-target="#improve-the-full-pipeline">Improve the full pipeline</a></li>
+  <li><a href="#tune-a-focused-search-space" id="toc-tune-a-focused-search-space" class="nav-link" data-scroll-target="#tune-a-focused-search-space">Tune a focused search space</a></li>
+  <li><a href="#improve-decisions-not-only-scores" id="toc-improve-decisions-not-only-scores" class="nav-link" data-scroll-target="#improve-decisions-not-only-scores">Improve decisions, not only scores</a>
+  <ul class="collapse">
+  <li><a href="#probability-calibration" id="toc-probability-calibration" class="nav-link" data-scroll-target="#probability-calibration">Probability calibration</a></li>
+  </ul></li>
+  <li><a href="#perform-structured-error-analysis" id="toc-perform-structured-error-analysis" class="nav-link" data-scroll-target="#perform-structured-error-analysis">Perform structured error analysis</a></li>
+  <li><a href="#compare-candidates-fairly" id="toc-compare-candidates-fairly" class="nav-link" data-scroll-target="#compare-candidates-fairly">Compare candidates fairly</a></li>
+  <li><a href="#use-an-explicit-stopping-rule" id="toc-use-an-explicit-stopping-rule" class="nav-link" data-scroll-target="#use-an-explicit-stopping-rule">Use an explicit stopping rule</a></li>
+  <li><a href="#reproducible-chapter-workflow" id="toc-reproducible-chapter-workflow" class="nav-link" data-scroll-target="#reproducible-chapter-workflow">Reproducible chapter workflow</a></li>
+  <li><a href="#practical-checklist" id="toc-practical-checklist" class="nav-link" data-scroll-target="#practical-checklist">Practical checklist</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next step</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-predictive-model-building.html">Predictive and Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="./10-model-improvement.html"><span class="chapter-title">Model Improvement</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="lesson10" class="quarto-section-identifier"><span class="chapter-title">Model Improvement</span></span></h1>
+<h1 class="title"><span id="sec-lesson10" class="quarto-section-identifier"><span class="chapter-title">Model Improvement</span></span></h1>
 </div>
 
 
@@ -353,11 +417,460 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Better models result from disciplined iteration, not complexity alone</li>
 </ul>
 </div>
-<blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
-</blockquote>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>diagnose whether a model is limited by bias, variance, data quality, or the decision threshold;</li>
+<li>improve a complete preprocessing-and-model pipeline without introducing data leakage;</li>
+<li>tune a focused set of hyperparameters with cross-validation;</li>
+<li>use learning curves, validation curves, calibration, and subgroup errors to guide the next experiment;</li>
+<li>compare a candidate model with its baseline using out-of-fold evidence; and</li>
+<li>stop iterating when added complexity no longer produces a meaningful improvement.</li>
+</ul>
+</section>
+<section id="improvement-is-a-controlled-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="improvement-is-a-controlled-experiment">Improvement is a controlled experiment</h2>
+<p>Model improvement is not the search for the most complicated algorithm. It is a sequence of controlled experiments in which one justified change is evaluated against a stable baseline.</p>
+<p>The evaluation design from <a href="09-model-evaluation-and-validation.html" class="quarto-xref"><span>Model Evaluation and Validation</span></a> should remain fixed while candidates are developed. In particular, keep the test set untouched until the final model has been selected. Repeatedly checking the test score turns the test set into part of the tuning process and makes its estimate optimistic.</p>
+<div class="cell" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    A[Freeze baseline and metric] --&gt; B[Diagnose the main limitation]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    B --&gt; C[Change one component]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    C --&gt; D[Evaluate with cross-validation]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    D --&gt; E{Meaningful and stable gain?}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    E -- Yes --&gt; F[Record as new candidate]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    E -- No --&gt; G[Reject or revise]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    F --&gt; H{Stopping rule met?}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    G --&gt; H</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    H -- No --&gt; B</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    H -- Yes --&gt; I[Evaluate once on test data]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[Freeze baseline and metric] --&gt; B[Diagnose the main limitation]
+    B --&gt; C[Change one component]
+    C --&gt; D[Evaluate with cross-validation]
+    D --&gt; E{Meaningful and stable gain?}
+    E -- Yes --&gt; F[Record as new candidate]
+    E -- No --&gt; G[Reject or revise]
+    F --&gt; H{Stopping rule met?}
+    G --&gt; H
+    H -- No --&gt; B
+    H -- Yes --&gt; I[Evaluate once on test data]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Protect the test set
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use training folds for preprocessing, feature selection, hyperparameter tuning, threshold selection, and model comparison. Use the test set once, after the improvement decisions are complete.</p>
+</div>
+</div>
+</section>
+<section id="start-from-a-reproducible-baseline" class="level2">
+<h2 class="anchored" data-anchor-id="start-from-a-reproducible-baseline">Start from a reproducible baseline</h2>
+<p>A useful baseline is more than a score. It records the dataset version, split strategy, preprocessing, estimator, hyperparameters, random seed, metric, and uncertainty across validation folds.</p>
+<p>For imbalanced classification, a dummy classifier provides a minimum reference, while a regularized logistic regression provides an interpretable modelling baseline.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.dummy <span class="im">import</span> DummyClassifier</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_validate</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>baseline <span class="op">=</span> LogisticRegression(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    max_iter<span class="op">=</span><span class="dv">2_000</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    class_weight<span class="op">=</span><span class="st">"balanced"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    baseline,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>{<span class="st">"roc_auc"</span>: <span class="st">"roc_auc"</span>, <span class="st">"pr_auc"</span>: <span class="st">"average_precision"</span>},</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    return_train_score<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The mean validation score describes average performance, while the fold-to-fold standard deviation describes stability. A small mean gain accompanied by much greater variability may not be a practical improvement.</p>
+</section>
+<section id="diagnose-before-changing-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="diagnose-before-changing-the-model">Diagnose before changing the model</h2>
+<p>Different limitations require different interventions.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Diagnostic pattern</th>
+<th>Likely limitation</th>
+<th>Useful next experiment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training and validation scores are both weak</td>
+<td>High bias or weak signal</td>
+<td>Improve features, reduce regularization, or try a more expressive model</td>
+</tr>
+<tr class="even">
+<td>Training score is strong but validation score is much lower</td>
+<td>High variance</td>
+<td>Add data, simplify the model, strengthen regularization, or reduce unstable features</td>
+</tr>
+<tr class="odd">
+<td>Validation performance keeps improving with more observations</td>
+<td>Data limitation</td>
+<td>Collect or label more representative data</td>
+</tr>
+<tr class="even">
+<td>Ranking metric is acceptable but decisions are poor</td>
+<td>Threshold mismatch</td>
+<td>Tune the operating threshold using decision costs</td>
+</tr>
+<tr class="odd">
+<td>Probabilities are systematically too high or too low</td>
+<td>Poor calibration</td>
+<td>Calibrate probabilities on held-out folds</td>
+</tr>
+<tr class="even">
+<td>Errors concentrate in a subgroup</td>
+<td>Representation or measurement problem</td>
+<td>Audit sampling, labels, features, and subgroup-specific performance</td>
+</tr>
+<tr class="odd">
+<td>Cross-validation is strong but deployment performance is weak</td>
+<td>Distribution shift or leakage</td>
+<td>Revisit splitting, data lineage, and production drift</td>
+</tr>
+</tbody>
+</table>
+<section id="learning-curves" class="level3">
+<h3 class="anchored" data-anchor-id="learning-curves">Learning curves</h3>
+<p>A learning curve compares training and validation performance as the training sample grows.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> learning_curve</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sizes, train_scores, valid_scores <span class="op">=</span> learning_curve(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>pipeline,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_train,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y_train,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"average_precision"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    train_sizes<span class="op">=</span>[<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Interpret the curves together:</p>
+<ul>
+<li>a persistent large gap suggests variance;</li>
+<li>two low, converged curves suggest bias; and</li>
+<li>an improving validation curve suggests that additional data may help.</li>
+</ul>
+<p>These are diagnostic patterns, not proofs. Data quality, class imbalance, grouped observations, and temporal drift can produce similar shapes.</p>
+</section>
+</section>
+<section id="improve-the-full-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="improve-the-full-pipeline">Improve the full pipeline</h2>
+<p>Preprocessing must be fitted inside each training fold. A <code>Pipeline</code> keeps imputation, scaling, feature transformations, and the estimator inside the cross-validation process.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>numeric_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>categorical_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"most_frequent"</span>)),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"encoder"</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"numeric"</span>, numeric_pipeline, numeric_features),</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"categorical"</span>, categorical_pipeline, categorical_features),</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"preprocess"</span>, preprocessor),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"model"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">2_000</span>, random_state<span class="op">=</span><span class="dv">42</span>)),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A common leakage pattern
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not impute, scale, select features, or resample the complete dataset before cross-validation. Information from validation observations would influence the fitted transformation.</p>
+</div>
+</div>
+</section>
+<section id="tune-a-focused-search-space" class="level2">
+<h2 class="anchored" data-anchor-id="tune-a-focused-search-space">Tune a focused search space</h2>
+<p>Hyperparameter tuning should encode plausible choices rather than generate a huge arbitrary grid. <code>RandomizedSearchCV</code> is efficient when several parameters are available; <code>GridSearchCV</code> is appropriate for a small, carefully chosen grid.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> loguniform</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> RandomizedSearchCV</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>parameter_distributions <span class="op">=</span> {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model__C"</span>: loguniform(<span class="fl">1e-3</span>, <span class="fl">1e2</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"model__class_weight"</span>: [<span class="va">None</span>, <span class="st">"balanced"</span>],</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>search <span class="op">=</span> RandomizedSearchCV(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>pipeline,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    param_distributions<span class="op">=</span>parameter_distributions,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"average_precision"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    refit<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    return_train_score<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>search.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The search score is not an unbiased estimate of the selected model because the same folds influenced the choice. For high-stakes comparisons, use nested cross-validation: the inner loop tunes candidates and the outer loop estimates their generalization performance.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>outer_cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">2026</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>nested_scores <span class="op">=</span> cross_validate(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    search,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>outer_cv,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>{<span class="st">"roc_auc"</span>: <span class="st">"roc_auc"</span>, <span class="st">"pr_auc"</span>: <span class="st">"average_precision"</span>},</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="improve-decisions-not-only-scores" class="level2">
+<h2 class="anchored" data-anchor-id="improve-decisions-not-only-scores">Improve decisions, not only scores</h2>
+<p>The default probability threshold of 0.50 is rarely a universal decision rule. Select a threshold from out-of-fold predictions so that the decision reflects the relative consequences of false positives and false negatives.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_recall_curve</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_predict</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>oof_probability <span class="op">=</span> cross_val_predict(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    search.best_estimator_,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"predict_proba"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>precision, recall, thresholds <span class="op">=</span> precision_recall_curve(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    oof_probability,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> precision[:<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> recall[:<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> (</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    precision[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> recall[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">1e-12</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>selected_threshold <span class="op">=</span> thresholds[np.argmax(f1)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Optimising F1 is only an illustration. In practice, define the rule from the application—for example, maximise recall while maintaining precision of at least 0.80, or minimise an explicit expected cost.</p>
+<section id="probability-calibration" class="level3">
+<h3 class="anchored" data-anchor-id="probability-calibration">Probability calibration</h3>
+<p>Calibration asks whether predictions near 0.70 are positive approximately 70% of the time. It matters when probabilities inform risk, triage, resource allocation, or expected value.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> CalibratedClassifierCV</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>calibrated_model <span class="op">=</span> CalibratedClassifierCV(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>search.best_estimator_,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"sigmoid"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>calibrated_model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calibration can improve probability reliability without improving rank-based metrics such as ROC AUC. Evaluate discrimination and calibration separately.</p>
+</section>
+</section>
+<section id="perform-structured-error-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="perform-structured-error-analysis">Perform structured error analysis</h2>
+<p>Aggregate metrics can hide systematic failures. Create an out-of-fold error table and examine errors across relevant groups, ranges, time periods, missingness patterns, and confidence levels.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>error_table <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"observed"</span>: y_train.reset_index(drop<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"probability"</span>: oof_probability,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>error_table[<span class="st">"predicted"</span>] <span class="op">=</span> (</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    error_table[<span class="st">"probability"</span>] <span class="op">&gt;=</span> selected_threshold</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>).astype(<span class="bu">int</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>error_table[<span class="st">"error"</span>] <span class="op">=</span> error_table[<span class="st">"observed"</span>] <span class="op">!=</span> error_table[<span class="st">"predicted"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Useful questions include:</p>
+<ul>
+<li>Are false negatives concentrated in a clinically or operationally important group?</li>
+<li>Do errors increase when particular variables are missing?</li>
+<li>Are high-confidence errors associated with label problems or unusual observations?</li>
+<li>Does performance deteriorate over time or across data sources?</li>
+<li>Would the proposed feature exist, in the same form, at prediction time?</li>
+</ul>
+<p>Subgroup results should include sample size and uncertainty. Very small groups can produce extreme but unstable estimates.</p>
+</section>
+<section id="compare-candidates-fairly" class="level2">
+<h2 class="anchored" data-anchor-id="compare-candidates-fairly">Compare candidates fairly</h2>
+<p>Candidate models should be evaluated on identical folds and the same primary metric. Paired fold results are more informative than comparing unrelated mean scores.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"fold"</span>: <span class="bu">range</span>(<span class="dv">1</span>, cv.get_n_splits() <span class="op">+</span> <span class="dv">1</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"baseline_pr_auc"</span>: baseline_scores[<span class="st">"test_pr_auc"</span>],</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"candidate_pr_auc"</span>: candidate_scores[<span class="st">"test_pr_auc"</span>],</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>comparison[<span class="st">"difference"</span>] <span class="op">=</span> (</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    comparison[<span class="st">"candidate_pr_auc"</span>] <span class="op">-</span> comparison[<span class="st">"baseline_pr_auc"</span>]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A final choice should consider more than the largest mean score.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterion</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Predictive value</td>
+<td>Is the gain large enough to matter for the intended decision?</td>
+</tr>
+<tr class="even">
+<td>Stability</td>
+<td>Is the gain consistent across folds, seeds, time periods, and important groups?</td>
+</tr>
+<tr class="odd">
+<td>Calibration</td>
+<td>Are predicted probabilities reliable enough for their intended use?</td>
+</tr>
+<tr class="even">
+<td>Complexity</td>
+<td>Does the gain justify added dependencies, latency, maintenance, and explanation burden?</td>
+</tr>
+<tr class="odd">
+<td>Reproducibility</td>
+<td>Can the same result be rebuilt from recorded data, code, environment, and seed?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="use-an-explicit-stopping-rule" class="level2">
+<h2 class="anchored" data-anchor-id="use-an-explicit-stopping-rule">Use an explicit stopping rule</h2>
+<p>End improvement when one or more pre-specified conditions are met:</p>
+<ul>
+<li>the primary metric reaches the minimum useful target;</li>
+<li>recent experiments produce gains smaller than the minimum meaningful improvement;</li>
+<li>uncertainty is larger than the observed difference;</li>
+<li>performance is adequate across important subgroups;</li>
+<li>added complexity is not justified by operational value; or</li>
+<li>the remaining limitation requires new or better data rather than more tuning.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Prefer the simplest adequate model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If two candidates perform similarly, prefer the one that is easier to validate, explain, maintain, monitor, and reproduce.</p>
+</div>
+</div>
+</section>
+<section id="reproducible-chapter-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-chapter-workflow">Reproducible chapter workflow</h2>
+<p>The companion script runs a complete demonstration using synthetic classification data. It writes model-comparison results, the selected threshold, and diagnostic figures without requiring the examples in this chapter to execute during rendering.</p>
+<p>From the repository root, run:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/10-model-improvement.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The equivalent Bash helper is:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/10-run-model-improvement.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Both commands produce the same outputs:</p>
+<ul>
+<li><code>results/model-improvement/10-model-comparison.csv</code>;</li>
+<li><code>results/model-improvement/10-threshold-summary.csv</code>;</li>
+<li><code>results/figures/10-learning-curve.png</code>;</li>
+<li><code>results/figures/10-validation-curve.png</code>; and</li>
+<li><code>results/figures/10-calibration-curve.png</code>.</li>
+</ul>
+<p>After running the script, the generated figures can be included in the rendered guide using the following Markdown image references:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Learning curve for diagnosing bias and variance.](results/figures/10-learning-curve.png)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Validation curve showing the effect of regularization.](results/figures/10-validation-curve.png)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="al">![Calibration curve comparing predicted and observed probabilities.](results/figures/10-calibration-curve.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="practical-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="practical-checklist">Practical checklist</h2>
+<p>Before accepting an improved model, confirm that:</p>
+<ul>
+<li>the baseline, primary metric, and split strategy were defined first;</li>
+<li>preprocessing and feature selection occurred inside the pipeline;</li>
+<li>the test set did not influence tuning or threshold selection;</li>
+<li>the search space was justified and computationally proportionate;</li>
+<li>candidate and baseline results used identical validation folds;</li>
+<li>uncertainty and subgroup behaviour were examined;</li>
+<li>probability calibration was assessed when probabilities drive decisions;</li>
+<li>the chosen threshold reflects the real decision context;</li>
+<li>the final model and threshold were evaluated once on untouched test data; and</li>
+<li>the experiment configuration and outputs were saved.</li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ul>
+<li>Diagnose the limitation before selecting an intervention.</li>
+<li>Improve the complete pipeline, not the estimator in isolation.</li>
+<li>Keep preprocessing, selection, and tuning inside cross-validation.</li>
+<li>Treat threshold selection and calibration as separate from model ranking.</li>
+<li>Use error analysis to identify failures hidden by aggregate metrics.</li>
+<li>Prefer stable, meaningful improvements over marginal complexity.</li>
+<li>Stop according to a rule, then perform one final evaluation on untouched test data.</li>
+</ul>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next step</h2>
+<p>The next stage is to turn the selected model, threshold, preprocessing steps, and evaluation evidence into a reproducible model artifact that can be interpreted, monitored, and prepared for responsible use.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

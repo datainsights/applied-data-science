@@ -1,0 +1,2 @@
+mae,rmse,r2,best_cv_rmse,best_parameters
+28531.92005852196,35151.77510252146,0.9166509413009538,38782.2143950587,"{'model__max_depth': 8, 'model__max_features': 0.8, 'model__min_samples_leaf': 1}"

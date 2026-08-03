@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -314,15 +349,99 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#communication-begins-with-the-decision" id="toc-communication-begins-with-the-decision" class="nav-link" data-scroll-target="#communication-begins-with-the-decision">15.1 Communication Begins with the Decision</a></li>
+  <li><a href="#define-the-central-message" id="toc-define-the-central-message" class="nav-link" data-scroll-target="#define-the-central-message">15.2 Define the Central Message</a>
+  <ul class="collapse">
+  <li><a href="#a-practical-message-template" id="toc-a-practical-message-template" class="nav-link" data-scroll-target="#a-practical-message-template">A practical message template</a></li>
+  </ul></li>
+  <li><a href="#separate-result-interpretation-and-action" id="toc-separate-result-interpretation-and-action" class="nav-link" data-scroll-target="#separate-result-interpretation-and-action">15.3 Separate Result, Interpretation, and Action</a></li>
+  <li><a href="#build-an-evidence-hierarchy" id="toc-build-an-evidence-hierarchy" class="nav-link" data-scroll-target="#build-an-evidence-hierarchy">15.4 Build an Evidence Hierarchy</a></li>
+  <li><a href="#use-plain-language-precisely" id="toc-use-plain-language-precisely" class="nav-link" data-scroll-target="#use-plain-language-precisely">15.5 Use Plain Language Precisely</a>
+  <ul class="collapse">
+  <li><a href="#keep-numerical-meaning-visible" id="toc-keep-numerical-meaning-visible" class="nav-link" data-scroll-target="#keep-numerical-meaning-visible">Keep numerical meaning visible</a></li>
+  </ul></li>
+  <li><a href="#report-uncertainty-as-part-of-the-result" id="toc-report-uncertainty-as-part-of-the-result" class="nav-link" data-scroll-target="#report-uncertainty-as-part-of-the-result">15.6 Report Uncertainty as Part of the Result</a>
+  <ul class="collapse">
+  <li><a href="#statistical-result" id="toc-statistical-result" class="nav-link" data-scroll-target="#statistical-result">Statistical result</a></li>
+  <li><a href="#predictive-result" id="toc-predictive-result" class="nav-link" data-scroll-target="#predictive-result">Predictive result</a></li>
+  <li><a href="#negative-or-inconclusive-findings" id="toc-negative-or-inconclusive-findings" class="nav-link" data-scroll-target="#negative-or-inconclusive-findings">Negative or inconclusive findings</a></li>
+  </ul></li>
+  <li><a href="#design-tables-for-comparison" id="toc-design-tables-for-comparison" class="nav-link" data-scroll-target="#design-tables-for-comparison">15.7 Design Tables for Comparison</a>
+  <ul class="collapse">
+  <li><a href="#example-model-comparison-table" id="toc-example-model-comparison-table" class="nav-link" data-scroll-target="#example-model-comparison-table">Example: model comparison table</a></li>
+  <li><a href="#avoid-false-precision" id="toc-avoid-false-precision" class="nav-link" data-scroll-target="#avoid-false-precision">Avoid false precision</a></li>
+  </ul></li>
+  <li><a href="#design-figures-around-a-question" id="toc-design-figures-around-a-question" class="nav-link" data-scroll-target="#design-figures-around-a-question">15.8 Design Figures Around a Question</a>
+  <ul class="collapse">
+  <li><a href="#principles-for-clear-figures" id="toc-principles-for-clear-figures" class="nav-link" data-scroll-target="#principles-for-clear-figures">Principles for clear figures</a></li>
+  <li><a href="#non-executable-python-example" id="toc-non-executable-python-example" class="nav-link" data-scroll-target="#non-executable-python-example">Non-executable Python example</a></li>
+  </ul></li>
+  <li><a href="#write-captions-that-stand-alone" id="toc-write-captions-that-stand-alone" class="nav-link" data-scroll-target="#write-captions-that-stand-alone">15.9 Write Captions That Stand Alone</a></li>
+  <li><a href="#communicate-predictive-models-responsibly" id="toc-communicate-predictive-models-responsibly" class="nav-link" data-scroll-target="#communicate-predictive-models-responsibly">15.10 Communicate Predictive Models Responsibly</a>
+  <ul class="collapse">
+  <li><a href="#match-metrics-to-consequences" id="toc-match-metrics-to-consequences" class="nav-link" data-scroll-target="#match-metrics-to-consequences">Match metrics to consequences</a></li>
+  </ul></li>
+  <li><a href="#communicate-statistical-models-responsibly" id="toc-communicate-statistical-models-responsibly" class="nav-link" data-scroll-target="#communicate-statistical-models-responsibly">15.11 Communicate Statistical Models Responsibly</a>
+  <ul class="collapse">
+  <li><a href="#translate-without-distorting" id="toc-translate-without-distorting" class="nav-link" data-scroll-target="#translate-without-distorting">Translate without distorting</a></li>
+  </ul></li>
+  <li><a href="#structure-reports-for-layered-reading" id="toc-structure-reports-for-layered-reading" class="nav-link" data-scroll-target="#structure-reports-for-layered-reading">15.12 Structure Reports for Layered Reading</a>
+  <ul class="collapse">
+  <li><a href="#suggested-report-structure" id="toc-suggested-report-structure" class="nav-link" data-scroll-target="#suggested-report-structure">Suggested report structure</a></li>
+  </ul></li>
+  <li><a href="#presentations-and-dashboards" id="toc-presentations-and-dashboards" class="nav-link" data-scroll-target="#presentations-and-dashboards">15.13 Presentations and Dashboards</a>
+  <ul class="collapse">
+  <li><a href="#presentations" id="toc-presentations" class="nav-link" data-scroll-target="#presentations">Presentations</a></li>
+  <li><a href="#dashboards" id="toc-dashboards" class="nav-link" data-scroll-target="#dashboards">Dashboards</a></li>
+  </ul></li>
+  <li><a href="#accessibility-is-part-of-clarity" id="toc-accessibility-is-part-of-clarity" class="nav-link" data-scroll-target="#accessibility-is-part-of-clarity">15.14 Accessibility Is Part of Clarity</a>
+  <ul class="collapse">
+  <li><a href="#example-alternative-text" id="toc-example-alternative-text" class="nav-link" data-scroll-target="#example-alternative-text">Example alternative text</a></li>
+  </ul></li>
+  <li><a href="#preserve-traceability-and-reproducibility" id="toc-preserve-traceability-and-reproducibility" class="nav-link" data-scroll-target="#preserve-traceability-and-reproducibility">15.15 Preserve Traceability and Reproducibility</a></li>
+  <li><a href="#review-claims-across-formats" id="toc-review-claims-across-formats" class="nav-link" data-scroll-target="#review-claims-across-formats">15.16 Review Claims Across Formats</a></li>
+  <li><a href="#common-communication-failures" id="toc-common-communication-failures" class="nav-link" data-scroll-target="#common-communication-failures">15.17 Common Communication Failures</a>
+  <ul class="collapse">
+  <li><a href="#reporting-software-output-instead-of-findings" id="toc-reporting-software-output-instead-of-findings" class="nav-link" data-scroll-target="#reporting-software-output-instead-of-findings">Reporting software output instead of findings</a></li>
+  <li><a href="#leading-with-methods" id="toc-leading-with-methods" class="nav-link" data-scroll-target="#leading-with-methods">Leading with methods</a></li>
+  <li><a href="#hiding-important-uncertainty" id="toc-hiding-important-uncertainty" class="nav-link" data-scroll-target="#hiding-important-uncertainty">Hiding important uncertainty</a></li>
+  <li><a href="#treating-statistical-significance-as-practical-importance" id="toc-treating-statistical-significance-as-practical-importance" class="nav-link" data-scroll-target="#treating-statistical-significance-as-practical-importance">Treating statistical significance as practical importance</a></li>
+  <li><a href="#using-causal-language-for-observational-results" id="toc-using-causal-language-for-observational-results" class="nav-link" data-scroll-target="#using-causal-language-for-observational-results">Using causal language for observational results</a></li>
+  <li><a href="#overloading-the-audience" id="toc-overloading-the-audience" class="nav-link" data-scroll-target="#overloading-the-audience">Overloading the audience</a></li>
+  <li><a href="#removing-all-technical-language" id="toc-removing-all-technical-language" class="nav-link" data-scroll-target="#removing-all-technical-language">Removing all technical language</a></li>
+  </ul></li>
+  <li><a href="#a-communication-quality-checklist" id="toc-a-communication-quality-checklist" class="nav-link" data-scroll-target="#a-communication-quality-checklist">15.18 A Communication Quality Checklist</a>
+  <ul class="collapse">
+  <li><a href="#purpose-and-audience" id="toc-purpose-and-audience" class="nav-link" data-scroll-target="#purpose-and-audience">Purpose and audience</a></li>
+  <li><a href="#evidence-and-claims" id="toc-evidence-and-claims" class="nav-link" data-scroll-target="#evidence-and-claims">Evidence and claims</a></li>
+  <li><a href="#numbers-tables-and-figures" id="toc-numbers-tables-and-figures" class="nav-link" data-scroll-target="#numbers-tables-and-figures">Numbers, tables, and figures</a></li>
+  <li><a href="#models-and-decisions" id="toc-models-and-decisions" class="nav-link" data-scroll-target="#models-and-decisions">Models and decisions</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility">Reproducibility</a></li>
+  </ul></li>
+  <li><a href="#mini-communication-exercise" id="toc-mini-communication-exercise" class="nav-link" data-scroll-target="#mini-communication-exercise">15.19 Mini Communication Exercise</a>
+  <ul class="collapse">
+  <li><a href="#poor-summary" id="toc-poor-summary" class="nav-link" data-scroll-target="#poor-summary">Poor summary</a></li>
+  <li><a href="#improved-summary" id="toc-improved-summary" class="nav-link" data-scroll-target="#improved-summary">Improved summary</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">15.20 Key Takeaways</a></li>
+  <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">15.21 Reflection Questions</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html">Communication and Responsible Practice</a></li><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html"><span class="chapter-title">Communicating Results Clearly</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="lesson15" class="quarto-section-identifier"><span class="chapter-title">Communicating Results Clearly</span></span></h1>
+<h1 class="title"><span id="sec-lesson15" class="quarto-section-identifier"><span class="chapter-title">Communicating Results Clearly</span></span></h1>
 </div>
 
 
@@ -353,11 +472,842 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Clear communication makes evidence understandable without overstating it</li>
 </ul>
 </div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>A technically correct analysis can still fail if its audience cannot identify the main result, understand the uncertainty, or see what should happen next. Analytical communication is therefore not a decorative final step. It is part of the analytical workflow.</p>
+<p>The preceding chapter established how to move from results to defensible claims. This chapter focuses on presenting those claims clearly to different audiences while preserving their meaning, limitations, and uncertainty.</p>
+<p>Good communication does not make evidence sound more certain than it is. It reduces unnecessary complexity while keeping the distinctions that matter.</p>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
+<ol type="1">
+<li>identify the audience, decision, and central message for an analytical result;</li>
+<li>separate findings, interpretation, recommendations, and limitations;</li>
+<li>organise results using a clear evidence hierarchy;</li>
+<li>choose appropriate text, tables, and figures for different communication tasks;</li>
+<li>report statistical and predictive results without hiding uncertainty;</li>
+<li>improve accessibility, traceability, and reproducibility in analytical outputs; and</li>
+<li>review a report, presentation, or dashboard using a practical communication checklist.</li>
+</ol>
+</section>
+<section id="communication-begins-with-the-decision" class="level2">
+<h2 class="anchored" data-anchor-id="communication-begins-with-the-decision">15.1 Communication Begins with the Decision</h2>
+<p>Before writing a report or designing a figure, determine what the audience needs to understand or decide.</p>
+<p>Ask three questions:</p>
+<ol type="1">
+<li><strong>Who is the audience?</strong></li>
+<li><strong>What decision or understanding should the analysis support?</strong></li>
+<li><strong>What evidence is necessary for that purpose?</strong></li>
+</ol>
+<p>The same analysis may need different presentations for different audiences.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Audience</th>
+<th>Primary need</th>
+<th>Appropriate emphasis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Technical reviewer</td>
+<td>Assess validity and reproducibility</td>
+<td>Methods, diagnostics, assumptions, uncertainty</td>
+</tr>
+<tr class="even">
+<td>Domain specialist</td>
+<td>Interpret substantive meaning</td>
+<td>Context, effect sizes, limitations, practical relevance</td>
+</tr>
+<tr class="odd">
+<td>Decision-maker</td>
+<td>Compare options and consequences</td>
+<td>Main finding, uncertainty, trade-offs, recommended action</td>
+</tr>
+<tr class="even">
+<td>General audience</td>
+<td>Understand the essential result</td>
+<td>Plain language, intuitive scale, minimal technical detail</td>
+</tr>
+</tbody>
+</table>
+<p>Adapting communication to an audience does not mean changing the result. It means selecting the level of detail, terminology, and format needed for accurate understanding.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Audience adaptation should simplify presentation, not weaken evidential standards. Important uncertainty, limitations, and conditions should remain visible.</p>
+</div>
+</div>
+</section>
+<section id="define-the-central-message" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-central-message">15.2 Define the Central Message</h2>
+<p>Every analytical output should have a central message that can be stated in one or two sentences.</p>
+<p>A useful message answers:</p>
+<ul>
+<li>what was observed;</li>
+<li>how strong or uncertain the evidence is;</li>
+<li>why the result matters; and</li>
+<li>what should happen next, if a recommendation is justified.</li>
+</ul>
+<p>Compare the following statements.</p>
+<p><strong>Weak</strong></p>
 <blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
+<p>The model achieved an ROC AUC of 0.84.</p>
 </blockquote>
+<p><strong>Stronger</strong></p>
+<blockquote class="blockquote">
+<p>The model distinguished higher-risk from lower-risk cases reasonably well in held-out data (ROC AUC 0.84), but calibration should be reviewed before predicted probabilities are used for individual decisions.</p>
+</blockquote>
+<p>The stronger statement reports the result, interprets it cautiously, and identifies a condition that affects use.</p>
+<section id="a-practical-message-template" class="level3">
+<h3 class="anchored" data-anchor-id="a-practical-message-template">A practical message template</h3>
+<blockquote class="blockquote">
+<p>In <strong>[population or setting]</strong>, we found <strong>[main result]</strong>, with <strong>[uncertainty or strength of evidence]</strong>. This suggests <strong>[careful interpretation]</strong>. The result supports <strong>[action or next step]</strong>, subject to <strong>[important limitation or condition]</strong>.</p>
+</blockquote>
+<p>This structure is not intended to make every conclusion sound identical. It is a prompt for checking that essential information has not been omitted.</p>
+</section>
+</section>
+<section id="separate-result-interpretation-and-action" class="level2">
+<h2 class="anchored" data-anchor-id="separate-result-interpretation-and-action">15.3 Separate Result, Interpretation, and Action</h2>
+<p>Analytical writing becomes clearer when different types of statements are not blended together.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Question answered</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Result</td>
+<td>What did the analysis show?</td>
+<td>The estimated difference was 4.2 units.</td>
+</tr>
+<tr class="even">
+<td>Uncertainty</td>
+<td>How precise or stable was it?</td>
+<td>The 95% confidence interval was 1.1 to 7.3.</td>
+</tr>
+<tr class="odd">
+<td>Interpretation</td>
+<td>What might the result mean?</td>
+<td>The groups probably differ, although the plausible magnitude remains broad.</td>
+</tr>
+<tr class="even">
+<td>Recommendation</td>
+<td>What should be done?</td>
+<td>Collect additional data before adopting a high-cost intervention.</td>
+</tr>
+<tr class="odd">
+<td>Limitation</td>
+<td>What constrains the conclusion?</td>
+<td>The observational design does not establish causality.</td>
+</tr>
+</tbody>
+</table>
+<p>Keeping these components distinct makes it easier for readers to evaluate where the evidence ends and judgement begins.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use explicit signals such as <em>the analysis showed</em>, <em>this may indicate</em>, <em>we recommend</em>, and <em>a limitation is</em>. These phrases help readers distinguish evidence from interpretation and action.</p>
+</div>
+</div>
+</section>
+<section id="build-an-evidence-hierarchy" class="level2">
+<h2 class="anchored" data-anchor-id="build-an-evidence-hierarchy">15.4 Build an Evidence Hierarchy</h2>
+<p>Readers should encounter the most important information first and be able to access technical detail when needed.</p>
+<p>A useful hierarchy has four layers:</p>
+<ol type="1">
+<li><strong>Headline:</strong> the principal finding or decision-relevant message;</li>
+<li><strong>Evidence:</strong> the estimate, comparison, pattern, or model result supporting it;</li>
+<li><strong>Qualification:</strong> uncertainty, assumptions, limitations, and relevant alternatives;</li>
+<li><strong>Technical detail:</strong> methods, diagnostics, sensitivity analyses, and reproducibility information.</li>
+</ol>
+<p>This hierarchy works across reports, presentations, dashboards, and research summaries.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Headline finding] --&gt; B[Supporting evidence]
+    B --&gt; C[Uncertainty and limitations]
+    C --&gt; D[Methods and diagnostics]</code></pre>
+<p>The hierarchy does not imply that methods are unimportant. It places them where the intended audience can use them without obscuring the main message.</p>
+</section>
+<section id="use-plain-language-precisely" class="level2">
+<h2 class="anchored" data-anchor-id="use-plain-language-precisely">15.5 Use Plain Language Precisely</h2>
+<p>Plain language is not imprecise language. It removes unnecessary technical complexity while retaining analytical meaning.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Technical or vague wording</th>
+<th>Clearer wording</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The dependent variable exhibited heteroscedasticity.</td>
+<td>The variability of the outcome increased at higher fitted values.</td>
+</tr>
+<tr class="even">
+<td>A statistically significant association was observed.</td>
+<td>The estimated association was unlikely to be explained by sampling variation alone under the model assumptions.</td>
+</tr>
+<tr class="odd">
+<td>The model performed well.</td>
+<td>The model achieved an ROC AUC of 0.84 and an average precision of 0.61 on held-out data.</td>
+</tr>
+<tr class="even">
+<td>Feature X was important.</td>
+<td>Feature X strongly influenced predictions in this model, but this does not establish a causal effect.</td>
+</tr>
+<tr class="odd">
+<td>There was no effect.</td>
+<td>The analysis did not provide clear evidence of an effect; effects within the reported interval remain plausible.</td>
+</tr>
+</tbody>
+</table>
+<p>Prefer concrete nouns and active verbs where appropriate. Define specialised terms when they are necessary, and avoid replacing a precise quantity with an unsupported adjective such as <em>large</em>, <em>strong</em>, or <em>excellent</em>.</p>
+<section id="keep-numerical-meaning-visible" class="level3">
+<h3 class="anchored" data-anchor-id="keep-numerical-meaning-visible">Keep numerical meaning visible</h3>
+<p>Percentages can conceal the underlying scale. When possible, pair relative and absolute quantities.</p>
+<blockquote class="blockquote">
+<p>Risk decreased by 20%, from 10 cases per 100 people to 8 cases per 100 people.</p>
+</blockquote>
+<p>This is more informative than reporting a 20% reduction alone.</p>
+</section>
+</section>
+<section id="report-uncertainty-as-part-of-the-result" class="level2">
+<h2 class="anchored" data-anchor-id="report-uncertainty-as-part-of-the-result">15.6 Report Uncertainty as Part of the Result</h2>
+<p>Uncertainty should appear alongside the estimate, not in a footnote added after the conclusion.</p>
+<p>Depending on the analysis, useful uncertainty information may include:</p>
+<ul>
+<li>confidence or credible intervals;</li>
+<li>variability across resamples or validation folds;</li>
+<li>prediction intervals;</li>
+<li>sensitivity to modelling choices;</li>
+<li>uncertainty caused by missing data or measurement error; and</li>
+<li>limits on generalisability.</li>
+</ul>
+<section id="statistical-result" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-result">Statistical result</h3>
+<p>Instead of:</p>
+<blockquote class="blockquote">
+<p>The intervention increased the outcome by 5.4 units and was statistically significant.</p>
+</blockquote>
+<p>Prefer:</p>
+<blockquote class="blockquote">
+<p>The estimated increase was 5.4 units (95% confidence interval: 2.0 to 8.8). Under the model assumptions, the data were inconsistent with no difference, although effects across the reported interval remain plausible.</p>
+</blockquote>
+</section>
+<section id="predictive-result" class="level3">
+<h3 class="anchored" data-anchor-id="predictive-result">Predictive result</h3>
+<p>Instead of:</p>
+<blockquote class="blockquote">
+<p>The model was 87% accurate.</p>
+</blockquote>
+<p>Prefer:</p>
+<blockquote class="blockquote">
+<p>On the held-out test set, accuracy was 0.87. Because only 12% of observations belonged to the positive class, balanced metrics and class-specific errors were also examined.</p>
+</blockquote>
+</section>
+<section id="negative-or-inconclusive-findings" class="level3">
+<h3 class="anchored" data-anchor-id="negative-or-inconclusive-findings">Negative or inconclusive findings</h3>
+<p>A large p-value does not demonstrate that no meaningful effect exists. Communicate what the interval and study design allow the audience to conclude.</p>
+<blockquote class="blockquote">
+<p>The estimate was close to zero, but the confidence interval included both a small benefit and a potentially important harm. The result is therefore inconclusive rather than evidence of equivalence.</p>
+</blockquote>
+</section>
+</section>
+<section id="design-tables-for-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="design-tables-for-comparison">15.7 Design Tables for Comparison</h2>
+<p>Tables are useful when readers need exact values, several measures, or detailed comparisons. They should not reproduce every value generated by software.</p>
+<p>A clear analytical table generally includes:</p>
+<ul>
+<li>a descriptive title;</li>
+<li>meaningful row and column labels;</li>
+<li>consistent units and decimal places;</li>
+<li>denominators where percentages are reported;</li>
+<li>uncertainty where relevant;</li>
+<li>notes defining abbreviations or special calculations; and</li>
+<li>a logical ordering that supports comparison.</li>
+</ul>
+<section id="example-model-comparison-table" class="level3">
+<h3 class="anchored" data-anchor-id="example-model-comparison-table">Example: model comparison table</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th style="text-align: right;">ROC AUC</th>
+<th style="text-align: right;">Average precision</th>
+<th style="text-align: right;">Log loss</th>
+<th>Main observation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logistic regression</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0.57</td>
+<td style="text-align: right;">0.36</td>
+<td>Strong baseline and easy to explain</td>
+</tr>
+<tr class="even">
+<td>Random forest</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">0.34</td>
+<td>Better ranking, modest probability improvement</td>
+</tr>
+<tr class="odd">
+<td>Gradient boosting</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.31</td>
+<td>Best overall candidate under the fixed evaluation design</td>
+</tr>
+</tbody>
+</table>
+<p>The table focuses attention on the measures used for selection. A complete technical appendix could provide fold-level results, hyperparameters, and additional diagnostics.</p>
+</section>
+<section id="avoid-false-precision" class="level3">
+<h3 class="anchored" data-anchor-id="avoid-false-precision">Avoid false precision</h3>
+<p>Choose decimal places according to measurement quality and decision relevance. Reporting <code>0.863742</code> usually implies more precision than the evaluation supports. <code>0.864</code> or <code>0.86</code> may be more appropriate.</p>
+</section>
+</section>
+<section id="design-figures-around-a-question" class="level2">
+<h2 class="anchored" data-anchor-id="design-figures-around-a-question">15.8 Design Figures Around a Question</h2>
+<p>A figure should help the reader answer a specific question. Choose the visual form based on the analytical task.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Communication task</th>
+<th>Useful visual form</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compare categories</td>
+<td>Ordered bar chart or dot plot</td>
+</tr>
+<tr class="even">
+<td>Show change over time</td>
+<td>Line chart</td>
+</tr>
+<tr class="odd">
+<td>Show a distribution</td>
+<td>Histogram, density plot, box plot, or empirical cumulative distribution</td>
+</tr>
+<tr class="even">
+<td>Show association</td>
+<td>Scatter plot with appropriate uncertainty or grouping</td>
+</tr>
+<tr class="odd">
+<td>Compare estimates</td>
+<td>Coefficient or interval plot</td>
+</tr>
+<tr class="even">
+<td>Assess classification trade-offs</td>
+<td>ROC or precision–recall curve</td>
+</tr>
+<tr class="odd">
+<td>Assess predicted probabilities</td>
+<td>Calibration plot</td>
+</tr>
+</tbody>
+</table>
+<section id="principles-for-clear-figures" class="level3">
+<h3 class="anchored" data-anchor-id="principles-for-clear-figures">Principles for clear figures</h3>
+<ol type="1">
+<li>Use a title that states the question or finding.</li>
+<li>Label axes with meaningful names and units.</li>
+<li>Use colour to encode information, not decoration.</li>
+<li>Order categories intentionally.</li>
+<li>Show uncertainty where it affects interpretation.</li>
+<li>Remove visual elements that do not support the message.</li>
+<li>Include a caption explaining the population, data, and key analytical conditions.</li>
+<li>Ensure the figure remains understandable for readers with colour-vision deficiencies.</li>
+</ol>
+</section>
+<section id="non-executable-python-example" class="level3">
+<h3 class="anchored" data-anchor-id="non-executable-python-example">Non-executable Python example</h3>
+<p>The following example illustrates how to produce a focused interval plot. It is intentionally non-executable in the guide; project analyses should generate publication outputs through chapter-prefixed scripts in <code>scripts/python/</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"feature"</span>: [<span class="st">"Age"</span>, <span class="st">"Prior exposure"</span>, <span class="st">"Treatment"</span>],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"estimate"</span>: [<span class="fl">0.12</span>, <span class="fl">0.34</span>, <span class="op">-</span><span class="fl">0.28</span>],</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"lower"</span>: [<span class="fl">0.04</span>, <span class="fl">0.18</span>, <span class="op">-</span><span class="fl">0.46</span>],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"upper"</span>: [<span class="fl">0.20</span>, <span class="fl">0.50</span>, <span class="op">-</span><span class="fl">0.10</span>],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>, context<span class="op">=</span><span class="st">"talk"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">4.8</span>))</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(results))</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ax.errorbar(</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    results[<span class="st">"estimate"</span>],</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    xerr<span class="op">=</span>[</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        results[<span class="st">"estimate"</span>] <span class="op">-</span> results[<span class="st">"lower"</span>],</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        results[<span class="st">"upper"</span>] <span class="op">-</span> results[<span class="st">"estimate"</span>],</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"#1f4e79"</span>,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    ecolor<span class="op">=</span><span class="st">"#5b7fa3"</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    capsize<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"0.35"</span>, linewidth<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(<span class="bu">list</span>(y), labels<span class="op">=</span>results[<span class="st">"feature"</span>])</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Estimated effect with 95</span><span class="sc">% c</span><span class="st">onfidence interval"</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">""</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Estimated effects differ in direction and precision"</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The example emphasises estimates and intervals rather than using colour intensity or bar length to imply certainty.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A visually attractive chart is not necessarily an informative chart. Evaluate a figure by whether it supports accurate comparison and interpretation.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="write-captions-that-stand-alone" class="level2">
+<h2 class="anchored" data-anchor-id="write-captions-that-stand-alone">15.9 Write Captions That Stand Alone</h2>
+<p>A caption should allow a reader to understand the figure or table without searching the surrounding text for essential context.</p>
+<p>A strong caption identifies:</p>
+<ul>
+<li>what is shown;</li>
+<li>the data or analytical population;</li>
+<li>how uncertainty was calculated;</li>
+<li>any important reference line, threshold, transformation, or subgroup; and</li>
+<li>the main pattern, when appropriate.</li>
+</ul>
+<p><strong>Weak caption</strong></p>
+<blockquote class="blockquote">
+<p>Figure 1. Model results.</p>
+</blockquote>
+<p><strong>Stronger caption</strong></p>
+<blockquote class="blockquote">
+<p>Figure 1. Held-out precision–recall curves for three candidate classifiers. Curves were calculated on the unchanged test set; the horizontal reference represents the positive-class prevalence. Gradient boosting achieved the highest average precision, although performance should be confirmed in external data.</p>
+</blockquote>
+<p>The caption explains both the mechanics and the responsible interpretation.</p>
+</section>
+<section id="communicate-predictive-models-responsibly" class="level2">
+<h2 class="anchored" data-anchor-id="communicate-predictive-models-responsibly">15.10 Communicate Predictive Models Responsibly</h2>
+<p>Model communication should cover more than the best headline metric.</p>
+<p>At minimum, report:</p>
+<ol type="1">
+<li>the prediction target and intended use;</li>
+<li>the population and data source;</li>
+<li>the evaluation design;</li>
+<li>relevant baseline performance;</li>
+<li>multiple metrics aligned with the decision;</li>
+<li>the operating threshold, if decisions are threshold-based;</li>
+<li>error patterns across important groups;</li>
+<li>calibration when probabilities will be interpreted;</li>
+<li>important limitations and risks; and</li>
+<li>the conditions under which performance should be monitored.</li>
+</ol>
+<section id="match-metrics-to-consequences" class="level3">
+<h3 class="anchored" data-anchor-id="match-metrics-to-consequences">Match metrics to consequences</h3>
+<p>The practical meaning of an error depends on context.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decision concern</th>
+<th>Metric or analysis to emphasise</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Missing positive cases is costly</td>
+<td>Recall or sensitivity</td>
+</tr>
+<tr class="even">
+<td>False alerts are costly</td>
+<td>Precision or positive predictive value</td>
+</tr>
+<tr class="odd">
+<td>Both classes matter under imbalance</td>
+<td>Balanced accuracy, class-specific metrics</td>
+</tr>
+<tr class="even">
+<td>Ranking cases is the main goal</td>
+<td>ROC AUC or average precision</td>
+</tr>
+<tr class="odd">
+<td>Probabilities guide action</td>
+<td>Calibration and proper scoring rules</td>
+</tr>
+<tr class="even">
+<td>A fixed threshold triggers action</td>
+<td>Confusion matrix and threshold-specific consequences</td>
+</tr>
+</tbody>
+</table>
+<p>Do not describe a model as fair, safe, or deployment-ready based on aggregate performance alone. These claims require evidence matched to the intended setting.</p>
+</section>
+</section>
+<section id="communicate-statistical-models-responsibly" class="level2">
+<h2 class="anchored" data-anchor-id="communicate-statistical-models-responsibly">15.11 Communicate Statistical Models Responsibly</h2>
+<p>For statistical models, communicate estimates in a way that preserves their scale and assumptions.</p>
+<p>Report:</p>
+<ul>
+<li>the estimand or parameter of interest;</li>
+<li>the model and adjustment set;</li>
+<li>the estimate and uncertainty interval;</li>
+<li>the reference category and measurement units;</li>
+<li>important diagnostics or assumption checks;</li>
+<li>whether the interpretation is associational or causal; and</li>
+<li>sensitivity to reasonable alternative specifications.</li>
+</ul>
+<section id="translate-without-distorting" class="level3">
+<h3 class="anchored" data-anchor-id="translate-without-distorting">Translate without distorting</h3>
+<p>An odds ratio of 1.50 does not mean that probability increased by 50%. If decisions depend on absolute effects, translate model outputs into predicted probabilities or expected differences for meaningful scenarios.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Illustrative, non-executable example</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>scenario_probabilities <span class="op">=</span> model.predict_proba(scenario_data)[:, <span class="dv">1</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> scenario_data.assign(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    predicted_probability<span class="op">=</span>scenario_probabilities</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The resulting probabilities should be reported with clear scenario definitions and, where possible, uncertainty intervals.</p>
+</section>
+</section>
+<section id="structure-reports-for-layered-reading" class="level2">
+<h2 class="anchored" data-anchor-id="structure-reports-for-layered-reading">15.12 Structure Reports for Layered Reading</h2>
+<p>Many readers scan before they read closely. A layered report supports both behaviours.</p>
+<section id="suggested-report-structure" class="level3">
+<h3 class="anchored" data-anchor-id="suggested-report-structure">Suggested report structure</h3>
+<ol type="1">
+<li><strong>Title and purpose</strong> — what question the analysis addresses;</li>
+<li><strong>Executive summary</strong> — main result, uncertainty, implication, and limitation;</li>
+<li><strong>Context and analytical question</strong> — why the work was undertaken;</li>
+<li><strong>Data and methods</strong> — enough detail to evaluate the approach;</li>
+<li><strong>Results</strong> — evidence organised around questions rather than software output;</li>
+<li><strong>Interpretation</strong> — substantive meaning and plausible alternatives;</li>
+<li><strong>Recommendations</strong> — actions supported by the evidence;</li>
+<li><strong>Limitations</strong> — constraints on validity, generalisability, and use;</li>
+<li><strong>Technical appendix</strong> — diagnostics, detailed methods, and supplementary results;</li>
+<li><strong>Reproducibility information</strong> — code, environment, data provenance, and version details.</li>
+</ol>
+<p>Headings should communicate content. A heading such as <strong>Calibration deteriorated in the external sample</strong> is often more informative than <strong>Additional results</strong>.</p>
+</section>
+</section>
+<section id="presentations-and-dashboards" class="level2">
+<h2 class="anchored" data-anchor-id="presentations-and-dashboards">15.13 Presentations and Dashboards</h2>
+<p>Reports, presentations, and dashboards serve different reading patterns.</p>
+<section id="presentations" class="level3">
+<h3 class="anchored" data-anchor-id="presentations">Presentations</h3>
+<p>Each slide should usually support one main idea. Use the slide title to state the message, then provide the evidence required to evaluate it.</p>
+<p>Avoid:</p>
+<ul>
+<li>reading dense paragraphs from slides;</li>
+<li>shrinking a full report table to fit one slide;</li>
+<li>presenting a chart without explaining its decision relevance; and</li>
+<li>revealing uncertainty only after a strong claim has been made.</li>
+</ul>
+</section>
+<section id="dashboards" class="level3">
+<h3 class="anchored" data-anchor-id="dashboards">Dashboards</h3>
+<p>Dashboards support monitoring and exploration. They should make the following explicit:</p>
+<ul>
+<li>definitions of metrics;</li>
+<li>time windows and refresh dates;</li>
+<li>filters currently applied;</li>
+<li>denominators and missing-data rules;</li>
+<li>alert thresholds and their meaning; and</li>
+<li>whether displayed changes exceed normal variation.</li>
+</ul>
+<p>A dashboard is not self-explanatory merely because it is interactive. Context, definitions, and responsible defaults remain necessary.</p>
+</section>
+</section>
+<section id="accessibility-is-part-of-clarity" class="level2">
+<h2 class="anchored" data-anchor-id="accessibility-is-part-of-clarity">15.14 Accessibility Is Part of Clarity</h2>
+<p>Accessible communication benefits all readers and is essential for some.</p>
+<p>Use the following practices:</p>
+<ul>
+<li>provide meaningful alternative text for figures;</li>
+<li>do not rely on colour alone to distinguish groups;</li>
+<li>use sufficient colour contrast;</li>
+<li>label lines or groups directly where practical;</li>
+<li>keep text large enough to read at the intended display size;</li>
+<li>use descriptive link text;</li>
+<li>define abbreviations and specialised terms; and</li>
+<li>ensure tables have clear headers and a logical reading order.</li>
+</ul>
+<section id="example-alternative-text" class="level3">
+<h3 class="anchored" data-anchor-id="example-alternative-text">Example alternative text</h3>
+<p>Weak:</p>
+<blockquote class="blockquote">
+<p>Chart showing results.</p>
+</blockquote>
+<p>Stronger:</p>
+<blockquote class="blockquote">
+<p>Dot-and-interval plot of three adjusted effect estimates. Treatment has a negative estimate whose 95% confidence interval remains below zero; age and prior exposure have positive estimates, with prior exposure showing the largest magnitude.</p>
+</blockquote>
+<p>Alternative text should communicate the figure’s purpose and important pattern rather than list every visual property.</p>
+</section>
+</section>
+<section id="preserve-traceability-and-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="preserve-traceability-and-reproducibility">15.15 Preserve Traceability and Reproducibility</h2>
+<p>Readers should be able to connect a claim to its evidence and, where appropriate, reproduce the output.</p>
+<p>For project reports:</p>
+<ul>
+<li>generate tables and figures from scripts rather than editing values manually;</li>
+<li>use chapter-prefixed script and output names;</li>
+<li>record data versions and analysis dates;</li>
+<li>retain the evaluation design used to produce reported metrics;</li>
+<li>distinguish exploratory from confirmatory results;</li>
+<li>link claims to named tables, figures, or appendices; and</li>
+<li>preserve the software environment needed to regenerate outputs.</li>
+</ul>
+<p>If a later project-specific version of this chapter requires generated assets, use the established chapter prefix—for example, <code>scripts/python/15-build-communication-assets.py</code>. This guide chapter does not require that script because it does not depend on generated assets.</p>
+</section>
+<section id="review-claims-across-formats" class="level2">
+<h2 class="anchored" data-anchor-id="review-claims-across-formats">15.16 Review Claims Across Formats</h2>
+<p>The same claim may appear in a report, slide, abstract, dashboard annotation, and spoken presentation. Check that its meaning remains consistent.</p>
+<p>Common inconsistencies include:</p>
+<ul>
+<li>a cautious report conclusion becoming a definitive slide headline;</li>
+<li>a validation metric being described as expected deployment performance;</li>
+<li>an association being described as an effect;</li>
+<li>a subgroup observation being presented without its small sample size; and</li>
+<li>a relative change being presented without the absolute baseline.</li>
+</ul>
+<p>Create a small claim register for important projects.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Claim ID</th>
+<th>Claim</th>
+<th>Evidence</th>
+<th>Qualification</th>
+<th>Used in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C1</td>
+<td>Candidate B ranked cases best</td>
+<td>Held-out average precision</td>
+<td>Single-site test set</td>
+<td>Report, slides</td>
+</tr>
+<tr class="even">
+<td>C2</td>
+<td>Probabilities need recalibration</td>
+<td>Calibration curve and log loss</td>
+<td>External validation required</td>
+<td>Report, model card</td>
+</tr>
+</tbody>
+</table>
+<p>This makes revisions easier and reduces accidental overstatement.</p>
+</section>
+<section id="common-communication-failures" class="level2">
+<h2 class="anchored" data-anchor-id="common-communication-failures">15.17 Common Communication Failures</h2>
+<section id="reporting-software-output-instead-of-findings" class="level3">
+<h3 class="anchored" data-anchor-id="reporting-software-output-instead-of-findings">Reporting software output instead of findings</h3>
+<p>Raw coefficient tables, diagnostic dumps, and console output rarely communicate the analytical message. Select and explain the evidence relevant to the question.</p>
+</section>
+<section id="leading-with-methods" class="level3">
+<h3 class="anchored" data-anchor-id="leading-with-methods">Leading with methods</h3>
+<p>Methods matter, but many audiences first need to know the question and principal result. Use layered communication to make both accessible.</p>
+</section>
+<section id="hiding-important-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="hiding-important-uncertainty">Hiding important uncertainty</h3>
+<p>Do not display a point estimate prominently while placing its uncertainty in small text or an appendix.</p>
+</section>
+<section id="treating-statistical-significance-as-practical-importance" class="level3">
+<h3 class="anchored" data-anchor-id="treating-statistical-significance-as-practical-importance">Treating statistical significance as practical importance</h3>
+<p>Report magnitude, uncertainty, and practical context. A small effect can be precisely estimated but unimportant for the decision.</p>
+</section>
+<section id="using-causal-language-for-observational-results" class="level3">
+<h3 class="anchored" data-anchor-id="using-causal-language-for-observational-results">Using causal language for observational results</h3>
+<p>Words such as <em>caused</em>, <em>improved</em>, and <em>reduced</em> imply causal evidence. Use associational language unless the design and assumptions support a causal claim.</p>
+</section>
+<section id="overloading-the-audience" class="level3">
+<h3 class="anchored" data-anchor-id="overloading-the-audience">Overloading the audience</h3>
+<p>More detail is not always more transparent. Move supporting analyses to appendices while keeping the path from claim to evidence clear.</p>
+</section>
+<section id="removing-all-technical-language" class="level3">
+<h3 class="anchored" data-anchor-id="removing-all-technical-language">Removing all technical language</h3>
+<p>Oversimplification can distort meaning. Retain technical terms that are necessary, define them, and explain their relevance.</p>
+</section>
+</section>
+<section id="a-communication-quality-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="a-communication-quality-checklist">15.18 A Communication Quality Checklist</h2>
+<p>Before publishing or presenting analytical results, check the following.</p>
+<section id="purpose-and-audience" class="level3">
+<h3 class="anchored" data-anchor-id="purpose-and-audience">Purpose and audience</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">The intended audience and decision are clear.</label></li>
+<li><label><input type="checkbox">The central message can be stated in one or two sentences.</label></li>
+<li><label><input type="checkbox">The level of technical detail matches the audience.</label></li>
+</ul>
+</section>
+<section id="evidence-and-claims" class="level3">
+<h3 class="anchored" data-anchor-id="evidence-and-claims">Evidence and claims</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Every important claim is linked to appropriate evidence.</label></li>
+<li><label><input type="checkbox">Results, interpretations, recommendations, and limitations are distinguishable.</label></li>
+<li><label><input type="checkbox">Causal language is supported by the design and assumptions.</label></li>
+<li><label><input type="checkbox">Negative or inconclusive results are not described as proof of no effect.</label></li>
+</ul>
+</section>
+<section id="numbers-tables-and-figures" class="level3">
+<h3 class="anchored" data-anchor-id="numbers-tables-and-figures">Numbers, tables, and figures</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Units, denominators, reference groups, and time periods are defined.</label></li>
+<li><label><input type="checkbox">Uncertainty appears alongside important estimates.</label></li>
+<li><label><input type="checkbox">Tables support comparison and avoid unnecessary precision.</label></li>
+<li><label><input type="checkbox">Figures answer a clear question and have informative captions.</label></li>
+<li><label><input type="checkbox">Colour, labels, and alternative text support accessibility.</label></li>
+</ul>
+</section>
+<section id="models-and-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="models-and-decisions">Models and decisions</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Metrics match the intended use and error consequences.</label></li>
+<li><label><input type="checkbox">Evaluation data are clearly distinguished from training data.</label></li>
+<li><label><input type="checkbox">Thresholds and subgroup performance are reported when relevant.</label></li>
+<li><label><input type="checkbox">Limitations on transportability and deployment are explicit.</label></li>
+</ul>
+</section>
+<section id="reproducibility" class="level3">
+<h3 class="anchored" data-anchor-id="reproducibility">Reproducibility</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Reported values are generated from traceable analysis outputs.</label></li>
+<li><label><input type="checkbox">Data, code, environment, and output versions are recorded.</label></li>
+<li><label><input type="checkbox">The same claims remain consistent across communication formats.</label></li>
+</ul>
+</section>
+</section>
+<section id="mini-communication-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="mini-communication-exercise">15.19 Mini Communication Exercise</h2>
+<p>Suppose a classifier has the following held-out results:</p>
+<ul>
+<li>ROC AUC: 0.88;</li>
+<li>average precision: 0.68;</li>
+<li>recall at the proposed threshold: 0.81;</li>
+<li>precision at the proposed threshold: 0.42;</li>
+<li>positive-class prevalence: 0.18; and</li>
+<li>calibration is weaker for the highest-risk group.</li>
+</ul>
+<section id="poor-summary" class="level3">
+<h3 class="anchored" data-anchor-id="poor-summary">Poor summary</h3>
+<blockquote class="blockquote">
+<p>The model is highly accurate and ready for deployment.</p>
+</blockquote>
+</section>
+<section id="improved-summary" class="level3">
+<h3 class="anchored" data-anchor-id="improved-summary">Improved summary</h3>
+<blockquote class="blockquote">
+<p>In held-out data, the model ranked higher-risk cases well (ROC AUC 0.88; average precision 0.68). At the proposed threshold, it identified 81% of positive cases, but fewer than half of its alerts were correct (precision 0.42). Because predicted probabilities were less reliable in the highest-risk group, recalibration and external validation are needed before deployment.</p>
+</blockquote>
+<p>The improved version:</p>
+<ul>
+<li>names the evaluation setting;</li>
+<li>reports complementary metrics;</li>
+<li>translates threshold performance into practical meaning;</li>
+<li>identifies a group-specific limitation; and</li>
+<li>recommends an evidence-aligned next step.</li>
+</ul>
+</section>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">15.20 Key Takeaways</h2>
+<ol type="1">
+<li>Analytical communication begins with the audience and the decision, not with formatting.</li>
+<li>A central message should combine the main result with uncertainty and appropriate qualification.</li>
+<li>Results, interpretations, recommendations, and limitations should remain distinguishable.</li>
+<li>Tables communicate exact comparisons; figures communicate patterns and relationships.</li>
+<li>Model performance should be reported using metrics and error consequences aligned with intended use.</li>
+<li>Accessibility, traceability, and reproducibility are components of analytical quality.</li>
+<li>Clear communication simplifies presentation without overstating evidence.</li>
+</ol>
+</section>
+<section id="reflection-questions" class="level2">
+<h2 class="anchored" data-anchor-id="reflection-questions">15.21 Reflection Questions</h2>
+<ol type="1">
+<li>How would you explain the same model result differently to a technical reviewer and a programme manager?</li>
+<li>Which uncertainty information is essential for the decisions supported by your current analysis?</li>
+<li>Does your most important figure answer a specific question without relying on surrounding text?</li>
+<li>Are any associational findings currently expressed using causal language?</li>
+<li>Can each major claim in your report be traced to a table, figure, or documented analysis result?</li>
+<li>What information should move to an appendix so that the main message becomes clearer without losing transparency?</li>
+</ol>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Clear analytical communication preserves the relationship between evidence, uncertainty, interpretation, and action. It helps audiences understand not only what an analysis found, but also how confidently the result can be used and where judgement is still required.</p>
+<p>The strongest communication is neither the most technical nor the most simplified. It is the presentation that allows its intended audience to understand the evidence accurately, evaluate its limitations, and make an appropriately informed decision.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

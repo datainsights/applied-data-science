@@ -3,687 +3,227 @@
 :::cdi-message
 - **ID:** ADS-APP
 - **Type:** Reference
-- **Audience:** Public
-- **Theme:** Environment, project structure, reproducibility, and reusable workflow patterns
+- **Audience:** Intermediate to Advanced
+- **Theme:** A defensible analysis is reproducible from question to decision
 :::
 
-This appendix collects technical reference material that supports the **Applied Data Science System**.
-
-It documents the project structure, environment setup, rendering workflow, script-based execution pattern, and reusable Python patterns used throughout the guide.
-
-The purpose of the appendix is simple:
-
-> make the workflow easier to rerun, inspect, adapt, and extend.
+This appendix consolidates the reusable structures, commands, modelling patterns, and review checks developed throughout **Advanced Data Science**. Use it as an operational reference—not as a substitute for the reasoning in the main chapters.
 
 ---
 
-## How to Use This Appendix
-
-Use this appendix as a reference when you need to:
-
-- recreate the project environment
-- understand the folder structure
-- rerun lesson scripts
-- regenerate reports and figures
-- render the Quarto site
-- prepare changes for GitHub Pages
-
-Most chapters in this guide can be run in two ways:
-
-1. interactively, by reading and running the code blocks in the chapter
-2. reproducibly, by running the supporting Python script from the project root
-
-The script-based workflow is preferred when preparing a public or production-facing version of the guide.
-
----
-
-## Project Structure Overview
-
-A standard CDI applied data science project uses a Quarto-first structure with supporting scripts and saved outputs.
+## Reproducible Project Structure
 
 ```text
 applied-data-science/
-├── index.qmd
-├── 00-preface.qmd
-├── 01-setting-up-environment.qmd
-├── 08-feature-engineering.qmd
-├── 09-model-building.qmd
-├── 10-model-evaluation.qmd
-├── 11-model-improvement.qmd
-├── 12-pipelines-and-cross-validation.qmd
-├── 13-feature-importance-and-interpretation.qmd
-├── 14-from-model-outputs-to-real-world-claims.qmd
-├── 15-communicating-results-clearly.qmd
-├── 16-from-analysis-to-decision-making.qmd
-├── 17-end-to-end-case-study.qmd
-├── 18-limitations-and-responsible-use.qmd
-├── 19-from-foundations-to-real-world-practice.qmd
-├── 999-appendix.qmd
-├── 999-references.qmd
 ├── data/
-│   ├── README.md
-│   ├── diabetes.csv
 │   ├── raw/
-│   │   └── people-example.csv
-│   └── processed/
-│       └── model-ready-example.csv
+│   ├── processed/
+│   └── reference/
 ├── models/
-│   └── diabetes-linear-regression.joblib
+├── notebooks/
 ├── reports/
-│   ├── *.csv
-│   ├── *.md
-│   └── figures/
-│       └── *.png
+├── results/
+│   ├── figures/
+│   └── tables/
 ├── scripts/
 │   ├── bash/
 │   └── python/
-├── docs/
+├── .gitignore
 ├── _quarto.yml
 ├── requirements.txt
-├── requirements-lock.txt
-└── .gitignore
+└── requirements-lock.txt
 ```
 
-This layout separates source files, data, scripts, generated reports, model artifacts, and rendered documentation.
+- Preserve `data/raw/` as the unchanged source layer.
+- Write derived datasets only to `data/processed/`.
+- Keep reusable analysis and figure generation in chapter-prefixed scripts.
+- Separate models, figures, tables, and narrative reports.
+- Record direct dependencies in `requirements.txt` and, when needed, freeze the complete working environment in `requirements-lock.txt`.
+
+This separation makes computational steps easier to inspect, rerun, and revise. Reproducibility requires more than sharing code: the data, software environment, execution order, and analytical decisions must also be sufficiently documented [@peng2011reproducible]. Data and metadata intended for reuse should additionally follow the FAIR principles of findability, accessibility, interoperability, and reusability [@wilkinson2016fair].
 
 ---
 
-## Key Directories
+## Essential Commands
 
-### `data/`
-
-The `data/` directory stores project datasets.
-
-In this guide, it includes:
-
-```text
-data/diabetes.csv
-data/raw/people-example.csv
-data/processed/model-ready-example.csv
-```
-
-The diabetes dataset supports the modeling lessons.
-
-The people example supports feature engineering and model-ready table construction.
-
----
-
-### `scripts/python/`
-
-The `scripts/python/` directory contains executable lesson scripts.
-
-These scripts turn chapter logic into reusable project workflows.
-
-Examples include:
-
-```text
-scripts/python/09b_train_baseline_linear_model.py
-scripts/python/10a_evaluate_repeated_splits.py
-scripts/python/12a_cross_validate_pipeline.py
-scripts/python/17a_run_end_to_end_case_study.py
-```
-
-Each script should be runnable from the project root.
-
----
-
-### `scripts/bash/`
-
-The `scripts/bash/` directory contains helper scripts for project setup and build operations.
-
-Examples include:
-
-```text
-scripts/bash/01a-create-project-structure.sh
-scripts/bash/01c-build-project.sh
-scripts/bash/01d-freeze-dependencies.sh
-```
-
-These scripts support repeatable project management.
-
----
-
-### `reports/`
-
-The `reports/` directory stores reusable outputs created by the scripts.
-
-These may include:
-
-- model metrics
-- cross-validation summaries
-- coefficient tables
-- communication summaries
-- responsible-use checklists
-- decision framing tables
-
-Saved reports make the workflow auditable.
-
-They also allow later chapters to refer to previous outputs without hiding the work that created them.
-
----
-
-### `reports/figures/`
-
-The `reports/figures/` directory stores saved plots.
-
-Examples include:
-
-```text
-reports/figures/diabetes-observed-vs-predicted.png
-reports/figures/diabetes-residual-plot.png
-reports/figures/diabetes-cross-validation-mae.png
-```
-
-Saving figures as files makes them easier to reuse in reports, slides, websites, and README pages.
-
----
-
-### `models/`
-
-The `models/` directory stores trained teaching models.
-
-For example:
-
-```text
-models/diabetes-linear-regression.joblib
-```
-
-In this guide, the model artifact is small and intentional.
-
-In larger projects, model artifacts should be tracked carefully because they can become large or sensitive.
-
----
-
-### `docs/`
-
-The `docs/` directory contains the rendered Quarto website.
-
-For GitHub Pages using a `docs/` deployment workflow, this is the public site output directory.
-
-Do not edit files inside `docs/` manually unless there is a specific reason.
-
-Instead, edit the `.qmd` source files and rerender the site.
-
----
-
-## Environment Setup Reference
-
-This project uses a local Python virtual environment.
-
-Create and activate the environment from the project root:
+### Activate the project environment
 
 ```bash
-python3 -m venv .venv
 source .venv/bin/activate
+which python
+python --version
 ```
 
-Install the required packages:
+### Install or reproduce dependencies
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+python -m pip freeze > requirements-lock.txt
 ```
 
-The `requirements.txt` file defines the main dependencies needed to run the project.
-
----
-
-## Reproducibility Lock File
-
-The project may also include:
-
-```text
-requirements-lock.txt
-```
-
-This file records an exact package snapshot.
-
-A useful distinction is:
-
-```text
-requirements.txt       = minimal dependency list
-requirements-lock.txt  = frozen reproducibility snapshot
-```
-
-To refresh the lock file after installing packages:
+### Run a chapter script
 
 ```bash
-pip freeze > requirements-lock.txt
+python scripts/python/09-generate-model-evaluation-figures.py
 ```
 
-The lock file helps preserve the environment used when the guide was built.
-
----
-
-## Running a Lesson Script
-
-Most applied lessons include a supporting Python script.
-
-Run scripts from the project root.
-
-For example:
-
-```bash
-python scripts/python/12a_cross_validate_pipeline.py
-```
-
-A script should usually create outputs in:
-
-```text
-reports/
-reports/figures/
-models/
-data/processed/
-```
-
-depending on the lesson.
-
----
-
-## Rendering the Quarto Site
-
-After running scripts, render the site:
+### Render the complete guide
 
 ```bash
 quarto render
 ```
 
-The rendered output is written to:
-
-```text
-docs/
-```
-
-Open the site locally:
+### Leave the environment
 
 ```bash
-open docs/index.html
+deactivate
 ```
 
-On non-macOS systems, open `docs/index.html` using your file browser or web browser.
+Always run project scripts from the repository root unless a script explicitly states otherwise.
 
 ---
 
-## Standard Lesson Workflow
+## End-to-End Analytical Workflow
 
-A typical lesson workflow is:
-
-```text
-source data
-    ↓
-Python script
-    ↓
-reports and figures
-    ↓
-Quarto chapter
-    ↓
-quarto render
-    ↓
-docs site
-```
-
-The preferred pattern is:
-
-```bash
-python scripts/python/<lesson-script>.py
-quarto render
-```
-
-This ensures that outputs are regenerated before the site is rebuilt.
+1. **Frame the question.** Define the population, outcome, unit of analysis, time horizon, and intended decision.
+2. **Audit the data-generating process.** Identify selection, measurement, missingness, timing, and access constraints.
+3. **Define the evaluation design.** Choose the split strategy, baselines, metrics, and acceptance criteria before model comparison.
+4. **Prepare data within the design.** Fit imputation, scaling, encoding, feature selection, and resampling using training data only.
+5. **Establish a baseline.** Compare sophisticated candidates with a simple, reproducible reference.
+6. **Develop candidates.** Change one justified component at a time and evaluate it consistently.
+7. **Validate performance.** Examine discrimination or error, calibration where relevant, uncertainty, stability, and subgroup results.
+8. **Interpret cautiously.** Distinguish model behaviour from causal explanation and test whether conclusions survive plausible alternatives.
+9. **Connect evidence to action.** Evaluate thresholds, costs, benefits, capacity, and consequences of errors.
+10. **Communicate and document.** Report methods, results, limitations, and decision conditions clearly enough for review.
 
 ---
 
-## GitHub Pages Workflow
+## Leakage-Safe Modelling Pattern
 
-For a public Quarto site using GitHub Pages, the usual workflow is:
-
-```text
-edit .qmd files and scripts
-    ↓
-run scripts
-    ↓
-quarto render
-    ↓
-commit source and docs
-    ↓
-push to GitHub
-    ↓
-GitHub Pages publishes docs/
-```
-
-If a custom domain is used, the rendered site should include a `CNAME` file containing the domain.
-
-For this project, the custom domain is:
-
-```text
-applied-datascience.complexdatainsights.com
-```
-
-If the workflow creates the `CNAME` file automatically, confirm that the deployed `docs/` output preserves it.
-
----
-
-## Reusable Pandas Patterns
-
-### Read a CSV file
+Scikit-learn provides a consistent interface for preprocessing, modelling, validation, and pipelines [@pedregosa2011scikit]. The following pattern keeps learned preprocessing inside cross-validation.
 
 ```python
-import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-df = pd.read_csv("data/diabetes.csv")
-```
+numeric_pipeline = make_pipeline(
+    SimpleImputer(strategy="median"),
+    StandardScaler(),
+)
 
-### Select columns
+categorical_pipeline = make_pipeline(
+    SimpleImputer(strategy="most_frequent"),
+    OneHotEncoder(handle_unknown="ignore"),
+)
 
-```python
-df[["col1", "col2"]]
-```
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("numeric", numeric_pipeline, numeric_features),
+        ("categorical", categorical_pipeline, categorical_features),
+    ]
+)
 
-### Drop columns
+model = make_pipeline(
+    preprocessor,
+    LogisticRegression(max_iter=2_000),
+)
 
-```python
-X = df.drop(columns=["target"])
-```
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
-### Select a target column
-
-```python
-y = df["target"]
-```
-
-### Filter rows
-
-```python
-filtered_df = df[df["value"] > 0]
-```
-
-### Create a new column
-
-```python
-df["new_column"] = df["col1"] + df["col2"]
-```
-
-### Group and aggregate
-
-```python
-summary_df = df.groupby("group_col").agg(
-    mean_value=("value_col", "mean"),
-    count=("value_col", "count")
-).reset_index()
-```
-
-### Handle missing values
-
-```python
-df["col"] = df["col"].fillna(df["col"].median())
-```
-
-### Convert data type
-
-```python
-df["category_col"] = df["category_col"].astype("category")
-```
-
-### Save a result
-
-```python
-df.to_csv("reports/output-table.csv", index=False)
-```
-
----
-
-## Reusable Scikit-Learn Patterns
-
-### Define features and target
-
-```python
-X = df.drop(columns=["disease_progression"])
-y = df["disease_progression"]
-```
-
-### Split data
-
-```python
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42
+scores = cross_validate(
+    model,
+    X_train,
+    y_train,
+    cv=cv,
+    scoring={
+        "roc_auc": "roc_auc",
+        "average_precision": "average_precision",
+        "neg_log_loss": "neg_log_loss",
+    },
+    return_train_score=True,
 )
 ```
 
-### Fit a baseline model
-
-```python
-from sklearn.linear_model import LinearRegression
-
-model = LinearRegression()
-model.fit(X_train, y_train)
-```
-
-### Generate predictions
-
-```python
-predictions = model.predict(X_test)
-```
-
-### Evaluate predictions
-
-```python
-from sklearn.metrics import mean_absolute_error, r2_score
-
-mae = mean_absolute_error(y_test, predictions)
-r2 = r2_score(y_test, predictions)
-```
-
-### Build a pipeline
-
-```python
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
-
-pipeline = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model", LinearRegression())
-])
-```
-
-### Run cross-validation
-
-```python
-from sklearn.model_selection import cross_val_score
-
-mae_scores = -cross_val_score(
-    pipeline,
-    X,
-    y,
-    cv=5,
-    scoring="neg_mean_absolute_error"
-)
-```
-
-### Save a trained model
-
-```python
-import joblib
-
-joblib.dump(model, "models/diabetes-linear-regression.joblib")
-```
-
-### Load a trained model
-
-```python
-import joblib
-
-model = joblib.load("models/diabetes-linear-regression.joblib")
-```
+The pipeline must include every operation that learns from data. If the observations are grouped, spatial, or time ordered, replace ordinary random folds with a split strategy that respects that dependence.
 
 ---
 
-## Reusable Matplotlib Patterns
+## Evaluation Quick Reference
 
-### Basic scatter plot
+| Task | Useful evidence | Common mistake |
+|---|---|---|
+| Regression | MAE or RMSE, residual patterns, uncertainty, subgroup error | Reporting one average error without scale or context |
+| Balanced classification | Confusion matrix, sensitivity, specificity, ROC AUC, calibration | Treating accuracy as sufficient |
+| Imbalanced classification | Precision, recall, average precision, calibration, threshold consequences | Relying on ROC AUC alone |
+| Probability estimation | Log loss, Brier score, calibration curve | Assuming good ranking means reliable probabilities |
+| Unsupervised learning | Compactness, separation, stability, sensitivity to preprocessing | Treating clusters as discovered truth |
+| Decision support | Expected benefit or cost, capacity, threshold sensitivity | Selecting a threshold from statistical convenience |
 
-```python
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=(7, 5))
-plt.scatter(x, y)
-plt.xlabel("X")
-plt.ylabel("Y")
-plt.title("Scatter Plot")
-plt.tight_layout()
-plt.show()
-```
-
-### Save a figure
-
-```python
-plt.savefig("reports/figures/example-figure.png", dpi=300, bbox_inches="tight")
-```
-
-### Observed vs predicted plot
-
-```python
-plt.figure(figsize=(7, 5))
-plt.scatter(observed, predicted)
-
-min_value = min(observed.min(), predicted.min())
-max_value = max(observed.max(), predicted.max())
-
-plt.plot([min_value, max_value], [min_value, max_value], linestyle="--")
-plt.xlabel("Observed")
-plt.ylabel("Predicted")
-plt.title("Observed vs Predicted")
-plt.tight_layout()
-plt.show()
-```
+Compare validation results with a meaningful baseline, report variation across folds or repeated samples, and reserve the test set for the final selected procedure. Transparent prediction-model reporting should describe the data, participants or observations, predictors, outcomes, missing-data handling, validation design, performance measures, and limitations [@collins2015tripod].
 
 ---
 
-## Reproducibility Checklist
+## Interpretation Guardrails
 
-Before finalizing any chapter, confirm that:
+- **Association is not causation.** Predictive importance can arise from correlation, proxies, confounding, measurement practices, or leakage.
+- **Global and local explanations answer different questions.** A global summary describes average model behaviour; a local explanation concerns one prediction.
+- **Importance is conditional on the fitted model and available features.** Correlated variables can share, mask, or redistribute apparent importance.
+- **Explanations do not validate a model.** Performance, calibration, robustness, and fitness for the intended use require separate evidence.
+- **Subgroup results need adequate sample sizes and uncertainty.** Small differences may be unstable, while aggregate performance can conceal important failures.
 
-- the lesson script runs from the project root
-- expected outputs are created
-- paths are relative, not machine-specific
-- no private files or credentials are included
-- code blocks use the same workflow described in the chapter
-- figures render correctly
-- saved report files are updated
-- the Quarto site builds successfully
-- `docs/index.html` opens locally
-- `git status` shows only expected changes
-
-A useful final check is:
-
-```bash
-quarto render
-git status
-```
+SHAP is one principled framework for assigning feature contributions to individual predictions, but its outputs remain explanations of a fitted model rather than causal effects [@lundberg2017unified].
 
 ---
 
-## Public Repository Safety Checklist
+## Decision and Responsible-Use Checklist
 
-Before making a project public, check for sensitive files or accidental local paths.
+Before recommending or using an analytical result, ask:
 
-Search for common sensitive terms:
+- What decision will this result inform, and who is affected?
+- Are the development data representative of the intended setting?
+- Which errors are most harmful, and to whom?
+- Is the chosen threshold consistent with costs, benefits, and operational capacity?
+- Are probability estimates sufficiently calibrated for the decision?
+- Does performance remain acceptable across relevant groups and conditions?
+- What happens when data quality deteriorates or the population changes?
+- Can a person question, override, or appeal a consequential output?
+- Who monitors the system, and what triggers review, retraining, or withdrawal?
+- Are privacy, security, legal, and domain-specific requirements satisfied?
 
-```bash
-grep -R "password\|token\|secret\|api_key\|apikey\|Users/" . \
-  --exclude-dir=.git \
-  --exclude-dir=.venv \
-  --exclude-dir=docs
-```
-
-Check for large files:
-
-```bash
-find . -type f -size +10M \
-  -not -path "./.git/*" \
-  -not -path "./.venv/*"
-```
-
-Review tracked files:
-
-```bash
-git status
-git diff --cached --name-status
-```
-
-These checks help keep public CDI repositories clean and safe.
+Responsible analytical practice is a lifecycle activity. The NIST AI Risk Management Framework organizes this work around governance, context mapping, measurement, and risk management rather than treating responsibility as a final compliance check [@nist2023airmf].
 
 ---
 
-## Running the Full System
-```bash
-bash scripts/bash/end-to-end-workflow.sh
-```
+## Final Reproducibility Audit
 
-## Data Sources
+Before publishing or handing off the work, confirm that:
 
-This guide uses the diabetes dataset distributed through scikit-learn and saved locally as:
-
-```text
-data/diabetes.csv
-```
-
-The dataset is used for educational modeling examples throughout the applied lessons.
-
----
-
-## Software and Tools
-
-This guide uses a small set of widely adopted tools for reproducible applied data science:
-
-- **Python** [@python]
-- **pandas** [@pandas]
-- **NumPy** [@numpy]
-- **matplotlib** [@matplotlib]
-- **scikit-learn** [@scikit-learn]
-- **joblib** [@joblib]
-- **Quarto** [@quarto]
-
-Together, these tools support tabular data handling, modeling, evaluation, visualization, reproducible reporting, and static site publishing.
+- the raw data remain unchanged and provenance is recorded;
+- all paths are project-relative;
+- random seeds are fixed where stochastic behaviour should be reproducible;
+- transformations and feature definitions are explicit;
+- preprocessing is learned only from training data;
+- the split strategy matches the structure and intended use of the data;
+- baselines, metrics, thresholds, and selection rules are documented;
+- tables and figures can be regenerated from scripts;
+- package requirements are recorded;
+- results have been rerun from a clean session or environment;
+- limitations and unresolved risks are visible; and
+- another analyst could trace the final claim back to data and code.
 
 ---
 
-## Closing Note
+## Core Software
 
-The goal of the **Applied Data Science System** is not only to teach syntax.
+- **Python** [@python] — general-purpose language used throughout the workflow.
+- **pandas** [@pandas] — tabular data preparation and analysis.
+- **NumPy** [@numpy] — numerical arrays and computation.
+- **matplotlib** [@matplotlib] and **seaborn** [@seaborn] — static statistical visualization.
+- **scikit-learn** [@pedregosa2011scikit] — preprocessing, modelling, pipelines, and validation.
+- **Quarto** [@quarto] — reproducible technical publishing.
 
-It is to teach a disciplined workflow:
-
-```text
-data
-    ↓
-analysis
-    ↓
-modeling
-    ↓
-evaluation
-    ↓
-interpretation
-    ↓
-communication
-    ↓
-decision context
-    ↓
-responsible use
-```
-
-The same structure can be reused across:
-
-- new datasets
-- client projects
-- public guides
-- domain-specific CDI pathways
-- future analytical systems
-
-A strong data science workflow does more than produce outputs.
-
-It produces evidence that can be inspected, explained, reproduced, and used responsibly.
+The software implements the workflow; the credibility of the result still depends on the question, data, design, validation, interpretation, and decision context.

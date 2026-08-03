@@ -7,4 +7,334 @@
 - **Theme:** Reliable modelling begins with defensible data preparation
 :::
 
-> This chapter is scaffolded for development.
+## Learning objectives
+
+By the end of this chapter, you will be able to:
+
+- define the modelling unit, outcome, and prediction point before transforming data;
+- separate training and test data before learning preparation parameters;
+- assign numeric, categorical, identifier, and target roles deliberately;
+- handle missing values, categories, and scale differences with a reproducible pipeline;
+- inspect the transformed feature space without losing traceability; and
+- save preparation metadata and modelling-ready outputs for later chapters.
+
+## From cleaning to model-aware preparation
+
+The Foundations guide introduced cleaning as the process of making data valid,
+consistent, and understandable. Advanced preparation asks a different question:
+
+> How can the data be transformed for modelling without allowing unavailable or
+> future information to influence the model?
+
+A value can be clean and still be unsuitable for prediction. A customer ID may
+be perfectly recorded but should not usually become a feature. A laboratory
+measurement collected after treatment may be valid but unavailable when a
+clinical decision must be made. A global median calculated before the data split
+may look harmless but transfers information from the test set into training.
+
+For this chapter, `scripts/python/02-prepare-advanced-data.py` creates
+`data/processed/advanced_modeling_data.csv`. Each row represents one customer
+at a defined observation point, and `churned` indicates whether the customer
+subsequently left.
+
+Run the Chapter 02 scripts from the repository root in this order:
+
+```bash
+python scripts/python/02-prepare-advanced-data.py
+python scripts/python/02-advanced-data-preparation.py
+```
+
+The first script creates `data/processed/` automatically when it does not
+already exist. The second script creates its required modelling, model, and
+results directories before saving outputs.
+
+## Define the analytical contract
+
+Preparation should begin with a short analytical contract rather than with a
+transformer.
+
+| Decision | Question | Chapter example |
+|---|---|---|
+| Modelling unit | What does one row represent? | One customer |
+| Target | What outcome will be predicted? | `churned` |
+| Prediction point | When must the prediction be available? | Before the next renewal |
+| Feature window | What information is available by then? | Activity observed up to that point |
+| Exclusions | Which fields must not become predictors? | `customer_id` and post-outcome fields |
+| Holdout purpose | What does the test set estimate? | Performance on unseen customers |
+
+This contract is the first defence against target leakage. Leakage occurs when
+training uses information that would not be available at prediction time or
+when information from held-out observations influences fitted preparation
+steps.
+
+:::callout-warning
+## Leakage can produce convincing results
+
+A leaked model may score unusually well and still fail in practice. Check the
+meaning and timing of every candidate feature; column names alone are not
+enough.
+:::
+
+## Audit the modelling table
+
+Begin with structure, uniqueness, missingness, and the outcome distribution.
+The code below is displayed for learning and copying; the complete executable
+workflow is in `scripts/python/02-advanced-data-preparation.py`.
+
+```python
+import pandas as pd
+
+DATA_PATH = "data/processed/advanced_modeling_data.csv"
+TARGET = "churned"
+ID_COLUMN = "customer_id"
+
+data = pd.read_csv(DATA_PATH)
+
+print(data.shape)
+print(data.dtypes)
+print(data.isna().mean().sort_values(ascending=False))
+print(data[TARGET].value_counts(dropna=False, normalize=True))
+print("Duplicate IDs:", data[ID_COLUMN].duplicated().sum())
+```
+
+The audit should answer four practical questions:
+
+1. Does each row match the intended modelling unit?
+2. Is the target present, valid, and measured after the feature window?
+3. Are identifiers or post-outcome variables mixed with candidate features?
+4. Are there data-quality problems that should be corrected upstream rather
+   than hidden inside a modelling pipeline?
+
+## Split before learning from the data
+
+The test set must remain independent of every data-dependent decision. Split
+before estimating medians, category sets, scaling parameters, feature-selection
+thresholds, or outlier boundaries.
+
+```python
+from sklearn.model_selection import train_test_split
+
+X = data.drop(columns=[TARGET, ID_COLUMN])
+y = data[TARGET].astype("int8")
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y,
+)
+```
+
+`stratify=y` preserves approximately the same outcome proportion in both
+partitions. It is useful for classification, especially when the outcome is
+unevenly distributed. It does not solve class imbalance; it only makes the
+split more representative.
+
+:::callout-note
+## Match the split to the deployment setting
+
+A random split is appropriate only when future observations resemble an
+exchangeable sample of the current population. Use a chronological split for
+future prediction, and a group-aware split when multiple rows belong to the
+same patient, household, site, device, or other entity. These designs are
+developed further in the model-evaluation chapters.
+:::
+
+## Assign feature roles explicitly
+
+Automatic type detection is convenient but should be verified. Integer codes
+may represent categories, while ordered categories may need domain-specific
+encoding.
+
+```python
+numeric_features = [
+    "age",
+    "tenure_months",
+    "monthly_spend",
+    "support_tickets",
+    "usage_hours",
+]
+
+categorical_features = [
+    "region",
+    "plan_type",
+    "contract_type",
+    "payment_method",
+]
+```
+
+Keep the role definitions visible and reviewable. An explicit list makes schema
+changes easier to detect and helps prevent identifiers from entering the model
+silently.
+
+## Build one fitted preparation pipeline
+
+The pipeline below learns all data-dependent parameters from `X_train` only.
+Numeric variables receive median imputation followed by standardisation.
+Categorical variables receive most-frequent imputation and one-hot encoding.
+
+```python
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+numeric_pipeline = Pipeline(
+    steps=[
+        ("impute", SimpleImputer(strategy="median", add_indicator=True)),
+        ("scale", StandardScaler()),
+    ]
+)
+
+categorical_pipeline = Pipeline(
+    steps=[
+        ("impute", SimpleImputer(strategy="most_frequent")),
+        (
+            "encode",
+            OneHotEncoder(
+                handle_unknown="infrequent_if_exist",
+                min_frequency=0.01,
+                sparse_output=False,
+            ),
+        ),
+    ]
+)
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("numeric", numeric_pipeline, numeric_features),
+        ("categorical", categorical_pipeline, categorical_features),
+    ],
+    remainder="drop",
+    verbose_feature_names_out=False,
+)
+
+preprocessor.set_output(transform="pandas")
+X_train_ready = preprocessor.fit_transform(X_train)
+X_test_ready = preprocessor.transform(X_test)
+```
+
+The distinction between `fit_transform()` and `transform()` is essential:
+
+- `fit_transform(X_train)` learns preparation parameters from the training set
+  and applies them;
+- `transform(X_test)` applies those same learned parameters without re-estimating
+  them.
+
+### Why these transformations?
+
+| Data issue | Training-derived action | Main benefit |
+|---|---|---|
+| Missing numeric values | Median imputation | Robust central replacement |
+| Informative numeric missingness | Missingness indicators | Preserves whether a value was absent |
+| Different numeric scales | Standardisation | Supports scale-sensitive estimators |
+| Missing categorical values | Most-frequent imputation | Produces a complete category input |
+| Nominal categories | One-hot encoding | Avoids imposing an artificial order |
+| Unseen or rare categories | Infrequent-category handling | Makes later transformation more stable |
+
+Tree-based models often do not require standardisation, but keeping scale-aware
+preparation in a reusable pipeline supports later comparison with linear,
+distance-based, and margin-based models. Model-specific alternatives should be
+compared inside cross-validation rather than chosen after observing test-set
+performance.
+
+## Treat outliers as analytical evidence
+
+Do not remove an observation merely because it is numerically extreme. First
+determine whether it is:
+
+- an impossible or incorrectly recorded value;
+- a valid but unusual member of the target population;
+- evidence of a different population or data-generating process; or
+- influential only for a particular modelling method.
+
+Correct impossible values upstream and document the rule. For valid extremes,
+consider robust transformations, robust estimators, or training-derived
+clipping thresholds. Any thresholds must be estimated inside the training
+workflow—not from the full dataset.
+
+## Validate the prepared feature space
+
+Preparation is not complete until the outputs have been checked.
+
+```python
+assert X_train_ready.columns.equals(X_test_ready.columns)
+assert not X_train_ready.isna().any().any()
+assert not X_test_ready.isna().any().any()
+assert len(X_train_ready) == len(y_train)
+assert len(X_test_ready) == len(y_test)
+
+print(X_train_ready.shape)
+print(X_test_ready.shape)
+print(X_train_ready.columns.tolist())
+```
+
+Also verify that:
+
+- the target and identifier are absent from the transformed features;
+- train and test columns appear in the same order;
+- no missing values remain unless the intended estimator supports them;
+- row counts and indices still align with the target; and
+- category expansion has not produced an impractically wide matrix.
+
+## Preserve reproducibility and traceability
+
+The runnable script writes:
+
+- `data/modeling/X_train_prepared.csv`;
+- `data/modeling/X_test_prepared.csv`;
+- `data/modeling/y_train.csv`;
+- `data/modeling/y_test.csv`;
+- `models/preprocessor.joblib`; and
+- `results/tables/data_preparation_summary.json`.
+
+The saved preprocessor is more important than the transformed CSV files alone.
+It records the fitted medians, scaling values, and learned category structure
+needed to prepare future observations consistently.
+
+```bash
+python scripts/python/02-advanced-data-preparation.py
+```
+
+:::callout-tip
+## Prefer a combined modelling pipeline
+
+In later chapters, the preprocessor and estimator should normally be joined in
+one scikit-learn `Pipeline`. This allows each cross-validation fold to fit its
+own preparation steps and provides a single object for prediction and
+deployment.
+:::
+
+## Common preparation mistakes
+
+| Mistake | Why it is risky | Better practice |
+|---|---|---|
+| Imputing before the split | Test information influences training | Fit imputation on training data only |
+| Scaling train and test separately | The feature spaces no longer share one reference | Fit once on training data, then transform both |
+| Encoding identifiers | The model may memorise entities | Exclude IDs and preserve them only for traceability |
+| Using post-outcome variables | Creates target leakage | Enforce the prediction point and feature window |
+| Dropping every incomplete row | Can reduce power and introduce bias | Investigate missingness and use justified handling |
+| Selecting features using the full dataset | Test outcomes influence model development | Perform selection inside the training workflow |
+| Reusing the test set repeatedly | The test set becomes part of model tuning | Reserve it for final evaluation |
+
+## Chapter checklist
+
+Before moving to exploratory modelling, confirm that you can answer **yes** to
+each question:
+
+- Is the modelling unit defined?
+- Is the prediction point explicit?
+- Were identifiers and unavailable variables excluded?
+- Was the split made before fitting preparation steps?
+- Do all learned transformations use training data only?
+- Can unseen categories be handled safely?
+- Do the prepared train and test matrices have matching schemas?
+- Are the fitted preprocessor and preparation summary saved?
+
+## Key takeaway
+
+Advanced data preparation is not a collection of isolated cleaning commands. It
+is a fitted, testable, and reusable system that preserves the boundary between
+training data and unseen data. That boundary makes later model comparisons and
+performance estimates defensible.

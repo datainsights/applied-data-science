@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -314,15 +349,39 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#from-a-fitted-model-to-a-modelling-procedure" id="toc-from-a-fitted-model-to-a-modelling-procedure" class="nav-link active" data-scroll-target="#from-a-fitted-model-to-a-modelling-procedure">From a fitted model to a modelling procedure</a></li>
+  <li><a href="#why-preprocessing-belongs-inside-the-pipeline" id="toc-why-preprocessing-belongs-inside-the-pipeline" class="nav-link" data-scroll-target="#why-preprocessing-belongs-inside-the-pipeline">Why preprocessing belongs inside the pipeline</a></li>
+  <li><a href="#mixed-numerical-and-categorical-predictors" id="toc-mixed-numerical-and-categorical-predictors" class="nav-link" data-scroll-target="#mixed-numerical-and-categorical-predictors">Mixed numerical and categorical predictors</a></li>
+  <li><a href="#choosing-the-cross-validation-design" id="toc-choosing-the-cross-validation-design" class="nav-link" data-scroll-target="#choosing-the-cross-validation-design">Choosing the cross-validation design</a></li>
+  <li><a href="#evaluating-more-than-one-metric" id="toc-evaluating-more-than-one-metric" class="nav-link" data-scroll-target="#evaluating-more-than-one-metric">Evaluating more than one metric</a></li>
+  <li><a href="#out-of-fold-predictions" id="toc-out-of-fold-predictions" class="nav-link" data-scroll-target="#out-of-fold-predictions">Out-of-fold predictions</a></li>
+  <li><a href="#visualising-fold-stability" id="toc-visualising-fold-stability" class="nav-link" data-scroll-target="#visualising-fold-stability">Visualising fold stability</a></li>
+  <li><a href="#hyperparameter-tuning-inside-cross-validation" id="toc-hyperparameter-tuning-inside-cross-validation" class="nav-link" data-scroll-target="#hyperparameter-tuning-inside-cross-validation">Hyperparameter tuning inside cross-validation</a></li>
+  <li><a href="#nested-cross-validation" id="toc-nested-cross-validation" class="nav-link" data-scroll-target="#nested-cross-validation">Nested cross-validation</a></li>
+  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes">Common failure modes</a>
+  <ul class="collapse">
+  <li><a href="#preprocessing-before-splitting" id="toc-preprocessing-before-splitting" class="nav-link" data-scroll-target="#preprocessing-before-splitting">Preprocessing before splitting</a></li>
+  <li><a href="#ignoring-groups" id="toc-ignoring-groups" class="nav-link" data-scroll-target="#ignoring-groups">Ignoring groups</a></li>
+  <li><a href="#randomly-splitting-time" id="toc-randomly-splitting-time" class="nav-link" data-scroll-target="#randomly-splitting-time">Randomly splitting time</a></li>
+  <li><a href="#tuning-outside-the-pipeline" id="toc-tuning-outside-the-pipeline" class="nav-link" data-scroll-target="#tuning-outside-the-pipeline">Tuning outside the pipeline</a></li>
+  <li><a href="#reporting-only-the-best-fold-or-best-search-score" id="toc-reporting-only-the-best-fold-or-best-search-score" class="nav-link" data-scroll-target="#reporting-only-the-best-fold-or-best-search-score">Reporting only the best fold or best search score</a></li>
+  </ul></li>
+  <li><a href="#a-reproducible-workflow" id="toc-a-reproducible-workflow" class="nav-link" data-scroll-target="#a-reproducible-workflow">A reproducible workflow</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary">Chapter summary</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-pipelines-and-cross-validation.html">Reproducibility and Interpretation</a></li><li class="breadcrumb-item"><a href="./12-pipelines-and-cross-validation.html"><span class="chapter-title">Pipelines and Cross-Validation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="lesson12" class="quarto-section-identifier"><span class="chapter-title">Pipelines and Cross-Validation</span></span></h1>
+<h1 class="title"><span id="sec-lesson12" class="quarto-section-identifier"><span class="chapter-title">Pipelines and Cross-Validation</span></span></h1>
 </div>
 
 
@@ -353,11 +412,308 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Pipelines keep preprocessing and validation aligned</li>
 </ul>
 </div>
-<blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
-</blockquote>
+<p>Pipelines and cross-validation solve two closely related problems. A pipeline keeps every learned transformation attached to the model, while cross-validation estimates how that complete modelling procedure is likely to perform on unseen data.</p>
+<p>This distinction matters. Validation is not reliable when preprocessing is learned from the full dataset before the folds are created. The validation fold has then influenced the training process, even if its outcome was never passed directly to the estimator.</p>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>combine preprocessing and estimation in one scikit-learn pipeline;</li>
+<li>select a cross-validation strategy that matches the data-generating process;</li>
+<li>obtain out-of-fold predictions and fold-level performance estimates;</li>
+<li>tune a pipeline without leaking validation information; and</li>
+<li>distinguish routine cross-validation from nested model evaluation.</li>
+</ul>
+<section id="from-a-fitted-model-to-a-modelling-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-fitted-model-to-a-modelling-procedure">From a fitted model to a modelling procedure</h2>
+<p>Chapter <a href="09-model-evaluation-and-validation.html" class="quarto-xref"><span>Model Evaluation and Validation</span></a> established that evaluation design should be fixed before candidate models are compared. Chapter <a href="10-model-improvement.html" class="quarto-xref"><span>Model Improvement</span></a> then developed model improvements within that design. Here, the object being evaluated is the <strong>complete modelling procedure</strong>:</p>
+<ol type="1">
+<li>learn preprocessing parameters from the training observations;</li>
+<li>transform the training and validation observations separately;</li>
+<li>fit the estimator on the transformed training observations; and</li>
+<li>score predictions for the untouched validation observations.</li>
+</ol>
+<p>Cross-validation repeats this procedure across several train-validation splits. Each observation can therefore contribute to validation without being used to fit the model that predicts it.</p>
+</section>
+<section id="why-preprocessing-belongs-inside-the-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="why-preprocessing-belongs-inside-the-pipeline">Why preprocessing belongs inside the pipeline</h2>
+<p>Operations such as imputation, scaling, encoding, feature selection, and dimensionality reduction learn information from data. If they are fitted before cross-validation, their learned parameters contain information from observations that later appear in validation folds.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid: the scaler sees every observation before validation begins.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> StandardScaler().fit_transform(X)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(model, X_scaled, y, cv<span class="op">=</span>cv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Place learned transformations inside a pipeline instead:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> make_pipeline(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    LogisticRegression(max_iter<span class="op">=</span><span class="dv">2_000</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>During cross-validation, scikit-learn clones the pipeline for every fold. The imputer and scaler are fitted only on that fold’s training partition.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="A pipeline prevents procedural leakage">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A pipeline prevents procedural leakage
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A pipeline cannot repair a split that already violates the problem structure. Repeated measurements from one person, future observations, or related samples must still be separated using an appropriate validation strategy.</p>
+</div>
+</div>
+</section>
+<section id="mixed-numerical-and-categorical-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="mixed-numerical-and-categorical-predictors">Mixed numerical and categorical predictors</h2>
+<p>Real datasets often require different transformations for different columns. <code>ColumnTransformer</code> keeps those branches within the same fitted object.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>numeric_pipeline <span class="op">=</span> make_pipeline(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>categorical_pipeline <span class="op">=</span> make_pipeline(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"most_frequent"</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"numeric"</span>, numeric_pipeline, numeric_columns),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"categorical"</span>, categorical_pipeline, categorical_columns),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> make_pipeline(</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    preprocessor,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    LogisticRegression(max_iter<span class="op">=</span><span class="dv">2_000</span>),</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The fitted pipeline is also the deployment unit. New observations receive the same column selection, imputation, scaling, encoding, and prediction rules used during validation.</p>
+</section>
+<section id="choosing-the-cross-validation-design" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-the-cross-validation-design">Choosing the cross-validation design</h2>
+<p>The best splitter is determined by how future data will arrive, not by a default number of folds.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data structure</th>
+<th>Suitable starting point</th>
+<th>Main protection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Independent observations</td>
+<td><code>KFold</code></td>
+<td>General fold-to-fold variation</td>
+</tr>
+<tr class="even">
+<td>Imbalanced classification</td>
+<td><code>StratifiedKFold</code></td>
+<td>Approximate class proportions</td>
+</tr>
+<tr class="odd">
+<td>Repeated subjects or related samples</td>
+<td><code>GroupKFold</code> or <code>StratifiedGroupKFold</code></td>
+<td>No group in both train and validation</td>
+</tr>
+<tr class="even">
+<td>Ordered or forecasting data</td>
+<td><code>TimeSeriesSplit</code></td>
+<td>Training observations precede validation</td>
+</tr>
+<tr class="odd">
+<td>Small datasets needing repeated estimates</td>
+<td>Repeated K-fold variants</td>
+<td>Sensitivity to a single partition</td>
+</tr>
+</tbody>
+</table>
+<p>For classification with approximately independent observations, a shuffled, stratified design is a defensible starting point:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    n_splits<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Fixing <code>random_state</code> makes the partition reproducible. It does not make the performance estimate certain; fold-to-fold variation should still be reported.</p>
+</section>
+<section id="evaluating-more-than-one-metric" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-more-than-one-metric">Evaluating more than one metric</h2>
+<p>A single metric rarely describes all relevant behaviour. For an imbalanced classification problem, ROC AUC and average precision can be evaluated together, while fit and scoring times help reveal computational costs.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    pipeline,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>{</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"roc_auc"</span>: <span class="st">"roc_auc"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"average_precision"</span>: <span class="st">"average_precision"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    return_train_score<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Summarise the fold estimates with their centre and variability:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fold_results <span class="op">=</span> pd.DataFrame(scores)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> fold_results.agg([<span class="st">"mean"</span>, <span class="st">"std"</span>]).T</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary.loc[[<span class="st">"test_roc_auc"</span>, <span class="st">"test_average_precision"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The standard deviation across folds is a diagnostic of partition sensitivity, not a universal confidence interval. When observations are grouped or ordered, its interpretation depends on the selected splitting design.</p>
+</section>
+<section id="out-of-fold-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="out-of-fold-predictions">Out-of-fold predictions</h2>
+<p><code>cross_val_predict</code> returns one prediction for each observation from a model that did not train on that observation. These out-of-fold predictions are useful for pooled diagnostic plots, error analysis, and threshold exploration.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_predict</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>out_of_fold_probability <span class="op">=</span> cross_val_predict(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    pipeline,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"predict_proba"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>)[:, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Out-of-fold predictions do not replace a final test set when one is required. They are generated while the candidate procedure is still being assessed and may influence later modelling decisions.</p>
+</section>
+<section id="visualising-fold-stability" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-fold-stability">Visualising fold stability</h2>
+<p>The Chapter 12 figure script compares validation performance across folds and constructs a pooled out-of-fold calibration display.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/12-generate-pipeline-cv-figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output is written to <code>results/figures/</code>.</p>
+<div id="fig-12-fold-scores" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-12-fold-scores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/12-cross-validation-fold-scores.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-12-fold-scores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.1: Validation metrics across stratified folds.
+</figcaption>
+</figure>
+</div>
+<p>Figure <a href="#fig-12-fold-scores" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> makes unstable folds visible instead of hiding them behind a mean score. Large variation should prompt investigation of sample size, class balance, grouping, and influential observations.</p>
+<div id="fig-12-oof-calibration" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-12-oof-calibration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/12-out-of-fold-calibration.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-12-oof-calibration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.2: Calibration from out-of-fold probabilities.
+</figcaption>
+</figure>
+</div>
+<p>Figure <a href="#fig-12-oof-calibration" class="quarto-xref">Figure&nbsp;<span>13.2</span></a> evaluates probability behaviour using predictions made for held-out observations. A calibration curve created from in-sample predictions would be optimistically biased.</p>
+</section>
+<section id="hyperparameter-tuning-inside-cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="hyperparameter-tuning-inside-cross-validation">Hyperparameter tuning inside cross-validation</h2>
+<p>Search objects can tune parameters inside a pipeline. Parameter names use the step name followed by two underscores.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>parameter_grid <span class="op">=</span> {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"logisticregression__C"</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">10.0</span>],</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"logisticregression__class_weight"</span>: [<span class="va">None</span>, <span class="st">"balanced"</span>],</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>search <span class="op">=</span> GridSearchCV(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>pipeline,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    param_grid<span class="op">=</span>parameter_grid,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"average_precision"</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    refit<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>search.fit(X_train, y_train)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>best_pipeline <span class="op">=</span> search.best_estimator_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If a separate test set was reserved before development, evaluate <code>best_pipeline</code> on it once after the search and decision rules are complete. Repeatedly checking the test set turns it into another validation set.</p>
+</section>
+<section id="nested-cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="nested-cross-validation">Nested cross-validation</h2>
+<p>Using the same cross-validation results both to choose hyperparameters and to report final performance can be optimistic. Nested cross-validation separates these roles:</p>
+<ul>
+<li>the <strong>inner loop</strong> selects hyperparameters using only the outer training data;</li>
+<li>the <strong>outer loop</strong> evaluates the selected procedure on unseen outer-fold data.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>outer_cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>inner_cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">43</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>search <span class="op">=</span> GridSearchCV(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    pipeline,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    parameter_grid,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"average_precision"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>inner_cv,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>nested_scores <span class="op">=</span> cross_validate(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    search,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"average_precision"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>outer_cv,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Nested cross-validation is most useful when the dataset is too small for a stable holdout set and an approximately unbiased estimate of the entire tuning procedure is important. It is computationally expensive and does not remove the need for an external validation dataset when transportability is the real question.</p>
+</section>
+<section id="common-failure-modes" class="level2">
+<h2 class="anchored" data-anchor-id="common-failure-modes">Common failure modes</h2>
+<section id="preprocessing-before-splitting" class="level3">
+<h3 class="anchored" data-anchor-id="preprocessing-before-splitting">Preprocessing before splitting</h3>
+<p>Any transformation that learns from data must be fitted inside the relevant training partition. This includes feature selection and target-aware encoding, not only scaling and imputation.</p>
+</section>
+<section id="ignoring-groups" class="level3">
+<h3 class="anchored" data-anchor-id="ignoring-groups">Ignoring groups</h3>
+<p>Random folds can put observations from the same patient, site, household, or experimental unit on both sides of a split. The model may then exploit shared information that will not be available for genuinely new groups.</p>
+</section>
+<section id="randomly-splitting-time" class="level3">
+<h3 class="anchored" data-anchor-id="randomly-splitting-time">Randomly splitting time</h3>
+<p>Shuffling ordered observations allows the model to learn from the future. Temporal validation should reproduce the intended prediction horizon and any gap required by the application.</p>
+</section>
+<section id="tuning-outside-the-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="tuning-outside-the-pipeline">Tuning outside the pipeline</h3>
+<p>Feature selection, resampling, and other tuned preprocessing choices belong inside the search object. Otherwise, the validation folds influence which features or transformations are retained.</p>
+</section>
+<section id="reporting-only-the-best-fold-or-best-search-score" class="level3">
+<h3 class="anchored" data-anchor-id="reporting-only-the-best-fold-or-best-search-score">Reporting only the best fold or best search score</h3>
+<p>Report the prespecified metrics, their fold-level variation, the splitting strategy, and the complete tuning space. A best score without its selection process is not a reproducible performance claim.</p>
+</section>
+</section>
+<section id="a-reproducible-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="a-reproducible-workflow">A reproducible workflow</h2>
+<ol type="1">
+<li>Define the prediction target, unit of observation, and future use case.</li>
+<li>Reserve a final test set when sample size and study design permit.</li>
+<li>Choose folds that respect classes, groups, time, and dependence.</li>
+<li>Place every learned preprocessing step inside the pipeline.</li>
+<li>Define metrics and tuning rules before comparing candidates.</li>
+<li>Generate fold-level scores and out-of-fold predictions.</li>
+<li>Investigate variability and errors without contaminating the test set.</li>
+<li>Refit the selected pipeline and preserve it as one reproducible object.</li>
+</ol>
+</section>
+<section id="chapter-summary" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-summary">Chapter summary</h2>
+<p>Pipelines ensure that preprocessing is learned within each training fold and reapplied consistently to validation and future data. Cross-validation then estimates the behaviour of that complete procedure across defensible data splits. Together, they reduce leakage, expose instability, and make model selection easier to reproduce.</p>
+<p>The most important decision is not whether to use five or ten folds. It is whether the validation design reproduces the independence, grouping, and time structure of the problem the model will face after development.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

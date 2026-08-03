@@ -1,10 +1,781 @@
-# End-to-End Case Study {#lesson18}
+# End-to-End Case Study {#sec-lesson18}
 
 :::cdi-message
 - **ID:** ADS-L18
 - **Type:** Integrated practice
 - **Audience:** Intermediate
-- **Theme:** A complete workflow connects preparation, modelling, validation, and communication
+- **Theme:** A defensible workflow connects the decision, data, modelling, validation, interpretation, and communication
 :::
 
-> This chapter is scaffolded for development.
+## Why This Chapter Matters
+
+An analysis is not complete because a model has been fitted. It is complete only when the workflow can be inspected from the original decision question to the final recommendation.
+
+This chapter brings the guide together in one case study. The objective is not to find a perfect model. It is to produce an analysis whose data transformations, comparisons, limitations, and claims remain defensible when another analyst reviews the work.
+
+The case study follows six connected questions:
+
+1. What decision must the analysis support?
+2. What information would genuinely be available at prediction time?
+3. How should development and final evaluation data be separated?
+4. Which modelling strategy performs well enough for the intended use?
+5. What threshold balances missed cases against review capacity?
+6. What can responsibly be concluded, communicated, and monitored?
+
+::: {.callout-important title="The governing rule"}
+The final holdout set is opened once, after preprocessing choices, candidate comparison, hyperparameter selection, and threshold selection have been completed using development data only.
+:::
+
+## Case Study: Prioritising Equipment Inspections
+
+A maintenance team receives more equipment alerts than it can inspect immediately. It wants a model that ranks new alerts by the likelihood that an inspection will identify a fault requiring prompt follow-up.
+
+The model will support a triage queue. It will not cancel inspections, certify equipment as safe, or automatically authorise maintenance work.
+
+### Decision statement
+
+> For each newly recorded alert, estimate the probability that inspection will confirm a priority fault, then use an agreed threshold to place the alert in the priority-review queue.
+
+This statement identifies the unit of analysis, prediction time, outcome, and intended action.
+
+| Design element | Case-study definition |
+|---|---|
+| Unit of analysis | One equipment alert |
+| Prediction time | When the alert enters the review system |
+| Outcome | Priority fault confirmed during inspection |
+| Prediction horizon | The subsequent inspection episode |
+| Model output | Estimated probability of a confirmed priority fault |
+| Human action | Prioritise an alert for earlier review |
+| Out-of-scope action | Declaring equipment safe without inspection |
+
+### Success criteria
+
+The team specifies the criteria before comparing models:
+
+- discrimination must improve meaningfully over a simple baseline;
+- probability estimates should be sufficiently calibrated for threshold selection;
+- recall is prioritised because missed priority faults are costly;
+- the predicted-positive rate must remain compatible with review capacity;
+- performance must be examined across sites and equipment-age groups;
+- the final recommendation must state uncertainty and operational limitations.
+
+Accuracy alone is unsuitable because priority faults are less common than non-priority outcomes and the two error types have different consequences.
+
+## Workflow Map
+
+```{mermaid}
+flowchart TD
+    A[Define decision and outcome] --> B[Audit prediction-time data]
+    B --> C[Lock time-based holdout]
+    C --> D[Develop pipelines and candidates]
+    D --> E[Select threshold on development predictions]
+    E --> F[Evaluate once on final holdout]
+    F --> G[Communicate, deploy cautiously, and monitor]
+```
+
+Each stage creates evidence needed by the next stage. If the decision or prediction time changes, the feature audit, validation design, threshold, and claims may also need to change.
+
+## 1. Establish the Analytical Contract
+
+Before inspecting model performance, record the intended use and foreseeable misuse.
+
+```python
+analytical_contract = {
+    "unit": "equipment alert",
+    "prediction_time": "alert creation",
+    "outcome": "priority fault confirmed at inspection",
+    "intended_use": "prioritise alerts for human review",
+    "prohibited_use": "declare equipment safe or cancel inspection",
+    "primary_metric": "recall at an operationally feasible threshold",
+    "secondary_metrics": [
+        "average precision",
+        "ROC AUC",
+        "precision",
+        "Brier score",
+    ],
+}
+```
+
+The contract prevents a technically valid result from being reused for a decision it was never designed to support.
+
+## 2. Build and Audit the Analysis Table
+
+Assume the raw alert, equipment, and inspection tables have already been joined into one row per alert. The analysis table contains:
+
+- `alert_date`: when the alert was recorded;
+- `site`: operating site;
+- `equipment_type`: broad equipment category;
+- `equipment_age_years`: age at alert time;
+- `sensor_score`: standardised sensor anomaly score;
+- `temperature_c`: temperature observed with the alert;
+- `alerts_last_30d`: number of earlier alerts in the previous 30 days;
+- `days_since_maintenance`: elapsed time since the latest completed maintenance;
+- `priority_fault`: binary outcome recorded after inspection.
+
+### Prediction-time availability
+
+Every candidate feature must pass a prediction-time audit.
+
+| Variable | Available when alert arrives? | Use? | Reason |
+|---|---:|---:|---|
+| `sensor_score` | Yes | Yes | Recorded with the alert |
+| `alerts_last_30d` | Yes | Yes | Uses historical alerts only |
+| `days_since_maintenance` | Yes | Yes | Derived from prior maintenance |
+| `technician_notes` | Not always | No | Missing until review begins |
+| `repair_cost` | No | No | Determined after inspection |
+| `inspection_result` | No | Outcome only | Defines the target |
+
+Using `repair_cost` or post-review notes would leak information from the future. Excellent validation performance produced by such variables would not survive real use.
+
+### Structural checks
+
+```python
+import pandas as pd
+
+data = pd.read_csv(
+    "data/processed/18-equipment-alerts.csv",
+    parse_dates=["alert_date"],
+)
+
+assert data["alert_id"].is_unique
+assert data["priority_fault"].isin([0, 1]).all()
+assert data["alert_date"].notna().all()
+
+audit = pd.DataFrame({
+    "dtype": data.dtypes.astype(str),
+    "missing_n": data.isna().sum(),
+    "missing_pct": data.isna().mean().mul(100).round(1),
+    "unique_n": data.nunique(dropna=False),
+})
+
+print(data.shape)
+print(data["priority_fault"].value_counts(normalize=True))
+print(audit)
+```
+
+The audit should also check impossible values, duplicate alerts, changing category labels, implausible dates, and whether multiple alerts from the same equipment create dependence that the validation design must respect.
+
+## 3. Lock the Final Holdout
+
+Alerts arrive over time, so a random split would make evaluation less representative of future use. The most recent period becomes the final holdout.
+
+```python
+HOLDOUT_START = pd.Timestamp("2025-10-01")
+
+development = data.loc[data["alert_date"] < HOLDOUT_START].copy()
+holdout = data.loc[data["alert_date"] >= HOLDOUT_START].copy()
+
+assert development["alert_date"].max() < holdout["alert_date"].min()
+
+X_development = development.drop(columns=["priority_fault"])
+y_development = development["priority_fault"]
+
+X_holdout = holdout.drop(columns=["priority_fault"])
+y_holdout = holdout["priority_fault"]
+```
+
+The split boundary should be recorded in the analysis log. The holdout must not guide feature selection, preprocessing, candidate selection, hyperparameter tuning, or threshold selection.
+
+::: {.callout-warning title="A common hidden leak"}
+Fitting an imputer, scaler, encoder, or feature selector on the complete dataset exposes information from the holdout period. Put every learned transformation inside the modelling pipeline.
+:::
+
+## 4. Create One Reusable Preprocessing Definition
+
+Identifiers, dates, predictors, and outcomes have different roles. Only prediction-time features enter the model.
+
+```python
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+numeric_features = [
+    "equipment_age_years",
+    "sensor_score",
+    "temperature_c",
+    "alerts_last_30d",
+    "days_since_maintenance",
+]
+
+categorical_features = ["site", "equipment_type"]
+
+numeric_pipeline = Pipeline([
+    ("imputer", SimpleImputer(strategy="median")),
+    ("scaler", StandardScaler()),
+])
+
+categorical_pipeline = Pipeline([
+    ("imputer", SimpleImputer(strategy="most_frequent")),
+    ("encoder", OneHotEncoder(
+        handle_unknown="ignore",
+        sparse_output=False,
+    )),
+])
+
+preprocessor = ColumnTransformer([
+    ("numeric", numeric_pipeline, numeric_features),
+    ("categorical", categorical_pipeline, categorical_features),
+])
+```
+
+This definition makes the comparison fair: each candidate receives the same raw predictors and the same fold-specific preprocessing logic.
+
+## 5. Establish Baselines Before Improving the Model
+
+Two baselines answer different questions:
+
+1. a prevalence baseline tests whether the pipeline improves on a non-informative probability estimate;
+2. a regularised logistic regression provides an interpretable modelling baseline.
+
+```python
+from sklearn.dummy import DummyClassifier
+from sklearn.linear_model import LogisticRegression
+
+dummy_pipeline = Pipeline([
+    ("preprocess", preprocessor),
+    ("model", DummyClassifier(strategy="prior")),
+])
+
+logistic_pipeline = Pipeline([
+    ("preprocess", preprocessor),
+    ("model", LogisticRegression(
+        penalty="l2",
+        class_weight="balanced",
+        max_iter=2_000,
+        random_state=42,
+    )),
+])
+```
+
+Class weighting changes the fitted decision function; it does not make the observed population balanced. Predicted probabilities must therefore be checked for calibration rather than assumed to be calibrated.
+
+## 6. Compare Candidates Using Development Data
+
+Because observations are ordered in time, expanding-window validation is preferable to shuffled cross-validation.
+
+```python
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.model_selection import TimeSeriesSplit, cross_validate
+
+boosted_pipeline = Pipeline([
+    ("preprocess", preprocessor),
+    ("model", HistGradientBoostingClassifier(
+        learning_rate=0.05,
+        max_leaf_nodes=15,
+        min_samples_leaf=30,
+        random_state=42,
+    )),
+])
+
+order = X_development["alert_date"].sort_values().index
+X_dev_ordered = X_development.loc[order]
+y_dev_ordered = y_development.loc[order]
+
+cv = TimeSeriesSplit(n_splits=5)
+
+scoring = {
+    "roc_auc": "roc_auc",
+    "average_precision": "average_precision",
+    "neg_brier": "neg_brier_score",
+}
+
+candidates = {
+    "dummy": dummy_pipeline,
+    "logistic": logistic_pipeline,
+    "boosted": boosted_pipeline,
+}
+
+rows = []
+for name, pipeline in candidates.items():
+    scores = cross_validate(
+        pipeline,
+        X_dev_ordered,
+        y_dev_ordered,
+        cv=cv,
+        scoring=scoring,
+        n_jobs=-1,
+    )
+    rows.append({
+        "model": name,
+        "roc_auc_mean": scores["test_roc_auc"].mean(),
+        "roc_auc_sd": scores["test_roc_auc"].std(),
+        "average_precision_mean": scores["test_average_precision"].mean(),
+        "average_precision_sd": scores["test_average_precision"].std(),
+        "brier_mean": -scores["test_neg_brier"].mean(),
+    })
+
+comparison = pd.DataFrame(rows).sort_values(
+    "average_precision_mean",
+    ascending=False,
+)
+print(comparison.round(3))
+```
+
+The fold standard deviations matter. A small improvement with substantially greater instability, complexity, or monitoring burden may not justify selecting the more complex model.
+
+### Model selection rule
+
+Choose the simplest candidate that:
+
+- materially exceeds both baselines on average precision;
+- retains acceptable recall under the operational capacity constraint;
+- has stable fold-level results;
+- produces probability estimates that can be calibrated adequately;
+- does not show an unacceptable subgroup failure.
+
+This rule should be written before the final holdout is evaluated.
+
+## 7. Generate Out-of-Fold Development Probabilities
+
+Thresholds must not be chosen from in-sample probabilities. Use predictions for observations that were not used to fit the corresponding fold model.
+
+```python
+import numpy as np
+from sklearn.base import clone
+
+selected_pipeline = logistic_pipeline
+oof_probability = np.full(len(X_dev_ordered), np.nan)
+
+for train_idx, validation_idx in cv.split(X_dev_ordered):
+    fold_model = clone(selected_pipeline)
+    fold_model.fit(
+        X_dev_ordered.iloc[train_idx],
+        y_dev_ordered.iloc[train_idx],
+    )
+    oof_probability[validation_idx] = fold_model.predict_proba(
+        X_dev_ordered.iloc[validation_idx]
+    )[:, 1]
+
+valid_oof = ~np.isnan(oof_probability)
+y_oof = y_dev_ordered.iloc[np.flatnonzero(valid_oof)].to_numpy()
+p_oof = oof_probability[valid_oof]
+```
+
+The earliest block has no earlier training block and therefore has no out-of-fold prediction. That is an expected property of expanding-window validation.
+
+## 8. Select an Operational Threshold
+
+Suppose the team can prioritise approximately 20% of incoming alerts and requires development recall of at least 0.80 when feasible.
+
+```python
+from sklearn.metrics import precision_score, recall_score
+
+threshold_rows = []
+
+for threshold in np.linspace(0.05, 0.95, 181):
+    predicted = (p_oof >= threshold).astype(int)
+    threshold_rows.append({
+        "threshold": threshold,
+        "recall": recall_score(y_oof, predicted, zero_division=0),
+        "precision": precision_score(y_oof, predicted, zero_division=0),
+        "review_rate": predicted.mean(),
+    })
+
+threshold_table = pd.DataFrame(threshold_rows)
+
+feasible = threshold_table.loc[
+    (threshold_table["recall"] >= 0.80)
+    & (threshold_table["review_rate"] <= 0.20)
+]
+
+if feasible.empty:
+    raise RuntimeError(
+        "No threshold satisfies both recall and capacity requirements. "
+        "Revise the model, resources, or operating target explicitly."
+    )
+
+selected_threshold = feasible.sort_values(
+    ["recall", "precision"],
+    ascending=False,
+).iloc[0]["threshold"]
+```
+
+The `RuntimeError` is analytically important. When no threshold satisfies both safety and capacity requirements, the correct response is not to hide the conflict. The team must improve the workflow, increase review capacity, or revise the requirement with decision owners.
+
+## 9. Fit Once and Evaluate the Final Holdout
+
+After the model class and threshold have been frozen, fit the selected pipeline on all development data and evaluate the untouched holdout.
+
+```python
+from sklearn.metrics import (
+    average_precision_score,
+    brier_score_loss,
+    confusion_matrix,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
+
+final_model = clone(selected_pipeline)
+final_model.fit(X_dev_ordered, y_dev_ordered)
+
+holdout_probability = final_model.predict_proba(X_holdout)[:, 1]
+holdout_prediction = (
+    holdout_probability >= selected_threshold
+).astype(int)
+
+final_metrics = {
+    "roc_auc": roc_auc_score(y_holdout, holdout_probability),
+    "average_precision": average_precision_score(
+        y_holdout,
+        holdout_probability,
+    ),
+    "brier_score": brier_score_loss(y_holdout, holdout_probability),
+    "recall": recall_score(y_holdout, holdout_prediction),
+    "precision": precision_score(
+        y_holdout,
+        holdout_prediction,
+        zero_division=0,
+    ),
+    "review_rate": holdout_prediction.mean(),
+}
+
+print(pd.Series(final_metrics).round(3))
+print(confusion_matrix(y_holdout, holdout_prediction))
+```
+
+### Interpret the metrics as a set
+
+- **ROC AUC** describes ranking across all possible thresholds.
+- **Average precision** focuses attention on performance for the positive class.
+- **Brier score** evaluates probability accuracy.
+- **Recall** measures how many priority faults enter the priority queue.
+- **Precision** measures how many prioritised alerts are confirmed as priority faults.
+- **Review rate** connects model output to operational capacity.
+
+No single metric answers the full decision question.
+
+## 10. Quantify Uncertainty
+
+A point estimate can appear more certain than the available holdout permits. A stratified bootstrap provides an empirical interval while preserving outcome representation in each resample.
+
+```python
+from sklearn.utils import resample
+
+rng = np.random.default_rng(42)
+bootstrap_recall = []
+
+holdout_results = pd.DataFrame({
+    "observed": y_holdout.to_numpy(),
+    "predicted": holdout_prediction,
+    "probability": holdout_probability,
+})
+
+for _ in range(2_000):
+    sampled_parts = []
+    for outcome, group in holdout_results.groupby("observed"):
+        sampled_parts.append(
+            group.iloc[rng.integers(0, len(group), len(group))]
+        )
+    sample = pd.concat(sampled_parts, ignore_index=True)
+    bootstrap_recall.append(
+        recall_score(sample["observed"], sample["predicted"])
+    )
+
+recall_interval = np.quantile(bootstrap_recall, [0.025, 0.975])
+print(recall_interval)
+```
+
+If alerts from the same equipment are strongly dependent, resample equipment clusters rather than individual rows. The uncertainty method must reflect the data-generating structure.
+
+## 11. Inspect Calibration and Threshold Behaviour
+
+A ranking model can discriminate well while producing poorly calibrated probabilities. Calibration matters when probabilities are used to set thresholds, allocate resources, or communicate risk.
+
+```python
+import matplotlib.pyplot as plt
+from sklearn.calibration import CalibrationDisplay
+from sklearn.metrics import PrecisionRecallDisplay
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
+
+PrecisionRecallDisplay.from_predictions(
+    y_holdout,
+    holdout_probability,
+    ax=axes[0],
+    name="Selected model",
+)
+axes[0].set_title("Final-holdout precision–recall curve")
+
+CalibrationDisplay.from_predictions(
+    y_holdout,
+    holdout_probability,
+    n_bins=8,
+    strategy="quantile",
+    ax=axes[1],
+    name="Selected model",
+)
+axes[1].set_title("Final-holdout calibration")
+
+fig.tight_layout()
+fig.savefig(
+    "results/figures/18-holdout-performance.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+```
+
+The holdout plots diagnose the frozen workflow; they must not be used to repeatedly retune it while continuing to call the same data a final holdout.
+
+## 12. Check Subgroup Performance
+
+Overall performance can conceal a weak result for one operational group.
+
+```python
+evaluation = X_holdout[[
+    "site",
+    "equipment_type",
+    "equipment_age_years",
+]].copy()
+
+evaluation["observed"] = y_holdout.to_numpy()
+evaluation["predicted"] = holdout_prediction
+evaluation["probability"] = holdout_probability
+evaluation["age_group"] = pd.cut(
+    evaluation["equipment_age_years"],
+    bins=[-np.inf, 5, 10, np.inf],
+    labels=["0–5 years", "6–10 years", "11+ years"],
+)
+
+def subgroup_metrics(group):
+    observed = group["observed"]
+    predicted = group["predicted"]
+    return pd.Series({
+        "n": len(group),
+        "positive_n": observed.sum(),
+        "recall": recall_score(observed, predicted, zero_division=0),
+        "precision": precision_score(
+            observed,
+            predicted,
+            zero_division=0,
+        ),
+        "review_rate": predicted.mean(),
+    })
+
+site_results = evaluation.groupby("site").apply(
+    subgroup_metrics,
+    include_groups=False,
+)
+
+age_results = evaluation.groupby("age_group", observed=True).apply(
+    subgroup_metrics,
+    include_groups=False,
+)
+```
+
+Small subgroup estimates should be labelled unstable rather than over-interpreted. A performance difference can reflect sample size, prevalence, measurement quality, operational practice, or genuine model weakness. It is a signal for investigation, not an automatic causal explanation.
+
+## 13. Interpret the Model Without Overclaiming
+
+If logistic regression is selected, transformed coefficients can help describe the fitted associations. They do not establish causal effects.
+
+```python
+feature_names = final_model.named_steps["preprocess"].get_feature_names_out()
+coefficients = final_model.named_steps["model"].coef_.ravel()
+
+coefficient_table = (
+    pd.DataFrame({
+        "feature": feature_names,
+        "coefficient": coefficients,
+        "odds_ratio": np.exp(coefficients),
+    })
+    .assign(abs_coefficient=lambda frame: frame["coefficient"].abs())
+    .sort_values("abs_coefficient", ascending=False)
+)
+```
+
+Appropriate language:
+
+> Within this fitted predictive model, higher sensor anomaly scores were associated with higher predicted odds of a confirmed priority fault, conditional on the included features.
+
+Inappropriate language:
+
+> Increasing the sensor score causes priority faults.
+
+The second statement is causal and is not supported by this predictive design.
+
+## 14. Perform Error Analysis
+
+Aggregate metrics should be followed by structured review of errors.
+
+```python
+error_review = evaluation.assign(
+    error_type=np.select(
+        [
+            (evaluation["observed"] == 1)
+            & (evaluation["predicted"] == 0),
+            (evaluation["observed"] == 0)
+            & (evaluation["predicted"] == 1),
+        ],
+        ["false_negative", "false_positive"],
+        default="correct",
+    )
+)
+
+error_summary = (
+    error_review.groupby(["error_type", "site"])
+    .size()
+    .rename("n")
+    .reset_index()
+)
+```
+
+The review should ask whether errors cluster by site, equipment type, missingness pattern, age, or time. Case-level review must use authorised, privacy-preserving procedures and must not expose sensitive operational records in public reports.
+
+## 15. Translate Results Into a Decision
+
+The final recommendation should connect evidence to a bounded action.
+
+### Example decision record
+
+| Decision component | Recorded conclusion |
+|---|---|
+| Proposed use | Rank new alerts for priority human review |
+| Selected model | Frozen preprocessing and regularised logistic pipeline |
+| Threshold basis | Out-of-fold development predictions plus review capacity |
+| Final evidence | Holdout discrimination, calibration, threshold metrics, and uncertainty |
+| Safeguard | No alert is closed or declared safe by the model |
+| Escalation rule | Suspend automated ranking if data or performance checks breach limits |
+| Review date | Set before operational use begins |
+
+### Claim ladder
+
+Separate what the evidence directly shows from what remains conditional:
+
+1. **Observed:** report the final-holdout metrics and uncertainty intervals.
+2. **Supported:** state that the frozen workflow showed useful prioritisation performance during the holdout period.
+3. **Conditional:** recommend a monitored pilot under the stated review capacity and safeguards.
+4. **Unsupported:** do not claim that the model prevents failures, improves safety, or generalises indefinitely without further evidence.
+
+## 16. Save Reproducible Outputs
+
+Save the fitted pipeline together with the analytical contract, feature lists, threshold, split boundary, software versions, and final metric table.
+
+```python
+from datetime import datetime, timezone
+from pathlib import Path
+import json
+import joblib
+import sklearn
+
+Path("models").mkdir(exist_ok=True)
+Path("results/tables").mkdir(parents=True, exist_ok=True)
+
+joblib.dump(final_model, "models/18-priority-alert-pipeline.joblib")
+comparison.to_csv(
+    "results/tables/18-model-comparison.csv",
+    index=False,
+)
+
+metadata = {
+    "created_utc": datetime.now(timezone.utc).isoformat(),
+    "holdout_start": str(HOLDOUT_START.date()),
+    "selected_threshold": float(selected_threshold),
+    "numeric_features": numeric_features,
+    "categorical_features": categorical_features,
+    "final_metrics": {key: float(value) for key, value in final_metrics.items()},
+    "sklearn_version": sklearn.__version__,
+    "intended_use": analytical_contract["intended_use"],
+    "prohibited_use": analytical_contract["prohibited_use"],
+}
+
+with open("models/18-model-metadata.json", "w", encoding="utf-8") as file:
+    json.dump(metadata, file, indent=2)
+```
+
+A serialized model without its threshold, feature contract, intended use, and evaluation context is not a complete analytical deliverable.
+
+## 17. Define Monitoring Before Deployment
+
+Monitoring should cover the entire decision workflow, not only model accuracy.
+
+| Monitoring layer | Example checks | Possible response |
+|---|---|---|
+| Input integrity | Missing columns, invalid ranges, unknown categories | Reject batch and investigate |
+| Data drift | Feature distributions, site mix, alert prevalence | Diagnose source or population change |
+| Output behaviour | Score distribution, review rate, threshold volume | Adjust staffing or pause use |
+| Delayed performance | Recall, precision, calibration after outcomes arrive | Revalidate or retrain |
+| Subgroups | Site and equipment-age performance | Investigate local failure |
+| Operations | Queue delays, overrides, unresolved alerts | Redesign workflow |
+
+Retraining should be triggered by evidence and governed as a new model version. It should not occur silently on a calendar without renewed validation.
+
+## 18. Reproducibility Checklist
+
+Before considering the case study complete, confirm that:
+
+- [ ] the decision, unit, outcome, prediction time, and intended use are explicit;
+- [ ] outcome construction is documented and checked;
+- [ ] every feature is available at prediction time;
+- [ ] identifiers and post-outcome variables are excluded;
+- [ ] the final holdout reflects the intended deployment setting;
+- [ ] all learned preprocessing occurs inside pipelines;
+- [ ] baselines and candidates use the same validation design;
+- [ ] the model-selection rule was fixed before final evaluation;
+- [ ] threshold selection used development predictions only;
+- [ ] the holdout was evaluated once after choices were frozen;
+- [ ] uncertainty, calibration, subgroup behaviour, and errors were examined;
+- [ ] interpretations distinguish prediction, association, and causation;
+- [ ] the recommendation includes limitations and safeguards;
+- [ ] model, metadata, tables, figures, and software versions are saved;
+- [ ] monitoring, ownership, escalation, and review dates are defined.
+
+## Common Failure Modes
+
+### Starting with an algorithm
+
+**Failure:** selecting a model before defining the decision and outcome.  
+**Consequence:** technically impressive results may be irrelevant to the real workflow.  
+**Correction:** begin with the analytical contract.
+
+### Randomly splitting time-dependent data
+
+**Failure:** mixing future and earlier alerts across train and test sets.  
+**Consequence:** evaluation does not represent forward-looking use.  
+**Correction:** use time-respecting development and holdout periods.
+
+### Preprocessing before validation
+
+**Failure:** imputing or scaling the complete dataset.  
+**Consequence:** fold and holdout information leaks into model development.  
+**Correction:** place learned transformations inside pipelines.
+
+### Selecting the threshold on the holdout
+
+**Failure:** changing the threshold after inspecting final results.  
+**Consequence:** the holdout becomes development data and no longer provides an unbiased final estimate.  
+**Correction:** select the threshold from out-of-fold development predictions.
+
+### Reporting only the best metric
+
+**Failure:** presenting ROC AUC without calibration, threshold metrics, uncertainty, or review volume.  
+**Consequence:** decision owners cannot judge operational usefulness.  
+**Correction:** report a metric set linked to the intended action.
+
+### Treating interpretation as causation
+
+**Failure:** describing predictive features as causes or intervention targets.  
+**Consequence:** stakeholders may act beyond the evidence.  
+**Correction:** use association language and reserve causal claims for suitable designs.
+
+## Exercises
+
+1. Rewrite the analytical contract for a regression problem in which the outcome is time to complete an inspection.
+2. Identify three additional variables that would create target leakage in this case study.
+3. Replace the time-based validation with grouped validation by equipment. Explain which deployment question each design answers.
+4. Change the minimum recall and maximum review-rate requirements. Describe how the selected threshold and error balance change.
+5. Compare logistic regression with a nonlinear candidate. Write a model-selection justification that considers stability, calibration, interpretability, and maintenance burden.
+6. Design a clustered bootstrap when multiple alerts belong to the same equipment unit.
+7. Draft a one-paragraph executive summary that distinguishes observed performance, supported interpretation, conditional recommendation, and unsupported claims.
+8. Create a monitoring table with named owners, review frequency, warning limits, and stop-use limits.
+
+## Chapter Summary
+
+An end-to-end workflow is a chain of justified decisions. The decision question determines the outcome and prediction time. Prediction time determines which features are legitimate. The deployment setting determines the validation design. Validation results support model selection, while development predictions support threshold selection. The untouched holdout supports the final performance claim. Interpretation, uncertainty, limitations, and monitoring determine whether that claim can responsibly support action.
+
+The central lesson is simple:
+
+> A useful model is not merely one that predicts well. It is one whose purpose, data, validation, operating rule, limitations, and consequences remain visible from beginning to end.
+
+This case study completes the technical workflow developed throughout the guide and prepares the reader to apply it to new domains without treating any single algorithm as the workflow itself.

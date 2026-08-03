@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -314,8 +349,29 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#from-cleaning-to-model-aware-preparation" id="toc-from-cleaning-to-model-aware-preparation" class="nav-link" data-scroll-target="#from-cleaning-to-model-aware-preparation">From cleaning to model-aware preparation</a></li>
+  <li><a href="#define-the-analytical-contract" id="toc-define-the-analytical-contract" class="nav-link" data-scroll-target="#define-the-analytical-contract">Define the analytical contract</a></li>
+  <li><a href="#audit-the-modelling-table" id="toc-audit-the-modelling-table" class="nav-link" data-scroll-target="#audit-the-modelling-table">Audit the modelling table</a></li>
+  <li><a href="#split-before-learning-from-the-data" id="toc-split-before-learning-from-the-data" class="nav-link" data-scroll-target="#split-before-learning-from-the-data">Split before learning from the data</a></li>
+  <li><a href="#assign-feature-roles-explicitly" id="toc-assign-feature-roles-explicitly" class="nav-link" data-scroll-target="#assign-feature-roles-explicitly">Assign feature roles explicitly</a></li>
+  <li><a href="#build-one-fitted-preparation-pipeline" id="toc-build-one-fitted-preparation-pipeline" class="nav-link" data-scroll-target="#build-one-fitted-preparation-pipeline">Build one fitted preparation pipeline</a>
+  <ul class="collapse">
+  <li><a href="#why-these-transformations" id="toc-why-these-transformations" class="nav-link" data-scroll-target="#why-these-transformations">Why these transformations?</a></li>
+  </ul></li>
+  <li><a href="#treat-outliers-as-analytical-evidence" id="toc-treat-outliers-as-analytical-evidence" class="nav-link" data-scroll-target="#treat-outliers-as-analytical-evidence">Treat outliers as analytical evidence</a></li>
+  <li><a href="#validate-the-prepared-feature-space" id="toc-validate-the-prepared-feature-space" class="nav-link" data-scroll-target="#validate-the-prepared-feature-space">Validate the prepared feature space</a></li>
+  <li><a href="#preserve-reproducibility-and-traceability" id="toc-preserve-reproducibility-and-traceability" class="nav-link" data-scroll-target="#preserve-reproducibility-and-traceability">Preserve reproducibility and traceability</a></li>
+  <li><a href="#common-preparation-mistakes" id="toc-common-preparation-mistakes" class="nav-link" data-scroll-target="#common-preparation-mistakes">Common preparation mistakes</a></li>
+  <li><a href="#chapter-checklist" id="toc-chapter-checklist" class="nav-link" data-scroll-target="#chapter-checklist">Chapter checklist</a></li>
+  <li><a href="#key-takeaway" id="toc-key-takeaway" class="nav-link" data-scroll-target="#key-takeaway">Key takeaway</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -353,11 +409,398 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Reliable modelling begins with defensible data preparation</li>
 </ul>
 </div>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you will be able to:</p>
+<ul>
+<li>define the modelling unit, outcome, and prediction point before transforming data;</li>
+<li>separate training and test data before learning preparation parameters;</li>
+<li>assign numeric, categorical, identifier, and target roles deliberately;</li>
+<li>handle missing values, categories, and scale differences with a reproducible pipeline;</li>
+<li>inspect the transformed feature space without losing traceability; and</li>
+<li>save preparation metadata and modelling-ready outputs for later chapters.</li>
+</ul>
+</section>
+<section id="from-cleaning-to-model-aware-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="from-cleaning-to-model-aware-preparation">From cleaning to model-aware preparation</h2>
+<p>The Foundations guide introduced cleaning as the process of making data valid, consistent, and understandable. Advanced preparation asks a different question:</p>
 <blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
+<p>How can the data be transformed for modelling without allowing unavailable or future information to influence the model?</p>
 </blockquote>
+<p>A value can be clean and still be unsuitable for prediction. A customer ID may be perfectly recorded but should not usually become a feature. A laboratory measurement collected after treatment may be valid but unavailable when a clinical decision must be made. A global median calculated before the data split may look harmless but transfers information from the test set into training.</p>
+<p>For this chapter, <code>scripts/python/02-prepare-advanced-data.py</code> creates <code>data/processed/advanced_modeling_data.csv</code>. Each row represents one customer at a defined observation point, and <code>churned</code> indicates whether the customer subsequently left.</p>
+<p>Run the Chapter 02 scripts from the repository root in this order:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/02-prepare-advanced-data.py</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/02-advanced-data-preparation.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first script creates <code>data/processed/</code> automatically when it does not already exist. The second script creates its required modelling, model, and results directories before saving outputs.</p>
+</section>
+<section id="define-the-analytical-contract" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-analytical-contract">Define the analytical contract</h2>
+<p>Preparation should begin with a short analytical contract rather than with a transformer.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decision</th>
+<th>Question</th>
+<th>Chapter example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Modelling unit</td>
+<td>What does one row represent?</td>
+<td>One customer</td>
+</tr>
+<tr class="even">
+<td>Target</td>
+<td>What outcome will be predicted?</td>
+<td><code>churned</code></td>
+</tr>
+<tr class="odd">
+<td>Prediction point</td>
+<td>When must the prediction be available?</td>
+<td>Before the next renewal</td>
+</tr>
+<tr class="even">
+<td>Feature window</td>
+<td>What information is available by then?</td>
+<td>Activity observed up to that point</td>
+</tr>
+<tr class="odd">
+<td>Exclusions</td>
+<td>Which fields must not become predictors?</td>
+<td><code>customer_id</code> and post-outcome fields</td>
+</tr>
+<tr class="even">
+<td>Holdout purpose</td>
+<td>What does the test set estimate?</td>
+<td>Performance on unseen customers</td>
+</tr>
+</tbody>
+</table>
+<p>This contract is the first defence against target leakage. Leakage occurs when training uses information that would not be available at prediction time or when information from held-out observations influences fitted preparation steps.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Leakage can produce convincing results
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A leaked model may score unusually well and still fail in practice. Check the meaning and timing of every candidate feature; column names alone are not enough.</p>
+</div>
+</div>
+</section>
+<section id="audit-the-modelling-table" class="level2">
+<h2 class="anchored" data-anchor-id="audit-the-modelling-table">Audit the modelling table</h2>
+<p>Begin with structure, uniqueness, missingness, and the outcome distribution. The code below is displayed for learning and copying; the complete executable workflow is in <code>scripts/python/02-advanced-data-preparation.py</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>DATA_PATH <span class="op">=</span> <span class="st">"data/processed/advanced_modeling_data.csv"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>TARGET <span class="op">=</span> <span class="st">"churned"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ID_COLUMN <span class="op">=</span> <span class="st">"customer_id"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(DATA_PATH)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.dtypes)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.isna().mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[TARGET].value_counts(dropna<span class="op">=</span><span class="va">False</span>, normalize<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Duplicate IDs:"</span>, data[ID_COLUMN].duplicated().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The audit should answer four practical questions:</p>
+<ol type="1">
+<li>Does each row match the intended modelling unit?</li>
+<li>Is the target present, valid, and measured after the feature window?</li>
+<li>Are identifiers or post-outcome variables mixed with candidate features?</li>
+<li>Are there data-quality problems that should be corrected upstream rather than hidden inside a modelling pipeline?</li>
+</ol>
+</section>
+<section id="split-before-learning-from-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="split-before-learning-from-the-data">Split before learning from the data</h2>
+<p>The test set must remain independent of every data-dependent decision. Split before estimating medians, category sets, scaling parameters, feature-selection thresholds, or outlier boundaries.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns<span class="op">=</span>[TARGET, ID_COLUMN])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[TARGET].astype(<span class="st">"int8"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.20</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>stratify=y</code> preserves approximately the same outcome proportion in both partitions. It is useful for classification, especially when the outcome is unevenly distributed. It does not solve class imbalance; it only makes the split more representative.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Match the split to the deployment setting
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A random split is appropriate only when future observations resemble an exchangeable sample of the current population. Use a chronological split for future prediction, and a group-aware split when multiple rows belong to the same patient, household, site, device, or other entity. These designs are developed further in the model-evaluation chapters.</p>
+</div>
+</div>
+</section>
+<section id="assign-feature-roles-explicitly" class="level2">
+<h2 class="anchored" data-anchor-id="assign-feature-roles-explicitly">Assign feature roles explicitly</h2>
+<p>Automatic type detection is convenient but should be verified. Integer codes may represent categories, while ordered categories may need domain-specific encoding.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>numeric_features <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tenure_months"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"monthly_spend"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"support_tickets"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"usage_hours"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>categorical_features <span class="op">=</span> [</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"region"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"plan_type"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"contract_type"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"payment_method"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Keep the role definitions visible and reviewable. An explicit list makes schema changes easier to detect and helps prevent identifiers from entering the model silently.</p>
+</section>
+<section id="build-one-fitted-preparation-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="build-one-fitted-preparation-pipeline">Build one fitted preparation pipeline</h2>
+<p>The pipeline below learns all data-dependent parameters from <code>X_train</code> only. Numeric variables receive median imputation followed by standardisation. Categorical variables receive most-frequent imputation and one-hot encoding.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>numeric_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"impute"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>, add_indicator<span class="op">=</span><span class="va">True</span>)),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"scale"</span>, StandardScaler()),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>categorical_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"impute"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"most_frequent"</span>)),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"encode"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            OneHotEncoder(</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                handle_unknown<span class="op">=</span><span class="st">"infrequent_if_exist"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                min_frequency<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                sparse_output<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"numeric"</span>, numeric_pipeline, numeric_features),</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"categorical"</span>, categorical_pipeline, categorical_features),</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    remainder<span class="op">=</span><span class="st">"drop"</span>,</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    verbose_feature_names_out<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>preprocessor.set_output(transform<span class="op">=</span><span class="st">"pandas"</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>X_train_ready <span class="op">=</span> preprocessor.fit_transform(X_train)</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>X_test_ready <span class="op">=</span> preprocessor.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The distinction between <code>fit_transform()</code> and <code>transform()</code> is essential:</p>
+<ul>
+<li><code>fit_transform(X_train)</code> learns preparation parameters from the training set and applies them;</li>
+<li><code>transform(X_test)</code> applies those same learned parameters without re-estimating them.</li>
+</ul>
+<section id="why-these-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="why-these-transformations">Why these transformations?</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data issue</th>
+<th>Training-derived action</th>
+<th>Main benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Missing numeric values</td>
+<td>Median imputation</td>
+<td>Robust central replacement</td>
+</tr>
+<tr class="even">
+<td>Informative numeric missingness</td>
+<td>Missingness indicators</td>
+<td>Preserves whether a value was absent</td>
+</tr>
+<tr class="odd">
+<td>Different numeric scales</td>
+<td>Standardisation</td>
+<td>Supports scale-sensitive estimators</td>
+</tr>
+<tr class="even">
+<td>Missing categorical values</td>
+<td>Most-frequent imputation</td>
+<td>Produces a complete category input</td>
+</tr>
+<tr class="odd">
+<td>Nominal categories</td>
+<td>One-hot encoding</td>
+<td>Avoids imposing an artificial order</td>
+</tr>
+<tr class="even">
+<td>Unseen or rare categories</td>
+<td>Infrequent-category handling</td>
+<td>Makes later transformation more stable</td>
+</tr>
+</tbody>
+</table>
+<p>Tree-based models often do not require standardisation, but keeping scale-aware preparation in a reusable pipeline supports later comparison with linear, distance-based, and margin-based models. Model-specific alternatives should be compared inside cross-validation rather than chosen after observing test-set performance.</p>
+</section>
+</section>
+<section id="treat-outliers-as-analytical-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="treat-outliers-as-analytical-evidence">Treat outliers as analytical evidence</h2>
+<p>Do not remove an observation merely because it is numerically extreme. First determine whether it is:</p>
+<ul>
+<li>an impossible or incorrectly recorded value;</li>
+<li>a valid but unusual member of the target population;</li>
+<li>evidence of a different population or data-generating process; or</li>
+<li>influential only for a particular modelling method.</li>
+</ul>
+<p>Correct impossible values upstream and document the rule. For valid extremes, consider robust transformations, robust estimators, or training-derived clipping thresholds. Any thresholds must be estimated inside the training workflow—not from the full dataset.</p>
+</section>
+<section id="validate-the-prepared-feature-space" class="level2">
+<h2 class="anchored" data-anchor-id="validate-the-prepared-feature-space">Validate the prepared feature space</h2>
+<p>Preparation is not complete until the outputs have been checked.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> X_train_ready.columns.equals(X_test_ready.columns)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="kw">not</span> X_train_ready.isna().<span class="bu">any</span>().<span class="bu">any</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="kw">not</span> X_test_ready.isna().<span class="bu">any</span>().<span class="bu">any</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(X_train_ready) <span class="op">==</span> <span class="bu">len</span>(y_train)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(X_test_ready) <span class="op">==</span> <span class="bu">len</span>(y_test)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train_ready.shape)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_test_ready.shape)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train_ready.columns.tolist())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Also verify that:</p>
+<ul>
+<li>the target and identifier are absent from the transformed features;</li>
+<li>train and test columns appear in the same order;</li>
+<li>no missing values remain unless the intended estimator supports them;</li>
+<li>row counts and indices still align with the target; and</li>
+<li>category expansion has not produced an impractically wide matrix.</li>
+</ul>
+</section>
+<section id="preserve-reproducibility-and-traceability" class="level2">
+<h2 class="anchored" data-anchor-id="preserve-reproducibility-and-traceability">Preserve reproducibility and traceability</h2>
+<p>The runnable script writes:</p>
+<ul>
+<li><code>data/modeling/X_train_prepared.csv</code>;</li>
+<li><code>data/modeling/X_test_prepared.csv</code>;</li>
+<li><code>data/modeling/y_train.csv</code>;</li>
+<li><code>data/modeling/y_test.csv</code>;</li>
+<li><code>models/preprocessor.joblib</code>; and</li>
+<li><code>results/tables/data_preparation_summary.json</code>.</li>
+</ul>
+<p>The saved preprocessor is more important than the transformed CSV files alone. It records the fitted medians, scaling values, and learned category structure needed to prepare future observations consistently.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/02-advanced-data-preparation.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Prefer a combined modelling pipeline
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In later chapters, the preprocessor and estimator should normally be joined in one scikit-learn <code>Pipeline</code>. This allows each cross-validation fold to fit its own preparation steps and provides a single object for prediction and deployment.</p>
+</div>
+</div>
+</section>
+<section id="common-preparation-mistakes" class="level2">
+<h2 class="anchored" data-anchor-id="common-preparation-mistakes">Common preparation mistakes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mistake</th>
+<th>Why it is risky</th>
+<th>Better practice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Imputing before the split</td>
+<td>Test information influences training</td>
+<td>Fit imputation on training data only</td>
+</tr>
+<tr class="even">
+<td>Scaling train and test separately</td>
+<td>The feature spaces no longer share one reference</td>
+<td>Fit once on training data, then transform both</td>
+</tr>
+<tr class="odd">
+<td>Encoding identifiers</td>
+<td>The model may memorise entities</td>
+<td>Exclude IDs and preserve them only for traceability</td>
+</tr>
+<tr class="even">
+<td>Using post-outcome variables</td>
+<td>Creates target leakage</td>
+<td>Enforce the prediction point and feature window</td>
+</tr>
+<tr class="odd">
+<td>Dropping every incomplete row</td>
+<td>Can reduce power and introduce bias</td>
+<td>Investigate missingness and use justified handling</td>
+</tr>
+<tr class="even">
+<td>Selecting features using the full dataset</td>
+<td>Test outcomes influence model development</td>
+<td>Perform selection inside the training workflow</td>
+</tr>
+<tr class="odd">
+<td>Reusing the test set repeatedly</td>
+<td>The test set becomes part of model tuning</td>
+<td>Reserve it for final evaluation</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="chapter-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-checklist">Chapter checklist</h2>
+<p>Before moving to exploratory modelling, confirm that you can answer <strong>yes</strong> to each question:</p>
+<ul>
+<li>Is the modelling unit defined?</li>
+<li>Is the prediction point explicit?</li>
+<li>Were identifiers and unavailable variables excluded?</li>
+<li>Was the split made before fitting preparation steps?</li>
+<li>Do all learned transformations use training data only?</li>
+<li>Can unseen categories be handled safely?</li>
+<li>Do the prepared train and test matrices have matching schemas?</li>
+<li>Are the fitted preprocessor and preparation summary saved?</li>
+</ul>
+</section>
+<section id="key-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaway">Key takeaway</h2>
+<p>Advanced data preparation is not a collection of isolated cleaning commands. It is a fitted, testable, and reusable system that preserves the boundary between training data and unseen data. That boundary makes later model comparisons and performance estimates defensible.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

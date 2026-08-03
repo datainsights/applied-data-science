@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -314,15 +349,42 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#from-defensible-decisions-to-responsible-use" id="toc-from-defensible-decisions-to-responsible-use" class="nav-link" data-scroll-target="#from-defensible-decisions-to-responsible-use">From defensible decisions to responsible use</a></li>
+  <li><a href="#limitations-are-part-of-the-result" id="toc-limitations-are-part-of-the-result" class="nav-link" data-scroll-target="#limitations-are-part-of-the-result">Limitations are part of the result</a></li>
+  <li><a href="#a-practical-limitation-taxonomy" id="toc-a-practical-limitation-taxonomy" class="nav-link" data-scroll-target="#a-practical-limitation-taxonomy">A practical limitation taxonomy</a></li>
+  <li><a href="#performance-is-not-the-same-as-fitness-for-use" id="toc-performance-is-not-the-same-as-fitness-for-use" class="nav-link" data-scroll-target="#performance-is-not-the-same-as-fitness-for-use">Performance is not the same as fitness for use</a>
+  <ul class="collapse">
+  <li><a href="#aggregate-metrics-can-conceal-variation" id="toc-aggregate-metrics-can-conceal-variation" class="nav-link" data-scroll-target="#aggregate-metrics-can-conceal-variation">Aggregate metrics can conceal variation</a></li>
+  <li><a href="#thresholds-encode-consequences" id="toc-thresholds-encode-consequences" class="nav-link" data-scroll-target="#thresholds-encode-consequences">Thresholds encode consequences</a></li>
+  <li><a href="#calibration-matters-when-probabilities-guide-action" id="toc-calibration-matters-when-probabilities-guide-action" class="nav-link" data-scroll-target="#calibration-matters-when-probabilities-guide-action">Calibration matters when probabilities guide action</a></li>
+  </ul></li>
+  <li><a href="#distribution-shift-and-changing-conditions" id="toc-distribution-shift-and-changing-conditions" class="nav-link" data-scroll-target="#distribution-shift-and-changing-conditions">Distribution shift and changing conditions</a></li>
+  <li><a href="#fairness-requires-context" id="toc-fairness-requires-context" class="nav-link" data-scroll-target="#fairness-requires-context">Fairness requires context</a></li>
+  <li><a href="#privacy-security-and-data-minimisation" id="toc-privacy-security-and-data-minimisation" class="nav-link" data-scroll-target="#privacy-security-and-data-minimisation">Privacy, security, and data minimisation</a></li>
+  <li><a href="#human-oversight-must-be-operational" id="toc-human-oversight-must-be-operational" class="nav-link" data-scroll-target="#human-oversight-must-be-operational">Human oversight must be operational</a></li>
+  <li><a href="#define-intended-and-excluded-uses" id="toc-define-intended-and-excluded-uses" class="nav-link" data-scroll-target="#define-intended-and-excluded-uses">Define intended and excluded uses</a></li>
+  <li><a href="#maintain-a-limitations-and-safeguards-register" id="toc-maintain-a-limitations-and-safeguards-register" class="nav-link" data-scroll-target="#maintain-a-limitations-and-safeguards-register">Maintain a limitations and safeguards register</a></li>
+  <li><a href="#a-responsible-use-workflow" id="toc-a-responsible-use-workflow" class="nav-link" data-scroll-target="#a-responsible-use-workflow">A responsible-use workflow</a></li>
+  <li><a href="#pre-use-review-checklist" id="toc-pre-use-review-checklist" class="nav-link" data-scroll-target="#pre-use-review-checklist">Pre-use review checklist</a></li>
+  <li><a href="#communicating-limitations-clearly" id="toc-communicating-limitations-clearly" class="nav-link" data-scroll-target="#communicating-limitations-clearly">Communicating limitations clearly</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary">Chapter summary</a></li>
+  <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection questions</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html">Communication and Responsible Practice</a></li><li class="breadcrumb-item"><a href="./17-limitations-and-responsible-use.html"><span class="chapter-title">Limitations and Responsible Use</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="lesson17" class="quarto-section-identifier"><span class="chapter-title">Limitations and Responsible Use</span></span></h1>
+<h1 class="title"><span id="sec-lesson17" class="quarto-section-identifier"><span class="chapter-title">Limitations and Responsible Use</span></span></h1>
 </div>
 
 
@@ -353,11 +415,404 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Responsible use begins with explicit limitations and appropriate oversight</li>
 </ul>
 </div>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>distinguish statistical, data, operational, and ethical limitations;</li>
+<li>explain why strong predictive performance does not guarantee appropriate use;</li>
+<li>identify risks related to subgroup performance, distribution shift, and automation;</li>
+<li>define meaningful human oversight and escalation procedures;</li>
+<li>document intended use, excluded use, uncertainty, and residual risk; and</li>
+<li>propose monitoring and review arrangements for an analytical system after deployment.</li>
+</ul>
+</section>
+<section id="from-defensible-decisions-to-responsible-use" class="level2">
+<h2 class="anchored" data-anchor-id="from-defensible-decisions-to-responsible-use">From defensible decisions to responsible use</h2>
+<p>Chapter <a href="16-from-analysis-to-decision-making.html" class="quarto-xref"><span>From Analysis to Decision-Making</span></a> connected analytical evidence to decisions. That connection does not end the analyst’s responsibility. A technically valid result can still be used in the wrong setting, applied to an excluded population, interpreted too confidently, or embedded in a process without adequate oversight.</p>
+<p>Responsible use therefore asks a broader question:</p>
 <blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
+<p>Under what conditions should this analysis influence action, and what safeguards are required when it does?</p>
 </blockquote>
+<p>The answer must account for more than model performance. It must consider the data-generating process, the decision context, the people affected, the cost of error, and the system that will operate around the analysis.</p>
+</section>
+<section id="limitations-are-part-of-the-result" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-are-part-of-the-result">Limitations are part of the result</h2>
+<p>A limitation is not an apology added at the end of a report. It is information that defines how far a conclusion can travel.</p>
+<p>Useful limitation statements specify:</p>
+<ol type="1">
+<li><strong>what is uncertain or constrained;</strong></li>
+<li><strong>why the constraint exists;</strong></li>
+<li><strong>which conclusion or use it affects;</strong> and</li>
+<li><strong>what mitigation, validation, or caution is required.</strong></li>
+</ol>
+<p>Compare the following statements:</p>
+<blockquote class="blockquote">
+<p>The dataset may be biased.</p>
+</blockquote>
+<p>and:</p>
+<blockquote class="blockquote">
+<p>Rural participants were under-represented in the development data. Performance estimates may therefore be optimistic for rural settings, and the model should not be used there without external validation and subgroup-specific review.</p>
+</blockquote>
+<p>The second statement is actionable because it connects evidence, consequence, and response.</p>
+</section>
+<section id="a-practical-limitation-taxonomy" class="level2">
+<h2 class="anchored" data-anchor-id="a-practical-limitation-taxonomy">A practical limitation taxonomy</h2>
+<p>Limitations often overlap, but classifying them helps ensure that important risks are not hidden inside a single general disclaimer.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Limitation area</th>
+<th>Questions to ask</th>
+<th>Possible consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data provenance</td>
+<td>Who collected the data, for what purpose, and under what conditions?</td>
+<td>The data may not support the new analytical purpose.</td>
+</tr>
+<tr class="even">
+<td>Representation</td>
+<td>Which populations, locations, periods, or conditions are missing or sparse?</td>
+<td>Performance may vary across groups or settings.</td>
+</tr>
+<tr class="odd">
+<td>Measurement</td>
+<td>Are variables reliable proxies for the concepts of interest?</td>
+<td>The analysis may reproduce measurement error or structural bias.</td>
+</tr>
+<tr class="even">
+<td>Missingness</td>
+<td>Why are values absent, and is missingness informative?</td>
+<td>Complete-case or imputed results may be systematically distorted.</td>
+</tr>
+<tr class="odd">
+<td>Design</td>
+<td>Is the study observational, experimental, cross-sectional, or longitudinal?</td>
+<td>Associations may be mistaken for causal effects.</td>
+</tr>
+<tr class="even">
+<td>Modelling</td>
+<td>Which assumptions, tuning choices, and evaluation procedures shape the result?</td>
+<td>Reported performance may be unstable or optimistic.</td>
+</tr>
+<tr class="odd">
+<td>Generalisability</td>
+<td>Does the deployment setting resemble the development and evaluation settings?</td>
+<td>Validity may not transfer to new populations or future periods.</td>
+</tr>
+<tr class="even">
+<td>Decision context</td>
+<td>What happens after a prediction or estimate is produced?</td>
+<td>A statistically accurate output may still lead to harmful action.</td>
+</tr>
+<tr class="odd">
+<td>Operations</td>
+<td>Who reviews outputs, handles exceptions, and monitors change?</td>
+<td>Errors may persist without detection or accountability.</td>
+</tr>
+</tbody>
+</table>
+<p>This taxonomy should be adapted to the application. High-stakes work requires deeper review than a low-impact exploratory analysis.</p>
+</section>
+<section id="performance-is-not-the-same-as-fitness-for-use" class="level2">
+<h2 class="anchored" data-anchor-id="performance-is-not-the-same-as-fitness-for-use">Performance is not the same as fitness for use</h2>
+<p>A model can achieve a strong aggregate score and still be unsuitable for a decision.</p>
+<section id="aggregate-metrics-can-conceal-variation" class="level3">
+<h3 class="anchored" data-anchor-id="aggregate-metrics-can-conceal-variation">Aggregate metrics can conceal variation</h3>
+<p>Overall performance combines observations that may represent different populations, environments, or operational conditions. Always ask whether errors are concentrated in particular subgroups.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_score, recall_score</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>group_results <span class="op">=</span> (</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    predictions.groupby(<span class="st">"group"</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">apply</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> frame: pd.Series(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"n"</span>: <span class="bu">len</span>(frame),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"precision"</span>: precision_score(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"observed"</span>],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"predicted"</span>],</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                    zero_division<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"recall"</span>: recall_score(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"observed"</span>],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"predicted"</span>],</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                    zero_division<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        include_groups<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The code is straightforward; interpretation is not. Small subgroup samples can produce unstable estimates, and group definitions may themselves be incomplete or sensitive. Report sample sizes and uncertainty alongside subgroup metrics, and avoid treating noisy differences as definitive evidence.</p>
+</section>
+<section id="thresholds-encode-consequences" class="level3">
+<h3 class="anchored" data-anchor-id="thresholds-encode-consequences">Thresholds encode consequences</h3>
+<p>The same predicted probabilities can support different decisions depending on the threshold. Lowering a classification threshold may detect more true cases while also increasing false alerts. Whether that trade-off is acceptable depends on the relative consequences of missed cases, unnecessary interventions, and unequal error burdens.</p>
+<p>Threshold selection should therefore be documented as a decision rule, not presented as a purely technical optimisation.</p>
+</section>
+<section id="calibration-matters-when-probabilities-guide-action" class="level3">
+<h3 class="anchored" data-anchor-id="calibration-matters-when-probabilities-guide-action">Calibration matters when probabilities guide action</h3>
+<p>When a system reports a probability, users may interpret it as an expected frequency. A model that ranks cases well but is poorly calibrated can still mislead resource allocation or risk communication. Calibration should be assessed in the relevant population and, where sample size permits, across operationally meaningful subgroups.</p>
+</section>
+</section>
+<section id="distribution-shift-and-changing-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-shift-and-changing-conditions">Distribution shift and changing conditions</h2>
+<p>Analytical validity is conditional on the relationship between the observed data and the setting in which the result is used. That relationship can change.</p>
+<p>Common forms of change include:</p>
+<ul>
+<li><strong>population shift:</strong> the characteristics of the people or units change;</li>
+<li><strong>measurement shift:</strong> instruments, coding practices, or data pipelines change;</li>
+<li><strong>prevalence shift:</strong> the frequency of the outcome changes;</li>
+<li><strong>concept shift:</strong> the relationship between predictors and outcomes changes; and</li>
+<li><strong>policy feedback:</strong> use of the model changes behaviour and therefore future data.</li>
+</ul>
+<p>A one-time test result cannot guarantee future performance. Monitoring should be designed before routine use begins.</p>
+<p>Useful monitoring signals may include:</p>
+<ul>
+<li>input ranges, missingness, and category frequencies;</li>
+<li>outcome prevalence and delayed ground-truth labels;</li>
+<li>discrimination, calibration, and decision-specific error rates;</li>
+<li>subgroup performance and alert volumes;</li>
+<li>override, appeal, and escalation rates; and</li>
+<li>operational incidents or unexpected downstream effects.</li>
+</ul>
+<p>Not every change requires automatic retraining. Some changes indicate a data-quality failure, policy change, or measurement problem that retraining would merely absorb. Investigation should precede remediation.</p>
+</section>
+<section id="fairness-requires-context" class="level2">
+<h2 class="anchored" data-anchor-id="fairness-requires-context">Fairness requires context</h2>
+<p>Fairness is not a single metric. Different definitions can conflict, especially when outcome prevalence differs between groups. Selecting one metric without reference to the decision can hide the actual source of harm.</p>
+<p>A responsible assessment asks:</p>
+<ul>
+<li>Who may benefit from the system?</li>
+<li>Who may bear false-positive, false-negative, or exclusion costs?</li>
+<li>Are the target and predictor variables valid for all relevant groups?</li>
+<li>Does historical data encode unequal access or treatment?</li>
+<li>Can affected people understand, question, or appeal a decision?</li>
+<li>Are observed disparities statistically stable and practically important?</li>
+<li>What intervention is possible if a disparity is detected?</li>
+</ul>
+<p>Protected or sensitive attributes should not be removed automatically from evaluation. Even when they are excluded from model inputs, they may be necessary for identifying unequal performance. Their collection and use must follow applicable consent, privacy, governance, and legal requirements.</p>
+</section>
+<section id="privacy-security-and-data-minimisation" class="level2">
+<h2 class="anchored" data-anchor-id="privacy-security-and-data-minimisation">Privacy, security, and data minimisation</h2>
+<p>Responsible analysis uses only the data required for a justified purpose and protects those data throughout their lifecycle.</p>
+<p>At minimum, review:</p>
+<ul>
+<li>the lawful or authorised basis for collection and use;</li>
+<li>whether the proposed analysis is compatible with the original purpose;</li>
+<li>access controls and separation of duties;</li>
+<li>risks from direct identifiers and combinations of indirect identifiers;</li>
+<li>retention, deletion, and versioning rules;</li>
+<li>secure transfer, storage, logging, and backup arrangements; and</li>
+<li>the possibility that outputs expose sensitive information.</li>
+</ul>
+<p>De-identification reduces some risks but does not make a dataset risk-free. Linkage with other sources may permit re-identification, and trained models or released summaries may disclose information in ways that require separate assessment.</p>
+</section>
+<section id="human-oversight-must-be-operational" class="level2">
+<h2 class="anchored" data-anchor-id="human-oversight-must-be-operational">Human oversight must be operational</h2>
+<p>Saying that a person remains “in the loop” is insufficient. Oversight is meaningful only when the reviewer has the information, authority, time, and competence to intervene.</p>
+<p>A workable oversight design identifies:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Oversight element</th>
+<th>Required definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reviewer</td>
+<td>The role responsible for checking or acting on the output</td>
+</tr>
+<tr class="even">
+<td>Evidence</td>
+<td>The model output, uncertainty, relevant context, and supporting information shown</td>
+</tr>
+<tr class="odd">
+<td>Authority</td>
+<td>The actions the reviewer may approve, reject, defer, or override</td>
+</tr>
+<tr class="even">
+<td>Trigger</td>
+<td>The conditions that require manual review or escalation</td>
+</tr>
+<tr class="odd">
+<td>Record</td>
+<td>What decision, rationale, and override information is retained</td>
+</tr>
+<tr class="even">
+<td>Appeal</td>
+<td>How an affected person can question or correct a decision</td>
+</tr>
+<tr class="odd">
+<td>Accountability</td>
+<td>Who owns incidents, monitoring, and final consequences</td>
+</tr>
+</tbody>
+</table>
+<p>Human review can also fail through automation bias, alert fatigue, unclear interfaces, or pressure to approve recommendations quickly. Oversight itself must therefore be evaluated.</p>
+</section>
+<section id="define-intended-and-excluded-uses" class="level2">
+<h2 class="anchored" data-anchor-id="define-intended-and-excluded-uses">Define intended and excluded uses</h2>
+<p>Every consequential analytical product should state what it is—and is not—designed to do.</p>
+<p>An intended-use statement should identify:</p>
+<ul>
+<li>the purpose of the analysis;</li>
+<li>the target population and setting;</li>
+<li>the intended user;</li>
+<li>the input data requirements;</li>
+<li>the supported decision or workflow;</li>
+<li>the expected level of human review; and</li>
+<li>the evidence used to establish fitness for that use.</li>
+</ul>
+<p>An excluded-use statement should name foreseeable applications that are unsupported or unsafe. Examples include use in a different population, substitution for professional judgement, causal interpretation of predictive associations, or fully automated action when manual review was assumed during evaluation.</p>
+<p>Clear exclusions are especially important when an analysis may be copied, repurposed, or distributed beyond its original team.</p>
+</section>
+<section id="maintain-a-limitations-and-safeguards-register" class="level2">
+<h2 class="anchored" data-anchor-id="maintain-a-limitations-and-safeguards-register">Maintain a limitations and safeguards register</h2>
+<p>A limitations register turns reflection into a reviewable project artifact.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Limitation or risk</th>
+<th>Evidence</th>
+<th>Affected use or group</th>
+<th>Mitigation or safeguard</th>
+<th>Residual risk</th>
+<th>Owner</th>
+<th>Review trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rural observations are sparse</td>
+<td>4% of evaluation sample</td>
+<td>Rural deployment</td>
+<td>External validation before use</td>
+<td>Performance remains uncertain</td>
+<td>Model owner</td>
+<td>New rural dataset</td>
+</tr>
+<tr class="even">
+<td>Outcomes arrive after 90 days</td>
+<td>Delayed labels</td>
+<td>Performance monitoring</td>
+<td>Track proxy signals; backfill confirmed outcomes</td>
+<td>Drift detection is delayed</td>
+<td>Operations lead</td>
+<td>Monthly review</td>
+</tr>
+<tr class="odd">
+<td>Threshold increases false alerts</td>
+<td>Decision-curve review</td>
+<td>Review team and flagged cases</td>
+<td>Capacity limit and manual review</td>
+<td>Unnecessary reviews remain possible</td>
+<td>Programme lead</td>
+<td>Alert rate exceeds limit</td>
+</tr>
+</tbody>
+</table>
+<p>The register should evolve as evidence, deployment conditions, or consequences change. Residual risk is the risk that remains after safeguards are applied; recording it prevents mitigation from being mistaken for elimination.</p>
+</section>
+<section id="a-responsible-use-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="a-responsible-use-workflow">A responsible-use workflow</h2>
+<p>Responsible practice should be integrated throughout the analytical lifecycle.</p>
+<ol type="1">
+<li><strong>Frame the purpose and decision.</strong> Define the problem, affected parties, intended users, and consequences of error.</li>
+<li><strong>Examine the data-generating process.</strong> Assess provenance, consent, representation, measurement, missingness, and likely biases.</li>
+<li><strong>Design evaluation around use.</strong> Select metrics, subgroups, thresholds, baselines, and validation settings that reflect the decision.</li>
+<li><strong>Document limitations and exclusions.</strong> Connect each limitation to affected claims or uses.</li>
+<li><strong>Define safeguards and oversight.</strong> Assign owners, escalation paths, appeal mechanisms, and stopping conditions.</li>
+<li><strong>Review before release.</strong> Include relevant technical, domain, operational, ethical, privacy, or legal expertise.</li>
+<li><strong>Monitor after release.</strong> Track data quality, performance, disparities, incidents, and changes in context.</li>
+<li><strong>Reassess or retire.</strong> Pause, revise, retrain, or withdraw the system when its assumptions no longer hold.</li>
+</ol>
+<p>The workflow is proportional: the depth of review should increase with uncertainty, scale, irreversibility, and potential harm.</p>
+</section>
+<section id="pre-use-review-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="pre-use-review-checklist">Pre-use review checklist</h2>
+<p>Before an analysis informs action, confirm that:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">the intended decision and user are explicit;</label></li>
+<li><label><input type="checkbox">the development and evaluation populations are documented;</label></li>
+<li><label><input type="checkbox">data provenance, consent, privacy, and access conditions have been reviewed;</label></li>
+<li><label><input type="checkbox">relevant baselines, uncertainty, and subgroup results are reported;</label></li>
+<li><label><input type="checkbox">threshold choices reflect operational consequences;</label></li>
+<li><label><input type="checkbox">causal claims are supported by the study design;</label></li>
+<li><label><input type="checkbox">intended and excluded uses are stated;</label></li>
+<li><label><input type="checkbox">limitations are connected to their practical consequences;</label></li>
+<li><label><input type="checkbox">safeguards, reviewers, escalation routes, and stopping rules are assigned;</label></li>
+<li><label><input type="checkbox">affected people have an appropriate correction or appeal route;</label></li>
+<li><label><input type="checkbox">monitoring signals and review frequency are defined; and</label></li>
+<li><label><input type="checkbox">ownership for incidents, updates, and retirement is clear.</label></li>
+</ul>
+<p>A checked box is not evidence by itself. Each item should point to a documented analysis, decision, or responsible owner.</p>
+</section>
+<section id="communicating-limitations-clearly" class="level2">
+<h2 class="anchored" data-anchor-id="communicating-limitations-clearly">Communicating limitations clearly</h2>
+<p>Limitations should appear near the claims they qualify, not only in a final paragraph that decision-makers may skip.</p>
+<p>Use direct language:</p>
+<ul>
+<li><strong>Evidence:</strong> “External validation was conducted in two urban hospitals.”</li>
+<li><strong>Boundary:</strong> “Performance in rural clinics is unknown.”</li>
+<li><strong>Consequence:</strong> “The model should not determine rural referrals.”</li>
+<li><strong>Next step:</strong> “Conduct prospective rural validation before considering use.”</li>
+</ul>
+<p>Avoid vague phrases such as “results should be interpreted with caution” unless the source of caution and its consequence are explained.</p>
+</section>
+<section id="chapter-summary" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-summary">Chapter summary</h2>
+<p>Responsible data science extends beyond correct code and strong evaluation metrics. It requires explicit boundaries, proportionate safeguards, accountable oversight, and continuing review.</p>
+<p>The central lessons are:</p>
+<ul>
+<li>limitations define the scope of a result and should be treated as part of the evidence;</li>
+<li>aggregate performance does not establish subgroup reliability or fitness for a particular decision;</li>
+<li>thresholds, uncertainty, fairness, privacy, and operational context affect whether a use is appropriate;</li>
+<li>human oversight must specify authority, information, escalation, and accountability;</li>
+<li>intended uses, excluded uses, safeguards, and residual risks should be documented; and</li>
+<li>monitoring and retirement are part of the analytical lifecycle, not optional activities after deployment.</li>
+</ul>
+<p>Across this guide, the workflow has moved from advanced data preparation and statistical reasoning to modelling, interpretation, communication, and decision-making. The final responsibility is to ensure that analytical capability remains connected to evidence, context, and human judgement.</p>
+</section>
+<section id="reflection-questions" class="level2">
+<h2 class="anchored" data-anchor-id="reflection-questions">Reflection questions</h2>
+<ol type="1">
+<li>Which limitation in your current or most recent analysis most strongly constrains its use?</li>
+<li>Could an aggregate performance metric hide a practically important subgroup failure?</li>
+<li>What decision threshold is being used, and who bears the cost of each type of error?</li>
+<li>What would meaningful human oversight look like in the real workflow?</li>
+<li>Which monitoring signal would tell you that the analysis should be reviewed, paused, or retired?</li>
+</ol>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
+<p>Apply the limitations and safeguards register to one completed analysis. Link each limitation to a claim, decision, affected group, safeguard, owner, and review trigger. This converts responsible use from a general principle into a reproducible analytical practice.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="assets/css/cdi.css">
 </head>
@@ -314,8 +378,39 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#from-a-sample-to-a-population-claim" id="toc-from-a-sample-to-a-population-claim" class="nav-link active" data-scroll-target="#from-a-sample-to-a-population-claim">From a sample to a population claim</a></li>
+  <li><a href="#point-estimates-and-sampling-distributions" id="toc-point-estimates-and-sampling-distributions" class="nav-link" data-scroll-target="#point-estimates-and-sampling-distributions">Point estimates and sampling distributions</a></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals">Confidence intervals</a>
+  <ul class="collapse">
+  <li><a href="#interpreting-a-95-confidence-interval" id="toc-interpreting-a-95-confidence-interval" class="nav-link" data-scroll-target="#interpreting-a-95-confidence-interval">Interpreting a 95% confidence interval</a></li>
+  </ul></li>
+  <li><a href="#comparing-two-independent-groups" id="toc-comparing-two-independent-groups" class="nav-link" data-scroll-target="#comparing-two-independent-groups">Comparing two independent groups</a>
+  <ul class="collapse">
+  <li><a href="#confidence-interval-for-the-mean-difference" id="toc-confidence-interval-for-the-mean-difference" class="nav-link" data-scroll-target="#confidence-interval-for-the-mean-difference">Confidence interval for the mean difference</a></li>
+  </ul></li>
+  <li><a href="#hypothesis-testing-as-a-decision-framework" id="toc-hypothesis-testing-as-a-decision-framework" class="nav-link" data-scroll-target="#hypothesis-testing-as-a-decision-framework">Hypothesis testing as a decision framework</a>
+  <ul class="collapse">
+  <li><a href="#statistical-decision-and-scientific-conclusion" id="toc-statistical-decision-and-scientific-conclusion" class="nav-link" data-scroll-target="#statistical-decision-and-scientific-conclusion">Statistical decision and scientific conclusion</a></li>
+  </ul></li>
+  <li><a href="#effect-size-and-practical-importance" id="toc-effect-size-and-practical-importance" class="nav-link" data-scroll-target="#effect-size-and-practical-importance">Effect size and practical importance</a></li>
+  <li><a href="#parametric-robust-and-resampling-approaches" id="toc-parametric-robust-and-resampling-approaches" class="nav-link" data-scroll-target="#parametric-robust-and-resampling-approaches">Parametric, robust, and resampling approaches</a></li>
+  <li><a href="#bootstrap-confidence-intervals" id="toc-bootstrap-confidence-intervals" class="nav-link" data-scroll-target="#bootstrap-confidence-intervals">Bootstrap confidence intervals</a></li>
+  <li><a href="#permutation-tests" id="toc-permutation-tests" class="nav-link" data-scroll-target="#permutation-tests">Permutation tests</a></li>
+  <li><a href="#assumptions-and-diagnostics" id="toc-assumptions-and-diagnostics" class="nav-link" data-scroll-target="#assumptions-and-diagnostics">Assumptions and diagnostics</a></li>
+  <li><a href="#multiple-comparisons" id="toc-multiple-comparisons" class="nav-link" data-scroll-target="#multiple-comparisons">Multiple comparisons</a></li>
+  <li><a href="#power-and-sample-size" id="toc-power-and-sample-size" class="nav-link" data-scroll-target="#power-and-sample-size">Power and sample size</a></li>
+  <li><a href="#visualizing-uncertainty" id="toc-visualizing-uncertainty" class="nav-link" data-scroll-target="#visualizing-uncertainty">Visualizing uncertainty</a></li>
+  <li><a href="#a-reproducible-reporting-pattern" id="toc-a-reproducible-reporting-pattern" class="nav-link" data-scroll-target="#a-reproducible-reporting-pattern">A reproducible reporting pattern</a></li>
+  <li><a href="#common-inference-failures" id="toc-common-inference-failures" class="nav-link" data-scroll-target="#common-inference-failures">Common inference failures</a></li>
+  <li><a href="#practical-workflow" id="toc-practical-workflow" class="nav-link" data-scroll-target="#practical-workflow">Practical workflow</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary">Chapter summary</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -353,11 +448,559 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Samples support claims only when uncertainty is quantified</li>
 </ul>
 </div>
+<p>Exploratory analysis describes the data that were observed. Statistical inference goes further: it uses a sample to estimate an unknown population quantity while making the uncertainty in that estimate explicit.</p>
+<p>This distinction matters. A difference between two sample means may reflect a meaningful population difference, ordinary sampling variation, bias in the way observations were collected, or some combination of these. Inferential methods help quantify sampling uncertainty, but they cannot repair poor study design or make an unrepresentative sample representative.</p>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>distinguish populations, samples, parameters, and statistics;</li>
+<li>use standard errors and confidence intervals to express uncertainty;</li>
+<li>formulate and interpret hypothesis tests correctly;</li>
+<li>report effect sizes alongside uncertainty and p-values;</li>
+<li>select parametric, robust, or resampling methods based on the data and design;</li>
+<li>account for multiple testing; and</li>
+<li>write conclusions that separate statistical evidence from practical importance.</li>
+</ul>
+<section id="from-a-sample-to-a-population-claim" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-sample-to-a-population-claim">From a sample to a population claim</h2>
+<p>Suppose an organization compares a new process with its current process. The observed data contain two sample means, but the scientific or operational question concerns the corresponding population means.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Population</td>
+<td>The complete group or process of interest</td>
+<td>All future cases handled by either process</td>
+</tr>
+<tr class="even">
+<td>Sample</td>
+<td>The observations actually collected</td>
+<td>Cases included in the evaluation</td>
+</tr>
+<tr class="odd">
+<td>Parameter</td>
+<td>An unknown population quantity</td>
+<td>The population mean difference, <span class="math inline">\(\mu_1-\mu_0\)</span></td>
+</tr>
+<tr class="even">
+<td>Statistic</td>
+<td>A quantity calculated from the sample</td>
+<td>The sample mean difference, <span class="math inline">\(\bar{x}_1-\bar{x}_0\)</span></td>
+</tr>
+<tr class="odd">
+<td>Estimator</td>
+<td>A rule used to estimate a parameter</td>
+<td>Difference in sample means</td>
+</tr>
+<tr class="even">
+<td>Estimate</td>
+<td>The observed value produced by an estimator</td>
+<td>A difference of 4.2 units</td>
+</tr>
+</tbody>
+</table>
+<p>Inference is credible only when the sample and analysis preserve the structure of the data-generating process. Before calculating a p-value or confidence interval, ask:</p>
+<ol type="1">
+<li>How were observations selected?</li>
+<li>How were groups or conditions assigned?</li>
+<li>Are observations independent, paired, clustered, or repeatedly measured?</li>
+<li>Are important sources of selection bias or confounding present?</li>
+<li>What population and time period can the sample reasonably represent?</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A larger sample does not remove systematic bias
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Increasing the sample size reduces sampling variability. It does not correct confounding, measurement error, selection bias, data leakage, or dependence that the analysis ignores.</p>
+</div>
+</div>
+</section>
+<section id="point-estimates-and-sampling-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimates-and-sampling-distributions">Point estimates and sampling distributions</h2>
+<p>A <strong>point estimate</strong> is a single best estimate of a parameter. Examples include a sample mean, median, proportion, correlation, regression coefficient, or difference between groups.</p>
+<p>If the study were repeated under the same conditions, the estimate would usually change. The distribution of estimates across these hypothetical repetitions is the <strong>sampling distribution</strong>. Its spread is summarized by the <strong>standard error</strong>.</p>
+<p>For a sample mean based on independent observations,</p>
+<p><span class="math display">\[
+SE(\bar{x}) = \frac{s}{\sqrt{n}},
+\]</span></p>
+<p>where <span class="math inline">\(s\)</span> is the sample standard deviation and <span class="math inline">\(n\)</span> is the sample size. The standard deviation describes variation among observations; the standard error describes uncertainty in an estimated quantity. They are not interchangeable.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> np.array([<span class="fl">18.2</span>, <span class="fl">17.5</span>, <span class="fl">19.1</span>, <span class="fl">16.8</span>, <span class="fl">18.9</span>, <span class="fl">17.7</span>, <span class="fl">18.4</span>, <span class="fl">19.3</span>])</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> values.mean()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>standard_deviation <span class="op">=</span> values.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>standard_error <span class="op">=</span> stats.sem(values)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean: </span><span class="sc">{</span>mean<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"SD: </span><span class="sc">{</span>standard_deviation<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"SE: </span><span class="sc">{</span>standard_error<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The standard error generally decreases as the sample size increases. This improves precision, but it does not guarantee that the estimate is unbiased or practically useful.</p>
+</section>
+<section id="confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals">Confidence intervals</h2>
+<p>A confidence interval combines a point estimate with a margin of error. For a population mean with an unknown population standard deviation, a two-sided interval is commonly based on the <span class="math inline">\(t\)</span> distribution:</p>
+<p><span class="math display">\[
+\bar{x} \pm t_{1-\alpha/2,\,n-1}\frac{s}{\sqrt{n}}.
+\]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>confidence_level <span class="op">=</span> <span class="fl">0.95</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>degrees_of_freedom <span class="op">=</span> <span class="bu">len</span>(values) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>critical_value <span class="op">=</span> stats.t.ppf(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> confidence_level) <span class="op">/</span> <span class="dv">2</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>degrees_of_freedom,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>margin_of_error <span class="op">=</span> critical_value <span class="op">*</span> standard_error</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="op">=</span> (</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    mean <span class="op">-</span> margin_of_error,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    mean <span class="op">+</span> margin_of_error,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(confidence_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="interpreting-a-95-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-a-95-confidence-interval">Interpreting a 95% confidence interval</h3>
+<p>The 95% refers to the long-run performance of the procedure: if the same sampling and interval-building process were repeated many times, approximately 95% of the resulting intervals would contain the true parameter under the model assumptions.</p>
+<p>For one computed frequentist interval, avoid saying that there is a 95% probability that the fixed population parameter lies inside it. A clear applied interpretation is:</p>
 <blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
+<p>The estimated mean is 18.24, with a 95% confidence interval from 17.49 to 18.98.</p>
 </blockquote>
+<p>The interval communicates both the estimated value and its precision. A wide interval indicates that substantively different parameter values remain compatible with the data and model.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Prefer intervals to isolated significance labels
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An interval shows the direction, plausible magnitude, and precision of an effect. A label such as “significant” or “not significant” discards most of that information.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="comparing-two-independent-groups" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-two-independent-groups">Comparing two independent groups</h2>
+<p>For independent groups, Welch’s <span class="math inline">\(t\)</span>-test is usually a safer default than the equal-variance Student <span class="math inline">\(t\)</span>-test because it does not assume identical population variances.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>control <span class="op">=</span> np.array([<span class="dv">71</span>, <span class="dv">68</span>, <span class="dv">75</span>, <span class="dv">73</span>, <span class="dv">69</span>, <span class="dv">74</span>, <span class="dv">72</span>, <span class="dv">70</span>, <span class="dv">76</span>, <span class="dv">67</span>, <span class="dv">73</span>, <span class="dv">71</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>treatment <span class="op">=</span> np.array([<span class="dv">66</span>, <span class="dv">64</span>, <span class="dv">70</span>, <span class="dv">68</span>, <span class="dv">63</span>, <span class="dv">69</span>, <span class="dv">65</span>, <span class="dv">67</span>, <span class="dv">71</span>, <span class="dv">64</span>, <span class="dv">66</span>, <span class="dv">68</span>])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.ttest_ind(treatment, control, equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>difference <span class="op">=</span> treatment.mean() <span class="op">-</span> control.mean()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean difference: </span><span class="sc">{</span>difference<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Welch t statistic: </span><span class="sc">{</span>result<span class="sc">.</span>statistic<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Two-sided p-value: </span><span class="sc">{</span>result<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The sign of the difference depends on the subtraction order. Define the estimand before interpreting the result:</p>
+<p><span class="math display">\[
+\Delta = \mu_{\text{treatment}}-\mu_{\text{control}}.
+\]</span></p>
+<p>Here, a negative estimate means that the treatment mean is lower than the control mean.</p>
+<section id="confidence-interval-for-the-mean-difference" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-for-the-mean-difference">Confidence interval for the mean difference</h3>
+<p>SciPy returns the test result and, in current versions, can also calculate its confidence interval.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>interval <span class="op">=</span> result.confidence_interval(confidence_level<span class="op">=</span><span class="fl">0.95</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"95% CI: (</span><span class="sc">{</span>interval<span class="sc">.</span>low<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span>interval<span class="sc">.</span>high<span class="sc">:.2f}</span><span class="ss">)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When code must support multiple library versions, calculate the Welch interval explicitly or use a tested project dependency lock.</p>
+</section>
+</section>
+<section id="hypothesis-testing-as-a-decision-framework" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-testing-as-a-decision-framework">Hypothesis testing as a decision framework</h2>
+<p>A hypothesis test compares the observed data with what would be expected under a null model.</p>
+<ul>
+<li>The <strong>null hypothesis</strong>, <span class="math inline">\(H_0\)</span>, usually represents no difference or no association.</li>
+<li>The <strong>alternative hypothesis</strong>, <span class="math inline">\(H_1\)</span>, represents the effect or association under investigation.</li>
+<li>The <strong>test statistic</strong> measures how far the estimate is from the null value relative to its uncertainty.</li>
+<li>The <strong>p-value</strong> is the probability, assuming the null hypothesis and model assumptions are true, of obtaining a test statistic at least as extreme as the observed one.</li>
+</ul>
+<p>For the two-group comparison:</p>
+<p><span class="math display">\[
+H_0: \mu_{\text{treatment}}-\mu_{\text{control}}=0
+\]</span></p>
+<p><span class="math display">\[
+H_1: \mu_{\text{treatment}}-\mu_{\text{control}}\neq0.
+\]</span></p>
+<p>A p-value is not:</p>
+<ul>
+<li>the probability that the null hypothesis is true;</li>
+<li>the probability that the result occurred “by chance”;</li>
+<li>the size or importance of an effect;</li>
+<li>evidence that the study design was unbiased; or</li>
+<li>the probability that the result will replicate.</li>
+</ul>
+<section id="statistical-decision-and-scientific-conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-decision-and-scientific-conclusion">Statistical decision and scientific conclusion</h3>
+<p>If a prespecified significance level is <span class="math inline">\(\alpha=0.05\)</span>, a p-value below 0.05 leads to rejection of <span class="math inline">\(H_0\)</span> under that decision rule. It does not create a sharp scientific boundary between truth and falsehood. Values just below and just above 0.05 often represent very similar evidence.</p>
+<p>A responsible conclusion combines:</p>
+<ul>
+<li>the estimated effect and its direction;</li>
+<li>the confidence interval;</li>
+<li>the p-value when a test was planned and relevant;</li>
+<li>the assumptions and study design;</li>
+<li>practical or scientific importance; and</li>
+<li>sensitivity to reasonable alternative analyses.</li>
+</ul>
+</section>
+</section>
+<section id="effect-size-and-practical-importance" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size-and-practical-importance">Effect size and practical importance</h2>
+<p>With a sufficiently large sample, a negligible difference can produce a small p-value. With a small sample, an important difference can remain imprecisely estimated. Effect sizes provide a scale for magnitude.</p>
+<p>For two independent groups, Hedges’ <span class="math inline">\(g\)</span> is a small-sample-corrected standardized mean difference:</p>
+<p><span class="math display">\[
+g = J\frac{\bar{x}_1-\bar{x}_0}{s_p},
+\]</span></p>
+<p>where <span class="math inline">\(s_p\)</span> is the pooled standard deviation and <span class="math inline">\(J\)</span> is a small-sample correction.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hedges_g(group_1, group_0):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return Hedges' g for two independent groups."""</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    n_1, n_0 <span class="op">=</span> <span class="bu">len</span>(group_1), <span class="bu">len</span>(group_0)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    variance_1 <span class="op">=</span> np.var(group_1, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    variance_0 <span class="op">=</span> np.var(group_0, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    pooled_sd <span class="op">=</span> np.sqrt(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        ((n_1 <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> variance_1 <span class="op">+</span> (n_0 <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> variance_0)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">/</span> (n_1 <span class="op">+</span> n_0 <span class="op">-</span> <span class="dv">2</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    cohen_d <span class="op">=</span> (np.mean(group_1) <span class="op">-</span> np.mean(group_0)) <span class="op">/</span> pooled_sd</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    correction <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> <span class="dv">3</span> <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> (n_1 <span class="op">+</span> n_0) <span class="op">-</span> <span class="dv">9</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> correction <span class="op">*</span> cohen_d</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>effect_size <span class="op">=</span> hedges_g(treatment, control)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Hedges' g: </span><span class="sc">{</span>effect_size<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Standardized effects support comparison across scales, but a raw effect in meaningful units is often easier to interpret. Report both when useful. Generic thresholds for “small,” “medium,” and “large” should not replace domain knowledge.</p>
+</section>
+<section id="parametric-robust-and-resampling-approaches" class="level2">
+<h2 class="anchored" data-anchor-id="parametric-robust-and-resampling-approaches">Parametric, robust, and resampling approaches</h2>
+<p>Method selection should follow the estimand, study design, data type, sample size, and plausible assumptions—not a mechanical normality-test decision.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question or data structure</th>
+<th>Possible method</th>
+<th>Main quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>One continuous outcome, two independent groups</td>
+<td>Welch’s <span class="math inline">\(t\)</span>-test</td>
+<td>Difference in means</td>
+</tr>
+<tr class="even">
+<td>One continuous outcome, paired observations</td>
+<td>Paired <span class="math inline">\(t\)</span>-test</td>
+<td>Mean paired difference</td>
+</tr>
+<tr class="odd">
+<td>Strong skew or influential outliers</td>
+<td>Trimmed-mean or robust method</td>
+<td>Robust location difference</td>
+</tr>
+<tr class="even">
+<td>Ordered or continuous outcome with rank focus</td>
+<td>Mann–Whitney test</td>
+<td>Probability/rank-based contrast</td>
+</tr>
+<tr class="odd">
+<td>Paired rank-based comparison</td>
+<td>Wilcoxon signed-rank test</td>
+<td>Distribution of paired differences</td>
+</tr>
+<tr class="even">
+<td>Few distributional assumptions desired</td>
+<td>Permutation test</td>
+<td>Design-specific null contrast</td>
+</tr>
+<tr class="odd">
+<td>Uncertainty for a complex statistic</td>
+<td>Bootstrap interval</td>
+<td>Statistic chosen by the analyst</td>
+</tr>
+<tr class="even">
+<td>Binary outcome</td>
+<td>Proportion interval, risk difference, odds ratio, or logistic model</td>
+<td>Chosen binary-effect measure</td>
+</tr>
+<tr class="odd">
+<td>Clustered or repeated observations</td>
+<td>Mixed model, GEE, cluster bootstrap, or cluster-robust SE</td>
+<td>Design-specific effect</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Different methods may answer different questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Mann–Whitney test is not simply a “nonparametric test of medians.” Without additional distributional assumptions, it concerns relative ranks or stochastic ordering. Choose a method whose estimand matches the question.</p>
+</div>
+</div>
+</section>
+<section id="bootstrap-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="bootstrap-confidence-intervals">Bootstrap confidence intervals</h2>
+<p>The bootstrap approximates a sampling distribution by repeatedly resampling the observed cases with replacement. It is especially useful when an analytic standard error is unavailable or when the statistic has a complicated sampling distribution.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>bootstrap_result <span class="op">=</span> stats.bootstrap(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    (treatment, control),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    statistic<span class="op">=</span><span class="kw">lambda</span> x, y: np.mean(x) <span class="op">-</span> np.mean(y),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    paired<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    confidence_level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"BCa"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    n_resamples<span class="op">=</span><span class="dv">10_000</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(<span class="dv">20260801</span>),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bootstrap_result.confidence_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The resampling unit must match the independent unit in the study. If patients are nested within clinics, resampling individual rows as if they were independent can substantially understate uncertainty. A cluster-aware bootstrap would resample clinics, not isolated patient rows.</p>
+</section>
+<section id="permutation-tests" class="level2">
+<h2 class="anchored" data-anchor-id="permutation-tests">Permutation tests</h2>
+<p>A permutation test constructs a reference distribution by rearranging labels in a way justified by the null hypothesis and study design.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>permutation_result <span class="op">=</span> stats.permutation_test(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    (treatment, control),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    statistic<span class="op">=</span><span class="kw">lambda</span> x, y: np.mean(x) <span class="op">-</span> np.mean(y),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    permutation_type<span class="op">=</span><span class="st">"independent"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    alternative<span class="op">=</span><span class="st">"two-sided"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    n_resamples<span class="op">=</span><span class="dv">20_000</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(<span class="dv">20260801</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Permutation p-value: </span><span class="sc">{</span>permutation_result<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Exchangeability is essential: under the null model, the labels must be legitimately rearrangeable. Paired, clustered, blocked, or time-dependent designs require restricted permutations that preserve their structure.</p>
+</section>
+<section id="assumptions-and-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-and-diagnostics">Assumptions and diagnostics</h2>
+<p>Assumptions belong to the complete data-generating and analysis process. Useful checks include:</p>
+<ul>
+<li><strong>Independence:</strong> justified mainly by design, not by a plot or test.</li>
+<li><strong>Outcome scale:</strong> appropriate for the chosen estimate and model.</li>
+<li><strong>Distributional shape:</strong> inspect skew, tails, discreteness, and influential observations.</li>
+<li><strong>Variance structure:</strong> use methods such as Welch’s test when equal variance is doubtful.</li>
+<li><strong>Missingness:</strong> investigate why values are absent and whether complete-case analysis is defensible.</li>
+<li><strong>Model form:</strong> inspect residuals and nonlinear patterns when using regression models.</li>
+<li><strong>Sample size:</strong> determine whether asymptotic approximations are credible.</li>
+</ul>
+<p>Normality tests can be misleading: they have low power in small samples and can flag inconsequential deviations in large samples. Use them, if at all, as one piece of evidence alongside design knowledge and graphical diagnostics.</p>
+</section>
+<section id="multiple-comparisons" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-comparisons">Multiple comparisons</h2>
+<p>Testing many hypotheses increases the chance of obtaining at least one small p-value even when all null hypotheses are true. If 20 independent null hypotheses are tested at <span class="math inline">\(\alpha=0.05\)</span>, the probability of at least one false rejection is</p>
+<p><span class="math display">\[
+1-(1-0.05)^{20}\approx0.64.
+\]</span></p>
+<p>Two common error-control goals are:</p>
+<ul>
+<li><strong>Family-wise error rate (FWER):</strong> control the probability of one or more false rejections; Holm’s method is often preferable to basic Bonferroni correction.</li>
+<li><strong>False discovery rate (FDR):</strong> control the expected proportion of false discoveries among rejected hypotheses; the Benjamini–Hochberg procedure is widely used in high-dimensional analysis.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.multitest <span class="im">import</span> multipletests</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>p_values <span class="op">=</span> np.array([<span class="fl">0.001</span>, <span class="fl">0.012</span>, <span class="fl">0.031</span>, <span class="fl">0.049</span>, <span class="fl">0.210</span>, <span class="fl">0.740</span>])</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>reject, adjusted_p_values, _, _ <span class="op">=</span> multipletests(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    p_values,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"fdr_bh"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> raw, adjusted, decision <span class="kw">in</span> <span class="bu">zip</span>(p_values, adjusted_p_values, reject):</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"raw=</span><span class="sc">{</span>raw<span class="sc">:.3f}</span><span class="ss">, adjusted=</span><span class="sc">{</span>adjusted<span class="sc">:.3f}</span><span class="ss">, reject=</span><span class="sc">{</span>decision<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Define the family of hypotheses transparently. Adjustment should follow the scientific question and analysis plan, not be used selectively after seeing the results.</p>
+</section>
+<section id="power-and-sample-size" class="level2">
+<h2 class="anchored" data-anchor-id="power-and-sample-size">Power and sample size</h2>
+<p><strong>Statistical power</strong> is the probability that a test rejects the null hypothesis when a specified alternative is true. Power depends on:</p>
+<ul>
+<li>the effect size considered important;</li>
+<li>outcome variability;</li>
+<li>sample size;</li>
+<li>significance level;</li>
+<li>study design and allocation ratio; and</li>
+<li>the planned statistical test.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.power <span class="im">import</span> TTestIndPower</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>analysis <span class="op">=</span> TTestIndPower()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>sample_size_per_group <span class="op">=</span> analysis.solve_power(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    effect_size<span class="op">=</span><span class="fl">0.50</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    power<span class="op">=</span><span class="fl">0.80</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    ratio<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    alternative<span class="op">=</span><span class="st">"two-sided"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Required sample size per group: </span><span class="sc">{</span>np<span class="sc">.</span>ceil(sample_size_per_group)<span class="sc">:.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Plan around the smallest effect that would matter in context, not an arbitrary standardized effect. Inflate the initial target when attrition, clustering, noncompliance, or unusable measurements are expected.</p>
+<p>Post hoc “observed power” calculated from the observed effect adds little beyond the p-value and confidence interval. After data collection, focus on the estimated effect and its uncertainty.</p>
+</section>
+<section id="visualizing-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-uncertainty">Visualizing uncertainty</h2>
+<p>The chapter figure contrasts the variability of individual observations with the uncertainty of estimated means, then shows the treatment-control estimate with its confidence interval.</p>
+<div id="fig-statistical-inference-overview" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two-panel statistical inference figure. The first panel compares sampling distributions of the mean for sample sizes 10 and 50. The second panel shows the treatment minus control mean difference with a 95 percent confidence interval and a vertical zero reference line.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-statistical-inference-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/05-statistical-inference-overview.png" class="img-fluid figure-img" alt="Two-panel statistical inference figure. The first panel compares sampling distributions of the mean for sample sizes 10 and 50. The second panel shows the treatment minus control mean difference with a 95 percent confidence interval and a vertical zero reference line.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statistical-inference-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Sampling distributions narrow as sample size increases, while the confidence interval summarizes uncertainty in the estimated group difference.
+</figcaption>
+</figure>
+</div>
+<p>Generate the figure directly with Python:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/05-generate_statistical_inference_figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Or use the Bash helper, which runs the same Python script and therefore produces the same output:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/05-generate_statistical_inference_figures.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The plotting code remains in <code>scripts/python/</code> so the guide stays readable while the complete workflow remains reproducible.</p>
+</section>
+<section id="a-reproducible-reporting-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="a-reproducible-reporting-pattern">A reproducible reporting pattern</h2>
+<p>Use a structured result rather than reporting only a p-value.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>result_summary <span class="op">=</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estimand"</span>: <span class="st">"treatment mean minus control mean"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estimate"</span>: difference,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"confidence_level"</span>: <span class="fl">0.95</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"confidence_interval"</span>: (interval.low, interval.high),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"test"</span>: <span class="st">"Welch two-sample t-test"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_value"</span>: result.pvalue,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"effect_size"</span>: effect_size,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"effect_size_measure"</span>: <span class="st">"Hedges' g"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_treatment"</span>: <span class="bu">len</span>(treatment),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_control"</span>: <span class="bu">len</span>(control),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A concise narrative might read:</p>
+<blockquote class="blockquote">
+<p>The treatment group had a lower mean outcome than the control group. The estimated treatment-minus-control difference was reported with its 95% confidence interval, Welch-test p-value, and Hedges’ <span class="math inline">\(g\)</span>. Conclusions were limited to the sampled population and depended on the independence and measurement assumptions.</p>
+</blockquote>
+<p>Replace general phrases with the computed values and domain-specific interpretation. Also state whether the analysis was confirmatory or exploratory, how missing observations were handled, and whether multiplicity adjustment was applied.</p>
+</section>
+<section id="common-inference-failures" class="level2">
+<h2 class="anchored" data-anchor-id="common-inference-failures">Common inference failures</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Failure</th>
+<th>Why it is a problem</th>
+<th>Better practice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reporting only “p &lt; 0.05”</td>
+<td>Hides magnitude and precision</td>
+<td>Report estimate, interval, exact p-value, and context</td>
+</tr>
+<tr class="even">
+<td>Treating non-significance as proof of no effect</td>
+<td>An imprecise study may miss important effects</td>
+<td>Examine the confidence interval and consider equivalence methods</td>
+</tr>
+<tr class="odd">
+<td>Choosing a test after inspecting the desired result</td>
+<td>Inflates researcher degrees of freedom</td>
+<td>Prespecify the primary analysis and label exploratory analyses</td>
+</tr>
+<tr class="even">
+<td>Ignoring pairing or clustering</td>
+<td>Usually understates uncertainty</td>
+<td>Preserve the design in the model and resampling scheme</td>
+</tr>
+<tr class="odd">
+<td>Testing baseline differences in randomized groups as a gatekeeper</td>
+<td>Randomization, not a baseline p-value, establishes allocation</td>
+<td>Assess meaningful imbalance and use a justified adjusted model</td>
+</tr>
+<tr class="even">
+<td>Removing outliers solely to obtain significance</td>
+<td>Makes conclusions outcome-dependent</td>
+<td>Use documented rules and sensitivity analyses</td>
+</tr>
+<tr class="odd">
+<td>Equating statistical with practical significance</td>
+<td>Small effects can be detectable but irrelevant</td>
+<td>Compare effects with domain-specific thresholds</td>
+</tr>
+<tr class="even">
+<td>Interpreting association as causation</td>
+<td>Observational associations may be confounded</td>
+<td>Use causal design and assumptions appropriate to the claim</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="practical-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="practical-workflow">Practical workflow</h2>
+<p>Use the following sequence for a defensible inferential analysis:</p>
+<ol type="1">
+<li>Define the population, outcome, exposure or intervention, comparison, and estimand.</li>
+<li>Identify the independent sampling or assignment unit.</li>
+<li>Document the study design, missingness, exclusions, and potential biases.</li>
+<li>Explore distributions and data quality without selecting results opportunistically.</li>
+<li>Choose a method that targets the estimand and respects dependence.</li>
+<li>Calculate the point estimate, uncertainty interval, and planned test.</li>
+<li>Quantify effect size in meaningful units and, when helpful, standardized units.</li>
+<li>Adjust for multiple comparisons when the inferential family requires it.</li>
+<li>Perform sensitivity or robustness analyses that address credible alternatives.</li>
+<li>Report limitations and distinguish statistical evidence from practical conclusions.</li>
+</ol>
+</section>
+<section id="chapter-summary" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-summary">Chapter summary</h2>
+<p>Statistical inference is not a machine for converting data into certainty. It is a disciplined framework for learning from incomplete information.</p>
+<p>The central habits are:</p>
+<ul>
+<li>define the target parameter before selecting a method;</li>
+<li>preserve the study design in the analysis;</li>
+<li>report estimates with uncertainty;</li>
+<li>interpret p-values narrowly and correctly;</li>
+<li>evaluate magnitude as well as statistical compatibility;</li>
+<li>control multiplicity when many claims are tested; and</li>
+<li>communicate the assumptions that make the conclusion defensible.</li>
+</ul>
+<p>The next stage of applied data science builds on these habits by using models to explain relationships, adjust for covariates, and generate predictions without losing sight of uncertainty and design.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

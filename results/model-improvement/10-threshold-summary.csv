@@ -1,0 +1,2 @@
+selected_threshold,selection_rule,oof_roc_auc,oof_pr_auc,test_roc_auc,test_pr_auc,test_precision,test_recall,test_f1,best_C,best_class_weight
+0.321444165712413,maximum out-of-fold F1 on training data,0.7892733599322442,0.5548621902050644,0.7753846153846153,0.6039330331041585,0.6071428571428571,0.4533333333333333,0.5190839694656488,0.0745934328572655,

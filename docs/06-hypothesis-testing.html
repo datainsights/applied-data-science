@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="assets/css/cdi.css">
 </head>
@@ -314,8 +378,58 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#from-a-research-question-to-a-testable-claim" id="toc-from-a-research-question-to-a-testable-claim" class="nav-link" data-scroll-target="#from-a-research-question-to-a-testable-claim">From a research question to a testable claim</a></li>
+  <li><a href="#the-logic-of-hypothesis-testing" id="toc-the-logic-of-hypothesis-testing" class="nav-link" data-scroll-target="#the-logic-of-hypothesis-testing">The logic of hypothesis testing</a>
+  <ul class="collapse">
+  <li><a href="#significance-level-and-decision-rule" id="toc-significance-level-and-decision-rule" class="nav-link" data-scroll-target="#significance-level-and-decision-rule">Significance level and decision rule</a></li>
+  </ul></li>
+  <li><a href="#errors-power-and-sample-size" id="toc-errors-power-and-sample-size" class="nav-link" data-scroll-target="#errors-power-and-sample-size">Errors, power, and sample size</a></li>
+  <li><a href="#estimation-comes-first" id="toc-estimation-comes-first" class="nav-link" data-scroll-target="#estimation-comes-first">Estimation comes first</a></li>
+  <li><a href="#select-a-method-from-the-study-design" id="toc-select-a-method-from-the-study-design" class="nav-link" data-scroll-target="#select-a-method-from-the-study-design">Select a method from the study design</a></li>
+  <li><a href="#assumptions-are-part-of-the-analysis" id="toc-assumptions-are-part-of-the-analysis" class="nav-link" data-scroll-target="#assumptions-are-part-of-the-analysis">Assumptions are part of the analysis</a>
+  <ul class="collapse">
+  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence">Independence</a></li>
+  <li><a href="#distributional-form" id="toc-distributional-form" class="nav-link" data-scroll-target="#distributional-form">Distributional form</a></li>
+  <li><a href="#variance-and-influential-observations" id="toc-variance-and-influential-observations" class="nav-link" data-scroll-target="#variance-and-influential-observations">Variance and influential observations</a></li>
+  </ul></li>
+  <li><a href="#a-reproducible-two-group-analysis" id="toc-a-reproducible-two-group-analysis" class="nav-link" data-scroll-target="#a-reproducible-two-group-analysis">A reproducible two-group analysis</a>
+  <ul class="collapse">
+  <li><a href="#effect-size-and-confidence-interval" id="toc-effect-size-and-confidence-interval" class="nav-link" data-scroll-target="#effect-size-and-confidence-interval">Effect size and confidence interval</a></li>
+  </ul></li>
+  <li><a href="#randomization-and-resampling-methods" id="toc-randomization-and-resampling-methods" class="nav-link" data-scroll-target="#randomization-and-resampling-methods">Randomization and resampling methods</a>
+  <ul class="collapse">
+  <li><a href="#permutation-test" id="toc-permutation-test" class="nav-link" data-scroll-target="#permutation-test">Permutation test</a></li>
+  <li><a href="#bootstrap-confidence-interval" id="toc-bootstrap-confidence-interval" class="nav-link" data-scroll-target="#bootstrap-confidence-interval">Bootstrap confidence interval</a></li>
+  </ul></li>
+  <li><a href="#visualize-the-estimate-and-the-reference-distribution" id="toc-visualize-the-estimate-and-the-reference-distribution" class="nav-link" data-scroll-target="#visualize-the-estimate-and-the-reference-distribution">Visualize the estimate and the reference distribution</a>
+  <ul class="collapse">
+  <li><a href="#raw-data-and-group-estimates" id="toc-raw-data-and-group-estimates" class="nav-link" data-scroll-target="#raw-data-and-group-estimates">Raw data and group estimates</a></li>
+  <li><a href="#permutation-reference-distribution" id="toc-permutation-reference-distribution" class="nav-link" data-scroll-target="#permutation-reference-distribution">Permutation reference distribution</a></li>
+  <li><a href="#magnitude-and-precision" id="toc-magnitude-and-precision" class="nav-link" data-scroll-target="#magnitude-and-precision">Magnitude and precision</a></li>
+  </ul></li>
+  <li><a href="#multiple-testing-and-selective-reporting" id="toc-multiple-testing-and-selective-reporting" class="nav-link" data-scroll-target="#multiple-testing-and-selective-reporting">Multiple testing and selective reporting</a></li>
+  <li><a href="#equivalence-and-non-inferiority" id="toc-equivalence-and-non-inferiority" class="nav-link" data-scroll-target="#equivalence-and-non-inferiority">Equivalence and non-inferiority</a></li>
+  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes">Common mistakes</a>
+  <ul class="collapse">
+  <li><a href="#treating-significance-as-importance" id="toc-treating-significance-as-importance" class="nav-link" data-scroll-target="#treating-significance-as-importance">Treating significance as importance</a></li>
+  <li><a href="#treating-non-significance-as-no-effect" id="toc-treating-non-significance-as-no-effect" class="nav-link" data-scroll-target="#treating-non-significance-as-no-effect">Treating non-significance as no effect</a></li>
+  <li><a href="#testing-assumptions-to-choose-a-test-mechanically" id="toc-testing-assumptions-to-choose-a-test-mechanically" class="nav-link" data-scroll-target="#testing-assumptions-to-choose-a-test-mechanically">Testing assumptions to choose a test mechanically</a></li>
+  <li><a href="#ignoring-dependence" id="toc-ignoring-dependence" class="nav-link" data-scroll-target="#ignoring-dependence">Ignoring dependence</a></li>
+  <li><a href="#running-many-analyses-and-reporting-only-the-smallest-result" id="toc-running-many-analyses-and-reporting-only-the-smallest-result" class="nav-link" data-scroll-target="#running-many-analyses-and-reporting-only-the-smallest-result">Running many analyses and reporting only the smallest result</a></li>
+  <li><a href="#writing-causal-conclusions-from-observational-associations" id="toc-writing-causal-conclusions-from-observational-associations" class="nav-link" data-scroll-target="#writing-causal-conclusions-from-observational-associations">Writing causal conclusions from observational associations</a></li>
+  </ul></li>
+  <li><a href="#a-reporting-template" id="toc-a-reporting-template" class="nav-link" data-scroll-target="#a-reporting-template">A reporting template</a></li>
+  <li><a href="#a-practical-decision-workflow" id="toc-a-practical-decision-workflow" class="nav-link" data-scroll-target="#a-practical-decision-workflow">A practical decision workflow</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next step</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -353,11 +467,489 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Theme:</strong> Statistical evidence requires assumptions, context, and careful interpretation</li>
 </ul>
 </div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Hypothesis testing provides a structured way to evaluate whether an observed pattern is compatible with a stated statistical model. It is useful when an analysis must move beyond describing a sample and address a focused question about a population, process, or intervention.</p>
+<p>A statistical test does not prove that a scientific claim is true or false. It measures how surprising the observed data—or a more extreme result—would be if the null hypothesis and the test assumptions were correct. A defensible conclusion therefore combines the test result with the estimated effect, its uncertainty, the study design, and subject-matter context.</p>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>translate a research question into statistical hypotheses;</li>
+<li>distinguish statistical significance from practical importance;</li>
+<li>select a test that matches the design, variable types, and assumptions;</li>
+<li>interpret <em>p</em>-values, confidence intervals, and effect sizes together;</li>
+<li>use permutation and bootstrap methods when they are appropriate;</li>
+<li>control false discoveries when testing multiple hypotheses; and</li>
+<li>report conclusions without overstating the evidence.</li>
+</ul>
+</section>
+<section id="from-a-research-question-to-a-testable-claim" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-research-question-to-a-testable-claim">From a research question to a testable claim</h2>
+<p>Begin with the scientific question, not the software function. A useful question identifies the population, outcome, comparison or exposure, and quantity of interest.</p>
+<p>Suppose a study compares systolic blood pressure after two treatment strategies. Let</p>
+<p><span class="math display">\[
+\Delta = \mu_A - \mu_B,
+\]</span></p>
+<p>where <span class="math inline">\(\mu_A\)</span> and <span class="math inline">\(\mu_B\)</span> are the population mean outcomes under strategies A and B. A two-sided test can be written as</p>
+<p><span class="math display">\[
+H_0: \Delta = 0
+\qquad \text{versus} \qquad
+H_1: \Delta \ne 0.
+\]</span></p>
+<p>The null hypothesis, <span class="math inline">\(H_0\)</span>, represents the reference model. The alternative hypothesis, <span class="math inline">\(H_1\)</span>, represents the departure the study is designed to detect.</p>
+<p>The parameter must match the question. If the scientific interest is a median, probability, odds ratio, risk difference, or regression coefficient, a hypothesis about means may answer the wrong question.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Directional hypotheses require advance justification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use a one-sided alternative only when effects in the opposite direction would not alter the scientific or practical conclusion and the direction was specified before examining the data. Choosing a one-sided test after seeing the result invalidates its interpretation.</p>
+</div>
+</div>
+</section>
+<section id="the-logic-of-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="the-logic-of-hypothesis-testing">The logic of hypothesis testing</h2>
+<p>A conventional test follows a sequence:</p>
+<ol type="1">
+<li>State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> in terms of a population parameter.</li>
+<li>Choose a test statistic that measures departure from <span class="math inline">\(H_0\)</span>.</li>
+<li>Determine its reference distribution under <span class="math inline">\(H_0\)</span>.</li>
+<li>Calculate the observed statistic and <em>p</em>-value.</li>
+<li>Evaluate assumptions and sensitivity.</li>
+<li>Interpret the result alongside the effect estimate and uncertainty.</li>
+</ol>
+<p>The <em>p</em>-value is</p>
+<p><span class="math display">\[
+p = P(\text{result at least as extreme as observed} \mid H_0,\ \text{model assumptions}).
+\]</span></p>
+<p>It is not the probability that <span class="math inline">\(H_0\)</span> is true, the probability that the result occurred by chance, or the probability that the finding will replicate.</p>
+<section id="significance-level-and-decision-rule" class="level3">
+<h3 class="anchored" data-anchor-id="significance-level-and-decision-rule">Significance level and decision rule</h3>
+<p>The significance level, <span class="math inline">\(\alpha\)</span>, is a pre-specified long-run tolerance for rejecting a true null hypothesis under repeated use of the procedure. A common value is 0.05, but it is not universally appropriate.</p>
+<p>If <span class="math inline">\(p \le \alpha\)</span>, the result is described as statistically significant under the stated procedure. If <span class="math inline">\(p &gt; \alpha\)</span>, the evidence is insufficient to reject <span class="math inline">\(H_0\)</span>. The second outcome is not evidence that the groups are identical or that the null hypothesis has been proven.</p>
+<p>Avoid reducing a result to a binary label. Values just below and just above 0.05 usually represent similar evidence, and neither conveys the size or importance of an effect.</p>
+</section>
+</section>
+<section id="errors-power-and-sample-size" class="level2">
+<h2 class="anchored" data-anchor-id="errors-power-and-sample-size">Errors, power, and sample size</h2>
+<p>Every testing procedure can make errors.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Reality</th>
+<th style="text-align: right;">Reject <span class="math inline">\(H_0\)</span></th>
+<th style="text-align: right;">Do not reject <span class="math inline">\(H_0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(H_0\)</span> is true</td>
+<td style="text-align: right;">Type I error</td>
+<td style="text-align: right;">Correct decision</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_0\)</span> is false</td>
+<td style="text-align: right;">Correct decision</td>
+<td style="text-align: right;">Type II error</td>
+</tr>
+</tbody>
+</table>
+<p>The Type I error rate is controlled by <span class="math inline">\(\alpha\)</span>. The Type II error probability is denoted by <span class="math inline">\(\beta\)</span>, and statistical power is</p>
+<p><span class="math display">\[
+\text{Power} = 1 - \beta.
+\]</span></p>
+<p>Power generally increases with a larger true effect, larger sample size, lower unexplained variability, more efficient design, and—in some settings—a higher <span class="math inline">\(\alpha\)</span>. Sample-size planning should use the smallest scientifically meaningful effect, not an unrealistically large effect chosen to make the study affordable.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Observed power is not a useful post-test explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Power is a design property evaluated over hypothetical repeated samples. After data have been observed, report the estimated effect and its confidence interval rather than calculating “observed power” from the same estimate.</p>
+</div>
+</div>
+</section>
+<section id="estimation-comes-first" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-comes-first">Estimation comes first</h2>
+<p>Hypothesis tests and confidence intervals address related questions. For many standard two-sided procedures, a test at level <span class="math inline">\(\alpha=0.05\)</span> rejects <span class="math inline">\(H_0\)</span> when the corresponding 95% confidence interval excludes the null value.</p>
+<p>A confidence interval adds information that a <em>p</em>-value cannot provide:</p>
+<ul>
+<li>the direction of the estimated effect;</li>
+<li>the range of values compatible with the data and model;</li>
+<li>the precision of the estimate; and</li>
+<li>whether scientifically meaningful effects remain plausible.</li>
+</ul>
+<p>An effect can be statistically significant but too small to matter. Conversely, a non-significant result with a wide confidence interval may remain compatible with both important benefit and important harm.</p>
+</section>
+<section id="select-a-method-from-the-study-design" class="level2">
+<h2 class="anchored" data-anchor-id="select-a-method-from-the-study-design">Select a method from the study design</h2>
+<p>The correct method depends on how observations were generated and related. Independence, pairing, clustering, repeated measurements, censoring, and confounding cannot be repaired by selecting a different function at the end of the analysis.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question and design</th>
+<th>Common method</th>
+<th>Effect to report</th>
+<th>Important checks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>One continuous outcome, two independent groups</td>
+<td>Welch’s two-sample <em>t</em>-test</td>
+<td>Mean difference; standardized mean difference when useful</td>
+<td>Independence; influential observations; sampling design</td>
+</tr>
+<tr class="even">
+<td>One continuous outcome, paired measurements</td>
+<td>Paired <em>t</em>-test</td>
+<td>Mean paired difference</td>
+<td>Correct pairing; distribution of within-pair differences</td>
+</tr>
+<tr class="odd">
+<td>Continuous or ordinal outcome, two independent groups</td>
+<td>Mann–Whitney test</td>
+<td>Probability-of-superiority or rank-based effect</td>
+<td>Independence; interpretation depends on distribution shapes</td>
+</tr>
+<tr class="even">
+<td>Continuous or ordinal outcome, paired measurements</td>
+<td>Wilcoxon signed-rank test</td>
+<td>Paired rank effect or median-compatible estimate</td>
+<td>Symmetry of paired differences for the usual location interpretation</td>
+</tr>
+<tr class="odd">
+<td>Continuous outcome, three or more groups</td>
+<td>ANOVA or linear model</td>
+<td>Group contrasts; partial <span class="math inline">\(\eta^2\)</span> when appropriate</td>
+<td>Residual structure; variance pattern; planned contrasts</td>
+</tr>
+<tr class="even">
+<td>Two categorical variables</td>
+<td>Chi-square test of independence</td>
+<td>Risk difference, risk ratio, odds ratio, or Cramér’s <span class="math inline">\(V\)</span></td>
+<td>Expected counts; independent observations</td>
+</tr>
+<tr class="odd">
+<td>Small categorical table</td>
+<td>Fisher’s exact test</td>
+<td>Odds ratio with interval</td>
+<td>Fixed-margin assumptions; sparse cells</td>
+</tr>
+<tr class="even">
+<td>Association between continuous variables</td>
+<td>Pearson or Spearman correlation</td>
+<td>Correlation coefficient with interval</td>
+<td>Linearity for Pearson; monotonicity for Spearman; influential points</td>
+</tr>
+<tr class="odd">
+<td>Outcome adjusted for predictors</td>
+<td>Regression model</td>
+<td>Coefficients or transformed effects with intervals</td>
+<td>Functional form; residuals; dependence; model specification</td>
+</tr>
+</tbody>
+</table>
+<p>Welch’s <em>t</em>-test is generally preferable to the equal-variance Student test for two independent groups because it does not require equal population variances and performs well when variances happen to be similar.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A rank test is not automatically a test of medians
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Mann–Whitney test compares distributions through ranks. It can be interpreted as a simple location or median comparison only under additional shape and spread assumptions. Report an effect whose meaning matches the method and data.</p>
+</div>
+</div>
+</section>
+<section id="assumptions-are-part-of-the-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-are-part-of-the-analysis">Assumptions are part of the analysis</h2>
+<p>Assumptions should be evaluated using the design, visual diagnostics, and subject-matter knowledge. A preliminary significance test of normality or equal variance is rarely a good switch for choosing between procedures.</p>
+<section id="independence" class="level3">
+<h3 class="anchored" data-anchor-id="independence">Independence</h3>
+<p>Independence is primarily a design assumption. Measurements from the same person, household, clinic, batch, site, or time series are often correlated. Treating them as independent usually understates uncertainty. Paired tests, mixed-effects models, generalized estimating equations, cluster-robust inference, or time-series methods may be needed.</p>
+</section>
+<section id="distributional-form" class="level3">
+<h3 class="anchored" data-anchor-id="distributional-form">Distributional form</h3>
+<p>For <em>t</em>-based inference, the key concern is the sampling distribution of the mean or model coefficient—not whether the raw data pass a normality test. Inspect distributions and residuals for severe skewness, heavy tails, and influential observations. Larger samples often improve robustness, but they do not fix dependence, bias, or a poorly specified estimand.</p>
+</section>
+<section id="variance-and-influential-observations" class="level3">
+<h3 class="anchored" data-anchor-id="variance-and-influential-observations">Variance and influential observations</h3>
+<p>Unequal group variances are handled naturally by Welch’s test. Extreme observations should be investigated for errors and scientific relevance rather than deleted merely to obtain significance. If results depend strongly on a few observations, show that sensitivity transparently.</p>
+</section>
+</section>
+<section id="a-reproducible-two-group-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="a-reproducible-two-group-analysis">A reproducible two-group analysis</h2>
+<p>The following example compares an outcome between two independent groups. The code is intentionally non-executable in the guide; it is presented for learning and adaptation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"data/processed/hypothesis_testing_data.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>group_a <span class="op">=</span> data.loc[data[<span class="st">"group"</span>] <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"outcome"</span>].dropna()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>group_b <span class="op">=</span> data.loc[data[<span class="st">"group"</span>] <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"outcome"</span>].dropna()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.ttest_ind(group_a, group_b, equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mean_difference <span class="op">=</span> group_a.mean() <span class="op">-</span> group_b.mean()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean difference: </span><span class="sc">{</span>mean_difference<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Welch t statistic: </span><span class="sc">{</span>result<span class="sc">.</span>statistic<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-value: </span><span class="sc">{</span>result<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The complete workflow should also calculate a confidence interval, report group summaries, inspect the data visually, and document exclusions and missing values.</p>
+<section id="effect-size-and-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="effect-size-and-confidence-interval">Effect size and confidence interval</h3>
+<p>For independent groups, the unstandardized mean difference remains interpretable in the original units. A standardized mean difference can support comparisons across differently scaled outcomes but should not replace the original-unit estimate.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mean_difference <span class="op">=</span> group_a.mean() <span class="op">-</span> group_b.mean()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>standard_error <span class="op">=</span> np.sqrt(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    group_a.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_a)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> group_b.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_b)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>degrees_freedom <span class="op">=</span> (</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    (group_a.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_a) <span class="op">+</span> group_b.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_b)) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">/</span> (</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        (group_a.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_a)) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> (<span class="bu">len</span>(group_a) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> (group_b.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_b)) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> (<span class="bu">len</span>(group_b) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>critical_value <span class="op">=</span> stats.t.ppf(<span class="fl">0.975</span>, degrees_freedom)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="op">=</span> (</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    mean_difference <span class="op">-</span> critical_value <span class="op">*</span> standard_error,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    mean_difference <span class="op">+</span> critical_value <span class="op">*</span> standard_error,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="randomization-and-resampling-methods" class="level2">
+<h2 class="anchored" data-anchor-id="randomization-and-resampling-methods">Randomization and resampling methods</h2>
+<p>Simulation-based methods make the inferential logic visible and can reduce reliance on closed-form reference distributions. They still require a design-consistent resampling scheme.</p>
+<section id="permutation-test" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-test">Permutation test</h3>
+<p>Under a null hypothesis that makes group labels exchangeable, randomly reassign the labels, recalculate the statistic, and compare the observed statistic with the resulting null distribution.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>permutation_result <span class="op">=</span> stats.permutation_test(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (group_a.to_numpy(), group_b.to_numpy()),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    statistic<span class="op">=</span><span class="kw">lambda</span> x, y: np.mean(x) <span class="op">-</span> np.mean(y),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    permutation_type<span class="op">=</span><span class="st">"independent"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    alternative<span class="op">=</span><span class="st">"two-sided"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    n_resamples<span class="op">=</span><span class="dv">20_000</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(<span class="dv">20260801</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Exchangeability must reflect the study design. Paired, blocked, clustered, and time-dependent data require restricted permutations rather than unrestricted shuffling.</p>
+</section>
+<section id="bootstrap-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap-confidence-interval">Bootstrap confidence interval</h3>
+<p>The bootstrap repeatedly samples observations with replacement to approximate the sampling distribution of an estimator.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bootstrap_result <span class="op">=</span> stats.bootstrap(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    (group_a.to_numpy(), group_b.to_numpy()),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    statistic<span class="op">=</span><span class="kw">lambda</span> x, y: np.mean(x) <span class="op">-</span> np.mean(y),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    paired<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    confidence_level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"BCa"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    n_resamples<span class="op">=</span><span class="dv">20_000</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(<span class="dv">20260801</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Bootstrap samples must preserve the data-generating structure. Resample pairs for paired data and use cluster- or block-level methods for clustered or dependent data.</p>
+</section>
+</section>
+<section id="visualize-the-estimate-and-the-reference-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-the-estimate-and-the-reference-distribution">Visualize the estimate and the reference distribution</h2>
+<p>A useful hypothesis-testing figure should reveal both the data and the inferential result. Recommended displays include:</p>
+<ul>
+<li>jittered observations with group summaries and confidence intervals;</li>
+<li>an estimation plot showing the raw groups and their difference;</li>
+<li>the permutation null distribution with the observed statistic marked; and</li>
+<li>a coefficient or forest plot for several estimated effects and intervals.</li>
+</ul>
+<p>Avoid bar charts that display only means and standard errors; they conceal distribution shape, sample size, overlap, and unusual observations.</p>
+<section id="raw-data-and-group-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="raw-data-and-group-estimates">Raw data and group estimates</h3>
+<p>The first figure retains every observation while adding the group means and 95% confidence intervals. This makes sample size, spread, overlap, and unusual values visible alongside the estimates.</p>
+<div id="fig-06-group-estimates" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Observed outcomes with group means and 95% confidence intervals.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-group-estimates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-group-estimates.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Observed outcomes with group means and 95% confidence intervals.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-group-estimates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Observed outcomes for groups A and B, with diamonds representing group means and vertical error bars representing 95% confidence intervals.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="permutation-reference-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-reference-distribution">Permutation reference distribution</h3>
+<p>The permutation distribution shows the mean differences expected when the group labels are exchangeable under the null hypothesis. The solid line marks the observed difference; the dashed line marks its equally extreme value in the opposite direction for the two-sided comparison.</p>
+<div id="fig-06-permutation-null" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Permutation null distribution with the observed difference marked.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-permutation-null-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-permutation-null-distribution.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Permutation null distribution with the observed difference marked.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-permutation-null-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: Permutation null distribution of differences in means, with the observed difference marked by a solid red line.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="magnitude-and-precision" class="level3">
+<h3 class="anchored" data-anchor-id="magnitude-and-precision">Magnitude and precision</h3>
+<p>Confidence intervals distinguish a clearly positive estimate from an imprecise result and from a small but precisely estimated effect. Statistical significance alone does not communicate these differences.</p>
+<div id="fig-06-ci-interpretation" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Effect estimates and confidence intervals reveal both magnitude and precision.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-ci-interpretation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-confidence-interval-interpretation.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Effect estimates and confidence intervals reveal both magnitude and precision.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-ci-interpretation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: Three point estimates and 95% confidence intervals illustrating a clear positive effect, an imprecise estimate, and a small precise effect.
+</figcaption>
+</figure>
+</div>
+<p>The commands below are shown as non-executable examples. Run either one from the project root to generate the chapter figures:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/06-generate-hypothesis-testing-figures.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/06-generate_hypothesis_testing_figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The Bash script and Python command are alternative entry points to the same figure-generation workflow and should produce the same outputs.</p>
+</section>
+</section>
+<section id="multiple-testing-and-selective-reporting" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-testing-and-selective-reporting">Multiple testing and selective reporting</h2>
+<p>When many null hypotheses are tested, the chance of at least one small <em>p</em>-value increases. For <span class="math inline">\(m\)</span> independent tests conducted at level <span class="math inline">\(\alpha\)</span>, the probability of at least one Type I error is</p>
+<p><span class="math display">\[
+1 - (1 - \alpha)^m.
+\]</span></p>
+<p>For 20 independent tests at <span class="math inline">\(\alpha=0.05\)</span>, this probability is approximately 0.64.</p>
+<p>Two common control targets are:</p>
+<ul>
+<li><strong>Family-wise error rate (FWER):</strong> the probability of one or more false rejections in a family. Holm’s procedure is generally preferable to unadjusted testing and is more powerful than the simple Bonferroni procedure.</li>
+<li><strong>False discovery rate (FDR):</strong> the expected proportion of false discoveries among rejected hypotheses. The Benjamini–Hochberg procedure is widely used in high-dimensional analyses.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.multitest <span class="im">import</span> multipletests</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>results[<span class="st">"p_value_holm"</span>] <span class="op">=</span> multipletests(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    results[<span class="st">"p_value"</span>], method<span class="op">=</span><span class="st">"holm"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>results[<span class="st">"q_value_bh"</span>] <span class="op">=</span> multipletests(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    results[<span class="st">"p_value"</span>], method<span class="op">=</span><span class="st">"fdr_bh"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Define the hypothesis family based on the scientific analysis plan. Adjustment cannot correct outcome switching, undisclosed exploratory analyses, or selective reporting.</p>
+<p>Raw and adjusted <em>p</em>-values can lead to different conclusions. Holm adjustment controls the family-wise error rate and is typically more conservative than Benjamini–Hochberg adjustment, which controls the false discovery rate.</p>
+<div id="fig-06-multiple-testing" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Comparison of raw, Holm-adjusted, and Benjamini–Hochberg-adjusted p-values.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-multiple-testing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-multiple-testing-adjustment.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Comparison of raw, Holm-adjusted, and Benjamini–Hochberg-adjusted p-values.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-multiple-testing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: Raw p-values and their Holm and Benjamini–Hochberg adjusted values for ten hypotheses, with a horizontal reference line at 0.05.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="equivalence-and-non-inferiority" class="level2">
+<h2 class="anchored" data-anchor-id="equivalence-and-non-inferiority">Equivalence and non-inferiority</h2>
+<p>Failure to reject a difference is not evidence of equivalence. To support practical similarity, define an equivalence margin <span class="math inline">\(\Delta_E\)</span> that represents the largest difference considered unimportant.</p>
+<p>The two one-sided tests procedure evaluates</p>
+<p><span class="math display">\[
+H_0: \Delta \le -\Delta_E \; \text{or} \; \Delta \ge \Delta_E
+\]</span></p>
+<p>against the alternative that <span class="math inline">\(-\Delta_E &lt; \Delta &lt; \Delta_E\)</span>. Equivalence is supported when the appropriate confidence interval lies entirely within the pre-specified equivalence bounds.</p>
+<p>Non-inferiority questions use a one-sided margin and require particular care with design, adherence, analysis population, and interpretation. The margin must be scientifically justified before analysis.</p>
+</section>
+<section id="common-mistakes" class="level2">
+<h2 class="anchored" data-anchor-id="common-mistakes">Common mistakes</h2>
+<section id="treating-significance-as-importance" class="level3">
+<h3 class="anchored" data-anchor-id="treating-significance-as-importance">Treating significance as importance</h3>
+<p>A very small effect can produce a small <em>p</em>-value in a large sample. Report the effect in meaningful units and compare it with a scientifically relevant threshold.</p>
+</section>
+<section id="treating-non-significance-as-no-effect" class="level3">
+<h3 class="anchored" data-anchor-id="treating-non-significance-as-no-effect">Treating non-significance as no effect</h3>
+<p>A large <em>p</em>-value may reflect imprecision rather than similarity. Examine the confidence interval and ask which effects remain compatible with the data.</p>
+</section>
+<section id="testing-assumptions-to-choose-a-test-mechanically" class="level3">
+<h3 class="anchored" data-anchor-id="testing-assumptions-to-choose-a-test-mechanically">Testing assumptions to choose a test mechanically</h3>
+<p>Normality and equal-variance tests add another unstable decision layer. Use design knowledge, diagnostics, robust procedures, and sensitivity analysis.</p>
+</section>
+<section id="ignoring-dependence" class="level3">
+<h3 class="anchored" data-anchor-id="ignoring-dependence">Ignoring dependence</h3>
+<p>Repeated or clustered observations do not become independent because they occupy separate rows. Model the dependence explicitly.</p>
+</section>
+<section id="running-many-analyses-and-reporting-only-the-smallest-result" class="level3">
+<h3 class="anchored" data-anchor-id="running-many-analyses-and-reporting-only-the-smallest-result">Running many analyses and reporting only the smallest result</h3>
+<p>Undisclosed analytic flexibility makes nominal <em>p</em>-values misleading. Separate confirmatory analyses from exploratory analyses and report the full analysis path.</p>
+</section>
+<section id="writing-causal-conclusions-from-observational-associations" class="level3">
+<h3 class="anchored" data-anchor-id="writing-causal-conclusions-from-observational-associations">Writing causal conclusions from observational associations</h3>
+<p>A hypothesis test does not eliminate confounding, selection bias, measurement error, or reverse causation. Causal claims require a defensible design and assumptions beyond statistical significance.</p>
+</section>
+</section>
+<section id="a-reporting-template" class="level2">
+<h2 class="anchored" data-anchor-id="a-reporting-template">A reporting template</h2>
+<p>A concise report should identify the estimand, method, effect, uncertainty, and limitations:</p>
 <blockquote class="blockquote">
-<p>This chapter is scaffolded for development.</p>
+<p>The estimated mean outcome was 4.2 units higher in group A than in group B (95% CI: 1.1 to 7.3). Welch’s two-sample test produced <span class="math inline">\(t(df)=2.67\)</span> and <span class="math inline">\(p=0.010\)</span>. The interval excludes no difference, but the practical importance of the estimate should be judged against the pre-specified meaningful-effect threshold. The analysis assumes independent observations and does not by itself establish causality.</p>
 </blockquote>
+<p>Include the following where relevant:</p>
+<ul>
+<li>group sample sizes and descriptive summaries;</li>
+<li>the exact test and whether it was one- or two-sided;</li>
+<li>the effect estimate in interpretable units;</li>
+<li>a confidence interval and exact <em>p</em>-value;</li>
+<li>multiplicity adjustment and the defined test family;</li>
+<li>assumption checks and sensitivity analyses; and</li>
+<li>missing-data handling, exclusions, and deviations from the analysis plan.</li>
+</ul>
+</section>
+<section id="a-practical-decision-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="a-practical-decision-workflow">A practical decision workflow</h2>
+<p>Before reporting a test, ask:</p>
+<ol type="1">
+<li>What population quantity am I trying to estimate?</li>
+<li>Does the comparison match the study design?</li>
+<li>Are observations independent, paired, clustered, or repeated?</li>
+<li>Which assumptions are essential for this procedure?</li>
+<li>What effect size is scientifically meaningful?</li>
+<li>Does the confidence interval exclude important benefit, harm, or equivalence?</li>
+<li>Were multiple hypotheses tested?</li>
+<li>Would a reasonable alternative analysis change the conclusion?</li>
+<li>Can the result support association only, or is a causal interpretation justified?</li>
+</ol>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ul>
+<li>Hypothesis testing evaluates data relative to a specified null model; it does not prove hypotheses.</li>
+<li>The study design and estimand determine the method.</li>
+<li>A <em>p</em>-value is not an effect size or the probability that the null hypothesis is true.</li>
+<li>Effect estimates and confidence intervals should accompany test results.</li>
+<li>Non-significance does not establish equality; equivalence requires an equivalence design.</li>
+<li>Dependence, multiplicity, and selective analysis can invalidate otherwise correct calculations.</li>
+<li>Transparent reporting and sensitivity analysis are central to defensible inference.</li>
+</ul>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next step</h2>
+<p>The next chapter builds on these principles by using statistical models to describe and predict outcomes while accounting for multiple variables. The same discipline remains essential: define the target, examine assumptions, quantify uncertainty, and distinguish statistical evidence from substantive importance.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
