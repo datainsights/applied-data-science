@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Limitations and Responsible Use – Advanced Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./18-end-to-end-case-study.html" rel="next">
+<link href="./16-from-analysis-to-decision-making.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-231ef2f9d4ce3268f31ef752336c15d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html">Communication and Responsible Practice</a></li><li class="breadcrumb-item"><a href="./17-limitations-and-responsible-use.html"><span class="chapter-title">Limitations and Responsible Use</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Advanced Data Science</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Orientation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-setting-up-environment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Setting Up a Reproducible Analytical Environment</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced Data Preparation and Exploration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-advanced-data-preparation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Data Preparation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-feature-engineering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Engineering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-exploratory-analysis-for-complex-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Analysis for Complex Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Statistical Inference and Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-statistical-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistical Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hypothesis Testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-regression-modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression Modelling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Predictive and Unsupervised Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-predictive-model-building.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Predictive Model Building</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-model-evaluation-and-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Evaluation and Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-model-improvement.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Improvement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-unsupervised-learning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Reproducibility and Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-feature-importance-and-interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Importance and Interpretation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-from-results-to-defensible-claims.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Results to Defensible Claims</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communication and Responsible Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communicating Results Clearly</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Analysis to Decision-Making</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">End-to-End Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-end-to-end-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Case Study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix and References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#from-defensible-decisions-to-responsible-use" id="toc-from-defensible-decisions-to-responsible-use" class="nav-link" data-scroll-target="#from-defensible-decisions-to-responsible-use">From defensible decisions to responsible use</a></li>
+  <li><a href="#limitations-are-part-of-the-result" id="toc-limitations-are-part-of-the-result" class="nav-link" data-scroll-target="#limitations-are-part-of-the-result">Limitations are part of the result</a></li>
+  <li><a href="#a-practical-limitation-taxonomy" id="toc-a-practical-limitation-taxonomy" class="nav-link" data-scroll-target="#a-practical-limitation-taxonomy">A practical limitation taxonomy</a></li>
+  <li><a href="#performance-is-not-the-same-as-fitness-for-use" id="toc-performance-is-not-the-same-as-fitness-for-use" class="nav-link" data-scroll-target="#performance-is-not-the-same-as-fitness-for-use">Performance is not the same as fitness for use</a>
+  <ul class="collapse">
+  <li><a href="#aggregate-metrics-can-conceal-variation" id="toc-aggregate-metrics-can-conceal-variation" class="nav-link" data-scroll-target="#aggregate-metrics-can-conceal-variation">Aggregate metrics can conceal variation</a></li>
+  <li><a href="#thresholds-encode-consequences" id="toc-thresholds-encode-consequences" class="nav-link" data-scroll-target="#thresholds-encode-consequences">Thresholds encode consequences</a></li>
+  <li><a href="#calibration-matters-when-probabilities-guide-action" id="toc-calibration-matters-when-probabilities-guide-action" class="nav-link" data-scroll-target="#calibration-matters-when-probabilities-guide-action">Calibration matters when probabilities guide action</a></li>
+  </ul></li>
+  <li><a href="#distribution-shift-and-changing-conditions" id="toc-distribution-shift-and-changing-conditions" class="nav-link" data-scroll-target="#distribution-shift-and-changing-conditions">Distribution shift and changing conditions</a></li>
+  <li><a href="#fairness-requires-context" id="toc-fairness-requires-context" class="nav-link" data-scroll-target="#fairness-requires-context">Fairness requires context</a></li>
+  <li><a href="#privacy-security-and-data-minimisation" id="toc-privacy-security-and-data-minimisation" class="nav-link" data-scroll-target="#privacy-security-and-data-minimisation">Privacy, security, and data minimisation</a></li>
+  <li><a href="#human-oversight-must-be-operational" id="toc-human-oversight-must-be-operational" class="nav-link" data-scroll-target="#human-oversight-must-be-operational">Human oversight must be operational</a></li>
+  <li><a href="#define-intended-and-excluded-uses" id="toc-define-intended-and-excluded-uses" class="nav-link" data-scroll-target="#define-intended-and-excluded-uses">Define intended and excluded uses</a></li>
+  <li><a href="#maintain-a-limitations-and-safeguards-register" id="toc-maintain-a-limitations-and-safeguards-register" class="nav-link" data-scroll-target="#maintain-a-limitations-and-safeguards-register">Maintain a limitations and safeguards register</a></li>
+  <li><a href="#a-responsible-use-workflow" id="toc-a-responsible-use-workflow" class="nav-link" data-scroll-target="#a-responsible-use-workflow">A responsible-use workflow</a></li>
+  <li><a href="#pre-use-review-checklist" id="toc-pre-use-review-checklist" class="nav-link" data-scroll-target="#pre-use-review-checklist">Pre-use review checklist</a></li>
+  <li><a href="#communicating-limitations-clearly" id="toc-communicating-limitations-clearly" class="nav-link" data-scroll-target="#communicating-limitations-clearly">Communicating limitations clearly</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary">Chapter summary</a></li>
+  <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection questions</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-communicating-results-clearly.html">Communication and Responsible Practice</a></li><li class="breadcrumb-item"><a href="./17-limitations-and-responsible-use.html"><span class="chapter-title">Limitations and Responsible Use</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-lesson17" class="quarto-section-identifier"><span class="chapter-title">Limitations and Responsible Use</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Aug 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> ADS-L17</li>
+<li><strong>Type:</strong> Responsible practice</li>
+<li><strong>Audience:</strong> Intermediate</li>
+<li><strong>Theme:</strong> Responsible use begins with explicit limitations and appropriate oversight</li>
+</ul>
+</div>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>distinguish statistical, data, operational, and ethical limitations;</li>
+<li>explain why strong predictive performance does not guarantee appropriate use;</li>
+<li>identify risks related to subgroup performance, distribution shift, and automation;</li>
+<li>define meaningful human oversight and escalation procedures;</li>
+<li>document intended use, excluded use, uncertainty, and residual risk; and</li>
+<li>propose monitoring and review arrangements for an analytical system after deployment.</li>
+</ul>
+</section>
+<section id="from-defensible-decisions-to-responsible-use" class="level2">
+<h2 class="anchored" data-anchor-id="from-defensible-decisions-to-responsible-use">From defensible decisions to responsible use</h2>
+<p>Chapter <a href="16-from-analysis-to-decision-making.html" class="quarto-xref"><span>From Analysis to Decision-Making</span></a> connected analytical evidence to decisions. That connection does not end the analyst’s responsibility. A technically valid result can still be used in the wrong setting, applied to an excluded population, interpreted too confidently, or embedded in a process without adequate oversight.</p>
+<p>Responsible use therefore asks a broader question:</p>
+<blockquote class="blockquote">
+<p>Under what conditions should this analysis influence action, and what safeguards are required when it does?</p>
+</blockquote>
+<p>The answer must account for more than model performance. It must consider the data-generating process, the decision context, the people affected, the cost of error, and the system that will operate around the analysis.</p>
+</section>
+<section id="limitations-are-part-of-the-result" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-are-part-of-the-result">Limitations are part of the result</h2>
+<p>A limitation is not an apology added at the end of a report. It is information that defines how far a conclusion can travel.</p>
+<p>Useful limitation statements specify:</p>
+<ol type="1">
+<li><strong>what is uncertain or constrained;</strong></li>
+<li><strong>why the constraint exists;</strong></li>
+<li><strong>which conclusion or use it affects;</strong> and</li>
+<li><strong>what mitigation, validation, or caution is required.</strong></li>
+</ol>
+<p>Compare the following statements:</p>
+<blockquote class="blockquote">
+<p>The dataset may be biased.</p>
+</blockquote>
+<p>and:</p>
+<blockquote class="blockquote">
+<p>Rural participants were under-represented in the development data. Performance estimates may therefore be optimistic for rural settings, and the model should not be used there without external validation and subgroup-specific review.</p>
+</blockquote>
+<p>The second statement is actionable because it connects evidence, consequence, and response.</p>
+</section>
+<section id="a-practical-limitation-taxonomy" class="level2">
+<h2 class="anchored" data-anchor-id="a-practical-limitation-taxonomy">A practical limitation taxonomy</h2>
+<p>Limitations often overlap, but classifying them helps ensure that important risks are not hidden inside a single general disclaimer.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Limitation area</th>
+<th>Questions to ask</th>
+<th>Possible consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data provenance</td>
+<td>Who collected the data, for what purpose, and under what conditions?</td>
+<td>The data may not support the new analytical purpose.</td>
+</tr>
+<tr class="even">
+<td>Representation</td>
+<td>Which populations, locations, periods, or conditions are missing or sparse?</td>
+<td>Performance may vary across groups or settings.</td>
+</tr>
+<tr class="odd">
+<td>Measurement</td>
+<td>Are variables reliable proxies for the concepts of interest?</td>
+<td>The analysis may reproduce measurement error or structural bias.</td>
+</tr>
+<tr class="even">
+<td>Missingness</td>
+<td>Why are values absent, and is missingness informative?</td>
+<td>Complete-case or imputed results may be systematically distorted.</td>
+</tr>
+<tr class="odd">
+<td>Design</td>
+<td>Is the study observational, experimental, cross-sectional, or longitudinal?</td>
+<td>Associations may be mistaken for causal effects.</td>
+</tr>
+<tr class="even">
+<td>Modelling</td>
+<td>Which assumptions, tuning choices, and evaluation procedures shape the result?</td>
+<td>Reported performance may be unstable or optimistic.</td>
+</tr>
+<tr class="odd">
+<td>Generalisability</td>
+<td>Does the deployment setting resemble the development and evaluation settings?</td>
+<td>Validity may not transfer to new populations or future periods.</td>
+</tr>
+<tr class="even">
+<td>Decision context</td>
+<td>What happens after a prediction or estimate is produced?</td>
+<td>A statistically accurate output may still lead to harmful action.</td>
+</tr>
+<tr class="odd">
+<td>Operations</td>
+<td>Who reviews outputs, handles exceptions, and monitors change?</td>
+<td>Errors may persist without detection or accountability.</td>
+</tr>
+</tbody>
+</table>
+<p>This taxonomy should be adapted to the application. High-stakes work requires deeper review than a low-impact exploratory analysis.</p>
+</section>
+<section id="performance-is-not-the-same-as-fitness-for-use" class="level2">
+<h2 class="anchored" data-anchor-id="performance-is-not-the-same-as-fitness-for-use">Performance is not the same as fitness for use</h2>
+<p>A model can achieve a strong aggregate score and still be unsuitable for a decision.</p>
+<section id="aggregate-metrics-can-conceal-variation" class="level3">
+<h3 class="anchored" data-anchor-id="aggregate-metrics-can-conceal-variation">Aggregate metrics can conceal variation</h3>
+<p>Overall performance combines observations that may represent different populations, environments, or operational conditions. Always ask whether errors are concentrated in particular subgroups.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_score, recall_score</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>group_results <span class="op">=</span> (</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    predictions.groupby(<span class="st">"group"</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">apply</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> frame: pd.Series(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"n"</span>: <span class="bu">len</span>(frame),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"precision"</span>: precision_score(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"observed"</span>],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"predicted"</span>],</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                    zero_division<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"recall"</span>: recall_score(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"observed"</span>],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                    frame[<span class="st">"predicted"</span>],</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                    zero_division<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        include_groups<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The code is straightforward; interpretation is not. Small subgroup samples can produce unstable estimates, and group definitions may themselves be incomplete or sensitive. Report sample sizes and uncertainty alongside subgroup metrics, and avoid treating noisy differences as definitive evidence.</p>
+</section>
+<section id="thresholds-encode-consequences" class="level3">
+<h3 class="anchored" data-anchor-id="thresholds-encode-consequences">Thresholds encode consequences</h3>
+<p>The same predicted probabilities can support different decisions depending on the threshold. Lowering a classification threshold may detect more true cases while also increasing false alerts. Whether that trade-off is acceptable depends on the relative consequences of missed cases, unnecessary interventions, and unequal error burdens.</p>
+<p>Threshold selection should therefore be documented as a decision rule, not presented as a purely technical optimisation.</p>
+</section>
+<section id="calibration-matters-when-probabilities-guide-action" class="level3">
+<h3 class="anchored" data-anchor-id="calibration-matters-when-probabilities-guide-action">Calibration matters when probabilities guide action</h3>
+<p>When a system reports a probability, users may interpret it as an expected frequency. A model that ranks cases well but is poorly calibrated can still mislead resource allocation or risk communication. Calibration should be assessed in the relevant population and, where sample size permits, across operationally meaningful subgroups.</p>
+</section>
+</section>
+<section id="distribution-shift-and-changing-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-shift-and-changing-conditions">Distribution shift and changing conditions</h2>
+<p>Analytical validity is conditional on the relationship between the observed data and the setting in which the result is used. That relationship can change.</p>
+<p>Common forms of change include:</p>
+<ul>
+<li><strong>population shift:</strong> the characteristics of the people or units change;</li>
+<li><strong>measurement shift:</strong> instruments, coding practices, or data pipelines change;</li>
+<li><strong>prevalence shift:</strong> the frequency of the outcome changes;</li>
+<li><strong>concept shift:</strong> the relationship between predictors and outcomes changes; and</li>
+<li><strong>policy feedback:</strong> use of the model changes behaviour and therefore future data.</li>
+</ul>
+<p>A one-time test result cannot guarantee future performance. Monitoring should be designed before routine use begins.</p>
+<p>Useful monitoring signals may include:</p>
+<ul>
+<li>input ranges, missingness, and category frequencies;</li>
+<li>outcome prevalence and delayed ground-truth labels;</li>
+<li>discrimination, calibration, and decision-specific error rates;</li>
+<li>subgroup performance and alert volumes;</li>
+<li>override, appeal, and escalation rates; and</li>
+<li>operational incidents or unexpected downstream effects.</li>
+</ul>
+<p>Not every change requires automatic retraining. Some changes indicate a data-quality failure, policy change, or measurement problem that retraining would merely absorb. Investigation should precede remediation.</p>
+</section>
+<section id="fairness-requires-context" class="level2">
+<h2 class="anchored" data-anchor-id="fairness-requires-context">Fairness requires context</h2>
+<p>Fairness is not a single metric. Different definitions can conflict, especially when outcome prevalence differs between groups. Selecting one metric without reference to the decision can hide the actual source of harm.</p>
+<p>A responsible assessment asks:</p>
+<ul>
+<li>Who may benefit from the system?</li>
+<li>Who may bear false-positive, false-negative, or exclusion costs?</li>
+<li>Are the target and predictor variables valid for all relevant groups?</li>
+<li>Does historical data encode unequal access or treatment?</li>
+<li>Can affected people understand, question, or appeal a decision?</li>
+<li>Are observed disparities statistically stable and practically important?</li>
+<li>What intervention is possible if a disparity is detected?</li>
+</ul>
+<p>Protected or sensitive attributes should not be removed automatically from evaluation. Even when they are excluded from model inputs, they may be necessary for identifying unequal performance. Their collection and use must follow applicable consent, privacy, governance, and legal requirements.</p>
+</section>
+<section id="privacy-security-and-data-minimisation" class="level2">
+<h2 class="anchored" data-anchor-id="privacy-security-and-data-minimisation">Privacy, security, and data minimisation</h2>
+<p>Responsible analysis uses only the data required for a justified purpose and protects those data throughout their lifecycle.</p>
+<p>At minimum, review:</p>
+<ul>
+<li>the lawful or authorised basis for collection and use;</li>
+<li>whether the proposed analysis is compatible with the original purpose;</li>
+<li>access controls and separation of duties;</li>
+<li>risks from direct identifiers and combinations of indirect identifiers;</li>
+<li>retention, deletion, and versioning rules;</li>
+<li>secure transfer, storage, logging, and backup arrangements; and</li>
+<li>the possibility that outputs expose sensitive information.</li>
+</ul>
+<p>De-identification reduces some risks but does not make a dataset risk-free. Linkage with other sources may permit re-identification, and trained models or released summaries may disclose information in ways that require separate assessment.</p>
+</section>
+<section id="human-oversight-must-be-operational" class="level2">
+<h2 class="anchored" data-anchor-id="human-oversight-must-be-operational">Human oversight must be operational</h2>
+<p>Saying that a person remains “in the loop” is insufficient. Oversight is meaningful only when the reviewer has the information, authority, time, and competence to intervene.</p>
+<p>A workable oversight design identifies:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Oversight element</th>
+<th>Required definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reviewer</td>
+<td>The role responsible for checking or acting on the output</td>
+</tr>
+<tr class="even">
+<td>Evidence</td>
+<td>The model output, uncertainty, relevant context, and supporting information shown</td>
+</tr>
+<tr class="odd">
+<td>Authority</td>
+<td>The actions the reviewer may approve, reject, defer, or override</td>
+</tr>
+<tr class="even">
+<td>Trigger</td>
+<td>The conditions that require manual review or escalation</td>
+</tr>
+<tr class="odd">
+<td>Record</td>
+<td>What decision, rationale, and override information is retained</td>
+</tr>
+<tr class="even">
+<td>Appeal</td>
+<td>How an affected person can question or correct a decision</td>
+</tr>
+<tr class="odd">
+<td>Accountability</td>
+<td>Who owns incidents, monitoring, and final consequences</td>
+</tr>
+</tbody>
+</table>
+<p>Human review can also fail through automation bias, alert fatigue, unclear interfaces, or pressure to approve recommendations quickly. Oversight itself must therefore be evaluated.</p>
+</section>
+<section id="define-intended-and-excluded-uses" class="level2">
+<h2 class="anchored" data-anchor-id="define-intended-and-excluded-uses">Define intended and excluded uses</h2>
+<p>Every consequential analytical product should state what it is—and is not—designed to do.</p>
+<p>An intended-use statement should identify:</p>
+<ul>
+<li>the purpose of the analysis;</li>
+<li>the target population and setting;</li>
+<li>the intended user;</li>
+<li>the input data requirements;</li>
+<li>the supported decision or workflow;</li>
+<li>the expected level of human review; and</li>
+<li>the evidence used to establish fitness for that use.</li>
+</ul>
+<p>An excluded-use statement should name foreseeable applications that are unsupported or unsafe. Examples include use in a different population, substitution for professional judgement, causal interpretation of predictive associations, or fully automated action when manual review was assumed during evaluation.</p>
+<p>Clear exclusions are especially important when an analysis may be copied, repurposed, or distributed beyond its original team.</p>
+</section>
+<section id="maintain-a-limitations-and-safeguards-register" class="level2">
+<h2 class="anchored" data-anchor-id="maintain-a-limitations-and-safeguards-register">Maintain a limitations and safeguards register</h2>
+<p>A limitations register turns reflection into a reviewable project artifact.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Limitation or risk</th>
+<th>Evidence</th>
+<th>Affected use or group</th>
+<th>Mitigation or safeguard</th>
+<th>Residual risk</th>
+<th>Owner</th>
+<th>Review trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rural observations are sparse</td>
+<td>4% of evaluation sample</td>
+<td>Rural deployment</td>
+<td>External validation before use</td>
+<td>Performance remains uncertain</td>
+<td>Model owner</td>
+<td>New rural dataset</td>
+</tr>
+<tr class="even">
+<td>Outcomes arrive after 90 days</td>
+<td>Delayed labels</td>
+<td>Performance monitoring</td>
+<td>Track proxy signals; backfill confirmed outcomes</td>
+<td>Drift detection is delayed</td>
+<td>Operations lead</td>
+<td>Monthly review</td>
+</tr>
+<tr class="odd">
+<td>Threshold increases false alerts</td>
+<td>Decision-curve review</td>
+<td>Review team and flagged cases</td>
+<td>Capacity limit and manual review</td>
+<td>Unnecessary reviews remain possible</td>
+<td>Programme lead</td>
+<td>Alert rate exceeds limit</td>
+</tr>
+</tbody>
+</table>
+<p>The register should evolve as evidence, deployment conditions, or consequences change. Residual risk is the risk that remains after safeguards are applied; recording it prevents mitigation from being mistaken for elimination.</p>
+</section>
+<section id="a-responsible-use-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="a-responsible-use-workflow">A responsible-use workflow</h2>
+<p>Responsible practice should be integrated throughout the analytical lifecycle.</p>
+<ol type="1">
+<li><strong>Frame the purpose and decision.</strong> Define the problem, affected parties, intended users, and consequences of error.</li>
+<li><strong>Examine the data-generating process.</strong> Assess provenance, consent, representation, measurement, missingness, and likely biases.</li>
+<li><strong>Design evaluation around use.</strong> Select metrics, subgroups, thresholds, baselines, and validation settings that reflect the decision.</li>
+<li><strong>Document limitations and exclusions.</strong> Connect each limitation to affected claims or uses.</li>
+<li><strong>Define safeguards and oversight.</strong> Assign owners, escalation paths, appeal mechanisms, and stopping conditions.</li>
+<li><strong>Review before release.</strong> Include relevant technical, domain, operational, ethical, privacy, or legal expertise.</li>
+<li><strong>Monitor after release.</strong> Track data quality, performance, disparities, incidents, and changes in context.</li>
+<li><strong>Reassess or retire.</strong> Pause, revise, retrain, or withdraw the system when its assumptions no longer hold.</li>
+</ol>
+<p>The workflow is proportional: the depth of review should increase with uncertainty, scale, irreversibility, and potential harm.</p>
+</section>
+<section id="pre-use-review-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="pre-use-review-checklist">Pre-use review checklist</h2>
+<p>Before an analysis informs action, confirm that:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">the intended decision and user are explicit;</label></li>
+<li><label><input type="checkbox">the development and evaluation populations are documented;</label></li>
+<li><label><input type="checkbox">data provenance, consent, privacy, and access conditions have been reviewed;</label></li>
+<li><label><input type="checkbox">relevant baselines, uncertainty, and subgroup results are reported;</label></li>
+<li><label><input type="checkbox">threshold choices reflect operational consequences;</label></li>
+<li><label><input type="checkbox">causal claims are supported by the study design;</label></li>
+<li><label><input type="checkbox">intended and excluded uses are stated;</label></li>
+<li><label><input type="checkbox">limitations are connected to their practical consequences;</label></li>
+<li><label><input type="checkbox">safeguards, reviewers, escalation routes, and stopping rules are assigned;</label></li>
+<li><label><input type="checkbox">affected people have an appropriate correction or appeal route;</label></li>
+<li><label><input type="checkbox">monitoring signals and review frequency are defined; and</label></li>
+<li><label><input type="checkbox">ownership for incidents, updates, and retirement is clear.</label></li>
+</ul>
+<p>A checked box is not evidence by itself. Each item should point to a documented analysis, decision, or responsible owner.</p>
+</section>
+<section id="communicating-limitations-clearly" class="level2">
+<h2 class="anchored" data-anchor-id="communicating-limitations-clearly">Communicating limitations clearly</h2>
+<p>Limitations should appear near the claims they qualify, not only in a final paragraph that decision-makers may skip.</p>
+<p>Use direct language:</p>
+<ul>
+<li><strong>Evidence:</strong> “External validation was conducted in two urban hospitals.”</li>
+<li><strong>Boundary:</strong> “Performance in rural clinics is unknown.”</li>
+<li><strong>Consequence:</strong> “The model should not determine rural referrals.”</li>
+<li><strong>Next step:</strong> “Conduct prospective rural validation before considering use.”</li>
+</ul>
+<p>Avoid vague phrases such as “results should be interpreted with caution” unless the source of caution and its consequence are explained.</p>
+</section>
+<section id="chapter-summary" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-summary">Chapter summary</h2>
+<p>Responsible data science extends beyond correct code and strong evaluation metrics. It requires explicit boundaries, proportionate safeguards, accountable oversight, and continuing review.</p>
+<p>The central lessons are:</p>
+<ul>
+<li>limitations define the scope of a result and should be treated as part of the evidence;</li>
+<li>aggregate performance does not establish subgroup reliability or fitness for a particular decision;</li>
+<li>thresholds, uncertainty, fairness, privacy, and operational context affect whether a use is appropriate;</li>
+<li>human oversight must specify authority, information, escalation, and accountability;</li>
+<li>intended uses, excluded uses, safeguards, and residual risks should be documented; and</li>
+<li>monitoring and retirement are part of the analytical lifecycle, not optional activities after deployment.</li>
+</ul>
+<p>Across this guide, the workflow has moved from advanced data preparation and statistical reasoning to modelling, interpretation, communication, and decision-making. The final responsibility is to ensure that analytical capability remains connected to evidence, context, and human judgement.</p>
+</section>
+<section id="reflection-questions" class="level2">
+<h2 class="anchored" data-anchor-id="reflection-questions">Reflection questions</h2>
+<ol type="1">
+<li>Which limitation in your current or most recent analysis most strongly constrains its use?</li>
+<li>Could an aggregate performance metric hide a practically important subgroup failure?</li>
+<li>What decision threshold is being used, and who bears the cost of each type of error?</li>
+<li>What would meaningful human oversight look like in the real workflow?</li>
+<li>Which monitoring signal would tell you that the analysis should be reviewed, paused, or retired?</li>
+</ol>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
+<p>Apply the limitations and safeguards register to one completed analysis. Link each limitation to a claim, decision, affected group, safeguard, owner, and review trigger. This converts responsible use from a general principle into a reproducible analytical practice.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./16-from-analysis-to-decision-making.html" class="pagination-link" aria-label="From Analysis to Decision-Making">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">From Analysis to Decision-Making</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./18-end-to-end-case-study.html" class="pagination-link" aria-label="End-to-End Case Study">
+        <span class="nav-page-text"><span class="chapter-title">End-to-End Case Study</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

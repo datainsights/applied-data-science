@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>From Results to Defensible Claims – Advanced Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./15-communicating-results-clearly.html" rel="next">
+<link href="./13-feature-importance-and-interpretation.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-231ef2f9d4ce3268f31ef752336c15d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-pipelines-and-cross-validation.html">Reproducibility and Interpretation</a></li><li class="breadcrumb-item"><a href="./14-from-results-to-defensible-claims.html"><span class="chapter-title">From Results to Defensible Claims</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Advanced Data Science</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Orientation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-setting-up-environment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Setting Up a Reproducible Analytical Environment</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced Data Preparation and Exploration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-advanced-data-preparation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Data Preparation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-feature-engineering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Engineering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-exploratory-analysis-for-complex-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Analysis for Complex Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Statistical Inference and Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-statistical-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistical Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-hypothesis-testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Hypothesis Testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-regression-modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression Modelling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Predictive and Unsupervised Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-predictive-model-building.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Predictive Model Building</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-model-evaluation-and-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Evaluation and Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-model-improvement.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Improvement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-unsupervised-learning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Reproducibility and Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-feature-importance-and-interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Importance and Interpretation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-from-results-to-defensible-claims.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">From Results to Defensible Claims</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communication and Responsible Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communicating Results Clearly</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Analysis to Decision-Making</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">End-to-End Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-end-to-end-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Case Study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix and References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-this-chapter-matters" id="toc-why-this-chapter-matters" class="nav-link active" data-scroll-target="#why-this-chapter-matters">Why this chapter matters</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#results-do-not-speak-for-themselves" id="toc-results-do-not-speak-for-themselves" class="nav-link" data-scroll-target="#results-do-not-speak-for-themselves">Results do not speak for themselves</a></li>
+  <li><a href="#the-evidence-to-claim-chain" id="toc-the-evidence-to-claim-chain" class="nav-link" data-scroll-target="#the-evidence-to-claim-chain">The evidence-to-claim chain</a></li>
+  <li><a href="#four-kinds-of-analytical-claims" id="toc-four-kinds-of-analytical-claims" class="nav-link" data-scroll-target="#four-kinds-of-analytical-claims">Four kinds of analytical claims</a>
+  <ul class="collapse">
+  <li><a href="#descriptive-claims" id="toc-descriptive-claims" class="nav-link" data-scroll-target="#descriptive-claims">Descriptive claims</a></li>
+  <li><a href="#associational-claims" id="toc-associational-claims" class="nav-link" data-scroll-target="#associational-claims">Associational claims</a></li>
+  <li><a href="#predictive-claims" id="toc-predictive-claims" class="nav-link" data-scroll-target="#predictive-claims">Predictive claims</a></li>
+  <li><a href="#causal-claims" id="toc-causal-claims" class="nav-link" data-scroll-target="#causal-claims">Causal claims</a></li>
+  </ul></li>
+  <li><a href="#match-the-wording-to-the-evidence" id="toc-match-the-wording-to-the-evidence" class="nav-link" data-scroll-target="#match-the-wording-to-the-evidence">Match the wording to the evidence</a></li>
+  <li><a href="#interpret-estimates-not-isolated-p-values" id="toc-interpret-estimates-not-isolated-p-values" class="nav-link" data-scroll-target="#interpret-estimates-not-isolated-p-values">Interpret estimates, not isolated p-values</a>
+  <ul class="collapse">
+  <li><a href="#statistical-and-practical-importance" id="toc-statistical-and-practical-importance" class="nav-link" data-scroll-target="#statistical-and-practical-importance">Statistical and practical importance</a></li>
+  </ul></li>
+  <li><a href="#absence-of-evidence-is-not-evidence-of-absence" id="toc-absence-of-evidence-is-not-evidence-of-absence" class="nav-link" data-scroll-target="#absence-of-evidence-is-not-evidence-of-absence">Absence of evidence is not evidence of absence</a></li>
+  <li><a href="#claims-from-predictive-models" id="toc-claims-from-predictive-models" class="nav-link" data-scroll-target="#claims-from-predictive-models">Claims from predictive models</a></li>
+  <li><a href="#multiplicity-and-selective-reporting" id="toc-multiplicity-and-selective-reporting" class="nav-link" data-scroll-target="#multiplicity-and-selective-reporting">Multiplicity and selective reporting</a></li>
+  <li><a href="#subgroup-claims-require-special-care" id="toc-subgroup-claims-require-special-care" class="nav-link" data-scroll-target="#subgroup-claims-require-special-care">Subgroup claims require special care</a></li>
+  <li><a href="#robustness-strengthensbut-does-not-provea-claim" id="toc-robustness-strengthensbut-does-not-provea-claim" class="nav-link" data-scroll-target="#robustness-strengthensbut-does-not-provea-claim">Robustness strengthens—but does not prove—a claim</a></li>
+  <li><a href="#a-worked-interpretation" id="toc-a-worked-interpretation" class="nav-link" data-scroll-target="#a-worked-interpretation">A worked interpretation</a>
+  <ul class="collapse">
+  <li><a href="#overstated-claim" id="toc-overstated-claim" class="nav-link" data-scroll-target="#overstated-claim">Overstated claim</a></li>
+  <li><a href="#defensible-claim" id="toc-defensible-claim" class="nav-link" data-scroll-target="#defensible-claim">Defensible claim</a></li>
+  </ul></li>
+  <li><a href="#a-reusable-claim-template" id="toc-a-reusable-claim-template" class="nav-link" data-scroll-target="#a-reusable-claim-template">A reusable claim template</a></li>
+  <li><a href="#a-programmatic-claim-audit" id="toc-a-programmatic-claim-audit" class="nav-link" data-scroll-target="#a-programmatic-claim-audit">A programmatic claim audit</a></li>
+  <li><a href="#claim-audit-checklist" id="toc-claim-audit-checklist" class="nav-link" data-scroll-target="#claim-audit-checklist">Claim-audit checklist</a>
+  <ul class="collapse">
+  <li><a href="#question-and-design" id="toc-question-and-design" class="nav-link" data-scroll-target="#question-and-design">Question and design</a></li>
+  <li><a href="#estimate-and-uncertainty" id="toc-estimate-and-uncertainty" class="nav-link" data-scroll-target="#estimate-and-uncertainty">Estimate and uncertainty</a></li>
+  <li><a href="#data-and-method" id="toc-data-and-method" class="nav-link" data-scroll-target="#data-and-method">Data and method</a></li>
+  <li><a href="#robustness-and-multiplicity" id="toc-robustness-and-multiplicity" class="nav-link" data-scroll-target="#robustness-and-multiplicity">Robustness and multiplicity</a></li>
+  <li><a href="#communication" id="toc-communication" class="nav-link" data-scroll-target="#communication">Communication</a></li>
+  </ul></li>
+  <li><a href="#common-interpretation-failures" id="toc-common-interpretation-failures" class="nav-link" data-scroll-target="#common-interpretation-failures">Common interpretation failures</a></li>
+  <li><a href="#chapter-summary" id="toc-chapter-summary" class="nav-link" data-scroll-target="#chapter-summary">Chapter summary</a></li>
+  <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection questions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-pipelines-and-cross-validation.html">Reproducibility and Interpretation</a></li><li class="breadcrumb-item"><a href="./14-from-results-to-defensible-claims.html"><span class="chapter-title">From Results to Defensible Claims</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-lesson14" class="quarto-section-identifier"><span class="chapter-title">From Results to Defensible Claims</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Aug 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> ADS-L14</li>
+<li><strong>Type:</strong> Analytical interpretation</li>
+<li><strong>Audience:</strong> Intermediate</li>
+<li><strong>Theme:</strong> Defensible claims remain proportional to the evidence</li>
+</ul>
+</div>
+<section id="why-this-chapter-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-chapter-matters">Why this chapter matters</h2>
+<p>An analysis is not complete when a model produces a coefficient, a confidence interval, or a performance score. The final analytical task is to decide what the evidence permits us to say.</p>
+<p>That step is difficult because results and claims are not the same thing. A result is an output of an analytical procedure. A claim is a statement about the data, a population, a future observation, or a causal process. Moving from one to the other requires judgment about the study design, data quality, assumptions, uncertainty, and intended scope.</p>
+<p>A defensible claim is therefore not the strongest statement that sounds plausible. It is the strongest statement that remains supported after the full evidence chain has been examined.</p>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
+<ol type="1">
+<li>distinguish statistical results from substantive claims;</li>
+<li>match claim strength to the study design and analytical objective;</li>
+<li>interpret effect estimates together with uncertainty and practical importance;</li>
+<li>separate descriptive, associational, predictive, and causal language;</li>
+<li>identify when subgroup, multiple-testing, or robustness issues weaken a conclusion;</li>
+<li>write concise claims that state the estimate, scope, uncertainty, and limitations; and</li>
+<li>audit an analytical claim before it is communicated.</li>
+</ol>
+</section>
+<section id="results-do-not-speak-for-themselves" class="level2">
+<h2 class="anchored" data-anchor-id="results-do-not-speak-for-themselves">Results do not speak for themselves</h2>
+<p>Consider the statement:</p>
+<blockquote class="blockquote">
+<p>The fitted coefficient for the intervention variable was -4.2, with a 95% confidence interval from -6.8 to -1.6.</p>
+</blockquote>
+<p>This is a statistical result. Its interpretation depends on questions that are not contained in the coefficient alone:</p>
+<ul>
+<li>What outcome was measured, and in what units?</li>
+<li>Was the intervention assigned or merely observed?</li>
+<li>Which variables were included in the model?</li>
+<li>Is the model form appropriate?</li>
+<li>How representative is the analytical sample?</li>
+<li>Were missing data, repeated measurements, or clustering handled appropriately?</li>
+<li>Was this analysis planned before the results were inspected?</li>
+</ul>
+<p>Without that context, changing “the coefficient was -4.2” into “the intervention reduces the outcome by 4.2 units” may overstate what the analysis establishes.</p>
+</section>
+<section id="the-evidence-to-claim-chain" class="level2">
+<h2 class="anchored" data-anchor-id="the-evidence-to-claim-chain">The evidence-to-claim chain</h2>
+<p>A claim is only as reliable as the weakest important link connecting the research question to the reported conclusion.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Link</th>
+<th>Guiding question</th>
+<th>Common threat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Question</td>
+<td>Is the target question clearly defined?</td>
+<td>Vague population, outcome, or estimand</td>
+</tr>
+<tr class="even">
+<td>Design</td>
+<td>Can the design support the intended claim?</td>
+<td>Causal language from observational data</td>
+</tr>
+<tr class="odd">
+<td>Measurement</td>
+<td>Do variables represent the intended concepts?</td>
+<td>Misclassification or measurement error</td>
+</tr>
+<tr class="even">
+<td>Data</td>
+<td>Is the analytical sample suitable?</td>
+<td>Selection bias, missingness, or leakage</td>
+</tr>
+<tr class="odd">
+<td>Method</td>
+<td>Does the method match the data structure?</td>
+<td>Violated assumptions or ignored dependence</td>
+</tr>
+<tr class="even">
+<td>Result</td>
+<td>Are effect size and uncertainty reported?</td>
+<td>Reliance on a p-value alone</td>
+</tr>
+<tr class="odd">
+<td>Robustness</td>
+<td>Does the conclusion survive reasonable alternatives?</td>
+<td>Dependence on one fragile specification</td>
+</tr>
+<tr class="even">
+<td>Scope</td>
+<td>Is the claim limited to the supported population and setting?</td>
+<td>Unwarranted generalisation</td>
+</tr>
+</tbody>
+</table>
+<p>This chain discourages a narrow focus on the final model output. A technically correct estimate can still support a weak claim if the design, measurement, or scope is poorly aligned with the question.</p>
+</section>
+<section id="four-kinds-of-analytical-claims" class="level2">
+<h2 class="anchored" data-anchor-id="four-kinds-of-analytical-claims">Four kinds of analytical claims</h2>
+<p>The language used in a conclusion should reveal the kind of evidence being presented.</p>
+<section id="descriptive-claims" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-claims">Descriptive claims</h3>
+<p>Descriptive claims summarise what was observed in the analysed data.</p>
+<blockquote class="blockquote">
+<p>In the analytical sample, the median waiting time was 38 minutes.</p>
+</blockquote>
+<p>The claim does not automatically extend to people, locations, or periods outside the sample. Generalisation requires a sampling or transportability argument.</p>
+</section>
+<section id="associational-claims" class="level3">
+<h3 class="anchored" data-anchor-id="associational-claims">Associational claims</h3>
+<p>Associational claims describe how variables vary together after any stated adjustments.</p>
+<blockquote class="blockquote">
+<p>Higher baseline risk was associated with longer hospital stay after adjustment for age and recorded comorbidities.</p>
+</blockquote>
+<p>The phrase “was associated with” is deliberate. Statistical adjustment does not by itself remove unmeasured confounding, selection bias, reverse causation, or measurement error.</p>
+</section>
+<section id="predictive-claims" class="level3">
+<h3 class="anchored" data-anchor-id="predictive-claims">Predictive claims</h3>
+<p>Predictive claims concern a model’s ability to estimate outcomes for new observations drawn from a relevant target setting.</p>
+<blockquote class="blockquote">
+<p>On the held-out test data, the model discriminated between the two outcome classes with a ROC AUC of 0.84.</p>
+</blockquote>
+<p>This statement describes test-set performance. It does not establish causality, guarantee deployment performance, or show that the model is clinically or operationally useful. Those conclusions require additional evidence, including calibration, threshold consequences, external validation, and workflow evaluation.</p>
+</section>
+<section id="causal-claims" class="level3">
+<h3 class="anchored" data-anchor-id="causal-claims">Causal claims</h3>
+<p>Causal claims describe how an outcome would change under an intervention or exposure contrast.</p>
+<blockquote class="blockquote">
+<p>Under the study assumptions, assignment to the intervention reduced the mean outcome by an estimated 4.2 units compared with control.</p>
+</blockquote>
+<p>Randomisation can strengthen this interpretation, but implementation failures, non-adherence, attrition, interference, and outcome measurement still matter. In observational studies, causal language requires a clearly defined estimand, a credible identification strategy, and explicit assumptions—not merely the inclusion of covariates in a regression model.</p>
+</section>
+</section>
+<section id="match-the-wording-to-the-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="match-the-wording-to-the-evidence">Match the wording to the evidence</h2>
+<p>Small wording changes can substantially alter the strength of a claim.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Evidence supports</th>
+<th>Prefer</th>
+<th>Avoid unless justified</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sample description</td>
+<td>“In this sample, 31%…”</td>
+<td>“In the population, 31%…”</td>
+</tr>
+<tr class="even">
+<td>Observed relationship</td>
+<td>“X was associated with Y”</td>
+<td>“X caused Y”</td>
+</tr>
+<tr class="odd">
+<td>Adjusted relationship</td>
+<td>“After adjustment for the measured covariates…”</td>
+<td>“After controlling for all other factors…”</td>
+</tr>
+<tr class="even">
+<td>Test-set prediction</td>
+<td>“The model achieved…”</td>
+<td>“The model will perform…”</td>
+</tr>
+<tr class="odd">
+<td>Uncertain estimate</td>
+<td>“The estimate was compatible with…”</td>
+<td>“There was no effect”</td>
+</tr>
+<tr class="even">
+<td>Subgroup result</td>
+<td>“Exploratory evidence suggested…”</td>
+<td>“The treatment works only for…”</td>
+</tr>
+<tr class="odd">
+<td>Robust result</td>
+<td>“The conclusion was similar across…”</td>
+<td>“The result was proven”</td>
+</tr>
+</tbody>
+</table>
+<p>Phrases such as “all other factors,” “proved,” and “no effect” often imply more certainty than an analysis provides. Precise language is not timid language; it is evidence-calibrated language.</p>
+</section>
+<section id="interpret-estimates-not-isolated-p-values" class="level2">
+<h2 class="anchored" data-anchor-id="interpret-estimates-not-isolated-p-values">Interpret estimates, not isolated p-values</h2>
+<p>A p-value addresses a limited question about the compatibility of the data with a statistical model under a null hypothesis. It does not measure:</p>
+<ul>
+<li>the size of an effect;</li>
+<li>the probability that the null hypothesis is true;</li>
+<li>the probability that a result will replicate;</li>
+<li>the practical importance of an estimate; or</li>
+<li>the absence of bias.</li>
+</ul>
+<p>Interpretation should begin with the effect estimate and its scale. Uncertainty should then be used to describe which values remain reasonably compatible with the data and model.</p>
+<p>Suppose a mean difference is estimated as -4.2 units with a 95% confidence interval from -6.8 to -1.6. A defensible interpretation is:</p>
+<blockquote class="blockquote">
+<p>The intervention group had an estimated mean outcome 4.2 units lower than the comparison group. Under the fitted model, values from 1.6 to 6.8 units lower were reasonably compatible with the data.</p>
+</blockquote>
+<p>This reports direction, magnitude, units, comparison, and uncertainty. Whether the result is important depends on substantive context. If a difference smaller than 5 units has little practical value, the interval includes both modest and practically important effects.</p>
+<section id="statistical-and-practical-importance" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-and-practical-importance">Statistical and practical importance</h3>
+<p>Statistical evidence and practical importance answer different questions.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Statistical evidence</th>
+<th>Practical importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>How precisely was the effect estimated?</td>
+<td>Is the effect large enough to matter?</td>
+</tr>
+<tr class="even">
+<td>How compatible are the data with a reference hypothesis?</td>
+<td>Would the effect change a decision or outcome?</td>
+</tr>
+<tr class="odd">
+<td>Influenced by sample size and variability</td>
+<td>Influenced by domain thresholds, costs, and consequences</td>
+</tr>
+</tbody>
+</table>
+<p>A very small effect can be estimated precisely in a large sample. A consequential effect can remain uncertain in a small sample. Both dimensions should be reported.</p>
+</section>
+</section>
+<section id="absence-of-evidence-is-not-evidence-of-absence" class="level2">
+<h2 class="anchored" data-anchor-id="absence-of-evidence-is-not-evidence-of-absence">Absence of evidence is not evidence of absence</h2>
+<p>A non-significant result does not establish that an effect is zero. It may reflect limited information, high variability, weak measurement, an insensitive design, or a genuinely small effect.</p>
+<p>Compare these conclusions:</p>
+<blockquote class="blockquote">
+<p>There was no difference between groups because p &gt; 0.05.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The estimated difference was 1.1 units, with a 95% confidence interval from -3.4 to 5.6. The data were compatible with effects in both directions, so the study did not estimate the difference precisely enough to support a clear conclusion.</p>
+</blockquote>
+<p>The second statement distinguishes uncertainty from equivalence. If the scientific objective is to demonstrate that differences are small enough to be unimportant, an equivalence or non-inferiority design with prespecified margins may be required.</p>
+</section>
+<section id="claims-from-predictive-models" class="level2">
+<h2 class="anchored" data-anchor-id="claims-from-predictive-models">Claims from predictive models</h2>
+<p>Predictive modelling introduces its own interpretation risks. Feature importance, model coefficients, and explanation values describe aspects of a fitted model; they do not automatically describe causal mechanisms or stable real-world relationships.</p>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Age was the most important predictor, so increasing age causes the outcome.</p>
+</blockquote>
+<p>This conclusion is invalid. Importance may reflect association, scale, correlation among predictors, missingness patterns, or the model’s structure. A more defensible statement is:</p>
+<blockquote class="blockquote">
+<p>Within the fitted model and evaluated data, age contributed strongly to prediction according to permutation importance. This does not establish that age or a correlated feature caused the outcome.</p>
+</blockquote>
+<p>Predictive claims should specify:</p>
+<ul>
+<li>the evaluation data and whether they were held out;</li>
+<li>the metric and its uncertainty when available;</li>
+<li>the target population and prediction horizon;</li>
+<li>whether calibration and decision thresholds were assessed;</li>
+<li>whether validation was internal, temporal, or external; and</li>
+<li>known differences between development and deployment settings.</li>
+</ul>
+</section>
+<section id="multiplicity-and-selective-reporting" class="level2">
+<h2 class="anchored" data-anchor-id="multiplicity-and-selective-reporting">Multiplicity and selective reporting</h2>
+<p>When many outcomes, predictors, subgroups, model specifications, or thresholds are examined, some apparently strong results can occur by chance. The problem becomes more serious when only the most favourable findings are reported.</p>
+<p>Defensible reporting distinguishes among:</p>
+<ul>
+<li><strong>confirmatory analyses</strong>, which test prespecified questions using a planned procedure;</li>
+<li><strong>sensitivity analyses</strong>, which examine whether conclusions depend on reasonable choices; and</li>
+<li><strong>exploratory analyses</strong>, which generate patterns or hypotheses for further study.</li>
+</ul>
+<p>Multiple-testing adjustments may be appropriate, but transparency is essential even when no formal adjustment is used. Report the size of the search space, not only the selected result.</p>
+</section>
+<section id="subgroup-claims-require-special-care" class="level2">
+<h2 class="anchored" data-anchor-id="subgroup-claims-require-special-care">Subgroup claims require special care</h2>
+<p>Subgroup analyses are often appealing because they suggest that an effect differs across people or settings. They are also frequently underpowered and vulnerable to chance findings.</p>
+<p>Evidence that one subgroup has a significant result while another does not is not, by itself, evidence that the subgroup effects differ. The relevant question is whether the contrast between subgroup effects is supported, commonly through an interaction analysis.</p>
+<p>A careful subgroup conclusion might read:</p>
+<blockquote class="blockquote">
+<p>The estimated association was stronger in the younger subgroup, but the interaction interval was wide and included no subgroup difference. This exploratory pattern requires confirmation in data designed to assess effect modification.</p>
+</blockquote>
+</section>
+<section id="robustness-strengthensbut-does-not-provea-claim" class="level2">
+<h2 class="anchored" data-anchor-id="robustness-strengthensbut-does-not-provea-claim">Robustness strengthens—but does not prove—a claim</h2>
+<p>Robustness analysis asks whether the main conclusion changes under reasonable alternative decisions. Depending on the study, useful checks may include:</p>
+<ul>
+<li>alternative outcome or exposure definitions;</li>
+<li>different but defensible covariate sets;</li>
+<li>transformations or nonlinear functional forms;</li>
+<li>robust or cluster-aware uncertainty estimates;</li>
+<li>alternative missing-data assumptions;</li>
+<li>influential-observation diagnostics;</li>
+<li>negative controls or falsification checks;</li>
+<li>temporal or external validation; and</li>
+<li>analyses that quantify sensitivity to unmeasured bias.</li>
+</ul>
+<p>Consistency across reasonable analyses increases confidence that the conclusion is not an artefact of one arbitrary choice. It does not eliminate shared biases in the data or design.</p>
+</section>
+<section id="a-worked-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="a-worked-interpretation">A worked interpretation</h2>
+<p>Imagine an observational study examining whether weekly training hours are related to employee productivity. The adjusted regression estimate is 1.8 additional productivity points per training hour, with a 95% confidence interval from 0.6 to 3.0.</p>
+<section id="overstated-claim" class="level3">
+<h3 class="anchored" data-anchor-id="overstated-claim">Overstated claim</h3>
+<blockquote class="blockquote">
+<p>Each extra hour of training increases employee productivity by 1.8 points.</p>
+</blockquote>
+<p>This uses causal language despite an observational design and treats the estimate as exact.</p>
+</section>
+<section id="defensible-claim" class="level3">
+<h3 class="anchored" data-anchor-id="defensible-claim">Defensible claim</h3>
+<blockquote class="blockquote">
+<p>Among employees included in the analysis, each additional weekly training hour was associated with an estimated 1.8-point higher productivity score after adjustment for measured role, experience, and department characteristics (95% CI: 0.6 to 3.0). Because training was not randomly assigned, residual confounding and reverse causation remain possible; the estimate should not be interpreted as the causal effect of increasing training time.</p>
+</blockquote>
+<p>The revised claim contains five useful elements:</p>
+<ol type="1">
+<li><strong>scope</strong> — employees included in the analysis;</li>
+<li><strong>contrast</strong> — each additional weekly training hour;</li>
+<li><strong>estimate and units</strong> — 1.8 productivity points;</li>
+<li><strong>uncertainty</strong> — the confidence interval; and</li>
+<li><strong>limitation</strong> — the observational design does not identify a causal effect by itself.</li>
+</ol>
+</section>
+</section>
+<section id="a-reusable-claim-template" class="level2">
+<h2 class="anchored" data-anchor-id="a-reusable-claim-template">A reusable claim template</h2>
+<p>The following structure works for many analytical conclusions:</p>
+<blockquote class="blockquote">
+<p>In <strong>[population or dataset]</strong>, <strong>[comparison or predictor]</strong> was <strong>[associated with / predictive of / estimated to cause]</strong> <strong>[outcome]</strong> by <strong>[effect estimate and units]</strong> under <strong>[design and model conditions]</strong>. The uncertainty interval was <strong>[interval]</strong>. The interpretation is limited by <strong>[most important design, data, or modelling limitation]</strong>.</p>
+</blockquote>
+<p>Not every sentence needs every component. The goal is to make the claim auditable, not mechanically long.</p>
+</section>
+<section id="a-programmatic-claim-audit" class="level2">
+<h2 class="anchored" data-anchor-id="a-programmatic-claim-audit">A programmatic claim audit</h2>
+<p>Interpretation cannot be automated completely, but a structured record can prevent important elements from being omitted.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>claim_audit <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"claim_type"</span>: <span class="st">"associational"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>: <span class="st">"employees included in the analytical sample"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"contrast"</span>: <span class="st">"one additional weekly training hour"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"outcome"</span>: <span class="st">"productivity score"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estimate"</span>: <span class="fl">1.8</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"interval_95"</span>: (<span class="fl">0.6</span>, <span class="fl">3.0</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"adjustment_set"</span>: [<span class="st">"role"</span>, <span class="st">"experience"</span>, <span class="st">"department"</span>],</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"design"</span>: <span class="st">"observational cohort"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"primary_limitation"</span>: <span class="st">"possible residual confounding"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"causal_language_supported"</span>: <span class="va">False</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>required_fields <span class="op">=</span> [</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"claim_type"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"contrast"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"outcome"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estimate"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"design"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"primary_limitation"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>missing <span class="op">=</span> [field <span class="cf">for</span> field <span class="kw">in</span> required_fields <span class="cf">if</span> <span class="kw">not</span> claim_audit.get(field)]</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing:</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Incomplete claim audit: </span><span class="sc">{</span>missing<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This record does not decide whether the analysis is valid. It makes the intended claim and its evidential basis explicit enough for review.</p>
+</section>
+<section id="claim-audit-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="claim-audit-checklist">Claim-audit checklist</h2>
+<p>Before reporting a conclusion, ask:</p>
+<section id="question-and-design" class="level3">
+<h3 class="anchored" data-anchor-id="question-and-design">Question and design</h3>
+<ul>
+<li>What exact claim am I trying to make?</li>
+<li>Is it descriptive, associational, predictive, or causal?</li>
+<li>Can the study design support that type of claim?</li>
+</ul>
+</section>
+<section id="estimate-and-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="estimate-and-uncertainty">Estimate and uncertainty</h3>
+<ul>
+<li>Have I reported the estimate, comparison, and units?</li>
+<li>Have I described uncertainty rather than relying only on significance?</li>
+<li>Does the interval include substantively different conclusions?</li>
+</ul>
+</section>
+<section id="data-and-method" class="level3">
+<h3 class="anchored" data-anchor-id="data-and-method">Data and method</h3>
+<ul>
+<li>Are the population, sample, and exclusions clear?</li>
+<li>Could missingness, selection, leakage, confounding, or measurement error alter the conclusion?</li>
+<li>Were dependence, clustering, repeated observations, and model assumptions addressed?</li>
+</ul>
+</section>
+<section id="robustness-and-multiplicity" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-and-multiplicity">Robustness and multiplicity</h3>
+<ul>
+<li>Was the analysis prespecified, exploratory, or selected after inspection?</li>
+<li>How many outcomes, subgroups, models, or thresholds were examined?</li>
+<li>Does the conclusion persist under reasonable alternative analyses?</li>
+</ul>
+</section>
+<section id="communication" class="level3">
+<h3 class="anchored" data-anchor-id="communication">Communication</h3>
+<ul>
+<li>Is the wording proportional to the evidence?</li>
+<li>Have I separated statistical evidence from practical importance?</li>
+<li>Is the claim limited to the supported population, setting, and time period?</li>
+<li>Have I stated the most decision-relevant limitation?</li>
+</ul>
+<p>If a claim fails the audit, revise either the analysis or the language. Do not repair a weak evidence chain with stronger prose.</p>
+</section>
+</section>
+<section id="common-interpretation-failures" class="level2">
+<h2 class="anchored" data-anchor-id="common-interpretation-failures">Common interpretation failures</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Failure</th>
+<th>Why it is misleading</th>
+<th>Better practice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treating significance as importance</td>
+<td>A small effect can be precisely estimated</td>
+<td>Report effect size, uncertainty, and a practical threshold</td>
+</tr>
+<tr class="even">
+<td>Treating non-significance as no effect</td>
+<td>Imprecision can hide meaningful effects</td>
+<td>Interpret the estimate and interval</td>
+</tr>
+<tr class="odd">
+<td>Using causal verbs for associations</td>
+<td>Adjustment may not remove bias</td>
+<td>Use associational language or justify identification assumptions</td>
+</tr>
+<tr class="even">
+<td>Generalising beyond the sample</td>
+<td>External validity is not automatic</td>
+<td>State the supported population and setting</td>
+</tr>
+<tr class="odd">
+<td>Interpreting feature importance causally</td>
+<td>Importance describes model behaviour</td>
+<td>Separate prediction, explanation, and intervention</td>
+</tr>
+<tr class="even">
+<td>Selecting favourable analyses</td>
+<td>Selection exaggerates evidence</td>
+<td>Distinguish planned, sensitivity, and exploratory analyses</td>
+</tr>
+<tr class="odd">
+<td>Hiding model dependence</td>
+<td>One specification may drive the result</td>
+<td>Report robustness across reasonable alternatives</td>
+</tr>
+<tr class="even">
+<td>Listing every limitation equally</td>
+<td>Readers cannot identify the main threat</td>
+<td>Prioritise limitations that could change the decision</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="chapter-summary" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-summary">Chapter summary</h2>
+<p>A defensible claim preserves the distinction between what an analysis calculated and what the evidence establishes. Strong interpretation requires alignment among the question, design, measurement, data, method, uncertainty, robustness, and scope.</p>
+<p>The core principles are:</p>
+<ul>
+<li>classify the claim before choosing its language;</li>
+<li>report effect size and uncertainty together;</li>
+<li>separate statistical evidence from practical importance;</li>
+<li>avoid turning association or model importance into causation;</li>
+<li>treat non-significant, subgroup, and multiple-testing results cautiously;</li>
+<li>use robustness checks to expose dependence on analytical choices; and</li>
+<li>state the population, conditions, and most important limitation.</li>
+</ul>
+<p>The aim is not to weaken every conclusion. It is to make each conclusion exactly as strong as the evidence allows.</p>
+</section>
+<section id="reflection-questions" class="level2">
+<h2 class="anchored" data-anchor-id="reflection-questions">Reflection questions</h2>
+<ol type="1">
+<li>What is the strongest claim your current study design can support?</li>
+<li>Which single assumption would most weaken your conclusion if it were false?</li>
+<li>Does your uncertainty interval include effects that would lead to different practical decisions?</li>
+<li>Which parts of your analysis were confirmatory, exploratory, or selected after viewing the data?</li>
+<li>How would you rewrite your main result for a reader who might otherwise interpret association as causation?</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./13-feature-importance-and-interpretation.html" class="pagination-link" aria-label="Feature Importance and Interpretation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Feature Importance and Interpretation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./15-communicating-results-clearly.html" class="pagination-link" aria-label="Communicating Results Clearly">
+        <span class="nav-page-text"><span class="chapter-title">Communicating Results Clearly</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

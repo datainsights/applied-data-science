@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Hypothesis Testing – Advanced Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./07-regression-modelling.html" rel="next">
+<link href="./05-statistical-inference.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-231ef2f9d4ce3268f31ef752336c15d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-statistical-inference.html">Statistical Inference and Modelling</a></li><li class="breadcrumb-item"><a href="./06-hypothesis-testing.html"><span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Advanced Data Science</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Orientation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-setting-up-environment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Setting Up a Reproducible Analytical Environment</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced Data Preparation and Exploration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-advanced-data-preparation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Data Preparation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-feature-engineering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Engineering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-exploratory-analysis-for-complex-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Analysis for Complex Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Statistical Inference and Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-statistical-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistical Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-hypothesis-testing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Hypothesis Testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-regression-modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression Modelling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Predictive and Unsupervised Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-predictive-model-building.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Predictive Model Building</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-model-evaluation-and-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Evaluation and Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-model-improvement.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Improvement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-unsupervised-learning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Reproducibility and Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-pipelines-and-cross-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pipelines and Cross-Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-feature-importance-and-interpretation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Feature Importance and Interpretation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-from-results-to-defensible-claims.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Results to Defensible Claims</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communication and Responsible Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-communicating-results-clearly.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Communicating Results Clearly</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-from-analysis-to-decision-making.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">From Analysis to Decision-Making</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-limitations-and-responsible-use.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limitations and Responsible Use</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">End-to-End Practice</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-end-to-end-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Case Study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix and References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./999-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#from-a-research-question-to-a-testable-claim" id="toc-from-a-research-question-to-a-testable-claim" class="nav-link" data-scroll-target="#from-a-research-question-to-a-testable-claim">From a research question to a testable claim</a></li>
+  <li><a href="#the-logic-of-hypothesis-testing" id="toc-the-logic-of-hypothesis-testing" class="nav-link" data-scroll-target="#the-logic-of-hypothesis-testing">The logic of hypothesis testing</a>
+  <ul class="collapse">
+  <li><a href="#significance-level-and-decision-rule" id="toc-significance-level-and-decision-rule" class="nav-link" data-scroll-target="#significance-level-and-decision-rule">Significance level and decision rule</a></li>
+  </ul></li>
+  <li><a href="#errors-power-and-sample-size" id="toc-errors-power-and-sample-size" class="nav-link" data-scroll-target="#errors-power-and-sample-size">Errors, power, and sample size</a></li>
+  <li><a href="#estimation-comes-first" id="toc-estimation-comes-first" class="nav-link" data-scroll-target="#estimation-comes-first">Estimation comes first</a></li>
+  <li><a href="#select-a-method-from-the-study-design" id="toc-select-a-method-from-the-study-design" class="nav-link" data-scroll-target="#select-a-method-from-the-study-design">Select a method from the study design</a></li>
+  <li><a href="#assumptions-are-part-of-the-analysis" id="toc-assumptions-are-part-of-the-analysis" class="nav-link" data-scroll-target="#assumptions-are-part-of-the-analysis">Assumptions are part of the analysis</a>
+  <ul class="collapse">
+  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence">Independence</a></li>
+  <li><a href="#distributional-form" id="toc-distributional-form" class="nav-link" data-scroll-target="#distributional-form">Distributional form</a></li>
+  <li><a href="#variance-and-influential-observations" id="toc-variance-and-influential-observations" class="nav-link" data-scroll-target="#variance-and-influential-observations">Variance and influential observations</a></li>
+  </ul></li>
+  <li><a href="#a-reproducible-two-group-analysis" id="toc-a-reproducible-two-group-analysis" class="nav-link" data-scroll-target="#a-reproducible-two-group-analysis">A reproducible two-group analysis</a>
+  <ul class="collapse">
+  <li><a href="#effect-size-and-confidence-interval" id="toc-effect-size-and-confidence-interval" class="nav-link" data-scroll-target="#effect-size-and-confidence-interval">Effect size and confidence interval</a></li>
+  </ul></li>
+  <li><a href="#randomization-and-resampling-methods" id="toc-randomization-and-resampling-methods" class="nav-link" data-scroll-target="#randomization-and-resampling-methods">Randomization and resampling methods</a>
+  <ul class="collapse">
+  <li><a href="#permutation-test" id="toc-permutation-test" class="nav-link" data-scroll-target="#permutation-test">Permutation test</a></li>
+  <li><a href="#bootstrap-confidence-interval" id="toc-bootstrap-confidence-interval" class="nav-link" data-scroll-target="#bootstrap-confidence-interval">Bootstrap confidence interval</a></li>
+  </ul></li>
+  <li><a href="#visualize-the-estimate-and-the-reference-distribution" id="toc-visualize-the-estimate-and-the-reference-distribution" class="nav-link" data-scroll-target="#visualize-the-estimate-and-the-reference-distribution">Visualize the estimate and the reference distribution</a>
+  <ul class="collapse">
+  <li><a href="#raw-data-and-group-estimates" id="toc-raw-data-and-group-estimates" class="nav-link" data-scroll-target="#raw-data-and-group-estimates">Raw data and group estimates</a></li>
+  <li><a href="#permutation-reference-distribution" id="toc-permutation-reference-distribution" class="nav-link" data-scroll-target="#permutation-reference-distribution">Permutation reference distribution</a></li>
+  <li><a href="#magnitude-and-precision" id="toc-magnitude-and-precision" class="nav-link" data-scroll-target="#magnitude-and-precision">Magnitude and precision</a></li>
+  </ul></li>
+  <li><a href="#multiple-testing-and-selective-reporting" id="toc-multiple-testing-and-selective-reporting" class="nav-link" data-scroll-target="#multiple-testing-and-selective-reporting">Multiple testing and selective reporting</a></li>
+  <li><a href="#equivalence-and-non-inferiority" id="toc-equivalence-and-non-inferiority" class="nav-link" data-scroll-target="#equivalence-and-non-inferiority">Equivalence and non-inferiority</a></li>
+  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes">Common mistakes</a>
+  <ul class="collapse">
+  <li><a href="#treating-significance-as-importance" id="toc-treating-significance-as-importance" class="nav-link" data-scroll-target="#treating-significance-as-importance">Treating significance as importance</a></li>
+  <li><a href="#treating-non-significance-as-no-effect" id="toc-treating-non-significance-as-no-effect" class="nav-link" data-scroll-target="#treating-non-significance-as-no-effect">Treating non-significance as no effect</a></li>
+  <li><a href="#testing-assumptions-to-choose-a-test-mechanically" id="toc-testing-assumptions-to-choose-a-test-mechanically" class="nav-link" data-scroll-target="#testing-assumptions-to-choose-a-test-mechanically">Testing assumptions to choose a test mechanically</a></li>
+  <li><a href="#ignoring-dependence" id="toc-ignoring-dependence" class="nav-link" data-scroll-target="#ignoring-dependence">Ignoring dependence</a></li>
+  <li><a href="#running-many-analyses-and-reporting-only-the-smallest-result" id="toc-running-many-analyses-and-reporting-only-the-smallest-result" class="nav-link" data-scroll-target="#running-many-analyses-and-reporting-only-the-smallest-result">Running many analyses and reporting only the smallest result</a></li>
+  <li><a href="#writing-causal-conclusions-from-observational-associations" id="toc-writing-causal-conclusions-from-observational-associations" class="nav-link" data-scroll-target="#writing-causal-conclusions-from-observational-associations">Writing causal conclusions from observational associations</a></li>
+  </ul></li>
+  <li><a href="#a-reporting-template" id="toc-a-reporting-template" class="nav-link" data-scroll-target="#a-reporting-template">A reporting template</a></li>
+  <li><a href="#a-practical-decision-workflow" id="toc-a-practical-decision-workflow" class="nav-link" data-scroll-target="#a-practical-decision-workflow">A practical decision workflow</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#next-step" id="toc-next-step" class="nav-link" data-scroll-target="#next-step">Next step</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-statistical-inference.html">Statistical Inference and Modelling</a></li><li class="breadcrumb-item"><a href="./06-hypothesis-testing.html"><span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="lesson06" class="quarto-section-identifier"><span class="chapter-title">Hypothesis Testing</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Aug 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> ADS-L06</li>
+<li><strong>Type:</strong> Hypothesis testing</li>
+<li><strong>Audience:</strong> Intermediate</li>
+<li><strong>Theme:</strong> Statistical evidence requires assumptions, context, and careful interpretation</li>
+</ul>
+</div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Hypothesis testing provides a structured way to evaluate whether an observed pattern is compatible with a stated statistical model. It is useful when an analysis must move beyond describing a sample and address a focused question about a population, process, or intervention.</p>
+<p>A statistical test does not prove that a scientific claim is true or false. It measures how surprising the observed data—or a more extreme result—would be if the null hypothesis and the test assumptions were correct. A defensible conclusion therefore combines the test result with the estimated effect, its uncertainty, the study design, and subject-matter context.</p>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>translate a research question into statistical hypotheses;</li>
+<li>distinguish statistical significance from practical importance;</li>
+<li>select a test that matches the design, variable types, and assumptions;</li>
+<li>interpret <em>p</em>-values, confidence intervals, and effect sizes together;</li>
+<li>use permutation and bootstrap methods when they are appropriate;</li>
+<li>control false discoveries when testing multiple hypotheses; and</li>
+<li>report conclusions without overstating the evidence.</li>
+</ul>
+</section>
+<section id="from-a-research-question-to-a-testable-claim" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-research-question-to-a-testable-claim">From a research question to a testable claim</h2>
+<p>Begin with the scientific question, not the software function. A useful question identifies the population, outcome, comparison or exposure, and quantity of interest.</p>
+<p>Suppose a study compares systolic blood pressure after two treatment strategies. Let</p>
+<p><span class="math display">\[
+\Delta = \mu_A - \mu_B,
+\]</span></p>
+<p>where <span class="math inline">\(\mu_A\)</span> and <span class="math inline">\(\mu_B\)</span> are the population mean outcomes under strategies A and B. A two-sided test can be written as</p>
+<p><span class="math display">\[
+H_0: \Delta = 0
+\qquad \text{versus} \qquad
+H_1: \Delta \ne 0.
+\]</span></p>
+<p>The null hypothesis, <span class="math inline">\(H_0\)</span>, represents the reference model. The alternative hypothesis, <span class="math inline">\(H_1\)</span>, represents the departure the study is designed to detect.</p>
+<p>The parameter must match the question. If the scientific interest is a median, probability, odds ratio, risk difference, or regression coefficient, a hypothesis about means may answer the wrong question.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Directional hypotheses require advance justification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use a one-sided alternative only when effects in the opposite direction would not alter the scientific or practical conclusion and the direction was specified before examining the data. Choosing a one-sided test after seeing the result invalidates its interpretation.</p>
+</div>
+</div>
+</section>
+<section id="the-logic-of-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="the-logic-of-hypothesis-testing">The logic of hypothesis testing</h2>
+<p>A conventional test follows a sequence:</p>
+<ol type="1">
+<li>State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> in terms of a population parameter.</li>
+<li>Choose a test statistic that measures departure from <span class="math inline">\(H_0\)</span>.</li>
+<li>Determine its reference distribution under <span class="math inline">\(H_0\)</span>.</li>
+<li>Calculate the observed statistic and <em>p</em>-value.</li>
+<li>Evaluate assumptions and sensitivity.</li>
+<li>Interpret the result alongside the effect estimate and uncertainty.</li>
+</ol>
+<p>The <em>p</em>-value is</p>
+<p><span class="math display">\[
+p = P(\text{result at least as extreme as observed} \mid H_0,\ \text{model assumptions}).
+\]</span></p>
+<p>It is not the probability that <span class="math inline">\(H_0\)</span> is true, the probability that the result occurred by chance, or the probability that the finding will replicate.</p>
+<section id="significance-level-and-decision-rule" class="level3">
+<h3 class="anchored" data-anchor-id="significance-level-and-decision-rule">Significance level and decision rule</h3>
+<p>The significance level, <span class="math inline">\(\alpha\)</span>, is a pre-specified long-run tolerance for rejecting a true null hypothesis under repeated use of the procedure. A common value is 0.05, but it is not universally appropriate.</p>
+<p>If <span class="math inline">\(p \le \alpha\)</span>, the result is described as statistically significant under the stated procedure. If <span class="math inline">\(p &gt; \alpha\)</span>, the evidence is insufficient to reject <span class="math inline">\(H_0\)</span>. The second outcome is not evidence that the groups are identical or that the null hypothesis has been proven.</p>
+<p>Avoid reducing a result to a binary label. Values just below and just above 0.05 usually represent similar evidence, and neither conveys the size or importance of an effect.</p>
+</section>
+</section>
+<section id="errors-power-and-sample-size" class="level2">
+<h2 class="anchored" data-anchor-id="errors-power-and-sample-size">Errors, power, and sample size</h2>
+<p>Every testing procedure can make errors.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Reality</th>
+<th style="text-align: right;">Reject <span class="math inline">\(H_0\)</span></th>
+<th style="text-align: right;">Do not reject <span class="math inline">\(H_0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(H_0\)</span> is true</td>
+<td style="text-align: right;">Type I error</td>
+<td style="text-align: right;">Correct decision</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_0\)</span> is false</td>
+<td style="text-align: right;">Correct decision</td>
+<td style="text-align: right;">Type II error</td>
+</tr>
+</tbody>
+</table>
+<p>The Type I error rate is controlled by <span class="math inline">\(\alpha\)</span>. The Type II error probability is denoted by <span class="math inline">\(\beta\)</span>, and statistical power is</p>
+<p><span class="math display">\[
+\text{Power} = 1 - \beta.
+\]</span></p>
+<p>Power generally increases with a larger true effect, larger sample size, lower unexplained variability, more efficient design, and—in some settings—a higher <span class="math inline">\(\alpha\)</span>. Sample-size planning should use the smallest scientifically meaningful effect, not an unrealistically large effect chosen to make the study affordable.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Observed power is not a useful post-test explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Power is a design property evaluated over hypothetical repeated samples. After data have been observed, report the estimated effect and its confidence interval rather than calculating “observed power” from the same estimate.</p>
+</div>
+</div>
+</section>
+<section id="estimation-comes-first" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-comes-first">Estimation comes first</h2>
+<p>Hypothesis tests and confidence intervals address related questions. For many standard two-sided procedures, a test at level <span class="math inline">\(\alpha=0.05\)</span> rejects <span class="math inline">\(H_0\)</span> when the corresponding 95% confidence interval excludes the null value.</p>
+<p>A confidence interval adds information that a <em>p</em>-value cannot provide:</p>
+<ul>
+<li>the direction of the estimated effect;</li>
+<li>the range of values compatible with the data and model;</li>
+<li>the precision of the estimate; and</li>
+<li>whether scientifically meaningful effects remain plausible.</li>
+</ul>
+<p>An effect can be statistically significant but too small to matter. Conversely, a non-significant result with a wide confidence interval may remain compatible with both important benefit and important harm.</p>
+</section>
+<section id="select-a-method-from-the-study-design" class="level2">
+<h2 class="anchored" data-anchor-id="select-a-method-from-the-study-design">Select a method from the study design</h2>
+<p>The correct method depends on how observations were generated and related. Independence, pairing, clustering, repeated measurements, censoring, and confounding cannot be repaired by selecting a different function at the end of the analysis.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question and design</th>
+<th>Common method</th>
+<th>Effect to report</th>
+<th>Important checks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>One continuous outcome, two independent groups</td>
+<td>Welch’s two-sample <em>t</em>-test</td>
+<td>Mean difference; standardized mean difference when useful</td>
+<td>Independence; influential observations; sampling design</td>
+</tr>
+<tr class="even">
+<td>One continuous outcome, paired measurements</td>
+<td>Paired <em>t</em>-test</td>
+<td>Mean paired difference</td>
+<td>Correct pairing; distribution of within-pair differences</td>
+</tr>
+<tr class="odd">
+<td>Continuous or ordinal outcome, two independent groups</td>
+<td>Mann–Whitney test</td>
+<td>Probability-of-superiority or rank-based effect</td>
+<td>Independence; interpretation depends on distribution shapes</td>
+</tr>
+<tr class="even">
+<td>Continuous or ordinal outcome, paired measurements</td>
+<td>Wilcoxon signed-rank test</td>
+<td>Paired rank effect or median-compatible estimate</td>
+<td>Symmetry of paired differences for the usual location interpretation</td>
+</tr>
+<tr class="odd">
+<td>Continuous outcome, three or more groups</td>
+<td>ANOVA or linear model</td>
+<td>Group contrasts; partial <span class="math inline">\(\eta^2\)</span> when appropriate</td>
+<td>Residual structure; variance pattern; planned contrasts</td>
+</tr>
+<tr class="even">
+<td>Two categorical variables</td>
+<td>Chi-square test of independence</td>
+<td>Risk difference, risk ratio, odds ratio, or Cramér’s <span class="math inline">\(V\)</span></td>
+<td>Expected counts; independent observations</td>
+</tr>
+<tr class="odd">
+<td>Small categorical table</td>
+<td>Fisher’s exact test</td>
+<td>Odds ratio with interval</td>
+<td>Fixed-margin assumptions; sparse cells</td>
+</tr>
+<tr class="even">
+<td>Association between continuous variables</td>
+<td>Pearson or Spearman correlation</td>
+<td>Correlation coefficient with interval</td>
+<td>Linearity for Pearson; monotonicity for Spearman; influential points</td>
+</tr>
+<tr class="odd">
+<td>Outcome adjusted for predictors</td>
+<td>Regression model</td>
+<td>Coefficients or transformed effects with intervals</td>
+<td>Functional form; residuals; dependence; model specification</td>
+</tr>
+</tbody>
+</table>
+<p>Welch’s <em>t</em>-test is generally preferable to the equal-variance Student test for two independent groups because it does not require equal population variances and performs well when variances happen to be similar.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A rank test is not automatically a test of medians
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Mann–Whitney test compares distributions through ranks. It can be interpreted as a simple location or median comparison only under additional shape and spread assumptions. Report an effect whose meaning matches the method and data.</p>
+</div>
+</div>
+</section>
+<section id="assumptions-are-part-of-the-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-are-part-of-the-analysis">Assumptions are part of the analysis</h2>
+<p>Assumptions should be evaluated using the design, visual diagnostics, and subject-matter knowledge. A preliminary significance test of normality or equal variance is rarely a good switch for choosing between procedures.</p>
+<section id="independence" class="level3">
+<h3 class="anchored" data-anchor-id="independence">Independence</h3>
+<p>Independence is primarily a design assumption. Measurements from the same person, household, clinic, batch, site, or time series are often correlated. Treating them as independent usually understates uncertainty. Paired tests, mixed-effects models, generalized estimating equations, cluster-robust inference, or time-series methods may be needed.</p>
+</section>
+<section id="distributional-form" class="level3">
+<h3 class="anchored" data-anchor-id="distributional-form">Distributional form</h3>
+<p>For <em>t</em>-based inference, the key concern is the sampling distribution of the mean or model coefficient—not whether the raw data pass a normality test. Inspect distributions and residuals for severe skewness, heavy tails, and influential observations. Larger samples often improve robustness, but they do not fix dependence, bias, or a poorly specified estimand.</p>
+</section>
+<section id="variance-and-influential-observations" class="level3">
+<h3 class="anchored" data-anchor-id="variance-and-influential-observations">Variance and influential observations</h3>
+<p>Unequal group variances are handled naturally by Welch’s test. Extreme observations should be investigated for errors and scientific relevance rather than deleted merely to obtain significance. If results depend strongly on a few observations, show that sensitivity transparently.</p>
+</section>
+</section>
+<section id="a-reproducible-two-group-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="a-reproducible-two-group-analysis">A reproducible two-group analysis</h2>
+<p>The following example compares an outcome between two independent groups. The code is intentionally non-executable in the guide; it is presented for learning and adaptation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"data/processed/hypothesis_testing_data.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>group_a <span class="op">=</span> data.loc[data[<span class="st">"group"</span>] <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"outcome"</span>].dropna()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>group_b <span class="op">=</span> data.loc[data[<span class="st">"group"</span>] <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"outcome"</span>].dropna()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> stats.ttest_ind(group_a, group_b, equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mean_difference <span class="op">=</span> group_a.mean() <span class="op">-</span> group_b.mean()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean difference: </span><span class="sc">{</span>mean_difference<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Welch t statistic: </span><span class="sc">{</span>result<span class="sc">.</span>statistic<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p-value: </span><span class="sc">{</span>result<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The complete workflow should also calculate a confidence interval, report group summaries, inspect the data visually, and document exclusions and missing values.</p>
+<section id="effect-size-and-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="effect-size-and-confidence-interval">Effect size and confidence interval</h3>
+<p>For independent groups, the unstandardized mean difference remains interpretable in the original units. A standardized mean difference can support comparisons across differently scaled outcomes but should not replace the original-unit estimate.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mean_difference <span class="op">=</span> group_a.mean() <span class="op">-</span> group_b.mean()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>standard_error <span class="op">=</span> np.sqrt(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    group_a.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_a)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> group_b.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_b)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>degrees_freedom <span class="op">=</span> (</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    (group_a.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_a) <span class="op">+</span> group_b.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_b)) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">/</span> (</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        (group_a.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_a)) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> (<span class="bu">len</span>(group_a) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> (group_b.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(group_b)) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> (<span class="bu">len</span>(group_b) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>critical_value <span class="op">=</span> stats.t.ppf(<span class="fl">0.975</span>, degrees_freedom)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="op">=</span> (</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    mean_difference <span class="op">-</span> critical_value <span class="op">*</span> standard_error,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    mean_difference <span class="op">+</span> critical_value <span class="op">*</span> standard_error,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="randomization-and-resampling-methods" class="level2">
+<h2 class="anchored" data-anchor-id="randomization-and-resampling-methods">Randomization and resampling methods</h2>
+<p>Simulation-based methods make the inferential logic visible and can reduce reliance on closed-form reference distributions. They still require a design-consistent resampling scheme.</p>
+<section id="permutation-test" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-test">Permutation test</h3>
+<p>Under a null hypothesis that makes group labels exchangeable, randomly reassign the labels, recalculate the statistic, and compare the observed statistic with the resulting null distribution.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>permutation_result <span class="op">=</span> stats.permutation_test(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (group_a.to_numpy(), group_b.to_numpy()),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    statistic<span class="op">=</span><span class="kw">lambda</span> x, y: np.mean(x) <span class="op">-</span> np.mean(y),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    permutation_type<span class="op">=</span><span class="st">"independent"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    alternative<span class="op">=</span><span class="st">"two-sided"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    n_resamples<span class="op">=</span><span class="dv">20_000</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(<span class="dv">20260801</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Exchangeability must reflect the study design. Paired, blocked, clustered, and time-dependent data require restricted permutations rather than unrestricted shuffling.</p>
+</section>
+<section id="bootstrap-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap-confidence-interval">Bootstrap confidence interval</h3>
+<p>The bootstrap repeatedly samples observations with replacement to approximate the sampling distribution of an estimator.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bootstrap_result <span class="op">=</span> stats.bootstrap(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    (group_a.to_numpy(), group_b.to_numpy()),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    statistic<span class="op">=</span><span class="kw">lambda</span> x, y: np.mean(x) <span class="op">-</span> np.mean(y),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    paired<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    confidence_level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"BCa"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    n_resamples<span class="op">=</span><span class="dv">20_000</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    rng<span class="op">=</span>np.random.default_rng(<span class="dv">20260801</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Bootstrap samples must preserve the data-generating structure. Resample pairs for paired data and use cluster- or block-level methods for clustered or dependent data.</p>
+</section>
+</section>
+<section id="visualize-the-estimate-and-the-reference-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-the-estimate-and-the-reference-distribution">Visualize the estimate and the reference distribution</h2>
+<p>A useful hypothesis-testing figure should reveal both the data and the inferential result. Recommended displays include:</p>
+<ul>
+<li>jittered observations with group summaries and confidence intervals;</li>
+<li>an estimation plot showing the raw groups and their difference;</li>
+<li>the permutation null distribution with the observed statistic marked; and</li>
+<li>a coefficient or forest plot for several estimated effects and intervals.</li>
+</ul>
+<p>Avoid bar charts that display only means and standard errors; they conceal distribution shape, sample size, overlap, and unusual observations.</p>
+<section id="raw-data-and-group-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="raw-data-and-group-estimates">Raw data and group estimates</h3>
+<p>The first figure retains every observation while adding the group means and 95% confidence intervals. This makes sample size, spread, overlap, and unusual values visible alongside the estimates.</p>
+<div id="fig-06-group-estimates" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Observed outcomes with group means and 95% confidence intervals.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-group-estimates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-group-estimates.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Observed outcomes with group means and 95% confidence intervals.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-group-estimates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Observed outcomes for groups A and B, with diamonds representing group means and vertical error bars representing 95% confidence intervals.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="permutation-reference-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-reference-distribution">Permutation reference distribution</h3>
+<p>The permutation distribution shows the mean differences expected when the group labels are exchangeable under the null hypothesis. The solid line marks the observed difference; the dashed line marks its equally extreme value in the opposite direction for the two-sided comparison.</p>
+<div id="fig-06-permutation-null" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Permutation null distribution with the observed difference marked.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-permutation-null-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-permutation-null-distribution.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Permutation null distribution with the observed difference marked.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-permutation-null-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: Permutation null distribution of differences in means, with the observed difference marked by a solid red line.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="magnitude-and-precision" class="level3">
+<h3 class="anchored" data-anchor-id="magnitude-and-precision">Magnitude and precision</h3>
+<p>Confidence intervals distinguish a clearly positive estimate from an imprecise result and from a small but precisely estimated effect. Statistical significance alone does not communicate these differences.</p>
+<div id="fig-06-ci-interpretation" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Effect estimates and confidence intervals reveal both magnitude and precision.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-ci-interpretation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-confidence-interval-interpretation.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Effect estimates and confidence intervals reveal both magnitude and precision.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-ci-interpretation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: Three point estimates and 95% confidence intervals illustrating a clear positive effect, an imprecise estimate, and a small precise effect.
+</figcaption>
+</figure>
+</div>
+<p>The commands below are shown as non-executable examples. Run either one from the project root to generate the chapter figures:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/06-generate-hypothesis-testing-figures.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/python/06-generate_hypothesis_testing_figures.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The Bash script and Python command are alternative entry points to the same figure-generation workflow and should produce the same outputs.</p>
+</section>
+</section>
+<section id="multiple-testing-and-selective-reporting" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-testing-and-selective-reporting">Multiple testing and selective reporting</h2>
+<p>When many null hypotheses are tested, the chance of at least one small <em>p</em>-value increases. For <span class="math inline">\(m\)</span> independent tests conducted at level <span class="math inline">\(\alpha\)</span>, the probability of at least one Type I error is</p>
+<p><span class="math display">\[
+1 - (1 - \alpha)^m.
+\]</span></p>
+<p>For 20 independent tests at <span class="math inline">\(\alpha=0.05\)</span>, this probability is approximately 0.64.</p>
+<p>Two common control targets are:</p>
+<ul>
+<li><strong>Family-wise error rate (FWER):</strong> the probability of one or more false rejections in a family. Holm’s procedure is generally preferable to unadjusted testing and is more powerful than the simple Bonferroni procedure.</li>
+<li><strong>False discovery rate (FDR):</strong> the expected proportion of false discoveries among rejected hypotheses. The Benjamini–Hochberg procedure is widely used in high-dimensional analyses.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.multitest <span class="im">import</span> multipletests</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>results[<span class="st">"p_value_holm"</span>] <span class="op">=</span> multipletests(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    results[<span class="st">"p_value"</span>], method<span class="op">=</span><span class="st">"holm"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>results[<span class="st">"q_value_bh"</span>] <span class="op">=</span> multipletests(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    results[<span class="st">"p_value"</span>], method<span class="op">=</span><span class="st">"fdr_bh"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Define the hypothesis family based on the scientific analysis plan. Adjustment cannot correct outcome switching, undisclosed exploratory analyses, or selective reporting.</p>
+<p>Raw and adjusted <em>p</em>-values can lead to different conclusions. Holm adjustment controls the family-wise error rate and is typically more conservative than Benjamini–Hochberg adjustment, which controls the false discovery rate.</p>
+<div id="fig-06-multiple-testing" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Comparison of raw, Holm-adjusted, and Benjamini–Hochberg-adjusted p-values.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-06-multiple-testing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/06-multiple-testing-adjustment.png" class="img-fluid figure-img" style="width:85.0%" data-fig-cap="Comparison of raw, Holm-adjusted, and Benjamini–Hochberg-adjusted p-values.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-06-multiple-testing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: Raw p-values and their Holm and Benjamini–Hochberg adjusted values for ten hypotheses, with a horizontal reference line at 0.05.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="equivalence-and-non-inferiority" class="level2">
+<h2 class="anchored" data-anchor-id="equivalence-and-non-inferiority">Equivalence and non-inferiority</h2>
+<p>Failure to reject a difference is not evidence of equivalence. To support practical similarity, define an equivalence margin <span class="math inline">\(\Delta_E\)</span> that represents the largest difference considered unimportant.</p>
+<p>The two one-sided tests procedure evaluates</p>
+<p><span class="math display">\[
+H_0: \Delta \le -\Delta_E \; \text{or} \; \Delta \ge \Delta_E
+\]</span></p>
+<p>against the alternative that <span class="math inline">\(-\Delta_E &lt; \Delta &lt; \Delta_E\)</span>. Equivalence is supported when the appropriate confidence interval lies entirely within the pre-specified equivalence bounds.</p>
+<p>Non-inferiority questions use a one-sided margin and require particular care with design, adherence, analysis population, and interpretation. The margin must be scientifically justified before analysis.</p>
+</section>
+<section id="common-mistakes" class="level2">
+<h2 class="anchored" data-anchor-id="common-mistakes">Common mistakes</h2>
+<section id="treating-significance-as-importance" class="level3">
+<h3 class="anchored" data-anchor-id="treating-significance-as-importance">Treating significance as importance</h3>
+<p>A very small effect can produce a small <em>p</em>-value in a large sample. Report the effect in meaningful units and compare it with a scientifically relevant threshold.</p>
+</section>
+<section id="treating-non-significance-as-no-effect" class="level3">
+<h3 class="anchored" data-anchor-id="treating-non-significance-as-no-effect">Treating non-significance as no effect</h3>
+<p>A large <em>p</em>-value may reflect imprecision rather than similarity. Examine the confidence interval and ask which effects remain compatible with the data.</p>
+</section>
+<section id="testing-assumptions-to-choose-a-test-mechanically" class="level3">
+<h3 class="anchored" data-anchor-id="testing-assumptions-to-choose-a-test-mechanically">Testing assumptions to choose a test mechanically</h3>
+<p>Normality and equal-variance tests add another unstable decision layer. Use design knowledge, diagnostics, robust procedures, and sensitivity analysis.</p>
+</section>
+<section id="ignoring-dependence" class="level3">
+<h3 class="anchored" data-anchor-id="ignoring-dependence">Ignoring dependence</h3>
+<p>Repeated or clustered observations do not become independent because they occupy separate rows. Model the dependence explicitly.</p>
+</section>
+<section id="running-many-analyses-and-reporting-only-the-smallest-result" class="level3">
+<h3 class="anchored" data-anchor-id="running-many-analyses-and-reporting-only-the-smallest-result">Running many analyses and reporting only the smallest result</h3>
+<p>Undisclosed analytic flexibility makes nominal <em>p</em>-values misleading. Separate confirmatory analyses from exploratory analyses and report the full analysis path.</p>
+</section>
+<section id="writing-causal-conclusions-from-observational-associations" class="level3">
+<h3 class="anchored" data-anchor-id="writing-causal-conclusions-from-observational-associations">Writing causal conclusions from observational associations</h3>
+<p>A hypothesis test does not eliminate confounding, selection bias, measurement error, or reverse causation. Causal claims require a defensible design and assumptions beyond statistical significance.</p>
+</section>
+</section>
+<section id="a-reporting-template" class="level2">
+<h2 class="anchored" data-anchor-id="a-reporting-template">A reporting template</h2>
+<p>A concise report should identify the estimand, method, effect, uncertainty, and limitations:</p>
+<blockquote class="blockquote">
+<p>The estimated mean outcome was 4.2 units higher in group A than in group B (95% CI: 1.1 to 7.3). Welch’s two-sample test produced <span class="math inline">\(t(df)=2.67\)</span> and <span class="math inline">\(p=0.010\)</span>. The interval excludes no difference, but the practical importance of the estimate should be judged against the pre-specified meaningful-effect threshold. The analysis assumes independent observations and does not by itself establish causality.</p>
+</blockquote>
+<p>Include the following where relevant:</p>
+<ul>
+<li>group sample sizes and descriptive summaries;</li>
+<li>the exact test and whether it was one- or two-sided;</li>
+<li>the effect estimate in interpretable units;</li>
+<li>a confidence interval and exact <em>p</em>-value;</li>
+<li>multiplicity adjustment and the defined test family;</li>
+<li>assumption checks and sensitivity analyses; and</li>
+<li>missing-data handling, exclusions, and deviations from the analysis plan.</li>
+</ul>
+</section>
+<section id="a-practical-decision-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="a-practical-decision-workflow">A practical decision workflow</h2>
+<p>Before reporting a test, ask:</p>
+<ol type="1">
+<li>What population quantity am I trying to estimate?</li>
+<li>Does the comparison match the study design?</li>
+<li>Are observations independent, paired, clustered, or repeated?</li>
+<li>Which assumptions are essential for this procedure?</li>
+<li>What effect size is scientifically meaningful?</li>
+<li>Does the confidence interval exclude important benefit, harm, or equivalence?</li>
+<li>Were multiple hypotheses tested?</li>
+<li>Would a reasonable alternative analysis change the conclusion?</li>
+<li>Can the result support association only, or is a causal interpretation justified?</li>
+</ol>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ul>
+<li>Hypothesis testing evaluates data relative to a specified null model; it does not prove hypotheses.</li>
+<li>The study design and estimand determine the method.</li>
+<li>A <em>p</em>-value is not an effect size or the probability that the null hypothesis is true.</li>
+<li>Effect estimates and confidence intervals should accompany test results.</li>
+<li>Non-significance does not establish equality; equivalence requires an equivalence design.</li>
+<li>Dependence, multiplicity, and selective analysis can invalidate otherwise correct calculations.</li>
+<li>Transparent reporting and sensitivity analysis are central to defensible inference.</li>
+</ul>
+</section>
+<section id="next-step" class="level2">
+<h2 class="anchored" data-anchor-id="next-step">Next step</h2>
+<p>The next chapter builds on these principles by using statistical models to describe and predict outcomes while accounting for multiple variables. The same discipline remains essential: define the target, examine assumptions, quantify uncertainty, and distinguish statistical evidence from substantive importance.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05-statistical-inference.html" class="pagination-link" aria-label="Statistical Inference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Statistical Inference</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./07-regression-modelling.html" class="pagination-link" aria-label="Regression Modelling">
+        <span class="nav-page-text"><span class="chapter-title">Regression Modelling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
